@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { restaurantsIndex } from "./urls/index"
+import { restaurantsIndex } from '../urls/index'
 
 export const fetchRestaurants = () => {
     return axios.get(restaurantsIndex)

@@ -1,3 +1,5 @@
+import { REQUEST_STATE } from '../constants';
+import { useReducer } from "react";
 
 
 export const InitializeState = {
@@ -10,6 +12,14 @@ export const restaurantsActionTypes = {
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const Reducer = {
-    const {state,dispatch}
+export const Reducer = (state,action) => {
+    switch (action.type) {
+        case restaurantsActionTypes.FETCHING
+            ...state
+            
+        case restaurantsActionTypes.FETCH_SUCCESS
+        
+        default:
+            throw new Error();    
+    }
 }

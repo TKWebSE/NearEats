@@ -12,7 +12,7 @@ import {Foods} from './containers/Foods.jsx';
 function App() {
   return (
     <Router>
-      <switch>
+      <Switch>
         //レストラン一覧
         <Route 
           exact
@@ -24,7 +24,7 @@ function App() {
           path="/foods">
           <Foods />
         </Route>
-      </switch>
+      </Switch>
     </Router>
   );
 }

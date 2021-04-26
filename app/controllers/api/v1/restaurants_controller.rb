@@ -1,6 +1,6 @@
 module Api
     module V1 
-        class Restaurant < ApplicationController
+        class RestaurantsController < ApplicationController
             def index
                restaurants = Restaurant.all
 
@@ -20,11 +20,12 @@ module Api
             def create
                 restaurant = Restaurant.new(name: params[:name],)
                 if restaurant.save
-                    render json {
+                    render json: {
                         restaurant: restaurant
-                 },status: :ok
+                    },status: :ok
                 else
-                    render json{}
+                    render json: {}
+                end
             end
             
             def update
@@ -34,13 +35,14 @@ module Api
                         restaurants: restaurants
                     }, status: :ok
                 else 
-                    render json: {},status: 
+                    render json: {}
+                end
             end
         
             def delete
                 restaurant = Restaurant.find(id: params[:id])
 
-                render json{}, status: :ok
+                render json: {}, status: :ok
             end
         end
     end
