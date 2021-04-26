@@ -7,6 +7,7 @@ export const Restaurants = () => {
         .then((data) =>
             
         )
+        .catch((e) => )
     },[])
     return (
         <Fragment>
