@@ -3,8 +3,8 @@ import { useReducer } from "react";
 
 
 export const InitializeState = {
-
-    restaurantsLists: []
+    fetchState: REQUEST_STATE.INITIAL,
+    restaurantsList: []
 }
 
 export const restaurantsActionTypes = {
@@ -12,13 +12,18 @@ export const restaurantsActionTypes = {
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const Reducer = (state,action) => {
+export const RestaurantsReducer = (state,action) => {
     switch (action.type) {
-        case restaurantsActionTypes.FETCHING
-            ...state
-            
-        case restaurantsActionTypes.FETCH_SUCCESS
-        
+        case restaurantsActionTypes.FETCHING:
+        return {
+            ...state,
+            fetchState:REQUEST_STATE.LOADING,
+        };
+        case restaurantsActionTypes.FETCH_SUCCESS:
+        return {
+            fetchState: REQUEST_STATE.OK,
+            restaurantsList:action.payload.restaurants,
+        };  
         default:
             throw new Error();    
     }
