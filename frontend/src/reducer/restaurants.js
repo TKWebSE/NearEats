@@ -2,7 +2,7 @@ import { REQUEST_STATE } from '../constants';
 import { useReducer } from "react";
 
 
-export const InitializeState = {
+export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
     restaurantsList: []
 }
@@ -12,7 +12,7 @@ export const restaurantsActionTypes = {
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const RestaurantsReducer = (state,action) => {
+export const restaurantsReducer = (state,action) => {
     switch (action.type) {
         case restaurantsActionTypes.FETCHING:
         return {
