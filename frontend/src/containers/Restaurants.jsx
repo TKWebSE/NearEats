@@ -1,8 +1,9 @@
 import React, {Fragment, useEffect, useReducer}  from 'react' ;
 import styled from 'styled-components';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+import {REQUEST_STATE} from "../constants";
 import {fetchRestaurants} from '../apis/restaurants';
-
-
 import {
     initializeState,
     restaurantsActionTypes,
@@ -15,6 +16,10 @@ const Wrapper = styled.div`
 `;
 
 const RestaurantCard = styled.div`
+    float:left;
+`;
+
+const SkeletonWrapper = styled(Skeleton)`
     float:left;
 `;
 
@@ -39,22 +44,28 @@ export const Restaurants = () => {
             <header>
                 レストラン一覧じゃい
             </header>{
-            REQUEST_STATE.LOADING == state.fetchState.LOADING {
-                <div>なうろーでぃんぐ</div>
-            }
-            
-            REQUEST_STATE.OK == state.fetchState.OK {
-                <wrapper>
+            state.fetchState === REQUEST_STATE.LOADING?
+            <Fragment>
+                <Skeleton variant="rect" width={450} height={300} />
+                <Skeleton variant="rect" width={450} height={300} />
+                <Skeleton variant="rect" width={450} height={300} />
+            </Fragment>
+            :
+            <Fragment>
+                <Wrapper>
                 {
                     state.restaurantsList.map(restaurant => 
+                    <Link to={`restaurant/${restaurant.id}` }>
                     <RestaurantCard>
                         {restaurant.name}
                         {restaurant.description}
                         {restaurant.price}
                     </RestaurantCard>
+                    </Link>
                     )
                 } 
-            </wrapper> 
+                </Wrapper> 
+            </Fragment>
             }
         </Fragment>
     )
