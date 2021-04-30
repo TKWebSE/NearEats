@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useReducer}  from 'react' ;
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Link } from "react-router-dom";
 
 import {REQUEST_STATE} from "../constants";
 import {fetchRestaurants} from '../apis/restaurants';
@@ -54,9 +55,9 @@ export const Restaurants = () => {
             <Fragment>
                 <Wrapper>
                 {
-                    state.restaurantsList.map(restaurant => 
-                    <Link to={`restaurant/${restaurant.id}` }>
-                    <RestaurantCard>
+                    state.restaurantsList.map((restaurant,index) => 
+                    <Link to={`restaurant/${restaurant.id}`}>
+                    <RestaurantCard key={index}>
                         {restaurant.name}
                         {restaurant.description}
                         {restaurant.price}

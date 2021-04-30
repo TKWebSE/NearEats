@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useReducer} from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Link } from "react-router-dom";
 
 import { fetchFoods } from '../apis/foods';
 import { REQUEST_STATE } from '../constants';
@@ -9,15 +10,33 @@ import {
     foodsActionTypes,
     foodsReducer,
 } from '../reducer/foods';
-import { foodCard } from `../component/foodCard`;
+import {FoodCard} from '../component/FoodCard';
 
-const foodWrapper = styled.div`
+
+const FoodsWrapper = styled.div`
+    display: inline-block
+    float:left;
+    margin-right:5%;
+    margin-left:5%;
+    margin-top:5%;
+`;
+
+const ContentsList = styled.div`
+    display: flex;
+    justify-content: space-around;
+    float:left;
+    width:18%;
+    margin-left:1%;
+    margin-right:1%;
+`;
+
+const FoodCards = styled(FoodCard)`
+    display: inline-block
     float:left;
 `;
-const fixSkeleton = styled.Skeleton`
-    float:left;
-    margin:5%;
-`;
+
+
+
 
 export const Foods = () => {
     const [state,dispatch] = useReducer(foodsReducer,initializeState);
@@ -39,29 +58,28 @@ export const Foods = () => {
 
     return (
         <Fragment>
-            <header>
-                フード一覧
-            </header>
-            <foodWrapper>
+            
+            <FoodsWrapper>
                 {
                 state.fetchState === REQUEST_STATE.LOADING?
+                    <ContentsList>
                     <Fragment>
                         <Skeleton variant="rect" width={450} height={300} />
                         <Skeleton variant="rect" width={450} height={300} />
                         <Skeleton variant="rect" width={450} height={300} />
                     </Fragment>
-            
+                    </ContentsList>
                 :
-                state.foodsList.map(food =>
-                    <Link to={`food/${food.id}` }>
-                    <foodWrapper>
-                        <foodCard food={food}></foodCard>
-                    </foodWrapper>
-                    </Link>
+                
+                state.foodsList.map((food) =>
+                <ContentsList>
+                    <Fragment>
+                        <FoodCard food={food}></FoodCard>
+                    </Fragment>
+                </ContentsList>
                 )
-
                 }
-            </foodWrapper>
+            </FoodsWrapper>
         </Fragment>
     )
 }

@@ -1,35 +1,50 @@
-import React from 'react';
-import styled from `styled-components`;
+import React ,{ Fragment } from 'react';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import foodImage from `../images/food-image`;
+import foodImage from "../images/food-image.jpg";
 
-const foodTitle = styled.div`
-    font-size: 1.4rem;
-    line-height: 2rem;
-    max-height: 4rem;
+const FoodCardWrapper = styled.div`
+    width:100%;
+    height:100%;
 `;
 
-const foodText = styled.div`
-    
+const TextWrapper = styled.div`
+
+`;
+
+const FoodName = styled.h3`
+
+`;
+
+const FoodPrice = styled.div`
+`;
+
+const FoodDescription = styled.div`
 `;
 
 const MainfoodImage = styled.img`
-    width:25%;
-    height:10%;
+    width:100%;
+    height:30%;
 `;
 
 //foodを表示するカードコンポーネント
-export const foodCard = (food) => {
-    
-    <wrapper>
+export const FoodCard = ({food}) => {
+    return(
+    <Fragment>
+        <FoodCardWrapper>
         <Link to={"foods/${food.id}"}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
-        <foodTitle>
-            {food.name}
-        </foodTitle>
+            <TextWrapper>
+                <FoodName>
+                    {food.name}
+                </FoodName>
+                <FoodPrice>
+                    ￥{food.price}
+                </FoodPrice>
+            </TextWrapper>
         </Link>
-        {food.description}
-        {food.price}
-        {restaurant_name}
-    </wrapper>
+        </FoodCardWrapper>
+    </Fragment>
+    )
 }
