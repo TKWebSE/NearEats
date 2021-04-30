@@ -1,5 +1,5 @@
 import axios from "axios";
-import { foodsIndex } from "../urls";
+import { foodsIndex ,foodShow } from "../urls";
 
 //food一覧を取得する
 export const fetchFoods = () => {
@@ -9,4 +9,13 @@ export const fetchFoods = () => {
     }
     )
     .catch(e=> console.log(e))
+}
+
+export const foodDetails = (food_id) => {
+    return axios.get(foodShow(food_id))
+    .then((res)=>{
+        return res.data
+    }
+    )
+    .catch(e => console.log(e));
 }

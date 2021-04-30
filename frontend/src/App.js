@@ -9,7 +9,6 @@ import {
 import {Restaurants} from './containers/Restaurants.jsx';
 import {Foods} from './containers/Foods.jsx';
 import { Fragment } from 'react';
-import styled from "styled-components";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { COLORS } from "./style_constants";
@@ -18,7 +17,7 @@ import { COLORS } from "./style_constants";
 const outerTheme = createMuiTheme({
   palette: {
     primary: {
-      main: COLORS.MAIN_COLOR,
+      main: COLORS.MAIN_COLOR
     },
   },
 });
@@ -34,11 +33,12 @@ function App() {
         //レストラン一覧
         <Route 
           exact
-          path="/restaurants">
+          path="restaurants">
           <Restaurants />
         </Route>
         //フード一覧
         <Route
+          exact
           path="/foods">
           <Foods />
         </Route>

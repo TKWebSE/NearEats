@@ -10,14 +10,17 @@ const FoodCardWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-
+    margin-bottom:5%;
 `;
 
 const FoodName = styled.h3`
-
+    margin-top:5%;
+    margin-bottom:0px;
+    text-decoration: none;
 `;
 
 const FoodPrice = styled.div`
+    
 `;
 
 const FoodDescription = styled.div`
@@ -33,7 +36,7 @@ export const FoodCard = ({food}) => {
     return(
     <Fragment>
         <FoodCardWrapper>
-        <Link to={"foods/${food.id}"}>
+        <Link to={"foods/${food.id}"} style={{ textDecoration: 'none' }}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
             <TextWrapper>
                 <FoodName>

@@ -21,6 +21,10 @@ const FoodsWrapper = styled.div`
     margin-top:5%;
 `;
 
+const FoodsIndexTitle = styled.h2`
+    margin-top:0px;
+`;
+
 const ContentsList = styled.div`
     display: flex;
     justify-content: space-around;
@@ -34,9 +38,6 @@ const FoodCards = styled(FoodCard)`
     display: inline-block
     float:left;
 `;
-
-
-
 
 export const Foods = () => {
     const [state,dispatch] = useReducer(foodsReducer,initializeState);
@@ -58,8 +59,10 @@ export const Foods = () => {
 
     return (
         <Fragment>
-            
             <FoodsWrapper>
+                <FoodsIndexTitle>
+                    近くの料理を検索
+                </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.LOADING?
                     <ContentsList>
