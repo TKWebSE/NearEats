@@ -1,10 +1,10 @@
-import React from `react`;
+import React from "react";
 import { REQUEST_STATE } from "../constants";
 import { restaurantsIndex ,foodDetails} from "../urls";
 
 export const initializeState = {
-    fetchState:INITIAL,
-    food: food,
+    fetchState:REQUEST_STATE.INITIAL,
+    food: null,
 }
 
 export const foodDetailActionTypes = {
@@ -25,7 +25,7 @@ export const foodDetailReducer = (state,action) => {
                 food: action.payload.food,
             }
         default:
-            throw new Error(e);
+            throw new Error();
     }
 
 }

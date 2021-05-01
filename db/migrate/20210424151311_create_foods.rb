@@ -5,7 +5,9 @@ class CreateFoods < ActiveRecord::Migration[6.0]
       t.string :name, null: false
       t.integer :price, null: false
       t.text :description, null: false
+      t.string :image
 
+      t.boolean :deleted,default:false
       t.timestamps
     end
   end

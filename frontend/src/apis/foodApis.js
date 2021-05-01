@@ -11,9 +11,11 @@ export const fetchFoods = () => {
     .catch(e=> console.log(e))
 }
 
-export const foodDetails = (food_id) => {
+export const fetchFoodDetail = (food_id) => {
+    console.log(food_id)
     return axios.get(foodShow(food_id))
     .then((res)=>{
+        console.log(res)
         return res.data
     }
     )

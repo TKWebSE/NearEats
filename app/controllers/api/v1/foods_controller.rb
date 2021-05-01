@@ -12,13 +12,35 @@ module Api
             
             def create
                 food = Food.new(name: params[:name],fee: params[:fee])
+
+                if food.save
+                    render json: {
+                        food: food
+                    }, status: :ok
+                else
+                    render json: {}
+                end
             end
 
             def show 
+                food = Food.find(id: params[:food_id])
+
+                render json: {
+                    food: food
+                }, status: :ok
             end
 
             def delete
-                food = Foods
+                food = Food.find(id: params[food_id])
+                food.deleted = true
+                
+                if food.save
+                    render json: {
+                        food: food
+                    } ,status: :ok
+                else
+                    render json: {}
+                end
             end
         end
     end

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
 
-import { fetchFoods } from '../apis/foods';
+import { fetchFoods } from '../apis/foodApis';
 import { REQUEST_STATE } from '../constants';
 import { 
     initializeState,

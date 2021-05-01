@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,11 +7,13 @@ import {
 } from "react-router-dom";
 
 import {Restaurants} from './containers/Restaurants.jsx';
+import { FoodDetail } from './containers/FoodDetail';
 import {Foods} from './containers/Foods.jsx';
 import { Fragment } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { COLORS } from "./style_constants";
+
 
 //ヘッダーの色を定義
 const outerTheme = createMuiTheme({
@@ -30,16 +32,39 @@ function App() {
     </ThemeProvider>
     <Router>
       <Switch>
-        //レストラン一覧
+        //restaurant一覧画面
         <Route 
           exact
           path="restaurants">
           <Restaurants />
         </Route>
-        //フード一覧
+        //food一覧
         <Route
           exact
           path="/foods">
+          <Foods />
+        </Route>
+        //food詳細画面
+        <Route
+          exact
+          path="/foods/:id"
+          render ={({match}) => 
+            <FoodDetail 
+              match={match}
+            />
+          }
+        >
+        </Route>
+        //food作成画面
+        <Route
+          exact
+          path="/foods/create">
+          <Foods />
+        </Route>
+        //food編集画面
+        <Route
+          exact
+          path="/foods/:id/edit">
           <Foods />
         </Route>
       </Switch>

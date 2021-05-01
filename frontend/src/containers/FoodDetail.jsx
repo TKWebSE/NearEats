@@ -1,13 +1,12 @@
-import React from `react`;
-import { useEffect, useReducer} from "react";
-import styled from `styled-components`;
-import { initializeState } from "../reducer/restaurants";
-import REQUEST_STATE from `../constants`;
-import fetchFoodDetails from `../apis/foods`;
-import {initializeState,
-        foodDetailActionTypes,
-        foodDetailReducer} from `../reducer/foodDetails`;
-import FoodDetailsCard from `../components`;
+import React,{Fragment,useEffect, useReducer} from "react";
+import styled from "styled-components";
+import Skeleton from "@material-ui/lab/Skeleton"
+import {REQUEST_STATE} from "../constants";
+import { fetchFoodDetail } from "../apis/foodApis";
+import { initializeState,
+         foodDetailActionTypes,
+         foodDetailReducer} from "../reducer/foodDetail";
+import {FoodDetailCard} from "../component/FoodDetailCard";
 
 const DetailWrapper = styled.div`
 
@@ -16,17 +15,16 @@ const DetailWrapper = styled.div`
 const FoodDetailHeader = styled.h3`
 `;
 
-const FoodDetailscard = styled.div
-
-export const FoodDetail = ()=> {
+export const FoodDetail = (match)=> {
     const [state,dispatch] = useReducer(foodDetailReducer,initializeState);
     
-    useEffect(() => {
+    useEffect((match) => {
         dispatch({ type: foodDetailActionTypes.FETCHING })
-        fetchFoodDetails(food_id)
+        console.log(match)
+        fetchFoodDetail(match)
         .then((data) => {
             dispatch({
-                type:FETCH_STATE.OK,
+                type:foodDetailActionTypes.OK,
                 payload:
                     {food: data.food},
             })
@@ -40,16 +38,18 @@ export const FoodDetail = ()=> {
                 <FoodDetailHeader>
                     料理詳細画面
                 </FoodDetailHeader>
-            REQUEST.STATE.LOADING === state.fetchState?
+            {
+            REQUEST_STATE.LOADING === state.fetchState?
                 <Fragment>
                     <Skeleton variant="rect" width={450} height={300} />
                     <Skeleton variant="rect" width={450} height={300} />
                     <Skeleton variant="rect" width={450} height={300} />
                 </Fragment>
             :
-                <FoodDetailscard>
-                     <FoodDetailsCard></FoodDetailsCard>
-                </FoodDetailscard>
+                <Fragment>
+                     <FoodDetailCard></FoodDetailCard>
+                </Fragment>
+            }
             </DetailWrapper>
         </Fragment>
     )
