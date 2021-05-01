@@ -11,9 +11,9 @@ export const fetchFoods = () => {
     .catch(e=> console.log(e))
 }
 
-export const fetchFoodDetail = (food_id) => {
-    console.log(food_id)
-    return axios.get(foodShow(food_id))
+export const fetchFoodDetail = (restaurant_id,food_id) => {
+    console.log(restaurant_id + food_id)
+    return axios.get(foodShow(restaurant_id,food_id))
     .then((res)=>{
         console.log(res)
         return res.data

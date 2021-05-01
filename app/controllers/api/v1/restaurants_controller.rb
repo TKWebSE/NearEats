@@ -18,7 +18,7 @@ module Api
             end
 
             def create
-                restaurant = Restaurant.new(name: params[:name],)
+                restaurant = Restaurant.new(name: params[:name])
                 if restaurant.save
                     render json: {
                         restaurant: restaurant

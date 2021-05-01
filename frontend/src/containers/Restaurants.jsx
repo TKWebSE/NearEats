@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
 
 import {REQUEST_STATE} from "../constants";
-import {fetchRestaurants} from '../apis/restaurants';
+import {fetchRestaurants} from '../apis/restaurantApis';
 import {
     initializeState,
     restaurantsActionTypes,

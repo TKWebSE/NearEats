@@ -23,7 +23,8 @@ module Api
             end
 
             def show 
-                food = Food.find(id: params[:food_id])
+                restaurant_id = Restaurant.find_by(id: params[:restaurantId])
+                food = Food.find_by(id: params[:id],restaurant_id: restaurant_id)
 
                 render json: {
                     food: food
@@ -31,7 +32,7 @@ module Api
             end
 
             def delete
-                food = Food.find(id: params[food_id])
+                food = Food.find(params[:id])
                 food.deleted = true
                 
                 if food.save

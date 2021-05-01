@@ -1,6 +1,5 @@
 import React from "react";
 import { REQUEST_STATE } from "../constants";
-import { restaurantsIndex ,foodDetails} from "../urls";
 
 export const initializeState = {
     fetchState:REQUEST_STATE.INITIAL,

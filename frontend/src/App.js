@@ -47,7 +47,7 @@ function App() {
         //food詳細画面
         <Route
           exact
-          path="/foods/:id"
+          path="/restaurants/:restaurantId/foods/:foodId"
           render ={({match}) => 
             <FoodDetail 
               match={match}

@@ -4,6 +4,6 @@ export const restaurantsIndex =  `${DEFAULT_URL}/restaurants`;
 export const restaurantsCreate = (restaurants_id) => "${DEFAULT_URL}/restaurants/create";
 export const restaurantsDelete = (restaurants_id) => "${DEFAULT_URL}/restaurants/delete";
 export const foodsIndex = `${DEFAULT_URL}/foods`;
-export const foodShow = (food_id) => `${DEFAULT_URL}/foods/${food_id}`;
+export const foodShow = (restaurant_id,food_id) => `${DEFAULT_URL}/restaurants/${restaurant_id}/foods/${food_id}`;
 export const foodsCreate = (food_id) => "${DEFAULT_URL}/restaurants/${food_id}/foods"
 export const foodsDelete = (food_id) => "${DEFAULT_URL}/${food_id}/foods"

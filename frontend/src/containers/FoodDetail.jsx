@@ -15,13 +15,12 @@ const DetailWrapper = styled.div`
 const FoodDetailHeader = styled.h3`
 `;
 
-export const FoodDetail = (match)=> {
+export const FoodDetail = ({match})=> {
     const [state,dispatch] = useReducer(foodDetailReducer,initializeState);
-    
-    useEffect((match) => {
+
+    useEffect(() => {
         dispatch({ type: foodDetailActionTypes.FETCHING })
-        console.log(match)
-        fetchFoodDetail(match)
+        fetchFoodDetail(match.params.restaurantId,match.params.foodId)
         .then((data) => {
             dispatch({
                 type:foodDetailActionTypes.OK,
