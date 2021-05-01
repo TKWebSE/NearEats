@@ -7,10 +7,19 @@ import fetchFoodDetails from `../apis/foods`;
 import {initializeState,
         foodDetailActionTypes,
         foodDetailReducer} from `../reducer/foodDetails`;
+import FoodDetailsCard from `../components`;
 
+const DetailWrapper = styled.div`
+
+`;
+
+const FoodDetailHeader = styled.h3`
+`;
+
+const FoodDetailscard = styled.div
 
 export const FoodDetail = ()=> {
-    const [state,dispatch] = useReducer(initializeState);
+    const [state,dispatch] = useReducer(foodDetailReducer,initializeState);
     
     useEffect(() => {
         dispatch({ type: foodDetailActionTypes.FETCHING })
@@ -27,7 +36,21 @@ export const FoodDetail = ()=> {
 
     return (
         <Fragment>
-        
+            <DetailWrapper>
+                <FoodDetailHeader>
+                    料理詳細画面
+                </FoodDetailHeader>
+            REQUEST.STATE.LOADING === state.fetchState?
+                <Fragment>
+                    <Skeleton variant="rect" width={450} height={300} />
+                    <Skeleton variant="rect" width={450} height={300} />
+                    <Skeleton variant="rect" width={450} height={300} />
+                </Fragment>
+            :
+                <FoodDetailscard>
+                     <FoodDetailsCard></FoodDetailsCard>
+                </FoodDetailscard>
+            </DetailWrapper>
         </Fragment>
     )
 }

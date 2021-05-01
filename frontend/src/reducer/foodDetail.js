@@ -12,16 +12,20 @@ export const foodDetailActionTypes = {
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const foodDetailReducer = () => {
+export const foodDetailReducer = (state,action) => {
     switch (action.type) {
         case foodDetailActionTypes.FETCHING:
-            ...state,
-            fetchState:REQUEST_STATE.LOADING
-        case foodDetailActionTypes.FETCH_SUCCESS
-            fetchState;REQUEST_STATE.OK,
-            food: action.payload.food,
+            return {
+                ...state,
+                fetchState:REQUEST_STATE.LOADING
+            }
+        case foodDetailActionTypes.FETCH_SUCCESS:
+            return {
+                fetchState:REQUEST_STATE.OK,
+                food: action.payload.food,
+            }
         default:
-            break;
+            throw new Error(e);
     }
 
 }
