@@ -12,7 +12,6 @@ export const fetchFoods = () => {
 }
 
 export const fetchFoodDetail = (restaurant_id,food_id) => {
-    console.log(restaurant_id + food_id)
     return axios.get(foodShow(restaurant_id,food_id))
     .then((res)=>{
         console.log(res)

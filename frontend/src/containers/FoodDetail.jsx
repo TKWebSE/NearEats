@@ -23,7 +23,7 @@ export const FoodDetail = ({match})=> {
         fetchFoodDetail(match.params.restaurantId,match.params.foodId)
         .then((data) => {
             dispatch({
-                type:foodDetailActionTypes.OK,
+                type:foodDetailActionTypes.FETCH_SUCCESS,
                 payload:
                     {food: data.food},
             })
@@ -46,7 +46,7 @@ export const FoodDetail = ({match})=> {
                 </Fragment>
             :
                 <Fragment>
-                     <FoodDetailCard></FoodDetailCard>
+                     <FoodDetailCard {...state.food}></FoodDetailCard>
                 </Fragment>
             }
             </DetailWrapper>

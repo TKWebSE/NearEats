@@ -43,14 +43,14 @@ export const Foods = () => {
     const [state,dispatch] = useReducer(foodsReducer,initializeState);
 
     useEffect(() => {
-        dispatch({type: foodsActionTypes.FETCHING});
+        dispatch({type: foodsActionTypes.FETCHING})
         fetchFoods()
         .then((data) => {
             dispatch({
                 type: foodsActionTypes.FETCH_SUCCESS,
                 payload: {
                     foods: data.foods
-                }
+                },
             })
         })
         .catch((e) => console.log(e))
@@ -73,7 +73,6 @@ export const Foods = () => {
                     </Fragment>
                     </ContentsList>
                 :
-                
                 state.foodsList.map((food) =>
                 <ContentsList>
                     <Fragment>

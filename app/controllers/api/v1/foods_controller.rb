@@ -25,7 +25,10 @@ module Api
             def show 
                 restaurant_id = Restaurant.find_by(id: params[:restaurantId])
                 food = Food.find_by(id: params[:id],restaurant_id: restaurant_id)
-
+                logger.debug(params[:restaurantId])
+                if restaurant_id ==nil
+                    logger.debug("aaaaaaaaaaaaaaaaaaaaa")
+                end
                 render json: {
                     food: food
                 }, status: :ok
