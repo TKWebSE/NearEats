@@ -36,7 +36,7 @@ export const FoodCard = ({food}) => {
     return(
     <Fragment>
         <FoodCardWrapper>
-        <Link to={`foods/${food.id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`restaurants/${food.restaurant_id}/foods/${food.id}`} style={{ textDecoration: 'none' }}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
             <TextWrapper>
                 <FoodName>

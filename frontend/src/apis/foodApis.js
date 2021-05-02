@@ -12,7 +12,12 @@ export const fetchFoods = () => {
 }
 
 export const fetchFoodDetail = (restaurant_id,food_id) => {
-    return axios.get(foodShow(restaurant_id,food_id))
+    return axios.get(foodShow(food_id),{
+    params: {
+        foodId:food_id,
+        restaurantId:restaurant_id,
+    }
+    })
     .then((res)=>{
         console.log(res)
         return res.data
