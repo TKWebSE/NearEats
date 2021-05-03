@@ -1,7 +1,7 @@
 import React,{ Fragment } from "react";
 import styled from "styled-components";
-import { DeleteButton } from "../component/MaterialUIButtons";
 import foodImage from "../images/food-image.jpg";
+import {OutlinedMultilineStatic} from "./MaterialUIMultiLine";
 
 const FoodCardWrapper = styled.div`
 `;
@@ -22,13 +22,12 @@ const FoodPrice = styled.h2`
 const FoodDesicription = styled.div`
 `;
 
-const FoodCreatedTime = styled.div`
-`;
 
-export const FoodDetailCard = (food) => {
+export const FoodEditCard = (food) => {
     return (
         <Fragment>
-            <FoodCardWrapper>
+        <FoodCardWrapper>
+            <div class="form-control">
             <FoodImage src={foodImage} alt="foodImage"></FoodImage>
             <FoodName>
                 {food.name}
@@ -36,14 +35,11 @@ export const FoodDetailCard = (food) => {
             <FoodPrice>
                 ￥{food.price}
             </FoodPrice>
-                <FoodDesicription>
-                    {food.description}
-                </FoodDesicription>
-                <FoodCreatedTime>
-                    {food.created_at}
-                </FoodCreatedTime>
-                <DeleteButton></DeleteButton>
-            </FoodCardWrapper>
+            <FoodDesicription>
+                <OutlinedMultilineStatic></OutlinedMultilineStatic>
+            </FoodDesicription>
+            </div>
+        </FoodCardWrapper>
         </Fragment>
     )
 }

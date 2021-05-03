@@ -9,7 +9,31 @@ module Api
                     foods: foods
                 }, status: :ok
             end
-            
+
+            def show 
+                restaurant_id = Restaurant.find_by(id: params[:restaurantId])
+                food = Food.find_by(id: params[:id],restaurant_id: restaurant_id)
+
+                render json: {
+                    food: food
+                }, status: :ok
+            end
+
+            def new
+                restaurant = Restaurant.find(1)
+                food = restaurant.foods.build(
+                    id: params[:id],name: params[:name],price: params[:price]
+                    )
+                
+                if food
+                    render json: {
+                        food: food
+                    }
+                else
+                    render json: {}
+                end
+            end
+
             def create
                 food = Food.new(name: params[:name],fee: params[:fee])
 
@@ -22,16 +46,23 @@ module Api
                 end
             end
 
-            def show 
-                restaurant_id = Restaurant.find_by(id: params[:restaurantId])
-                food = Food.find_by(id: params[:id],restaurant_id: restaurant_id)
+            def update
+               food = Food.find_by(id: params[:id])
+               
+               food.name = params[:name]
+               food.price = params[:price]
+               food.description = params[:description]
 
-                render json: {
-                    food: food
-                }, status: :ok
+               if food.save 
+                    render json: {
+                        food:food
+                    },status: :ok
+               else
+                   reder json: {}
+               end
             end
 
-            def delete
+            def destroy
                 food = Food.find(params[:id])
                 food.deleted = true
                 

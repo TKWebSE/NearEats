@@ -2,7 +2,7 @@ import React,{Fragment,useEffect, useReducer} from "react";
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton"
 import {REQUEST_STATE} from "../constants";
-import { fetchFoodDetail } from "../apis/foodApis";
+import { fetchFoodDetailApi } from "../apis/foodApis";
 import { initializeState,
          foodDetailActionTypes,
          foodDetailReducer} from "../reducer/foodDetail";
@@ -15,12 +15,16 @@ const DetailWrapper = styled.div`
 const FoodDetailHeader = styled.h3`
 `;
 
+const FoodCardWraooer = styled.div`
+    textalign:center;
+`;
+
 export const FoodDetail = ({match})=> {
     const [state,dispatch] = useReducer(foodDetailReducer,initializeState);
 
     useEffect(() => {
         dispatch({ type: foodDetailActionTypes.FETCHING })
-        fetchFoodDetail(match.params.restaurantId,match.params.foodId)
+        fetchFoodDetailApi(match.params.restaurantId,match.params.foodId)
         .then((data) => {
             dispatch({
                 type:foodDetailActionTypes.FETCH_SUCCESS,
@@ -46,7 +50,9 @@ export const FoodDetail = ({match})=> {
                 </Fragment>
             :
                 <Fragment>
-                     <FoodDetailCard {...state.food}></FoodDetailCard>
+                    <FoodCardWraooer>
+                       <FoodDetailCard {...state.food}></FoodDetailCard>
+                    </FoodCardWraooer>
                 </Fragment>
             }
             </DetailWrapper>

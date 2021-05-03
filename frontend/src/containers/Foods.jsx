@@ -3,12 +3,12 @@ import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
 
-import { fetchFoods } from '../apis/foodApis';
+import { fetchFoodsIndexApi } from '../apis/foodApis';
 import { REQUEST_STATE } from '../constants';
 import { 
     initializeState,
     foodsActionTypes,
-    foodsReducer,
+    foodsIndexReducer,
 } from '../reducer/foods';
 import {FoodCard} from '../component/FoodCard';
 
@@ -40,11 +40,11 @@ const FoodCards = styled(FoodCard)`
 `;
 
 export const Foods = () => {
-    const [state,dispatch] = useReducer(foodsReducer,initializeState);
+    const [state,dispatch] = useReducer(foodsIndexReducer,initializeState);
 
     useEffect(() => {
         dispatch({type: foodsActionTypes.FETCHING})
-        fetchFoods()
+        fetchFoodsIndexApi()
         .then((data) => {
             dispatch({
                 type: foodsActionTypes.FETCH_SUCCESS,

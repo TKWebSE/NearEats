@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ Fragment } from "react";
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -8,8 +8,8 @@ import {
 
 import {Restaurants} from './containers/Restaurants.jsx';
 import { FoodDetail } from './containers/FoodDetail';
+import { FoodEdit } from "./containers/FoodEdit";
 import {Foods} from './containers/Foods.jsx';
-import { Fragment } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { COLORS } from "./style_constants";
@@ -64,8 +64,13 @@ function App() {
         //food編集画面
         <Route
           exact
-          path="/foods/:id/edit">
-          <Foods />
+          path="/foods/:foodId/edit"
+          render={({match}) => 
+          <FoodEdit
+            match={match}
+          />
+          }
+        >
         </Route>
       </Switch>
     </Router>
