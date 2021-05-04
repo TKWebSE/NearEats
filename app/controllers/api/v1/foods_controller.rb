@@ -11,9 +11,9 @@ module Api
             end
 
             def show 
-                restaurant_id = Restaurant.find_by(id: params[:restaurantId])
-                food = Food.find_by(id: params[:id],restaurant_id: restaurant_id)
+                food = Food.find_by(id: params[:id])
 
+                logger.debug(params)
                 render json: {
                     food: food
                 }, status: :ok

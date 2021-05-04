@@ -20,7 +20,7 @@ const FoodName = styled.h3`
 `;
 
 const FoodPrice = styled.div`
-    
+    margin-left:5%;
 `;
 
 const FoodDescription = styled.div`

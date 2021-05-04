@@ -13,7 +13,7 @@ export const foodEditActionTypes = {
 
 export const foodEditReducer = (state,action) => {
     switch (action.type) {
-        case foodEditActionTypes.FECTHING:
+        case foodEditActionTypes.FETCHING:
             return {
                 ...state,
                 fetchstate:REQUEST_STATE.LOADING,
@@ -21,8 +21,8 @@ export const foodEditReducer = (state,action) => {
         case  foodEditActionTypes.FETCH_SUCCESS:
             return {
                 fetchstate:REQUEST_STATE.OK,
-                food:action.payload.food,
-                }
+                food: action.payload.food,
+            }
         default:
             throw Error();
     }

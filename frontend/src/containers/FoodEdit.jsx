@@ -2,18 +2,19 @@ import React, {Fragment, useEffect,useReducer} from 'react';
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {REQUEST_STATE} from "../constants";
-import { editfoodApi } from '../apis/foodApis';
+import { fetchFoodApi } from '../apis/foodApis';
 import { 
   initializeState,
   foodEditActionTypes,
   foodEditReducer } from "../reducer/foodEditReducer";
 import {FoodEditCard} from "../component/FoodEditCard";
-
+import TextField from '@material-ui/core/TextField';
 
 const DetailWrapper = styled.div`
 `;
 
-const FoodDetailHeader = styled.h3`
+const FoodDetailHeader = styled.h2`
+  margin-left:5%;
 `;
 
 const FoodCardWraooer = styled.div`
@@ -26,12 +27,12 @@ export const FoodEdit = ({match}) => {
 
   useEffect(()=>  {
     dispatch({type:foodEditActionTypes.FETCHING});
-    editfoodApi(match.params.foodId)
+    fetchFoodApi(match.params.foodId)
     .then((data)=> {
       dispatch({
         type:foodEditActionTypes.FETCH_SUCCESS,
         payload: {
-          data: data.food
+          food: data.food
         }
       })
     })
@@ -55,6 +56,15 @@ export const FoodEdit = ({match}) => {
           <Fragment>
               <FoodCardWraooer>
                   <FoodEditCard {...state.food}></FoodEditCard>
+                  <TextField
+          id="outlined-multiline-static"
+          label="Multiline"
+          multiline
+          fullWidth
+          rows={4}
+          variant="outlined"
+          defaultValue={state.food.name}
+        />
               </FoodCardWraooer>
           </Fragment>
       }

@@ -2,7 +2,7 @@ import React,{Fragment,useEffect, useReducer} from "react";
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton"
 import {REQUEST_STATE} from "../constants";
-import { fetchFoodDetailApi } from "../apis/foodApis";
+import { fetchFoodApi } from "../apis/foodApis";
 import { initializeState,
          foodDetailActionTypes,
          foodDetailReducer} from "../reducer/foodDetail";
@@ -24,7 +24,7 @@ export const FoodDetail = ({match})=> {
 
     useEffect(() => {
         dispatch({ type: foodDetailActionTypes.FETCHING })
-        fetchFoodDetailApi(match.params.restaurantId,match.params.foodId)
+        fetchFoodApi(match.params.foodId)
         .then((data) => {
             dispatch({
                 type:foodDetailActionTypes.FETCH_SUCCESS,

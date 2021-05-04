@@ -16,7 +16,7 @@ import { COLORS } from "./style_constants";
 
 
 //ヘッダーの色を定義
-const outerTheme = createMuiTheme({
+const headerTheme = createMuiTheme({
   palette: {
     primary: {
       main: COLORS.MAIN_COLOR
@@ -27,7 +27,7 @@ const outerTheme = createMuiTheme({
 function App() {
   return (
     <Fragment>
-    <ThemeProvider theme={outerTheme}>
+    <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider>
     <Router>
@@ -47,7 +47,7 @@ function App() {
         //food詳細画面
         <Route
           exact
-          path="/restaurants/:restaurantId/foods/:foodId"
+          path="/foods/:foodId"
           render ={({match}) => 
             <FoodDetail 
               match={match}
