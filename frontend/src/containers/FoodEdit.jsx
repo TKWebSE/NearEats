@@ -20,7 +20,7 @@ const FoodDetailHeader = styled.h2`
 const FoodCardWraooer = styled.div`
     textalign:center;
 `;
-
+const APP_KEY = 'sampleApp';
 
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
@@ -56,16 +56,8 @@ export const FoodEdit = ({match}) => {
           <Fragment>
               <FoodCardWraooer>
                   <FoodEditCard {...state.food}></FoodEditCard>
-                  <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          fullWidth
-          rows={4}
-          variant="outlined"
-          defaultValue={state.food.name}
-        />
               </FoodCardWraooer>
+              
           </Fragment>
       }
       </DetailWrapper>

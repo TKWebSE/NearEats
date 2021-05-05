@@ -36,16 +36,6 @@ export const FoodEditCard = (food) => {
                 {food.name}
             </FoodName>
             <FoodPrice>
-            <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          fullWidth
-          rows={4}
-          
-          variant="outlined"
-          defaultValue={food.name}
-        />
                 ￥<MaterialUIFoodPriceLine {...food}></MaterialUIFoodPriceLine>
             </FoodPrice>
             <FoodDesicription>

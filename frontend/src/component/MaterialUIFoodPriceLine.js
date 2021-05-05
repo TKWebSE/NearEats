@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState,useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
@@ -12,23 +12,37 @@ const useStyles = makeStyles((theme) => ({
 
 export function MaterialUIFoodPriceLine(food) {
     const classes = useStyles();
-    console.log(food)
+    const [value,setValue] = useState(food.price);
     
+    useEffect(()=>{
+      setValue(food.price)
+    },[food]);
 
     return (
-      <form className={classes.root} noValidate autoComplete="off">
-        <div>
-          <TextField
-            id="standard-number"
-            label="金額"
-            type="text"
-            inputMode="numeric"
-            defaultValue="1"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </div>
-    　</form>
+      <wrapper>
+      {
+      value === undefined || value === null?
+      <Fragment>
+          LOADING
+      </Fragment>
+      :
+      <Fragment>
+        <form className={classes.root} noValidate autoComplete="off">
+          <div>
+            <TextField
+              id="standard-number"
+              label="金額"
+              type="text"
+              inputMode="numeric"
+              defaultValue={value}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
+      　</form>
+      </Fragment>
+      }
+    </wrapper>
   );
 }
