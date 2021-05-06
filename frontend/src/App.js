@@ -38,6 +38,24 @@ function App() {
           path="restaurants">
           <Restaurants />
         </Route>
+        //user詳細画面
+        <Route 
+          exact
+          path="restaurants">
+          <Restaurants />
+        </Route>
+        //user作成画面
+        <Route 
+          exact
+          path="restaurants">
+          <Restaurants />
+        </Route>
+        //user編集画面
+        <Route 
+          exact
+          path="restaurants">
+          <Restaurants />
+        </Route>
         //food一覧
         <Route
           exact

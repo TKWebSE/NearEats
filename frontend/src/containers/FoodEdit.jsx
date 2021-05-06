@@ -8,19 +8,20 @@ import {
   foodEditActionTypes,
   foodEditReducer } from "../reducer/foodEditReducer";
 import {FoodEditCard} from "../component/FoodEditCard";
-import TextField from '@material-ui/core/TextField';
 
 const DetailWrapper = styled.div`
+  margin-left:20%;
+  margin-right:20%;
 `;
 
-const FoodDetailHeader = styled.h2`
-  margin-left:5%;
+const FoodDetailHeader = styled.h1`
+  margin-top:3%;
+  margin-bottom:3%;
 `;
 
-const FoodCardWraooer = styled.div`
-    textalign:center;
+const FoodCardWrapper = styled.div`
+  margin-bottom:5%;
 `;
-const APP_KEY = 'sampleApp';
 
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
@@ -54,10 +55,9 @@ export const FoodEdit = ({match}) => {
           </Fragment>
       :
           <Fragment>
-              <FoodCardWraooer>
+              <FoodCardWrapper>
                   <FoodEditCard {...state.food}></FoodEditCard>
-              </FoodCardWraooer>
-              
+              </FoodCardWrapper>
           </Fragment>
       }
       </DetailWrapper>

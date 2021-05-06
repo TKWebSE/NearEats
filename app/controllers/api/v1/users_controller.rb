@@ -1,8 +1,8 @@
 module Api
     module V1 
-        class RestaurantsController < ApplicationController
+        class UsersController < ApplicationController
             def index
-               restaurants = Restaurant.all
+               user = User.all
 
                render json: {
                    restaurants: restaurants

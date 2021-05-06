@@ -5,15 +5,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      
     },
   },
 }));
 
+//foodの金額を設定するためのTextFieldコンポーネント。
+//number指定していないので、バリデーションを書ける必要あり
 export function MaterialUIFoodPriceLine(food) {
     const classes = useStyles();
     const [value,setValue] = useState(food.price);
     
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
+
     useEffect(()=>{
       setValue(food.price)
     },[food]);
@@ -34,10 +40,12 @@ export function MaterialUIFoodPriceLine(food) {
               label="金額"
               type="text"
               inputMode="numeric"
+              fullWidth
               defaultValue={value}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
           </div>
       　</form>

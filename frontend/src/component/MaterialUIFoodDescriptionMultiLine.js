@@ -6,15 +6,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      
     },
   },
 }));
 
+//foodの説明を設定するためのTextFieldコンポーネント
 export function MaterialUIFoodDescriptionMultiLine(food) {
     const classes = useStyles();
-    const Fooddescription = food.description
-    const [value, setValue] = useState(Fooddescription);
+    const [value, setValue] = useState(food.description);
   
     const handleChange = (event) => {
       setValue(event.target.value);
@@ -22,7 +22,6 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
     
     useEffect(() => {
       setValue(food.description);
-      console.log("useEffective:" + value + "food:" + food.description)
     }, [food]);
         
     return (
@@ -41,7 +40,8 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
           label="料理の説明"
           multiline
           rows={4}
-          defaultValue={value===undefined? "a":value}
+          fullWidth
+          defaultValue={value}
           variant="outlined"
           onChange={handleChange}
         />

@@ -9,14 +9,21 @@ import { initializeState,
 import {FoodDetailCard} from "../component/FoodDetailCard";
 
 const DetailWrapper = styled.div`
-
+    margin-left:20%;
+    margin-right:20%;
 `;
 
-const FoodDetailHeader = styled.h3`
+const LoadingWrapper = styled.div`
+    
 `;
 
-const FoodCardWraooer = styled.div`
-    textalign:center;
+const FoodDetailHeader = styled.h1`
+    margin-top:3%;
+    margin-bottom:3%;
+`;
+
+const FoodCardWrapper = styled.div`
+    margin-bottom:5%;
 `;
 
 export const FoodDetail = ({match})=> {
@@ -44,15 +51,15 @@ export const FoodDetail = ({match})=> {
             {
             REQUEST_STATE.LOADING === state.fetchState?
                 <Fragment>
-                    <Skeleton variant="rect" width={450} height={300} />
-                    <Skeleton variant="rect" width={450} height={300} />
-                    <Skeleton variant="rect" width={450} height={300} />
+                    <LoadingWrapper>
+                        <Skeleton variant="rect" width={450} height={300} />
+                    </LoadingWrapper>
                 </Fragment>
             :
                 <Fragment>
-                    <FoodCardWraooer>
+                    <FoodCardWrapper>
                        <FoodDetailCard {...state.food}></FoodDetailCard>
-                    </FoodCardWraooer>
+                    </FoodCardWrapper>
                 </Fragment>
             }
             </DetailWrapper>
