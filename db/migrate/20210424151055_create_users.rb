@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.integer :point, null: false, default: 0
       t.integer :time_required, null: false
 
+      t.boolean :deleted,default:false
       t.timestamps
     end
   end

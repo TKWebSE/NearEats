@@ -17,14 +17,18 @@ ActiveRecord::Schema.define(version: 2021_04_24_151311) do
     t.string "name", null: false
     t.integer "price", null: false
     t.text "description", null: false
+    t.string "image"
+    t.boolean "deleted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["restaurant_id"], name: "index_foods_on_restaurant_id"
   end
 
-  create_table "restaurants", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "fee", default: 0, null: false
+    t.string "email", null: false
+    t.string "password", null: false
+    t.integer "point", default: 0, null: false
     t.integer "time_required", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

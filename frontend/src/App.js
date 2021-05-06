@@ -32,12 +32,6 @@ function App() {
     </ThemeProvider>
     <Router>
       <Switch>
-        //restaurant一覧画面
-        <Route 
-          exact
-          path="restaurants">
-          <Restaurants />
-        </Route>
         //user詳細画面
         <Route 
           exact
