@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_151311) do
+ActiveRecord::Schema.define(version: 2021_05_06_105214) do
 
   create_table "foods", force: :cascade do |t|
     t.integer "restaurant_id", null: false
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_04_24_151311) do
     t.index ["restaurant_id"], name: "index_foods_on_restaurant_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "order_user", null: false
+    t.integer "make_user", null: false
+    t.integer "foods_id", null: false
+    t.integer "count", default: 1, null: false
+    t.string "order_status", default: "0", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["foods_id"], name: "index_orders_on_foods_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -32,7 +43,9 @@ ActiveRecord::Schema.define(version: 2021_04_24_151311) do
     t.integer "time_required", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "\"order_user_id\", \"make_user_id\"", name: "index_users_on_order_user_id_and_make_user_id"
   end
 
   add_foreign_key "foods", "restaurants"
+  add_foreign_key "orders", "foods", column: "foods_id"
 end
