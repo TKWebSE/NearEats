@@ -8,31 +8,30 @@
 3.times do |n|
     user = User.new(
       name: "testユーザー_#{n}",
-      email: "email#{m}@yahoo.co.jp",
+      email: "email#{n}@yahoo.co.jp",
       password: "1234",
-      address: "#{m}県#{m}町の1-2-3",
+      address: "#{n}県#{n}町の1-2-3",
       point: 100,
       time_required: 10,
     )
   
     12.times do |m|
-      user.foods.build(
+      food = user.foods.build(
         name: "フード名_#{m}",
         price: 500,
         description: "フード_#{m}の説明文です。",
         count:m,
         station:"#{m}駅",
-      )
-    end
- 
-    5.times do |o|
+      );
+
       order = user.orders.build(
-        make_user: o,
+        order_user_id: user.id,
+        make_user_id: user.id,
         food_id: food.id,
-        count: o,
+        count: m,
         order_status: 1,
       )
     end
-
+ 
     user.save!
  end
