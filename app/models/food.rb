@@ -1,4 +1,4 @@
 class Food < ApplicationRecord
     belongs_to :user
-    has_one :order
+    has_many :orders
 end
