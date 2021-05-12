@@ -2,8 +2,7 @@ module Api
     module V1
         class FoodsController < ApplicationController
             def index
-                restaurant = Restaurant.find(1)
-                foods = restaurant.foods.all
+                foods = Food.all
                 
                 render json: {
                     foods: foods
@@ -20,8 +19,8 @@ module Api
             end
 
             def new
-                restaurant = Restaurant.find(1)
-                food = restaurant.foods.build(
+                user = Restaurant.find(1)
+                food = user.foods.build(
                     id: params[:id],name: params[:name],price: params[:price]
                     )
                 

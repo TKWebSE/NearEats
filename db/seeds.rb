@@ -24,14 +24,17 @@
         station:"#{m}駅",
       );
 
-      order = user.orders.build(
-        order_user_id: user.id,
-        make_user_id: user.id,
-        food_id: food.id,
-        count: m,
-        order_status: 1,
-      )
     end
  
     user.save!
+ end
+
+ 6.times do |m|
+  food = Food.find(m+1) 
+  order = food.orders.build(
+        order_user_id: food.id,
+        make_user_id: food.id,
+        count: m,
+        order_status: 1,
+      );
  end

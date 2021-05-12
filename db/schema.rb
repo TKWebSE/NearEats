@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2021_05_06_105214) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "order_user_id"
-    t.integer "make_user_id"
+    t.integer "order_user_id", null: false
+    t.integer "make_user_id", null: false
     t.integer "food_id"
     t.integer "count", default: 1, null: false
     t.string "order_status", default: "0", null: false
