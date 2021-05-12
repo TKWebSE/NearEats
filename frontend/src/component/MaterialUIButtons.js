@@ -63,7 +63,6 @@ export function IconLabelButtonss() {
       <Button
         variant="contained"
         color="primary"
-        size="small"
         className={classes.button}
         startIcon={<SaveIcon />}
       >

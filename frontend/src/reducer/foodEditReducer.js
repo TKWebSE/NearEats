@@ -9,6 +9,7 @@ export const initializeState = {
 export const foodEditActionTypes = {
     FETCHING:"FECTHING",
     FETCH_SUCCESS:"SUCCESS",
+    SETTING:"SETTING",
 }
 
 export const foodEditReducer = (state,action) => {
@@ -21,6 +22,10 @@ export const foodEditReducer = (state,action) => {
         case  foodEditActionTypes.FETCH_SUCCESS:
             return {
                 fetchstate:REQUEST_STATE.OK,
+                food: action.payload.food,
+            }
+        case foodEditActionTypes.SETTING:
+            return{
                 food: action.payload.food,
             }
         default:

@@ -11,11 +11,11 @@ const FoodCardWrapper = styled.div`
 const MainfoodImage = styled.img`
     width:100%;
     height:60%;
-    margin-bottom:2%;
 `;
 
 const TextWrapper = styled.div`
     margin-bottom:5%;
+    text-align:left;
 `;
 
 const FoodName = styled.h1`
