@@ -12,22 +12,25 @@ const useStyles = makeStyles((theme) => ({
 
 //foodの金額を設定するためのTextFieldコンポーネント。
 //number指定していないので、バリデーションを書ける必要あり
-export function MaterialUIFoodPriceLine(food) {
+export function MaterialUIFoodPriceLine(food,handleSetPriceValue) {
+  constructor(food){
+    this.state = {value :food};
+  }
     const classes = useStyles();
-    const [value,setValue] = useState(food.price);
+    // const [value,setValue] = useState(food.price);
     
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //   setValue(event.target.value);
+    // };
 
     useEffect(()=>{
-      setValue(food.price)
+      handleSetPriceValue(food.price)
     },[food]);
 
     return (
-      <wrapper>
+      <Fragment>
       {
-      value === undefined || value === null?
+      food === undefined || food === null || handleSetPriceValue === undefined || handleSetPriceValue === null?
       <Fragment>
           LOADING
       </Fragment>
@@ -41,16 +44,16 @@ export function MaterialUIFoodPriceLine(food) {
               type="text"
               inputMode="numeric"
               fullWidth
-              defaultValue={value}
+              defaultValue={food}
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
+              onChange={handleSetPriceValue}
             />
           </div>
       　</form>
       </Fragment>
       }
-    </wrapper>
+    </Fragment>
   );
 }

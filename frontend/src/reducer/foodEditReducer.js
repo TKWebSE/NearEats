@@ -8,8 +8,9 @@ export const initializeState = {
 
 export const foodEditActionTypes = {
     FETCHING:"FECTHING",
-    FETCH_SUCCESS:"SUCCESS",
-    SETTING:"SETTING",
+    FETCH_SUCCESS:"FETCH_SUCCESS",
+    UPDATING:"UPDATING",
+    UPDATE_SUCCESS:"SET_SUCCESS"
 }
 
 export const foodEditReducer = (state,action) => {
@@ -24,7 +25,12 @@ export const foodEditReducer = (state,action) => {
                 fetchstate:REQUEST_STATE.OK,
                 food: action.payload.food,
             }
-        case foodEditActionTypes.SETTING:
+        case foodEditActionTypes.UPDATING:
+            return{
+                fetchstate:REQUEST_STATE.LOADING,
+            }
+        case foodEditActionTypes.UPDATE_SUCCESS:
+            console.log(action.payload.food)
             return{
                 food: action.payload.food,
             }

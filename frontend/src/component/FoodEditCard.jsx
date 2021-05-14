@@ -33,7 +33,7 @@ const FoodDesicription = styled.div`
 `;
 
 //foodの編集画面用のカードコンポーネント
-export const FoodEditCard = (food) => {
+export const FoodEditCard = (food,handleSetPriceValue) => {
     
     return (
         <Fragment>
@@ -43,7 +43,7 @@ export const FoodEditCard = (food) => {
                 <MaterialUISetFoodNameLine {...food}></MaterialUISetFoodNameLine>
             </FoodName>
             <FoodPrice>
-                <MaterialUIFoodPriceLine {...food}></MaterialUIFoodPriceLine>
+                <MaterialUIFoodPriceLine {...food} handleSetPriceValue></MaterialUIFoodPriceLine>
             </FoodPrice>
             <FoodDesicription>
                 <MaterialUIFoodDescriptionMultiLine {...food} ></MaterialUIFoodDescriptionMultiLine>

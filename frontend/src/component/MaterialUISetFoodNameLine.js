@@ -25,7 +25,7 @@ export default function MaterialUISetFoodNameLine(food) {
   },[food])
 
   return (
-    <wrapper>
+    <Fragment>
         {
         value === undefined || value === null?
         <Fragment>
@@ -45,6 +45,6 @@ export default function MaterialUISetFoodNameLine(food) {
         </form>
         </Fragment>
         }
-    </wrapper>
+    </Fragment>
   );
 }

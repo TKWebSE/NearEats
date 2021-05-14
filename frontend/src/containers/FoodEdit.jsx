@@ -5,7 +5,7 @@ import {SaveButton} from "../component/MaterialUISaveButton";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {REQUEST_STATE} from "../constants";
 import {COLORS} from "../style_constants";
-import { fetchFoodApi } from '../apis/foodApis';
+import { fetchFoodApi, updateFoodApi} from '../apis/foodApis';
 import { 
   initializeState,
   foodEditActionTypes,
@@ -34,15 +34,16 @@ const saveButtonTheme = createMuiTheme({
   },
 });
 
-const submitHandle=(() => {
-
-})
-
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
-  function handleSetValue(e){
-    e.preventDefault();
-    console.log("neko")
+
+  const handleSetPriceValue = () => {
+    dispatch({type:foodEditActionTypes.SETTING,
+              payload:{
+                food_price: state.food.price
+              }
+      })
+    console.log(state);
   }
 
   useEffect(()=>  {
@@ -59,6 +60,16 @@ export const FoodEdit = ({match}) => {
     .catch(e => console.log(e))
   },[]);
 
+  const submitHandle=(() => {
+    dispatch({type:foodEditActionTypes.UPDATING});
+    console.log(state.food)
+    updateFoodApi(state.food)
+    .then((data) => {
+      dispatch({type:foodEditActionTypes.UPDATE_SUCCESS})
+    })
+    .catch(e => console.log(e))
+  })
+
   return (
     <Fragment>
       <DetailWrapper>
@@ -66,22 +77,19 @@ export const FoodEdit = ({match}) => {
               料理編集画面
           </FoodDetailHeader>
       {
-      REQUEST_STATE.LOADING === state.fetchState?
+      REQUEST_STATE.LOADING === state.fetchState || state.food === undefined?
             <Fragment>
               <Skeleton variant="rect" width={450} height={300} />
               <Skeleton variant="rect" width={450} height={300} />
               <Skeleton variant="rect" width={450} height={300} />
             </Fragment>
-      :REQUEST_STATE.LOADING === state.ok && !state.food === nil?
+      :
           <Fragment>
               <FoodCardWrapper>
-                <form >
-                  <FoodEditCard {...state.food}></FoodEditCard>
-                  {FoodEditCard.value}
+                  <FoodEditCard {...state.food} onChange={handleSetPriceValue}></FoodEditCard>
                   <ThemeProvider theme={saveButtonTheme}>
-                    <SaveButton onChange={handleSetValue}/>
+                    <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
-                </form>
               </FoodCardWrapper>
           </Fragment>
       }

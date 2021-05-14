@@ -25,7 +25,7 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
     }, [food]);
         
     return (
-    <wrapper>
+    <Fragment>
       {
       value === undefined || value === null?
       <Fragment>
@@ -49,6 +49,6 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
       </form>
     </Fragment>
     }
-    </wrapper>
+    </Fragment>
   );
 }

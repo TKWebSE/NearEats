@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SaveButton()  {
+export function SaveButton({onClick})  {
     const classes = useStyles();
   
     return (
@@ -23,6 +23,7 @@ export function SaveButton()  {
           color="primary"
           className={classes.button}
           startIcon={<SaveIcon />}
+          onClick={onClick}
         >
         Save
       </Button>
