@@ -4,6 +4,7 @@ import { REQUEST_STATE } from "../constants";
 export const initializeState = {
     fetchState:REQUEST_STATE.INITIAL,
     food:null,
+    update_food:null,
 }
 
 export const foodEditActionTypes = {

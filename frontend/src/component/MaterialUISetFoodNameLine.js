@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //foodの名前を設定するためのテキストフィールドコンポーネント
-export default function MaterialUISetFoodNameLine(food) {
+export default function MaterialUISetFoodNameLine(food,handleSetPriceValue) {
   const classes = useStyles();
   const [value,setValue] = useState(food.name)
 

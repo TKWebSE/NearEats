@@ -77,7 +77,7 @@ export const FoodEdit = ({match}) => {
               料理編集画面
           </FoodDetailHeader>
       {
-      REQUEST_STATE.LOADING === state.fetchState || state.food === undefined?
+      REQUEST_STATE.LOADING === state.fetchState || state.food === []?
             <Fragment>
               <Skeleton variant="rect" width={450} height={300} />
               <Skeleton variant="rect" width={450} height={300} />
