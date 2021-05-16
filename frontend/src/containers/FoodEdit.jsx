@@ -17,7 +17,7 @@ const DetailWrapper = styled.div`
   margin-right:20%;
 `;
 
-const FoodDetailHeader = styled.h1`
+const FoodEditHeader = styled.h1`
   margin-top:3%;
   margin-bottom:3%;
 `;
@@ -37,13 +37,13 @@ const saveButtonTheme = createMuiTheme({
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
 
-  const handleSetPriceValue = () => {
-    dispatch({type:foodEditActionTypes.SETTING,
-              payload:{
-                food_price: state.food.price
-              }
-      })
-    console.log(state);
+  function handleSetPriceValue() {
+    dispatch({
+      type:foodEditActionTypes.SETTING,
+      payload:{
+        food_price: state.food.price
+      }
+    })
   }
 
   useEffect(()=>  {
@@ -56,6 +56,7 @@ export const FoodEdit = ({match}) => {
           food: data.food
         }
       })
+      console.log(state)
     })
     .catch(e => console.log(e))
   },[]);
@@ -69,13 +70,13 @@ export const FoodEdit = ({match}) => {
     })
     .catch(e => console.log(e))
   })
-
+  
   return (
     <Fragment>
       <DetailWrapper>
-          <FoodDetailHeader>
+          <FoodEditHeader>
               料理編集画面
-          </FoodDetailHeader>
+          </FoodEditHeader>
       {
       REQUEST_STATE.LOADING === state.fetchState || state.food === []?
             <Fragment>
@@ -86,7 +87,7 @@ export const FoodEdit = ({match}) => {
       :
           <Fragment>
               <FoodCardWrapper>
-                  <FoodEditCard {...state.food} onChange={handleSetPriceValue}></FoodEditCard>
+                  <FoodEditCard {...state.food} handleSetPriceValue={handleSetPriceValue}></FoodEditCard>
                   <ThemeProvider theme={saveButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>

@@ -17,6 +17,7 @@ export const foodEditActionTypes = {
 export const foodEditReducer = (state,action) => {
     switch (action.type) {
         case foodEditActionTypes.FETCHING:
+            console.log("s")
             return {
                 ...state,
                 fetchstate:REQUEST_STATE.LOADING,
@@ -31,9 +32,9 @@ export const foodEditReducer = (state,action) => {
                 fetchstate:REQUEST_STATE.LOADING,
             }
         case foodEditActionTypes.UPDATE_SUCCESS:
-            console.log(action.payload.food)
+            console.log(action.payload)
             return{
-                food: action.payload.food,
+                food: action.payload.price,
             }
         default:
             throw Error();

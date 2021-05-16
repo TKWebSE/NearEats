@@ -4,6 +4,7 @@ import foodImage from "../images/food-image.jpg";
 import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
 import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
 import MaterialUISetFoodNameLine from "./MaterialUISetFoodNameLine";
+
 const FoodCardWrapper = styled.div`
     text-align:center;
 `;
@@ -33,7 +34,7 @@ const FoodDesicription = styled.div`
 `;
 
 //foodの編集画面用のカードコンポーネント
-export const FoodEditCard = (food,handleSetPriceValue) => {
+export const FoodEditCard = ({food,handleSetPriceValue}) => {
     
     return (
         <Fragment>
@@ -43,10 +44,11 @@ export const FoodEditCard = (food,handleSetPriceValue) => {
                 <MaterialUISetFoodNameLine {...food}></MaterialUISetFoodNameLine>
             </FoodName>
             <FoodPrice>
-                <MaterialUIFoodPriceLine {...food} handleSetPriceValue></MaterialUIFoodPriceLine>
+                <MaterialUIFoodPriceLine {...food} handleSetPriceValue={handleSetPriceValue}></MaterialUIFoodPriceLine>
+                {console.log(handleSetPriceValue)}
             </FoodPrice>
             <FoodDesicription>
-                <MaterialUIFoodDescriptionMultiLine {...food} ></MaterialUIFoodDescriptionMultiLine>
+                <MaterialUIFoodDescriptionMultiLine {...food} {...handleSetPriceValue} ></MaterialUIFoodDescriptionMultiLine>
             </FoodDesicription>
         </FoodCardWrapper>
         </Fragment>

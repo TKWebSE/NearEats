@@ -27,11 +27,11 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
     return (
     <Fragment>
       {
-      value === undefined || value === null?
-      <Fragment>
-          LOADING
-      </Fragment>
-      :
+      // value === undefined || value === null?
+      // <Fragment>
+      //     LOADING
+      // </Fragment>
+      // :
       <Fragment>
         <form className={classes.root} noValidate autoComplete="off">
         <div>
@@ -41,7 +41,7 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
           multiline
           rows={4}
           fullWidth
-          defaultValue={value}
+          defaultValue={value === undefined? "aa" :value}
           variant="outlined"
           onChange={handleChange}
         />
