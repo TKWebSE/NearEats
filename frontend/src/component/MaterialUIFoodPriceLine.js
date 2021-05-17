@@ -17,24 +17,22 @@ export function MaterialUIFoodPriceLine(food,handleSetPriceValue) {
     const classes = useStyles();
     const [value,setValue] = useState(food.price);
     
-    console.log({handleSetPriceValue})
     const handleChange = (event) => {
       setValue(event.target.value);
     };
 
     useEffect(()=>{
       setValue(food.price)
-      
     },[food]);
 
     return (
       <Fragment>
       {
-      // value === undefined || value === null?
-      // <Fragment>
-      //     LOADING
-      // </Fragment>
-      // :
+      value === undefined || value === null?
+      <Fragment>
+          LOADING
+      </Fragment>
+      :
         <form className={classes.root} noValidate autoComplete="off">
           <div>
             <TextField
@@ -47,7 +45,7 @@ export function MaterialUIFoodPriceLine(food,handleSetPriceValue) {
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
+              onChange={handleSetPriceValue}
             />
           </div>
       　</form>

@@ -8,12 +8,18 @@ const FoodCreateHeader = styled.h1`
     margin-bottom:3%;
 `;
 
-export  const FoodCreate = () => {
+export class FoodCreate extends Component {
+    constructor (props){
+        super(props);
+        neko:"nekoko"
+    }
     
     useEffect(() => {
-        
-    })
+        console.log(neko);
+    },[]);
+
     return(
+        
         <Fragment>
             <FoodCreateWrappwer>
                 <FoodCreateHeader>

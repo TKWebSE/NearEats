@@ -17,7 +17,6 @@ export const foodEditActionTypes = {
 export const foodEditReducer = (state,action) => {
     switch (action.type) {
         case foodEditActionTypes.FETCHING:
-            console.log("s")
             return {
                 ...state,
                 fetchstate:REQUEST_STATE.LOADING,

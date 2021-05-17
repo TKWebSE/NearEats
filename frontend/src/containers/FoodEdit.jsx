@@ -37,15 +37,6 @@ const saveButtonTheme = createMuiTheme({
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
 
-  function handleSetPriceValue() {
-    dispatch({
-      type:foodEditActionTypes.SETTING,
-      payload:{
-        food_price: state.food.price
-      }
-    })
-  }
-
   useEffect(()=>  {
     dispatch({type:foodEditActionTypes.FETCHING});
     fetchFoodApi(match.params.foodId)
@@ -56,10 +47,20 @@ export const FoodEdit = ({match}) => {
           food: data.food
         }
       })
-      console.log(state)
     })
     .catch(e => console.log(e))
   },[]);
+  console.log(state)
+
+  function handleSetPriceValue() {
+    console.log(state)
+    dispatch({
+      type:foodEditActionTypes.SETTING,
+      payload:{ 
+        food_price: state.food.price
+      }
+    })
+  }
 
   const submitHandle=(() => {
     dispatch({type:foodEditActionTypes.UPDATING});
@@ -70,7 +71,6 @@ export const FoodEdit = ({match}) => {
     })
     .catch(e => console.log(e))
   })
-  
   return (
     <Fragment>
       <DetailWrapper>
@@ -87,7 +87,11 @@ export const FoodEdit = ({match}) => {
       :
           <Fragment>
               <FoodCardWrapper>
-                  <FoodEditCard {...state.food} handleSetPriceValue={handleSetPriceValue}></FoodEditCard>
+                  <FoodEditCard 
+                    {...state.food} 
+                    handleSetPriceValue={handleSetPriceValue}
+                  >
+                    </FoodEditCard>
                   <ThemeProvider theme={saveButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
