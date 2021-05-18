@@ -8,7 +8,8 @@ import {
 
 import {Restaurants} from './containers/Restaurants.jsx';
 import { FoodDetail } from './containers/FoodDetail';
-import { FoodEdit } from "./containers/FoodEdit";
+import { FoodEdit} from "./containers/FoodEdit";
+import {FoodCreate} from "./containers/FoodCreate";
 import {Foods} from './containers/Foods.jsx';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
@@ -56,6 +57,12 @@ function App() {
           path="/foods">
           <Foods />
         </Route>
+        //food作成画面
+        <Route
+          exact
+          path="/foods/create">
+          <FoodCreate />
+        </Route>
         //food詳細画面
         <Route
           exact
@@ -66,12 +73,6 @@ function App() {
             />
           }
         >
-        </Route>
-        //food作成画面
-        <Route
-          exact
-          path="/foods/create">
-          <Foods />
         </Route>
         //food編集画面
         <Route

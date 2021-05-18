@@ -1,5 +1,5 @@
 import axios from "axios";
-import { foodsIndex ,foodShow,foodUpdate } from "../urls";
+import { foodsIndex ,foodShow,foodUpdate, foodCreate} from "../urls";
 
 //food一覧を取得する
 export const fetchFoodsIndexApi = () => {
@@ -22,6 +22,20 @@ export const fetchFoodApi = (food_id) => {
     }
     )
     .catch(e => console.log(e));
+}
+
+export const createFoodApi = (food) => {
+    return axios.post(foodCreate(food.id),{
+        food:{
+            name:food.name,
+            price:food.price,
+            description:food.description
+        }
+    })
+    .then((res) => {
+        return res.data
+    })
+    .catch(e => console.log(e))
 }
 
 export const updateFoodApi = (food) => {

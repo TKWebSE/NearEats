@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //foodの名前を設定するためのテキストフィールドコンポーネント
-export default function MaterialUISetFoodNameLine(food) {
+export default function MaterialUISetFoodNameLine(submitHandle) {
   const classes = useStyles();
   const [value,setValue] = useState(0)
 
@@ -21,12 +21,12 @@ export default function MaterialUISetFoodNameLine(food) {
   };
 
   useEffect(()=> {
-    food === undefined || food === null?
+    // food === undefined || food === null?
       setValue(0)
-    :
-      setValue(food.name);
-  },[food])
-
+    // :
+      setValue(1);
+  },[])
+  console.log(submitHandle)
   return (
     <Fragment>
         {
@@ -36,7 +36,7 @@ export default function MaterialUISetFoodNameLine(food) {
         </Fragment>
         :
         <Fragment>
-        <form className={classes.root} noValidate autoComplete="off">
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={submitHandle}>
         <TextField 
             id="outlined-basic" 
             label="商品名" 

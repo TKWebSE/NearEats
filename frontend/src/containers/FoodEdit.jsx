@@ -34,6 +34,8 @@ const saveButtonTheme = createMuiTheme({
   },
 });
 
+export const FoodEditContextDispatch = React.createContext('');
+
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
 
@@ -50,7 +52,6 @@ export const FoodEdit = ({match}) => {
     })
     .catch(e => console.log(e))
   },[]);
-  console.log(state)
 
   function handleSetPriceValue() {
     console.log(state)
@@ -60,9 +61,10 @@ export const FoodEdit = ({match}) => {
         food_price: state.food.price
       }
     })
+    console.log(state)
   }
 
-  const submitHandle=(() => {
+  const submitHandle=(e) => {
     dispatch({type:foodEditActionTypes.UPDATING});
     console.log(state.food)
     updateFoodApi(state.food)
@@ -70,7 +72,8 @@ export const FoodEdit = ({match}) => {
       dispatch({type:foodEditActionTypes.UPDATE_SUCCESS})
     })
     .catch(e => console.log(e))
-  })
+  }
+
   return (
     <Fragment>
       <DetailWrapper>
@@ -78,7 +81,7 @@ export const FoodEdit = ({match}) => {
               料理編集画面
           </FoodEditHeader>
       {
-      REQUEST_STATE.LOADING === state.fetchState || state.food === []?
+      REQUEST_STATE.LOADING === state.fetchState?
             <Fragment>
               <Skeleton variant="rect" width={450} height={300} />
               <Skeleton variant="rect" width={450} height={300} />
@@ -87,15 +90,16 @@ export const FoodEdit = ({match}) => {
       :
           <Fragment>
               <FoodCardWrapper>
+                <FoodEditContextDispatch.Provider value={state.food}>
                   <FoodEditCard 
-                    {...state.food} 
+                    food={state.food} 
                     handleSetPriceValue={handleSetPriceValue}
-                  >
-                    </FoodEditCard>
+                  />
                   <ThemeProvider theme={saveButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
-              </FoodCardWrapper>
+                </FoodEditContextDispatch.Provider>
+              </FoodCardWrapper>              
           </Fragment>
       }
       </DetailWrapper>
