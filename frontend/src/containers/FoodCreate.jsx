@@ -1,13 +1,13 @@
-import React, {Fragment, useEffect, useReducer} from "react";
+import React, {Fragment, useEffect, useReducer,createContext} from "react";
 import styled from "styled-components";
 import {FoodCreateCard} from "../component/FoodCreateCard";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {COLORS} from "../style_constants";
 import { initializeState,
-        foodEditActionTypes,
-        foodCreateReducer } from "../reducer/foodEditReducer";
-import {foodCreate} from "../apis/foodApis";
+        foodCreateActionTypes,
+        foodCreateReducer } from "../reducer/foodCreateReducer";
+import {createFoodApi} from "../apis/foodApis";
 
 const FoodCreateWrappwer = styled.div`
 `;
@@ -25,8 +25,8 @@ const saveButtonTheme = createMuiTheme({
     },
   });
 
-const FoodCreateState = React.createContext("");
-const FoodCreateDispatch = React.createContent("");
+export const FoodCreateState = createContext("");
+export const FoodCreateDispatch = createContext("");
 
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
@@ -36,8 +36,10 @@ export const FoodCreate = () => {
     },[]);
 
     function submitHandle() {
-        // foodCreate(value);
-        console.log("korekore");
+        //user認証機能実装次第改修
+        const user_id = 1
+        createFoodApi(state.food,user_id);
+        console.log(state.food);
     }
 
     return(

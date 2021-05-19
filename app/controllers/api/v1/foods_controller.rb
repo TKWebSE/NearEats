@@ -34,9 +34,11 @@ module Api
             end
 
             def create
-                food = Food.new(name: params[:name],fee: params[:fee])
+                food = Food.new(food_params)
+                food.count = 1
+                food.station = "東京駅"
 
-                if food.save
+                if food.save!
                     render json: {
                         food: food
                     }, status: :ok
@@ -80,7 +82,7 @@ module Api
             private 
 
                 def food_params
-                    params.require(:food).permit(:name,:price,:description)
+                    params.require(:food).permit(:name,:price,:description,:user_id)
                 end
         end
     end

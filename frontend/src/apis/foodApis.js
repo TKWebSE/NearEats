@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useReducer } from "react";
 import { foodsIndex ,foodShow,foodUpdate, foodCreate} from "../urls";
 
 //food一覧を取得する
@@ -24,12 +25,15 @@ export const fetchFoodApi = (food_id) => {
     .catch(e => console.log(e));
 }
 
-export const createFoodApi = (food) => {
-    return axios.post(foodCreate(food.id),{
+export const createFoodApi = (food,user_id) => {
+    console.log(foodCreate)
+    console.log(food)
+    return axios.post(foodCreate,{
         food:{
             name:food.name,
             price:food.price,
-            description:food.description
+            description:food.description,
+            user_id:user_id
         }
     })
     .then((res) => {

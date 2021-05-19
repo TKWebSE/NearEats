@@ -1,22 +1,39 @@
 import React from "react";
 import REQUEST_STATE from "../constants";
 
-const InitialzeState = {
-    food:null,
+export const initializeState = {
+    food:{
+        name:"nameeeeeee",
+        price:100,
+        description:"desdesceeeee",
+    },
 }
 
-const CreateActionType = {
+export const foodCreateActionTypes = {
     INITIAL:"INITIAL",
     SETTING:"SETTING",
     SUCCESS:"SUCCESS",
+    TEST:"TEST",
 }
 
-const foodCreateReducer = (state,action) => {
+export const foodCreateReducer = (state,action) => {
     switch (action.type) {
-        case CreateActionType.SETTING:
-            console.log("e")
-    
+        case foodCreateActionTypes.SETTING:
+            console.log("reduberSettingInside")
+            console.log(action)
+            console.log(state)
+            console.log({...state})
+            return {
+                    food:{
+                        name: action.payload.name,
+                        price: state.food.price,
+                        description:state.food.description,
+                    }
+            }
+        case foodCreateActionTypes.TEST:
+            console.log(state)
+            return{}
         default:
-            console.log(e);
+            throw new Error();
     }
 }
