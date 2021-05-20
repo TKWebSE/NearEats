@@ -1,6 +1,7 @@
 import React, { Fragment,useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { FoodCreateDispatch } from '../containers/FoodCreate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +16,14 @@ const useStyles = makeStyles((theme) => ({
 export function MaterialUIFoodDescriptionMultiLine(food) {
     const classes = useStyles();
     const [value, setValue] = useState("aaa");
-  
+    const FoodCreateDescriptionState = useContext(FoodCreateState);
+    const FoodCreateDescriptionDispatch = useContext(FoodCreateDispatch);
+
     const handleChange = (event) => {
       setValue(event.target.value);
+      FoodCreateDescriptionDispatch({
+        
+      })}
     };
     
     useEffect(() => {

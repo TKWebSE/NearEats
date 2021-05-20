@@ -1,8 +1,8 @@
 import React,{Fragmnet} from "react";
-import { Fragment } from "react";
 import styled from "styled-components";
-import { foodEditActionTypes } from "../reducer/foodEditReducer";
 import MaterialUISetFoodNameLine from "./MaterialUISetFoodNameLine";
+import MaterialUIFoodPriceLine from "./MaterialUIFoodPriceLine";
+import MaterialUIFoodDescriptionMultiLine from "./MaterialUIFoodDescriptionMultiLine";
 
 const FoodCreateCardWrapper = styled.div`
 `;
@@ -15,21 +15,20 @@ const FoodPrice = styled.div`
 
 const FoodDescription = styled.div`
 `;
-const food = {name: "aaa"}
 export const FoodCreateCard = () => {
     return(
-        <Fragment>
+        <Fragmnet>
             <FoodCreateCardWrapper>
                 <FoodName>
                     <MaterialUISetFoodNameLine food={food}></MaterialUISetFoodNameLine>
                 </FoodName>
                 <FoodPrice>
-                    
+                    <MaterialUIFoodPriceLine food={food}></MaterialUIFoodPriceLine>
                 </FoodPrice>
                 <FoodDescription>
-
+                    <MaterialUIFoodDescriptionMultiLine food={food}></MaterialUIFoodDescriptionMultiLine>
                 </FoodDescription>
             </FoodCreateCardWrapper>
-        </Fragment>
+        </Fragmnet>
     )
 }

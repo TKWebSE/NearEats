@@ -1,13 +1,16 @@
-import React, {Fragment, useEffect, useReducer,createContext} from "react";
+import React, {Fragment, useEffect, useReducer} from "react";
 import styled from "styled-components";
 import {FoodCreateCard} from "../component/FoodCreateCard";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
+import {FOOD_HEADER_TITLE} from "../constants";
 import {COLORS} from "../style_constants";
 import { initializeState,
-        foodCreateActionTypes,
         foodCreateReducer } from "../reducer/foodCreateReducer";
 import {createFoodApi} from "../apis/foodApis";
+import {useHistory} from "react-router-dom";
+import {foodShowHistory} from "../urls/index";
+import {FoodState,FoodDispatch} from "../context/FoodContext";
 
 const FoodCreateWrappwer = styled.div`
 `;
@@ -25,36 +28,37 @@ const saveButtonTheme = createMuiTheme({
     },
   });
 
-export const FoodCreateState = createContext("");
-export const FoodCreateDispatch = createContext("");
-
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
-    
+    const history = useHistory()
     useEffect(() => {
         console.log();
     },[]);
 
-    function submitHandle() {
+    function SubmitHandle() {
         //user認証機能実装次第改修
         const user_id = 1
-        createFoodApi(state.food,user_id);
-        console.log(state.food);
+        createFoodApi(state.food,user_id)
+        .then((data) => {
+            console.log(data)
+            history.push(foodShowHistory(1))
+        })
+        .catch(e => console.log(e))
     }
 
     return(
         <Fragment>
             <FoodCreateWrappwer>
                 <FoodCreateHeader>
-                    料理作成画面
+                    {FOOD_HEADER_TITLE.FOOD_CREATE}
                 </FoodCreateHeader>
-                <FoodCreateDispatch.Provider value={dispatch}>
-                    <FoodCreateState.Provider value={state}>
+                <FoodDispatch.Provider value={dispatch}>
+                    <FoodState.Provider value={state}>
                         <FoodCreateCard/>
-                    </FoodCreateState.Provider>
-                </FoodCreateDispatch.Provider>
+                    </FoodState.Provider>
+                </FoodDispatch.Provider>
                 <ThemeProvider theme={saveButtonTheme}>
-                    <SaveButton onClick={submitHandle} />
+                    <SaveButton onClick={SubmitHandle} />
                 </ThemeProvider>
             </FoodCreateWrappwer>
         </Fragment>

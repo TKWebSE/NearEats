@@ -1,7 +1,7 @@
 import React,{Fragment,useEffect, useReducer} from "react";
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton"
-import {REQUEST_STATE} from "../constants";
+import {REQUEST_STATE,FOOD_HEADER_TITLE} from "../constants";
 import { fetchFoodApi } from "../apis/foodApis";
 import { initializeState,
          foodDetailActionTypes,
@@ -46,7 +46,7 @@ export const FoodDetail = ({match})=> {
         <Fragment>
             <DetailWrapper>
                 <FoodDetailHeader>
-                    料理詳細画面
+                    {FOOD_HEADER_TITLE.FOOD_DETAIL}
                 </FoodDetailHeader>
             {
             REQUEST_STATE.LOADING === state.fetchState?

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer } from "react";
-import { foodsIndex ,foodShow,foodUpdate, foodCreate} from "../urls";
+import { foodsIndex ,foodShow,foodCreate,foodUpdate,foodDelete} from "../urls";
 
 //food一覧を取得する
 export const fetchFoodsIndexApi = () => {
@@ -51,6 +51,16 @@ export const updateFoodApi = (food) => {
         }
     })
     .then((res)=>{
+        return res.data
+    })
+    .catch(e => console.log(e));
+}
+
+export const deleteFoodApi = (food) => {
+    return axios.delete(foodDelete(food.id),{
+        food:food
+    })
+    .then((res) =>{
         return res.data
     })
     .catch(e => console.log(e));

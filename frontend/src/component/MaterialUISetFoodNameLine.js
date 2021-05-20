@@ -18,29 +18,27 @@ const useStyles = makeStyles((theme) => ({
 export default function MaterialUISetFoodNameLine() {
   const classes = useStyles();
   const [value,setValue] = useState(0)
-  const FoodCreateStateee = useContext(FoodCreateState)
-  const FoodCreateDispatcheee = useContext(FoodCreateDispatch)
+  const FoodCreateNameState = useContext(FoodCreateState)
+  const FoodCreateNameDispatche = useContext(FoodCreateDispatch)
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(FoodCreateStateee)
-    FoodCreateDispatcheee({
-      type:foodCreateActionTypes.SETTING,
+    console.log(FoodCreateNameState)
+    FoodCreateNameDispatche({
+      type:foodCreateActionTypes.SETTINGFOODNAME,
       payload:{
         name: event.target.value
       }
     })
-    console.log(FoodCreateStateee)
+    console.log(FoodCreateNameState)
     };
 
   console.log("nekoneko")
-  console.log(FoodCreateStateee)
+  console.log(FoodCreateNameState)
+  
   useEffect(()=> {
-    // food === undefined || food === null?
-      setValue(0)
-    // :
       setValue(1);
-      console.log(FoodCreateStateee)
+      console.log(FoodCreateNameState)
   },[])
   
 
@@ -59,7 +57,7 @@ export default function MaterialUISetFoodNameLine() {
             label="商品名" 
             variant="outlined" 
             fullWidth
-            value={value}
+            value={FoodCreateNameState.food.name}
             onChange={handleChange}
         />
         </form>
