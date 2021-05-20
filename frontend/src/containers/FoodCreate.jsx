@@ -30,7 +30,7 @@ const saveButtonTheme = createMuiTheme({
 
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
-    const history = useHistory()
+    const history = useHistory();
     useEffect(() => {
         console.log();
     },[]);

@@ -1,9 +1,7 @@
-import React,{Fragment,useEffect,useState,useContext} from 'react';
+import React,{Fragment,useEffect,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {FoodCreateState,FoodCreateDispatch} from "../containers/FoodCreate"
 import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
-import { foodDetailActionTypes } from '../reducer/foodDetail';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,41 +13,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //foodの名前を設定するためのテキストフィールドコンポーネント
-export default function MaterialUISetFoodNameLine() {
+export function MaterialUISetFoodNameLine() {
   const classes = useStyles();
-  const [value,setValue] = useState(0)
-  const FoodCreateNameState = useContext(FoodCreateState)
-  const FoodCreateNameDispatche = useContext(FoodCreateDispatch)
+  const FoodState = useContext(FoodState)
+  const FoodDispatch = useContext(FoodDispatch)
 
   const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log(FoodCreateNameState)
-    FoodCreateNameDispatche({
+    FoodDispatch({
       type:foodCreateActionTypes.SETTINGFOODNAME,
       payload:{
         name: event.target.value
       }
     })
-    console.log(FoodCreateNameState)
     };
-
-  console.log("nekoneko")
-  console.log(FoodCreateNameState)
   
   useEffect(()=> {
-      setValue(1);
-      console.log(FoodCreateNameState)
+      console.log(FoodState)
   },[])
   
 
   return (
     <Fragment>
         {
-        value === undefined || value === null?
-        <Fragment>
-            LOADING
-        </Fragment>
-        :
+        // value === undefined || value === null?
+        // <Fragment>
+        //     LOADING
+        // </Fragment>
+        // :
         <Fragment>
         <form className={classes.root} noValidate autoComplete="off">
         <TextField 
@@ -57,7 +47,7 @@ export default function MaterialUISetFoodNameLine() {
             label="商品名" 
             variant="outlined" 
             fullWidth
-            value={FoodCreateNameState.food.name}
+            value={FoodState.food.name}
             onChange={handleChange}
         />
         </form>

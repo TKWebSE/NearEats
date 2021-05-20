@@ -1,8 +1,8 @@
 import React,{Fragmnet} from "react";
 import styled from "styled-components";
-import MaterialUISetFoodNameLine from "./MaterialUISetFoodNameLine";
-import MaterialUIFoodPriceLine from "./MaterialUIFoodPriceLine";
-import MaterialUIFoodDescriptionMultiLine from "./MaterialUIFoodDescriptionMultiLine";
+import {MaterialUISetFoodNameLine} from "./MaterialUISetFoodNameLine";
+import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
+import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
 
 const FoodCreateCardWrapper = styled.div`
 `;
@@ -20,13 +20,13 @@ export const FoodCreateCard = () => {
         <Fragmnet>
             <FoodCreateCardWrapper>
                 <FoodName>
-                    <MaterialUISetFoodNameLine food={food}></MaterialUISetFoodNameLine>
+                    <MaterialUISetFoodNameLine></MaterialUISetFoodNameLine>
                 </FoodName>
                 <FoodPrice>
-                    <MaterialUIFoodPriceLine food={food}></MaterialUIFoodPriceLine>
+                    <MaterialUIFoodPriceLine></MaterialUIFoodPriceLine>
                 </FoodPrice>
                 <FoodDescription>
-                    <MaterialUIFoodDescriptionMultiLine food={food}></MaterialUIFoodDescriptionMultiLine>
+                    <MaterialUIFoodDescriptionMultiLine></MaterialUIFoodDescriptionMultiLine>
                 </FoodDescription>
             </FoodCreateCardWrapper>
         </Fragmnet>

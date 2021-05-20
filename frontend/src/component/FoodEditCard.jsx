@@ -1,8 +1,8 @@
 import React,{ Fragment,useContext } from "react";
 import styled from "styled-components";
 import foodImage from "../images/food-image.jpg";
-import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
-import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
+import MaterialUIFoodDescriptionMultiLine from "./MaterialUIFoodDescriptionMultiLine";
+import MaterialUIFoodPriceLine from "./MaterialUIFoodPriceLine";
 import MaterialUISetFoodNameLine from "./MaterialUISetFoodNameLine";
 import {FoodEditContextDispatch} from "../containers/FoodEdit";
 const FoodCardWrapper = styled.div`
@@ -48,7 +48,7 @@ export const FoodEditCard = (props) => {
         <Fragment>
         <FoodCardWrapper>
             <FoodImage src={foodImage} alt="foodImage"></FoodImage>
-            <FoodName>
+            {/* <FoodName>
                 <MaterialUISetFoodNameLine 
                     food={props.food} 
                     handleSetPriceValue={props.handleSetPriceValue}></MaterialUISetFoodNameLine>
@@ -63,7 +63,7 @@ export const FoodEditCard = (props) => {
                 <MaterialUIFoodDescriptionMultiLine food={props.food} 
                 // {...handleSetPriceValue} 
                 ></MaterialUIFoodDescriptionMultiLine>
-            </FoodDesicription>
+            </FoodDesicription> */}
         </FoodCardWrapper>
         </Fragment>
     )

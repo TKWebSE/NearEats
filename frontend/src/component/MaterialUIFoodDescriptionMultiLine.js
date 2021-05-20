@@ -1,7 +1,7 @@
-import React, { Fragment,useState,useEffect } from 'react';
+import React, { Fragment,useEffect,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { FoodCreateDispatch } from '../containers/FoodCreate';
+import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,31 +13,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //foodの説明を設定するためのTextFieldコンポーネント
-export function MaterialUIFoodDescriptionMultiLine(food) {
+export function MaterialUIFoodDescriptionMultiLine() {
     const classes = useStyles();
-    const [value, setValue] = useState("aaa");
-    const FoodCreateDescriptionState = useContext(FoodCreateState);
-    const FoodCreateDescriptionDispatch = useContext(FoodCreateDispatch);
+    const FoodState = useContext(FoodState);
+    const FoodDispatch = useContext(FoodDispatch);
 
     const handleChange = (event) => {
-      setValue(event.target.value);
-      FoodCreateDescriptionDispatch({
-        
-      })}
+      FoodDispatch({
+        type:foodCreateActionTypes.SETTINGFOODDESCRIPTION,
+        payload:{
+          description:event.target.value
+        }
+      })
     };
     
     useEffect(() => {
-      setValue(food.description);
-    }, [food]);
+      console.log(FoodState)
+    }, []);
         
     return (
     <Fragment>
       {
-      value === undefined || value === null?
-      <Fragment>
-          LOADING
-      </Fragment>
-      :
+      // value === undefined || value === null?
+      // <Fragment>
+      //     LOADING
+      // </Fragment>
+      // :
       <Fragment>
         <form className={classes.root} noValidate autoComplete="off">
         <div>
@@ -47,7 +48,7 @@ export function MaterialUIFoodDescriptionMultiLine(food) {
           multiline
           rows={4}
           fullWidth
-          defaultValue={value}
+          defaultValue={FoodState.food.description}
           variant="outlined"
           onChange={handleChange}
         />
