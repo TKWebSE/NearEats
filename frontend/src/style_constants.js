@@ -10,3 +10,12 @@ export const COLORS = {
     BODY1: '16px',
     BODY2: '14px',
   }
+
+//buttonの色を設定
+export const saveButtonTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: COLORS.MAIN_COLOR
+    },
+  },
+});

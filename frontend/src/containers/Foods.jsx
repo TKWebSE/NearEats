@@ -4,13 +4,14 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
 
 import { fetchFoodsIndexApi } from '../apis/foodApis';
-import { REQUEST_STATE } from '../constants';
+import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
 import { 
     initializeState,
     foodsActionTypes,
     foodsIndexReducer,
 } from '../reducer/foods';
 import {FoodCard} from '../component/FoodCard';
+
 
 
 const FoodsWrapper = styled.div`
@@ -61,7 +62,7 @@ export const Foods = () => {
         <Fragment>
             <FoodsWrapper>
                 <FoodsIndexTitle>
-                    近くの料理を検索
+                    {FOOD_HEADER_TITLE.FOOD_INDEX}
                 </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.LOADING?

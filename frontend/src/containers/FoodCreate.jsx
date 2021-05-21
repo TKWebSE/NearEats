@@ -5,6 +5,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {FOOD_HEADER_TITLE} from "../constants";
 import {COLORS} from "../style_constants";
+import {saveButtonTheme} from "../style_constants";
 import { initializeState,
         foodCreateReducer } from "../reducer/foodCreateReducer";
 import {createFoodApi} from "../apis/foodApis";
@@ -20,13 +21,6 @@ const FoodCreateHeader = styled.h1`
     margin-bottom:3%;
 `;
 
-const saveButtonTheme = createMuiTheme({
-    palette: {
-      primary: {
-        main: COLORS.MAIN_COLOR
-      },
-    },
-  });
 
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
