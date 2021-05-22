@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core/styles';
+
 export const COLORS = {
     MAIN_COLOR: '#00695f',
     BORDER: '#e2e2e2',

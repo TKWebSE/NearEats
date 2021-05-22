@@ -1,7 +1,7 @@
 import React, {Fragment,useReducer,seContext, useEffect} from 'react';
 import { initializeState } from '../reducer/userReducer';
 import {userShow} from "../urls/index";
-import {state,dispatch} from "../context/FoodContext";
+import {state,dispatch} from "../context/Context";
 
 
 const UserWrapper = styled.h1`

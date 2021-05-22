@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
 import { initializeState } from "../reducer/foodCreateReducer";
 
+import {UserDispatch,UserState} from "../context/Context";
+
+const UserCreateCard = styled.div``;
+
 export const UserCreate = () => {
     const [state,dispatch] = useReducer(UserCreateReducer,initializeState)
     const history = useHistory();
@@ -22,6 +26,11 @@ export const UserCreate = () => {
                 <UserCreateHeader>
                     {USER_HEADER_TITLE.USER_CREATE}
                 </UserCreateHeader>
+                <UserDispatch.Provide value={dispatch}>
+                    <UserState.Provide value={state}>
+                        <UserCreateCard></UserCreateCard>
+                    </UserState.Provide>
+                </UserDispatch.Provide>
             </UserCreateWrapper>
         </Fragment>
     )

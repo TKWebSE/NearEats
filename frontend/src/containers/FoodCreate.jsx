@@ -11,7 +11,7 @@ import { initializeState,
 import {createFoodApi} from "../apis/foodApis";
 import {useHistory} from "react-router-dom";
 import {foodShowHistory} from "../urls/index";
-import {FoodState,FoodDispatch} from "../context/FoodContext";
+import {FoodState,FoodDispatch} from "../context/Context";
 
 const FoodCreateWrappwer = styled.div`
 `;
@@ -25,9 +25,6 @@ const FoodCreateHeader = styled.h1`
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
     const history = useHistory();
-    useEffect(() => {
-        console.log();
-    },[]);
 
     function SubmitHandle() {
         //user認証機能実装次第改修
@@ -48,7 +45,7 @@ export const FoodCreate = () => {
                 </FoodCreateHeader>
                 <FoodDispatch.Provider value={dispatch}>
                     <FoodState.Provider value={state}>
-                        <FoodCreateCard/>
+                        <FoodCreateCard></FoodCreateCard>
                     </FoodState.Provider>
                 </FoodDispatch.Provider>
                 <ThemeProvider theme={saveButtonTheme}>
