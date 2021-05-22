@@ -52,7 +52,7 @@ export const Foods = () => {
                 payload: {
                     foods: data.foods
                 },
-            })
+            });
         })
         .catch((e) => console.log(e))
 

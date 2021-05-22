@@ -15,7 +15,7 @@ const FoodPrice = styled.div`
 
 const FoodDescription = styled.div`
 `;
-export const FoodCreateCard = () => {
+export const FoodCreateCard= () => {
     return(
         <Fragmnet>
             <FoodCreateCardWrapper>

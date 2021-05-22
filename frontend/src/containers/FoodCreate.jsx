@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect, useReducer} from "react";
 import styled from "styled-components";
-import {FoodCreateCard} from "../component/FoodCreateCard";
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import {ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {FOOD_HEADER_TITLE} from "../constants";
-import {COLORS} from "../style_constants";
+import {saveButtonTheme} from "../style_constants";
 import {saveButtonTheme} from "../style_constants";
 import { initializeState,
         foodCreateReducer } from "../reducer/foodCreateReducer";
@@ -12,6 +12,9 @@ import {createFoodApi} from "../apis/foodApis";
 import {useHistory} from "react-router-dom";
 import {foodShowHistory} from "../urls/index";
 import {FoodState,FoodDispatch} from "../context/Context";
+
+
+import {FoodCreateCard} from "../component/FoodCreateCard";
 
 const FoodCreateWrappwer = styled.div`
 `;

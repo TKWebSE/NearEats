@@ -7,7 +7,7 @@ export const Order =() => {
     const [state,dispatch] = useReducer(OrderIndexReducer,initialize);
 
 
-        
+
     return(
         <Fragment>
             <OrderIndexHeader>
@@ -15,7 +15,7 @@ export const Order =() => {
             </OrderIndexHeader>
             <OrderDispatch.Provide value={dispatch}>
                 <OrderState.Provide value={state}>
-
+                    {state.order.map}
                 </OrderState.Provide>
             </OrderDispatch.Provide>
         </Fragment>

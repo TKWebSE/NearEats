@@ -1,8 +1,10 @@
 import React, {Fragment,useReducer,seContext, useEffect} from 'react';
 import { initializeState } from '../reducer/userReducer';
-import {userShow} from "../urls/index";
+import {fetchUserApi} from "../api/user";
 import {state,dispatch} from "../context/Context";
-
+import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
+import ContainedButton from "../component/MaterialUIButtons";
+import {userEdit} from "../urls/index";
 
 const UserWrapper = styled.h1`
 `;
@@ -16,27 +18,39 @@ const UserName = styled.div`
 export const UserDetail = () => { 
   const [state,dispatch] = useReducer(reducer,initializeState);
 
-  useEffect(
-    dispatch
-  )
-
+  useEffect(() => {
+    dispatch({type:usersActionTypes.FETCHING});
+    fetchUserApi()
+      .then((date) => {
+          dispatch({
+            type:usersActionTypes.FETCH_SUCCESS,
+            payload:{
+              user:data.user
+            }
+          });
+        })
+      .catch((e) => console.log(e));
+  },[]);
+  
   return (
     <Fragment>
       <UserDetailWrapper>
         <UserHeaderWrapper>
           {USER_HEADER_TITLE.UserDetail}
         </UserHeaderWrapper>  
-      
         <UserName>
-          名前領域
+          {state.user.name}
         </UserName>
         <Userpoint>
-          ポイント領域
+          {state.user.point}
         </Userpoint>
         <UserDescription>
-          説明領域
+          {state.user.detail}
         </UserDescription>
-    </UserDetailWrapper>  
+        <UserEditButton>
+          <ContainedButton href={userEdit} />
+        </UserEditButton>
+      </UserDetailWrapper>  
     </Fragment>
     )
 }
