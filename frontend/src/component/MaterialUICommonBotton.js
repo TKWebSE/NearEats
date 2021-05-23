@@ -16,7 +16,7 @@ export default function ContainedButtons() {
   return (
     <div className={classes.root}>
       <Button variant="contained" color="primary">
-        Primary
+        内容を変更する
       </Button>
     </div>
   );

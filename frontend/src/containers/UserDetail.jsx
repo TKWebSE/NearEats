@@ -1,5 +1,4 @@
 import React, {Fragment,useReducer,seContext, useEffect} from 'react';
-import { initializeState } from '../reducer/userReducer';
 import {fetchUserApi} from "../api/user";
 import {state,dispatch} from "../context/Context";
 import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
@@ -15,12 +14,12 @@ const UserDetailWrapper = styled.div`
 const UserName = styled.div`
 `;
 
-export const UserDetail = () => { 
+export const UserDetail = ({match}) => { 
   const [state,dispatch] = useReducer(reducer,initializeState);
 
   useEffect(() => {
     dispatch({type:usersActionTypes.FETCHING});
-    fetchUserApi()
+    fetchUserApi(match.params.userId)
       .then((date) => {
           dispatch({
             type:usersActionTypes.FETCH_SUCCESS,
@@ -48,7 +47,7 @@ export const UserDetail = () => {
           {state.user.detail}
         </UserDescription>
         <UserEditButton>
-          <ContainedButton href={userEdit} />
+          <ContainedButtons href={userEdit} />
         </UserEditButton>
       </UserDetailWrapper>  
     </Fragment>

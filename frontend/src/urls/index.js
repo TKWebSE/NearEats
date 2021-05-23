@@ -8,7 +8,7 @@ export const foodUpdate = (food_id) => `${DEFAULT_URL}/foods/${food_id}`
 // export const foodEdit =(food_id) => `${DEFAULT_URL}/foods/${food_id}/edit`;
 export const foodDelete = (food_id) => "${DEFAULT_URL}/${food_id}/foods";
 export const userShow = (user_id) => `${DEFAULT_URL}/users/${user_id}`;
-export const 
+export const userEdit = () => '${DEFAULT_URL}/users/edit';
 export const userUpdate = (user_id) => `${DEFAULT_URL}/users/${user_id}/update`;
 export const userDelete = (user_id) => `${DEFAULT_URL}/users/${user_id}/delete`;
 export const orederIndex = '/orders';

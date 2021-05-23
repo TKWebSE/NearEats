@@ -5,7 +5,6 @@ import {ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {FOOD_HEADER_TITLE} from "../constants";
 import {saveButtonTheme} from "../style_constants";
-import {saveButtonTheme} from "../style_constants";
 import { initializeState,
         foodCreateReducer } from "../reducer/foodCreateReducer";
 import {createFoodApi} from "../apis/foodApis";

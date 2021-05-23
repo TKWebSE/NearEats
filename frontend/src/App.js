@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import {Restaurants} from './containers/Restaurants.jsx';
+import {UserDetail} from './containers/UserDetail.jsx';
 import { FoodDetail } from './containers/FoodDetail';
 import { FoodEdit} from "./containers/FoodEdit";
 import {FoodCreate} from "./containers/FoodCreate";
@@ -37,7 +37,11 @@ function App() {
         <Route 
           exact
           path="restaurants">
-          <Restaurants />
+          render ={({match}) => 
+            <UserDetail 
+              match={match}
+            />
+          }          
         </Route>
         //user作成画面
         <Route 
