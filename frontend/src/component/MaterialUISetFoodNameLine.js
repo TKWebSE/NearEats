@@ -2,6 +2,7 @@ import React,{Fragment,useEffect,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
+import {FoodState,FoodDispatch} from "../context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,20 +16,20 @@ const useStyles = makeStyles((theme) => ({
 //foodの名前を設定するためのテキストフィールドコンポーネント
 export function MaterialUISetFoodNameLine() {
   const classes = useStyles();
-  const FoodState = useContext(FoodState)
-  const FoodDispatch = useContext(FoodDispatch)
+  const FoodNameState = useContext(FoodState)
+  const FoodNameDispatch = useContext(FoodDispatch)
 
   const handleChange = (event) => {
-    FoodDispatch({
+    FoodNameDispatch({
       type:foodCreateActionTypes.SETTINGFOODNAME,
       payload:{
         name: event.target.value
       }
     })
-    };
+  };
   
   useEffect(()=> {
-      console.log(FoodState)
+      console.log(FoodNameState)
   },[])
   
 
@@ -47,7 +48,7 @@ export function MaterialUISetFoodNameLine() {
             label="商品名" 
             variant="outlined" 
             fullWidth
-            value={FoodState.food.name}
+            value={FoodNameState.food.name}
             onChange={handleChange}
         />
         </form>

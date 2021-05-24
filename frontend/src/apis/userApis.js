@@ -1,5 +1,5 @@
-import React from `react`;
-import axios from `axios`;
+import React from "react";
+import axios from "axios";
 import {userShow,userUpdate,userDelete} from "../urls/index";
 
 //editとdetailで使用
@@ -15,7 +15,7 @@ export const fetchUserApi = (user) => {
     .catch(e => console.log(e))
 }
 
-export const userUpdate = (user) => {
+export const userUpdateApi = (user) => {
     axios.put(userUpdate(user.id),{
         params:{user:user}
     })

@@ -1,4 +1,4 @@
-import React,{Fragmnet} from "react";
+import React,{Fragment} from "react";
 import styled from "styled-components";
 import {MaterialUISetFoodNameLine} from "./MaterialUISetFoodNameLine";
 import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
@@ -15,9 +15,9 @@ const FoodPrice = styled.div`
 
 const FoodDescription = styled.div`
 `;
-export const FoodCreateCard= () => {
+export const FoodCreateCard = () => {
     return(
-        <Fragmnet>
+        <Fragment>
             <FoodCreateCardWrapper>
                 <FoodName>
                     <MaterialUISetFoodNameLine></MaterialUISetFoodNameLine>
@@ -29,6 +29,6 @@ export const FoodCreateCard= () => {
                     <MaterialUIFoodDescriptionMultiLine></MaterialUIFoodDescriptionMultiLine>
                 </FoodDescription>
             </FoodCreateCardWrapper>
-        </Fragmnet>
+        </Fragment>
     )
 }

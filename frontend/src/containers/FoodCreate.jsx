@@ -12,7 +12,6 @@ import {useHistory} from "react-router-dom";
 import {foodShowHistory} from "../urls/index";
 import {FoodState,FoodDispatch} from "../context/Context";
 
-
 import {FoodCreateCard} from "../component/FoodCreateCard";
 
 const FoodCreateWrappwer = styled.div`
@@ -34,7 +33,7 @@ export const FoodCreate = () => {
         createFoodApi(state.food,user_id)
         .then((data) => {
             console.log(data)
-            history.push(foodShowHistory(1))
+            history.push(foodShowHistory(data.food.id))
         })
         .catch(e => console.log(e))
     }

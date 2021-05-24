@@ -47,13 +47,13 @@ function App() {
         <Route 
           exact
           path="restaurants">
-          <Restaurants />
+          <Foods />
         </Route>
         //user編集画面
         <Route 
           exact
           path="restaurants">
-          <Restaurants />
+          <Foods />
         </Route>
         //food一覧
         <Route

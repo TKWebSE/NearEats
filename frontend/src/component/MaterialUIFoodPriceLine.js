@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
+import {FoodState,FoodDispatch} from "../context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,20 +17,20 @@ const useStyles = makeStyles((theme) => ({
 //number指定していないので、バリデーションを書ける必要あり
 export function MaterialUIFoodPriceLine() {
     const classes = useStyles();
-    const FoodState = useContext(FoodState)
-    const FoodDispatch = useContext(FoodDispatch)
+    const FoodPriceState = useContext(FoodState)
+    const FoodPriceDispatch = useContext(FoodDispatch)
     
     const handleChange = (event) => {
-      FoodDispatch({
+      FoodPriceDispatch({
         type:foodCreateActionTypes.SETTINGFOODPRICE,
         payload:{
-          name: event.target.value
+          price: event.target.value
         }
       })
     };
 
     useEffect(()=>{
-      console.log(FoodState)
+      console.log(FoodPriceState)
     },[]);
 
     return (
@@ -41,20 +42,14 @@ export function MaterialUIFoodPriceLine() {
       // </Fragment>
       // :
         <form className={classes.root} noValidate autoComplete="off">
-          <div>
-            <TextField
-              id="standard-number"
-              label="金額"
-              type="text"
-              inputMode="numeric"
-              fullWidth
-              defaultValue={FoodState.food.price}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={handleChange}
-            />
-          </div>
+          <TextField 
+            id="outlined-basic" 
+            label="価格" 
+            variant="outlined" 
+            fullWidth
+            value={FoodPriceState.food.price}
+            onChange={handleChange}
+        />
       　</form>
       }
     </Fragment>

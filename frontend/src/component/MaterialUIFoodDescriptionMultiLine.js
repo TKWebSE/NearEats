@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
+import {FoodState,FoodDispatch} from "..//context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
 //foodの説明を設定するためのTextFieldコンポーネント
 export function MaterialUIFoodDescriptionMultiLine() {
     const classes = useStyles();
-    const FoodState = useContext(FoodState);
-    const FoodDispatch = useContext(FoodDispatch);
+    const FoodDescriptionState = useContext(FoodState);
+    const FoodDescriptionDispatch = useContext(FoodDispatch);
 
     const handleChange = (event) => {
-      FoodDispatch({
+      FoodDescriptionDispatch({
         type:foodCreateActionTypes.SETTINGFOODDESCRIPTION,
         payload:{
           description:event.target.value
@@ -28,7 +29,7 @@ export function MaterialUIFoodDescriptionMultiLine() {
     };
     
     useEffect(() => {
-      console.log(FoodState)
+      console.log(FoodDescriptionState)
     }, []);
         
     return (
@@ -48,7 +49,7 @@ export function MaterialUIFoodDescriptionMultiLine() {
           multiline
           rows={4}
           fullWidth
-          defaultValue={FoodState.food.description}
+          defaultValue={FoodDescriptionState.food.description}
           variant="outlined"
           onChange={handleChange}
         />
