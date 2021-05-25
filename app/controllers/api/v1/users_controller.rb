@@ -5,23 +5,26 @@ module Api
                user = User.all
 
                render json: {
-                   restaurants: restaurants
+                   users: users
                }, status: :ok
             end
         
             def show
-                restaurant = Restaurant.new(id: params[restaurant_id])
-
+                user = User.new(id: params[user_id])
+                logger.debug("コメント")
+                logger.debug(params)
+                logger.debug(params[:food])
+                logger.debug("コメント")
                 render json: {
-                    restaurant: restaurant
+                    user: user
                 },status: :ok
             end
 
             def create
-                restaurant = Restaurant.new(name: params[:name])
-                if restaurant.save
+                user = User.new(name: params[:name])
+                if user.save
                     render json: {
-                        restaurant: restaurant
+                        user: user
                     },status: :ok
                 else
                     render json: {}
@@ -29,10 +32,10 @@ module Api
             end
             
             def update
-                restaurant = Restaurant.find(id: params[:id])
-                if restaurant.save
+                user = User.find(id: params[:id])
+                if user.save
                     render json: {
-                        restaurants: restaurants
+                        user: user
                     }, status: :ok
                 else 
                     render json: {}
@@ -40,10 +43,16 @@ module Api
             end
         
             def delete
-                restaurant = Restaurant.find(id: params[:id])
+                user = User.find(id: params[:id])
 
                 render json: {}, status: :ok
             end
+
+            private 
+
+                def user_params
+                    params.require(:food).permit(:name,:price,:description,:user_id)
+                end
         end
     end
 end

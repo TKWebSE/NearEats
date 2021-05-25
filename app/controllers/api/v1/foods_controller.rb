@@ -49,15 +49,9 @@ module Api
 
             def update
                food = Food.find_by(id: params[:id])
-               logger.debug("コメント")
-               logger.debug(params)
-               logger.debug(params[:food])
-               logger.debug("コメント")
 
             #    name: foodparams[:name],price: foodparams[:price],description: foodparams[:description]
                if food.update(food_params) 
-                logger.debug("ifコメント")
-                logger.debug(params[:food])
                     render json: {
                         food:food
                     },status: :ok

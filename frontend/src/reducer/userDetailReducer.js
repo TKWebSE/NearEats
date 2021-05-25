@@ -15,6 +15,7 @@ export const userDetailReducer = (state,action) => {
     switch (action.type) {
         case usersActionTypes.FETCHING:
             return {
+                ...state,
                 fetchState:REQUEST_STATE.LOADING
             }
         case usersActionTypes.FETCH_SUCCESS:

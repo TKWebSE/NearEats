@@ -1,11 +1,15 @@
-import React, {Fragment,useReducer,seContext, useEffect} from 'react';
+import React, {Fragment,useReducer,useEffect} from 'react';
 import styled from "styled-components";
+import Skeleton from '@material-ui/lab/Skeleton';
 import {fetchUserApi} from "../apis/userApis";
 import {state,dispatch} from "../context/Context";
 import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
 import ContainedButton from "../component/MaterialUICommonBotton";
 import {userEdit} from "../urls/index";
-import {USER_HEADER_TITLE} from "../constants";
+import {REQUEST_STATE, USER_HEADER_TITLE} from "../constants";
+
+const ContentsList = styled.div`
+`;
 
 const UserDetailWrapper = styled.div`
 `;
@@ -29,7 +33,9 @@ export const UserDetail = ({match}) => {
   const [state,dispatch] = useReducer(userDetailReducer,initializeState);
   
   useEffect(() => {
+    console.log(state)
     dispatch({type:usersActionTypes.FETCHING});
+    console.log(state)
     fetchUserApi(match.params.userId)
       .then((data) => {
           dispatch({
@@ -44,23 +50,35 @@ export const UserDetail = ({match}) => {
   
   return (
     <Fragment>
-      <UserDetailWrapper>
-        <UserHeaderWrapper>
-          {USER_HEADER_TITLE.UserDetail}
-        </UserHeaderWrapper>  
-        <UserName>
-          {state.user.name}
-        </UserName>
-        <Userpoint>
-          {state.user.point}
-        </Userpoint>
-        <UserDescription>
-          {state.user.detail}
-        </UserDescription>
-        <UserEditButton>
-          <ContainedButton href={userEdit} />
-        </UserEditButton>
-      </UserDetailWrapper>  
+      <UserHeaderWrapper>
+        {USER_HEADER_TITLE.UserDetail}
+      </UserHeaderWrapper> 
+        {
+          state.fetchState === REQUEST_STATE.LOADING?
+            <ContentsList>
+              <Fragment>
+                  <Skeleton variant="rect" width={450} height={300} />
+                  <Skeleton variant="rect" width={450} height={300} />
+                  <Skeleton variant="rect" width={450} height={300} />
+              </Fragment>
+            </ContentsList>
+          :
+          <UserDetailWrapper>
+            
+            <UserName>
+              state.user.name
+            </UserName>
+            <Userpoint>
+              state.user.point
+            </Userpoint>
+            <UserDescription>
+              state.user.detail
+            </UserDescription>
+            <UserEditButton>
+              <ContainedButton href={userEdit} />
+            </UserEditButton>
+          </UserDetailWrapper>
+        } 
     </Fragment>
     )
 }

@@ -11,19 +11,9 @@ import { FoodDetail } from './containers/FoodDetail';
 import { FoodEdit} from "./containers/FoodEdit";
 import {FoodCreate} from "./containers/FoodCreate";
 import {Foods} from './containers/Foods.jsx';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
-import { COLORS } from "./style_constants";
-
-
-//ヘッダーの色を定義
-const headerTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: COLORS.MAIN_COLOR
-    },
-  },
-});
+import { headerTheme } from "./style_constants";
 
 function App() {
   return (
@@ -36,12 +26,13 @@ function App() {
         //user詳細画面
         <Route 
           exact
-          path="restaurants">
+          path="/users/:userId"
           render ={({match}) => 
             <UserDetail 
               match={match}
             />
-          }          
+          }
+        >          
         </Route>
         //user作成画面
         <Route 

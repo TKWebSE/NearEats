@@ -1,7 +1,9 @@
 import React,{Fragment,useEffect, useReducer,Link} from "react";
 import styled from "styled-components";
+import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from "@material-ui/lab/Skeleton"
-import {SaveButton} from "../component/MaterialUISaveButton";
+import CommonButton from "../component/MaterialUICommonBotton";
+import {ButtonTheme} from "../style_constants";
 import { DeleteButton } from "../component/MaterialUIButtons";
 import {REQUEST_STATE,FOOD_HEADER_TITLE} from "../constants";
 import { fetchFoodApi } from "../apis/foodApis";
@@ -48,9 +50,7 @@ export const FoodDetail = ({match})=> {
         .catch(e => console.log(e));
     },[]);
 
-    function onChangeHandle() {
-        console.log("pekopeko")
-        console.log(state.food.id)
+    function onClickHandle() {
         history.push(foodUpdateHistory(state.food.id))
     }
 
@@ -72,8 +72,10 @@ export const FoodDetail = ({match})=> {
                     <FoodCardWrapper>
                        <FoodDetailCard {...state.food}></FoodDetailCard>
                     </FoodCardWrapper>
-                            <SaveButton onClick={onChangeHandle}/>
-                    <DeleteButton></DeleteButton>
+                    <ThemeProvider theme={ButtonTheme}>
+                        <CommonButton onClick={onClickHandle}/>
+                    </ThemeProvider>
+                    {/* <DeleteButton></DeleteButton> */}
                 </Fragment>
             }
             </DetailWrapper>

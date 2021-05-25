@@ -67,11 +67,11 @@ export const Foods = () => {
                 {
                 state.fetchState === REQUEST_STATE.LOADING?
                     <ContentsList>
-                    <Fragment>
-                        <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </Fragment>
+                        <Fragment>
+                            <Skeleton variant="rect" width={450} height={300} />
+                            <Skeleton variant="rect" width={450} height={300} />
+                            <Skeleton variant="rect" width={450} height={300} />
+                        </Fragment>
                     </ContentsList>
                 :
                 state.foodsList.map((food) =>

@@ -12,7 +12,6 @@ export const foodEditActionTypes = {
     SETTINGFOODNAME:"SETTINGFOODNAME",
     SETTINGFOODPRICE:"SETTINGFOODPRICE",
     SETTINGFOODDESCRIPTION:"SETTINGFOODDESCRIPTION",
-    UPDATE_SUCCESS:"SET_SUCCESS",
 }
 
 export const foodEditReducer = (state,action) => {
@@ -30,6 +29,7 @@ export const foodEditReducer = (state,action) => {
         case foodEditActionTypes.SETTINGFOODNAME:
             return{
                 food:{
+                    id: state.food.id,
                     name: action.payload.name,
                     price: state.food.price,
                     description:state.food.description,
@@ -38,6 +38,7 @@ export const foodEditReducer = (state,action) => {
         case foodEditActionTypes.SETTINGFOODPRICE:
             return {
                 food:{
+                    id: state.food.id,
                     name:state.food.name,
                     price:action.payload.price,
                     description:state.food.description,
@@ -46,14 +47,11 @@ export const foodEditReducer = (state,action) => {
         case foodEditActionTypes.SETTINGFOODDESCRIPTION:
             return {
                 food:{
+                    id: state.food.id,
                     name:state.food.name,
                     price:state.food.price,
                     description:action.payload.description,
                 }
-            }
-        case foodEditActionTypes.UPDATE_SUCCESS:
-            return{
-                food: action.payload.price,
             }
         default:
             throw Error();

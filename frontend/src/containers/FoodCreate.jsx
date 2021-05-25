@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {FOOD_HEADER_TITLE} from "../constants";
-import {saveButtonTheme} from "../style_constants";
+import {ButtonTheme} from "../style_constants";
 import { initializeState,
         foodCreateReducer } from "../reducer/foodCreateReducer";
 import {createFoodApi} from "../apis/foodApis";
@@ -48,8 +48,8 @@ export const FoodCreate = () => {
                         <FoodCreateCard></FoodCreateCard>
                     </FoodState.Provider>
                 </FoodDispatch.Provider>
-                <ThemeProvider theme={saveButtonTheme}>
-                    <SaveButton onClick={SubmitHandle} />
+                <ThemeProvider theme={ButtonTheme}>
+                    <SaveButton onClick={SubmitHandle}/>
                 </ThemeProvider>
             </FoodCreateWrappwer>
         </Fragment>

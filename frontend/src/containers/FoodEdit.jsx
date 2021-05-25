@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect,useReducer} from 'react';
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import {saveButtonTheme} from "../style_constants";
+import {ButtonTheme} from "../style_constants";
 import {FOOD_HEADER_TITLE, REQUEST_STATE} from "../constants";
 import { fetchFoodApi, updateFoodApi} from '../apis/foodApis';
 import { 
@@ -48,14 +48,8 @@ export const FoodEdit = ({match}) => {
   },[]);
 
   const submitHandle=(e) => {
-    //user認証機能実装次第改修
-    const user_id = 1
-    dispatch({type:foodEditActionTypes.UPDATING});
-    console.log(state)
-    updateFoodApi(state.food.id)
+    updateFoodApi(state.food)
     .then((data) => {
-      console.log(data)
-      dispatch({type:foodEditActionTypes.UPDATE_SUCCESS})
       history.push(foodShowHistory(data.food.id))
     })
     .catch(e => console.log(e))
@@ -82,7 +76,7 @@ export const FoodEdit = ({match}) => {
                     <FoodEditCard />
                   </FoodState.Provider>
                 </FoodDispatch.Provider>
-                  <ThemeProvider theme={saveButtonTheme}>
+                  <ThemeProvider theme={ButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
               </FoodCardWrapper>

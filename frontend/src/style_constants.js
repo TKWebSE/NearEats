@@ -13,8 +13,17 @@ export const COLORS = {
     BODY2: '14px',
   }
 
+//ヘッダーの色を定義
+export const headerTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: COLORS.MAIN_COLOR
+    },
+  },
+});
+  
 //buttonの色を設定
-export const saveButtonTheme = createMuiTheme({
+export const ButtonTheme = createMuiTheme({
   palette: {
     primary: {
       main: COLORS.MAIN_COLOR

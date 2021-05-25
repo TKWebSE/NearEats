@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons() {
+export default function CommonButton({onClick}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary">
-        内容を変更する
+      <Button variant="contained" color="primary" onClick={onClick}>
+        編集する
       </Button>
     </div>
   );
