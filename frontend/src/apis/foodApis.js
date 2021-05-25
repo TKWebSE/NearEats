@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer } from "react";
-import { foodsIndex ,foodShow,foodCreate,foodUpdate,foodDelete} from "../urls";
+import { foodsIndex ,foodShow,foodCreate,foodUpdate,foodDelete} from "../urls/index";
 
 //food一覧を取得する
 export const fetchFoodsIndexApi = () => {

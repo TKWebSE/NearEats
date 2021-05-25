@@ -1,10 +1,10 @@
 import React,{ Fragment,useContext } from "react";
 import styled from "styled-components";
 import foodImage from "../images/food-image.jpg";
-import MaterialUIFoodDescriptionMultiLine from "./MaterialUIFoodDescriptionMultiLine";
-import MaterialUIFoodPriceLine from "./MaterialUIFoodPriceLine";
-import MaterialUISetFoodNameLine from "./MaterialUISetFoodNameLine";
-import {FoodEditContextDispatch} from "../containers/FoodEdit";
+import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
+import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
+import {MaterialUISetFoodNameLine} from "./MaterialUISetFoodNameLine";
+
 const FoodCardWrapper = styled.div`
     text-align:center;
 `;
@@ -36,34 +36,21 @@ const FoodDesicription = styled.div`
 
 
 //foodの編集画面用のカードコンポーネント
-export const FoodEditCard = (props) => {
-    const resource = useContext(FoodEditContextDispatch);
-    console.log(resource)
-    console.log(props)
+export const FoodEditCard = () => {
 
-    // function handleSetPriceValue(){
-    //     handleSetPriceValue
-    // }
     return (
         <Fragment>
         <FoodCardWrapper>
             <FoodImage src={foodImage} alt="foodImage"></FoodImage>
-            {/* <FoodName>
-                <MaterialUISetFoodNameLine 
-                    food={props.food} 
-                    handleSetPriceValue={props.handleSetPriceValue}></MaterialUISetFoodNameLine>
+            <FoodName>
+                <MaterialUISetFoodNameLine></MaterialUISetFoodNameLine>
             </FoodName>
             <FoodPrice>
-                <MaterialUIFoodPriceLine
-                    food={props.food} 
-                    handleSetPriceValue={props.handleSetPriceValue}
-                ></MaterialUIFoodPriceLine>
+                <MaterialUIFoodPriceLine></MaterialUIFoodPriceLine>
             </FoodPrice>
             <FoodDesicription>
-                <MaterialUIFoodDescriptionMultiLine food={props.food} 
-                // {...handleSetPriceValue} 
-                ></MaterialUIFoodDescriptionMultiLine>
-            </FoodDesicription> */}
+                <MaterialUIFoodDescriptionMultiLine></MaterialUIFoodDescriptionMultiLine>
+            </FoodDesicription>
         </FoodCardWrapper>
         </Fragment>
     )

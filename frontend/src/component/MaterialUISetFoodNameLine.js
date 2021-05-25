@@ -19,6 +19,7 @@ export function MaterialUISetFoodNameLine() {
   const FoodNameState = useContext(FoodState)
   const FoodNameDispatch = useContext(FoodDispatch)
 
+  console.log(FoodNameState)
   const handleChange = (event) => {
     FoodNameDispatch({
       type:foodCreateActionTypes.SETTINGFOODNAME,
@@ -36,11 +37,11 @@ export function MaterialUISetFoodNameLine() {
   return (
     <Fragment>
         {
-        // value === undefined || value === null?
-        // <Fragment>
-        //     LOADING
-        // </Fragment>
-        // :
+        FoodNameState.food === undefined || FoodNameState.food === null?
+        <Fragment>
+            LOADING
+        </Fragment>
+        :
         <Fragment>
         <form className={classes.root} noValidate autoComplete="off">
         <TextField 

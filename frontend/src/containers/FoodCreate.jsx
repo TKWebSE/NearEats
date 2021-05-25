@@ -32,7 +32,6 @@ export const FoodCreate = () => {
         const user_id = 1
         createFoodApi(state.food,user_id)
         .then((data) => {
-            console.log(data)
             history.push(foodShowHistory(data.food.id))
         })
         .catch(e => console.log(e))

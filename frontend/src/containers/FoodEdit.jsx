@@ -3,14 +3,17 @@ import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {SaveButton} from "../component/MaterialUISaveButton";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import {REQUEST_STATE} from "../constants";
-import {COLORS} from "../style_constants";
+import {saveButtonTheme} from "../style_constants";
+import {FOOD_HEADER_TITLE, REQUEST_STATE} from "../constants";
 import { fetchFoodApi, updateFoodApi} from '../apis/foodApis';
 import { 
   initializeState,
   foodEditActionTypes,
   foodEditReducer } from "../reducer/foodEditReducer";
 import {FoodEditCard} from "../component/FoodEditCard";
+import { FoodDispatch,FoodState } from '../context/Context';
+import {useHistory} from "react-router-dom";
+import {foodShowHistory} from "../urls/index";
 
 const DetailWrapper = styled.div`
   margin-left:20%;
@@ -26,24 +29,15 @@ const FoodCardWrapper = styled.div`
   margin-bottom:5%;
 `;
 
-const saveButtonTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: COLORS.MAIN_COLOR
-    },
-  },
-});
-
-export const FoodEditContextDispatch = React.createContext('');
-
 export const FoodEdit = ({match}) => { 
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
+  const history = useHistory();
 
   useEffect(()=>  {
     dispatch({type:foodEditActionTypes.FETCHING});
     fetchFoodApi(match.params.foodId)
     .then((data)=> {
-      dispatch({
+      dispatch({  
         type:foodEditActionTypes.FETCH_SUCCESS,
         payload: {
           food: data.food
@@ -53,23 +47,16 @@ export const FoodEdit = ({match}) => {
     .catch(e => console.log(e))
   },[]);
 
-  function handleSetPriceValue() {
-    console.log(state)
-    dispatch({
-      type:foodEditActionTypes.SETTING,
-      payload:{ 
-        food_price: state.food.price
-      }
-    })
-    console.log(state)
-  }
-
   const submitHandle=(e) => {
+    //user認証機能実装次第改修
+    const user_id = 1
     dispatch({type:foodEditActionTypes.UPDATING});
-    console.log(state.food)
-    updateFoodApi(state.food)
+    console.log(state)
+    updateFoodApi(state.food.id)
     .then((data) => {
+      console.log(data)
       dispatch({type:foodEditActionTypes.UPDATE_SUCCESS})
+      history.push(foodShowHistory(data.food.id))
     })
     .catch(e => console.log(e))
   }
@@ -78,7 +65,7 @@ export const FoodEdit = ({match}) => {
     <Fragment>
       <DetailWrapper>
           <FoodEditHeader>
-              料理編集画面
+              {FOOD_HEADER_TITLE.FOOD_EDIT}
           </FoodEditHeader>
       {
       REQUEST_STATE.LOADING === state.fetchState?
@@ -90,16 +77,16 @@ export const FoodEdit = ({match}) => {
       :
           <Fragment>
               <FoodCardWrapper>
-                <FoodEditContextDispatch.Provider value={state.food}>
-                  <FoodEditCard 
-                    food={state.food} 
-                    handleSetPriceValue={handleSetPriceValue}
-                  />
+                <FoodDispatch.Provider value={dispatch}>
+                  <FoodState.Provider value={state}>
+                    <FoodEditCard />
+                  </FoodState.Provider>
+                </FoodDispatch.Provider>
                   <ThemeProvider theme={saveButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
-                </FoodEditContextDispatch.Provider>
-              </FoodCardWrapper>              
+              </FoodCardWrapper>
+                           
           </Fragment>
       }
       </DetailWrapper>

@@ -36,11 +36,11 @@ export function MaterialUIFoodPriceLine() {
     return (
       <Fragment>
       {
-      // value === undefined || value === null?
-      // <Fragment>
-      //     LOADING
-      // </Fragment>
-      // :
+      FoodPriceState.food === undefined || FoodPriceState.food === null?
+      <Fragment>
+          LOADING
+      </Fragment>
+      :
         <form className={classes.root} noValidate autoComplete="off">
           <TextField 
             id="outlined-basic" 

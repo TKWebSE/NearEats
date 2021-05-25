@@ -16,7 +16,6 @@ export const foodCreateActionTypes = {
     SETTINGFOODPRICE:"SETTINGFOODPRICE",
     SETTINGFOODDESCRIPTION:"SETTINGFOODDESCRIPTION",
     SUCCESS:"SUCCESS",
-    TEST:"TEST",
 }
 
 export const foodCreateReducer = (state,action) => {
@@ -45,9 +44,6 @@ export const foodCreateReducer = (state,action) => {
                     description:action.payload.description,
                 }
             }
-        case foodCreateActionTypes.TEST:
-            console.log(state)
-            return{}
         default:
             throw new Error();
     }

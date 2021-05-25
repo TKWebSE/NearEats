@@ -1,6 +1,5 @@
 import React,{ Fragment } from "react";
 import styled from "styled-components";
-import { DeleteButton } from "../component/MaterialUIButtons";
 import foodImage from "../images/food-image.jpg";
 
 const FoodCardWrapper = styled.div`
@@ -47,7 +46,6 @@ export const FoodDetailCard = (food) => {
                 <FoodCreatedTime>
                     {food.created_at}
                 </FoodCreatedTime>
-                <DeleteButton></DeleteButton>
             </FoodCardWrapper>
         </Fragment>
     )

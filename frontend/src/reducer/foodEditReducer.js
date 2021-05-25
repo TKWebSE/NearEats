@@ -4,14 +4,15 @@ import { REQUEST_STATE } from "../constants";
 export const initializeState = {
     fetchState:REQUEST_STATE.INITIAL,
     food:null,
-    update_food:null,
 }
 
 export const foodEditActionTypes = {
     FETCHING:"FECTHING",
     FETCH_SUCCESS:"FETCH_SUCCESS",
-    SETTING:"SETTING",
-    UPDATE_SUCCESS:"SET_SUCCESS"
+    SETTINGFOODNAME:"SETTINGFOODNAME",
+    SETTINGFOODPRICE:"SETTINGFOODPRICE",
+    SETTINGFOODDESCRIPTION:"SETTINGFOODDESCRIPTION",
+    UPDATE_SUCCESS:"SET_SUCCESS",
 }
 
 export const foodEditReducer = (state,action) => {
@@ -26,12 +27,31 @@ export const foodEditReducer = (state,action) => {
                 fetchstate:REQUEST_STATE.OK,
                 food: action.payload.food,
             }
-        case foodEditActionTypes.SETTING:
+        case foodEditActionTypes.SETTINGFOODNAME:
             return{
-                food: action.payload.price,
+                food:{
+                    name: action.payload.name,
+                    price: state.food.price,
+                    description:state.food.description,
+                }
+            }
+        case foodEditActionTypes.SETTINGFOODPRICE:
+            return {
+                food:{
+                    name:state.food.name,
+                    price:action.payload.price,
+                    description:state.food.description,
+                }
+            }
+        case foodEditActionTypes.SETTINGFOODDESCRIPTION:
+            return {
+                food:{
+                    name:state.food.name,
+                    price:state.food.price,
+                    description:action.payload.description,
+                }
             }
         case foodEditActionTypes.UPDATE_SUCCESS:
-            console.log(action.payload)
             return{
                 food: action.payload.price,
             }

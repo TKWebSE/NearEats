@@ -27,7 +27,7 @@ const UserEditButton = styled.div`
 
 export const UserDetail = ({match}) => { 
   const [state,dispatch] = useReducer(userDetailReducer,initializeState);
-
+  
   useEffect(() => {
     dispatch({type:usersActionTypes.FETCHING});
     fetchUserApi(match.params.userId)

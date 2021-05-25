@@ -35,11 +35,11 @@ export function MaterialUIFoodDescriptionMultiLine() {
     return (
     <Fragment>
       {
-      // value === undefined || value === null?
-      // <Fragment>
-      //     LOADING
-      // </Fragment>
-      // :
+      FoodDescriptionState.food === undefined || FoodDescriptionState.food === null?
+      <Fragment>
+          LOADING
+      </Fragment>
+      :
       <Fragment>
         <form className={classes.root} noValidate autoComplete="off">
         <div>
