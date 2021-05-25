@@ -10,11 +10,12 @@ module Api
             end
         
             def show
-                user = User.new(id: params[user_id])
                 logger.debug("コメント")
                 logger.debug(params)
-                logger.debug(params[:food])
+                logger.debug(params[:userId])
                 logger.debug("コメント")
+                user = User.find_by(id: params[:userId])
+                logger.debug(user)
                 render json: {
                     user: user
                 },status: :ok
@@ -51,7 +52,7 @@ module Api
             private 
 
                 def user_params
-                    params.require(:food).permit(:name,:price,:description,:user_id)
+                    params.require(:user).permit(:name,:price,:description,:userId)
                 end
         end
     end

@@ -3,16 +3,24 @@ const API_V1 = "${DEFAULT_URL}/API/V1"
 
 //foodのURL
 export const foodsIndex = `${DEFAULT_URL}/foods`;
-export const foodShow = (food_id) => `${DEFAULT_URL}/foods/${food_id}`;
-export const foodShowHistory = (food_id) => `/foods/${food_id}`;
+export const foodShow = (foodId) => `${DEFAULT_URL}/foods/${foodId}`;
 export const foodCreate = `${DEFAULT_URL}/foods`;
-export const foodUpdate = (food_id) => `${DEFAULT_URL}/foods/${food_id}`
-export const foodUpdateHistory = (food_id) => `/foods/${food_id}/edit`;
-export const foodDelete = (food_id) => `${DEFAULT_URL}/${food_id}/foods`;
+export const foodUpdate = (foodId) => `${DEFAULT_URL}/foods/${foodId}`
+export const foodDelete = (foodId) => `${DEFAULT_URL}/${foodId}/foods`;
+export const foodUpdateHistory = (foodId) => `/foods/${foodId}/edit`;
+export const foodShowHistory = (foodId) => `/foods/${foodId}`;
 
 //userのURL
-export const userShow = (user_id) => `${DEFAULT_URL}/users/${user_id}`;
-export const userEdit = () => '${DEFAULT_URL}/users/edit';
-export const userUpdate = (user_id) => `${DEFAULT_URL}/users/${user_id}/update`;
-export const userDelete = (user_id) => `${DEFAULT_URL}/users/${user_id}/delete`;
-export const orederIndex = '/orders';
+export const userShow = (userId) => `${DEFAULT_URL}/users/${userId}`;
+export const userCreate = () => `${DEFAULT_URL}/users/create`;
+export const userEdit = (userId) => '${DEFAULT_URL}/users/edit';
+export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}/update`;
+export const userDelete = (userId) => `${DEFAULT_URL}/users/${userId}/delete`;
+
+//orderのURL
+export const orederIndex = () => `${DEFAULT_URL}/orders/`;
+export const orderShow = (orderId) => `${DEFAULT_URL}/orders/${orderId}`;
+export const orderCreate =() =>  `${DEFAULT_URL}/orders/create`;
+export const orderEdit =() => `${DEFAULT_URL}/orders/edit`;
+export const orderUpdate = () => `${DEFAULT_URL}/orders/update`;
+export const orderDelete = () =>  `${DEFAULT_URL}/orders/delete`;

@@ -33,19 +33,17 @@ export const UserDetail = ({match}) => {
   const [state,dispatch] = useReducer(userDetailReducer,initializeState);
   
   useEffect(() => {
-    console.log(state)
-    dispatch({type:usersActionTypes.FETCHING});
-    console.log(state)
+    dispatch({type:usersActionTypes.FETCHING})
     fetchUserApi(match.params.userId)
-      .then((data) => {
-          dispatch({
-            type:usersActionTypes.FETCH_SUCCESS,
-            payload:{
-              user:data.user
-            }
-          });
-        })
-      .catch((e) => console.log(e));
+    .then((data) => {
+        dispatch({
+          type:usersActionTypes.FETCH_SUCCESS,
+          payload:{
+            user:data.user
+          }
+        });
+      })
+    .catch((e) => console.log(e));
   },[]);
   
   return (

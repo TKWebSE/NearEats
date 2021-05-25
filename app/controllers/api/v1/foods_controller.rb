@@ -12,7 +12,6 @@ module Api
             def show 
                 food = Food.find_by(id: params[:id])
 
-                logger.debug(params)
                 render json: {
                     food: food
                 }, status: :ok
