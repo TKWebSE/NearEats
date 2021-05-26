@@ -55,7 +55,6 @@ export const Foods = () => {
             });
         })
         .catch((e) => console.log(e))
-
     },[])
 
     return (

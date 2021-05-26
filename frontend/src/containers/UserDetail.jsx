@@ -1,10 +1,11 @@
 import React, {Fragment,useReducer,useEffect} from 'react';
 import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
+import { ThemeProvider } from '@material-ui/core/styles';
 import {fetchUserApi} from "../apis/userApis";
-import {state,dispatch} from "../context/Context";
 import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
 import ContainedButton from "../component/MaterialUICommonBotton";
+import {ButtonTheme} from "../style_constants";
 import {userEdit} from "../urls/index";
 import {REQUEST_STATE, USER_HEADER_TITLE} from "../constants";
 
@@ -34,6 +35,7 @@ export const UserDetail = ({match}) => {
   
   useEffect(() => {
     dispatch({type:usersActionTypes.FETCHING})
+    console.log(state)
     fetchUserApi(match.params.userId)
     .then((data) => {
         dispatch({
@@ -42,6 +44,7 @@ export const UserDetail = ({match}) => {
             user:data.user
           }
         });
+        console.log(state)
       })
     .catch((e) => console.log(e));
   },[]);
@@ -52,7 +55,7 @@ export const UserDetail = ({match}) => {
         {USER_HEADER_TITLE.UserDetail}
       </UserHeaderWrapper> 
         {
-          state.fetchState === REQUEST_STATE.LOADING?
+          REQUEST_STATE.LOADING === state.fetchState?
             <ContentsList>
               <Fragment>
                   <Skeleton variant="rect" width={450} height={300} />
@@ -62,18 +65,19 @@ export const UserDetail = ({match}) => {
             </ContentsList>
           :
           <UserDetailWrapper>
-            
             <UserName>
-              state.user.name
+              {/* {state.user.name} */}
             </UserName>
             <Userpoint>
-              state.user.point
+              {/* {state.user.point} */}
             </Userpoint>
             <UserDescription>
-              state.user.detail
+              {/* {state.user.address} */}
             </UserDescription>
             <UserEditButton>
-              <ContainedButton href={userEdit} />
+              <ThemeProvider theme={ButtonTheme}>
+                <ContainedButton href={userEdit} />
+              </ThemeProvider>
             </UserEditButton>
           </UserDetailWrapper>
         } 

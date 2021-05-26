@@ -79,8 +79,7 @@ export const FoodEdit = ({match}) => {
                   <ThemeProvider theme={ButtonTheme}>
                     <SaveButton onClick={submitHandle} />
                   </ThemeProvider>
-              </FoodCardWrapper>
-                           
+              </FoodCardWrapper>             
           </Fragment>
       }
       </DetailWrapper>
