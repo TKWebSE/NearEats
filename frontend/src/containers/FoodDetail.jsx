@@ -10,8 +10,7 @@ import { fetchFoodApi } from "../apis/foodApis";
 import { initializeState,
          foodDetailActionTypes,
          foodDetailReducer} from "../reducer/foodDetail";
-import {FoodDetailCard} from "../component/FoodDetailCard";
-import {foodUpdate} from "../urls/index";
+import {FoodDetailCard} from "../component/foodComponent/FoodDetailCard";
 import {useHistory} from "react-router-dom";
 import {foodUpdateHistory} from "../urls/index";
 

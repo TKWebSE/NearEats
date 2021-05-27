@@ -10,7 +10,7 @@ import {
     foodsActionTypes,
     foodsIndexReducer,
 } from '../reducer/foods';
-import {FoodCard} from '../component/FoodCard';
+import {FoodCard} from '../component/foodComponent/FoodCard';
 
 
 

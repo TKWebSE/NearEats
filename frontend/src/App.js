@@ -7,10 +7,17 @@ import {
 } from "react-router-dom";
 
 import {UserDetail} from './containers/UserDetail.jsx';
+import {UserCreate} from "./containers/UserCreate";
+import {UserEdit} from "./containers/UserEdit";
+
+import {Foods} from './containers/Foods.jsx';
+import {FoodCreate} from "./containers/FoodCreate";
 import { FoodDetail } from './containers/FoodDetail';
 import { FoodEdit} from "./containers/FoodEdit";
-import {FoodCreate} from "./containers/FoodCreate";
-import {Foods} from './containers/Foods.jsx';
+
+import {Order} from "./containers/Order";
+import {OrderDetail} from "./containers/OrderDetail";
+
 import { ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { headerTheme } from "./style_constants";
@@ -23,6 +30,12 @@ function App() {
     </ThemeProvider>
     <Router>
       <Switch>
+      //user作成画面
+        <Route 
+          exact
+          path="/users/create">
+          <UserCreate />
+        </Route>
         //user詳細画面
         <Route 
           exact
@@ -34,17 +47,11 @@ function App() {
           }
         >          
         </Route>
-        //user作成画面
-        <Route 
-          exact
-          path="restaurants">
-          <Foods />
-        </Route>
         //user編集画面
         <Route 
           exact
-          path="restaurants">
-          <Foods />
+          path="users/:userId/edit">
+          <UserEdit />
         </Route>
         //food一覧
         <Route
@@ -75,6 +82,23 @@ function App() {
           path="/foods/:foodId/edit"
           render={({match}) => 
           <FoodEdit
+            match={match}
+          />
+          }
+        >
+        </Route>
+        //order一覧画面
+        <Route
+          exact
+          path="/orders">
+          <Order />
+        </Route>
+        //Order詳細画面
+        <Route
+          exact
+          path="/foods/:orderId"
+          render={({match}) => 
+          <OrderDetail
             match={match}
           />
           }

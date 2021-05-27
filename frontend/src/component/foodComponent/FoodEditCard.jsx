@@ -1,9 +1,9 @@
 import React,{ Fragment,useContext } from "react";
 import styled from "styled-components";
-import foodImage from "../images/food-image.jpg";
-import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
-import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
-import {MaterialUISetFoodNameLine} from "./MaterialUISetFoodNameLine";
+import foodImage from "../../images/food-image.jpg";
+import {MaterialUIFoodDescriptionMultiLine} from "../foodComponent/MaterialUIFoodDescriptionMultiLine";
+import {MaterialUIFoodPriceLine} from "../foodComponent/MaterialUIFoodPriceLine";
+import {MaterialUISetFoodNameLine} from "../foodComponent/MaterialUISetFoodNameLine";
 
 const FoodCardWrapper = styled.div`
     text-align:center;

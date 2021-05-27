@@ -10,7 +10,7 @@ import {
   initializeState,
   foodEditActionTypes,
   foodEditReducer } from "../reducer/foodEditReducer";
-import {FoodEditCard} from "../component/FoodEditCard";
+import {FoodEditCard} from "../component/foodComponent/FoodEditCard";
 import { FoodDispatch,FoodState } from '../context/Context';
 import {useHistory} from "react-router-dom";
 import {foodShowHistory} from "../urls/index";
@@ -33,7 +33,7 @@ export const FoodEdit = ({match}) => {
   const [state,dispatch] = useReducer(foodEditReducer,initializeState);
   const history = useHistory();
 
-  useEffect(()=>  {
+  useEffect(() =>  {
     dispatch({type:foodEditActionTypes.FETCHING});
     fetchFoodApi(match.params.foodId)
     .then((data)=> {

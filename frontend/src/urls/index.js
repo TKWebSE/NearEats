@@ -13,9 +13,10 @@ export const foodShowHistory = (foodId) => `/foods/${foodId}`;
 //userのURL
 export const userShow = (userId) => `${DEFAULT_URL}/users/${userId}`;
 export const userCreate = () => `${DEFAULT_URL}/users/create`;
-export const userEdit = (userId) => '${DEFAULT_URL}/users/edit';
+export const userEdit = (userId) => `${DEFAULT_URL}/users/${userId}/edit`;
 export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}/update`;
 export const userDelete = (userId) => `${DEFAULT_URL}/users/${userId}/delete`;
+export const userEditHistory = (userId) => `/users/${userId}/edit`;
 
 //orderのURL
 export const orederIndex = () => `${DEFAULT_URL}/orders/`;

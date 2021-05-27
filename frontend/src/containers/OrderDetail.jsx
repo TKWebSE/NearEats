@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 
-export const SampleC = () => { 
+export const OrderDetail = () => { 
   return (
     <Fragment>
         sampleCページ

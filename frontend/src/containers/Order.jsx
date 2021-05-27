@@ -1,11 +1,12 @@
 import React, {Fragment, useReducer  } from "react";
+import { useHistory } from "react-router";
 import { ORDER_HEADER_TITLE } from "../constants";
-import {OrderDispatch,OrderState} from "../context";
-
+import {OrderDispatch,OrderState} from "../context/Context";
+import { orderIndexReducer,initializeState } from "../reducer/orderIndexReducer";
 
 export const Order =() => { 
-    const [state,dispatch] = useReducer(OrderIndexReducer,initialize);
-
+    const [state,dispatch] = useReducer(orderIndexReducer,initializeState);
+    const history = useHistory();
 
 
     return(

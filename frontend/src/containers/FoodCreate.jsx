@@ -12,7 +12,7 @@ import {useHistory} from "react-router-dom";
 import {foodShowHistory} from "../urls/index";
 import {FoodState,FoodDispatch} from "../context/Context";
 
-import {FoodCreateCard} from "../component/FoodCreateCard";
+import {FoodCreateCard} from "../component/foodComponent/FoodCreateCard";
 
 const FoodCreateWrappwer = styled.div`
 `;

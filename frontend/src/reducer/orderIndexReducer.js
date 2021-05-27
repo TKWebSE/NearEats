@@ -4,25 +4,25 @@ import { useReducer } from "react";
 
 export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
-    restaurantsList: []
+    orderList: []
 }
 
-export const restaurantsActionTypes = {
+export const oredersActionTypes = {
     FETCHING: "FETCHING",
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const restaurantsReducer = (state,action) => {
+export const orderIndexReducer = (state,action) => {
     switch (action.type) {
-        case restaurantsActionTypes.FETCHING:
+        case oredersActionTypes.FETCHING:
         return {
             ...state,
             fetchState:REQUEST_STATE.LOADING,
         };
-        case restaurantsActionTypes.FETCH_SUCCESS:
+        case oredersActionTypes.FETCH_SUCCESS:
         return {
             fetchState: REQUEST_STATE.OK,
-            restaurantsList:action.payload.restaurants,
+            orderList:action.payload.orders,
         };  
         default:
             throw new Error();    

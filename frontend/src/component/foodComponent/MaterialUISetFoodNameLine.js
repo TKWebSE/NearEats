@@ -1,8 +1,8 @@
 import React,{Fragment,useEffect,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {foodCreateActionTypes} from "../reducer/foodCreateReducer";
-import {FoodState,FoodDispatch} from "../context/Context";
+import {foodCreateActionTypes} from "../../reducer/foodCreateReducer";
+import {FoodState,FoodDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {

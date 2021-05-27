@@ -25,3 +25,11 @@ export const ORDER_HEADER_TITLE = {
     ORDER_INDEX:"購入履歴",
     ORDER_DETAIL:"購入履歴の詳細",
 }
+
+export const USER_LABEL = {
+    USER_NAME:"ユーザー名",
+    USER_ADDRESS:"住所",
+    USER_MAIL:"メールアドレス",
+    USER_PASSWORD:"パスワード",
+    USER_POINT:"ユーザーポイント",
+}

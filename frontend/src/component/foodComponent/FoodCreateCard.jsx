@@ -1,8 +1,8 @@
 import React,{Fragment} from "react";
 import styled from "styled-components";
-import {MaterialUISetFoodNameLine} from "./MaterialUISetFoodNameLine";
-import {MaterialUIFoodPriceLine} from "./MaterialUIFoodPriceLine";
-import {MaterialUIFoodDescriptionMultiLine} from "./MaterialUIFoodDescriptionMultiLine";
+import {MaterialUISetFoodNameLine} from "../foodComponent/MaterialUISetFoodNameLine";
+import {MaterialUIFoodPriceLine} from "../foodComponent/MaterialUIFoodPriceLine";
+import {MaterialUIFoodDescriptionMultiLine} from "../foodComponent/MaterialUIFoodDescriptionMultiLine";
 
 const FoodCreateCardWrapper = styled.div`
 `;
