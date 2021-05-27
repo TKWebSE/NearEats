@@ -14,13 +14,11 @@ export const usersActionTypes = {
 export const userDetailReducer = (state,action) => {
     switch (action.type) {
         case usersActionTypes.FETCHING:
-            console.log("neko")
             return {
                 ...state,
                 fetchState:REQUEST_STATE.LOADING,
             }
         case usersActionTypes.FETCH_SUCCESS:
-            console.log("neko2")
             return {
                 fetchState:REQUEST_STATE.OK,
                 user:action.payload.user,

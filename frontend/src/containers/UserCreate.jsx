@@ -1,22 +1,29 @@
-import React, {Fragment,useEffect} from "react";
+import React, {Fragment,useReducer,useEffect} from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
-import { initializeState } from "../reducer/foodCreateReducer";
-
+import {userCreateApi} from "../apis/userApis";
+import { initializeState,userCreateReducer } from "../reducer/userCreateReducer";
 import {UserDispatch,UserState} from "../context/Context";
+// import {userShowHistory} from "../urls/index";
+import {UserCreateCard} from "../component/userComponent/UserCreateCard";
 
-const UserCreateCard = styled.div``;
+
+const UserCreateWrapper = styled.div`
+`;
+
+const UserCreateHeader = styled.div`
+`;
 
 export const UserCreate = () => {
-    const [state,dispatch] = useReducer(UserCreateReducer,initializeState)
+    const [state,dispatch] = useReducer(userCreateReducer,initializeState)
     const history = useHistory();
 
     function SubmitHandle() {
-        createUserApi(state.user)
+        userCreateApi(state.user)
         .then((data) => {
             console.log(data)
-            history.pushState(userShowHistory(1))
+            // history.pushState(userShowHistory(1))
         })
         .catch(e => console.log(e))
     }

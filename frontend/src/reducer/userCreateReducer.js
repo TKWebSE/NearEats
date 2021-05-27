@@ -1,30 +1,29 @@
-import React from "react";
-import {REQUEST_STATE} from "../constants";
+import React,{Reducer} from "react";
+import { REQUEST_STATE } from "../constants";
 
 export const initializeState = {
     fetchState:REQUEST_STATE.INITIAL,
     user:null,
 }
 
-export const userEditActionTypes = {
+export const usersActionTypes = {
     FETCHING:"FETCHING",
-    FETCH_SUCCESS:"FETCH_SUCCESS",
+    FETCH_SUCCESS:"SUCCESS",
 }
 
-export const userEditReducer = (action,state) => {
+export const userCreateReducer = (state,action) => {
     switch (action.type) {
-        case userEditActionTypes.FETCHING:
-            console.log("neko")
+        case usersActionTypes.FETCHING:
             return {
                 ...state,
                 fetchState:REQUEST_STATE.LOADING,
             }
-        case userEditActionTypes.FETCH_SUCCESS:
+        case usersActionTypes.FETCH_SUCCESS:
             return {
                 fetchState:REQUEST_STATE.OK,
                 user:action.payload.user,
             }
         default:
-            throw Error();
+            throw new Error();
     }
 }

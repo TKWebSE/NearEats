@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {userShow,userUpdate,userDelete} from "../urls/index";
+import {userShow,userCreate,userUpdate,userDelete} from "../urls/index";
 
 //editとdetailで使用
 export const fetchUserApi = (userId) => {
@@ -8,6 +8,16 @@ export const fetchUserApi = (userId) => {
         params:{
             userId:userId
         }
+    })
+    .then((res) => {
+        return res.data
+    })
+    .catch(e => console.log(e))
+}
+
+export const userCreateApi = (user) => {
+    return axios.post(userCreate(user.id),{
+        params:{user:user}
     })
     .then((res) => {
         return res.data

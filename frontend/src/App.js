@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import {UserDetail} from './containers/UserDetail.jsx';
+import {UserDetail} from './containers/UserDetail';
 import {UserCreate} from "./containers/UserCreate";
 import {UserEdit} from "./containers/UserEdit";
 
@@ -50,8 +50,13 @@ function App() {
         //user編集画面
         <Route 
           exact
-          path="users/:userId/edit">
-          <UserEdit />
+          path="/users/:userId/edit"
+          render ={({match}) => 
+            <UserEdit
+              match={match}
+            />
+          }
+        >          
         </Route>
         //food一覧
         <Route

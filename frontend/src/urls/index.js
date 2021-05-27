@@ -16,6 +16,7 @@ export const userCreate = () => `${DEFAULT_URL}/users/create`;
 export const userEdit = (userId) => `${DEFAULT_URL}/users/${userId}/edit`;
 export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}/update`;
 export const userDelete = (userId) => `${DEFAULT_URL}/users/${userId}/delete`;
+export const userDetailHistory = (userId) => `/users/${userId}`;
 export const userEditHistory = (userId) => `/users/${userId}/edit`;
 
 //orderのURL
@@ -25,3 +26,4 @@ export const orderCreate =() =>  `${DEFAULT_URL}/orders/create`;
 export const orderEdit =() => `${DEFAULT_URL}/orders/edit`;
 export const orderUpdate = () => `${DEFAULT_URL}/orders/update`;
 export const orderDelete = () =>  `${DEFAULT_URL}/orders/delete`;
+export const orderDetailHistory = (orderId) => `/orders/${orderId}`;

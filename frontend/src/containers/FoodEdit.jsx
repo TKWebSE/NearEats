@@ -6,10 +6,7 @@ import {SaveButton} from "../component/MaterialUISaveButton";
 import {ButtonTheme} from "../style_constants";
 import {FOOD_HEADER_TITLE, REQUEST_STATE} from "../constants";
 import { fetchFoodApi, updateFoodApi} from '../apis/foodApis';
-import { 
-  initializeState,
-  foodEditActionTypes,
-  foodEditReducer } from "../reducer/foodEditReducer";
+import { initializeState,foodEditActionTypes,foodEditReducer } from "../reducer/foodEditReducer";
 import {FoodEditCard} from "../component/foodComponent/FoodEditCard";
 import { FoodDispatch,FoodState } from '../context/Context';
 import {useHistory} from "react-router-dom";
