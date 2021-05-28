@@ -9,6 +9,7 @@ import {ButtonTheme} from "../style_constants";
 import {userEditHistory} from "../urls/index";
 import {REQUEST_STATE, USER_HEADER_TITLE} from "../constants";
 import {useHistory} from "react-router-dom";
+import {USER_LABEL} from "../constants";
 
 const ContentsList = styled.div`
 `;
@@ -21,9 +22,26 @@ const UserHeaderWrapper = styled.h1`
 const UserDetailWrapper = styled.div`
   margin-left:5%;
 `;
+const UserNameWrapper = styled.div`
+  float: left;
+`;
+const UserNameLabel = styled.h2`
+`;
+
+const UserPointLabel = styled.h2`
+margin-bottom:1%;
+`;
+
+const UserAddressLabel = styled.h2`
+  margin-bottom:1%;
+`;
 
 const UserName = styled.div`
   margin-bottom:1%;
+`;
+
+const UserValueWrapper = styled.h2`
+  margin-top:1%
 `;
 
 const Userpoint = styled.div`
@@ -70,15 +88,29 @@ export const UserDetail = ({match}) => {
         {
           REQUEST_STATE.OK === state.fetchState?
           <UserDetailWrapper>
-            <UserName>
-              {state.user.name}
-            </UserName>
-            <Userpoint>
-              {state.user.point}
-            </Userpoint>
-            <UserDescription>
-              {state.user.address}
-            </UserDescription>
+            <UserNameWrapper>
+            <UserNameLabel>
+                {USER_LABEL.USER_NAME}
+              </UserNameLabel>
+              <UserName>
+                {state.user.name}
+              </UserName>
+            </UserNameWrapper>
+            <UserValueWrapper>
+              
+              <UserPointLabel>
+                {USER_LABEL.USER_POINT}
+              </UserPointLabel>
+              <Userpoint>
+                {state.user.point}
+              </Userpoint>
+              <UserAddressLabel>
+                {USER_LABEL.USER_ADDRESS}
+              </UserAddressLabel>
+              <UserDescription>
+                {state.user.address}
+              </UserDescription>
+            </UserValueWrapper>
             <UserEditButton>
               <ThemeProvider theme={ButtonTheme}>
                 <ContainedButton onClick={onClickEditHandle} />

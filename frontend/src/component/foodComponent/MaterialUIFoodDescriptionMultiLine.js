@@ -27,10 +27,6 @@ export function MaterialUIFoodDescriptionMultiLine() {
         }
       })
     };
-    
-    useEffect(() => {
-      console.log(FoodDescriptionState)
-    }, []);
         
     return (
     <Fragment>

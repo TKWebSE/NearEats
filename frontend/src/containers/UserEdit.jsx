@@ -2,9 +2,9 @@ import React, { Fragment,useReducer,useEffect } from "react";
 import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
-import { fetchUserApi } from "../apis/userApis";
+import { fetchUserApi,userUpdateApi } from "../apis/userApis";
 import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
-import {initializeState,userEditActionTypes,userEditReducer} from "../reducer/useEditReducer";
+import {initializeState,userEditActionTypes,userEditReducer} from "../reducer/userEditReducer";
 import {userDetailHistory} from "../urls/index";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {UserEditCard} from "../component/userComponent/UserEditCard";
@@ -13,11 +13,19 @@ import {SaveButton} from "../component/MaterialUISaveButton";
 import { UserDispatch,UserState } from '../context/Context';
 
 
-const FoodEditHeader = styled.div`
+const FoodEditHeader = styled.h1`
+    margin-top:5%;
+    margin-left:7%;
 `;
 
 const UserEditCardWrapper = styled.div`
+    margin-left:5%;
+    margin-right:5%;
 `;
+const UserEditButton = styled.div`
+    margin-left:80%;
+`;
+
 
 export const UserEdit = ({match}) => {
     const [state,dispatch] = useReducer(userEditReducer,initializeState);
@@ -39,7 +47,10 @@ export const UserEdit = ({match}) => {
     },[]);
     
     function submitHandle() {
-        history.push(userDetailHistory(state.user.id))
+        userUpdateApi(state.user)
+        .then(
+            history.push(userDetailHistory(state.user.id))
+        )
     }
 
     return (
@@ -51,15 +62,17 @@ export const UserEdit = ({match}) => {
             REQUEST_STATE.OK === state.fetchState?
                 <Fragment>
                     <UserEditCardWrapper>
-                        <UserDispatch.Provider value={UserDispatch}>
-                            <UserState.Provider value={UserState}>
+                        <UserDispatch.Provider value={dispatch}>
+                            <UserState.Provider value={state}>
                                 <UserEditCard/>
                             </UserState.Provider>
                         </UserDispatch.Provider>   
                     </UserEditCardWrapper>
-                    <ThemeProvider theme={ButtonTheme}>
-                        <SaveButton onClick={submitHandle} />
-                    </ThemeProvider>
+                    <UserEditButton>
+                        <ThemeProvider theme={ButtonTheme}>
+                            <SaveButton onClick={submitHandle} />
+                        </ThemeProvider>
+                    </UserEditButton>
                 </Fragment>
             :
                 <Fragment>

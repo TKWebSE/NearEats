@@ -18,7 +18,7 @@ const FoodCreateWrappwer = styled.div`
 
 const FoodCreateHeader = styled.h1`
     margin-top:3%;
-    margin-bottom:3%;
+    margin-bottom:5%;
 `;
 
 

@@ -18,12 +18,13 @@ const DetailWrapper = styled.div`
 `;
 
 const FoodEditHeader = styled.h1`
-  margin-top:3%;
-  margin-bottom:3%;
+  margin-top:5%;
+  margin-left:5%;
 `;
 
 const FoodCardWrapper = styled.div`
   margin-bottom:5%;
+  margin-left:5&;
 `;
 
 export const FoodEdit = ({match}) => { 
