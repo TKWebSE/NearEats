@@ -21,35 +21,42 @@ const UserHeaderWrapper = styled.h1`
 
 const UserDetailWrapper = styled.div`
   margin-left:5%;
+  vertical-align:  middle; 
+  display: table;
 `;
 const UserNameWrapper = styled.div`
-  float: left;
+  display: table;
 `;
-const UserNameLabel = styled.h2`
-`;
-
-const UserPointLabel = styled.h2`
-margin-bottom:1%;
-`;
-
-const UserAddressLabel = styled.h2`
-  margin-bottom:1%;
+const UserNameLabel = styled.h1` 
+  display: table-cell;
 `;
 
 const UserName = styled.div`
   margin-bottom:1%;
 `;
 
-const UserValueWrapper = styled.h2`
-  margin-top:1%
+const UserPointWrapper = styled.h2`
+  display: table;
+`;
+
+const UserPointLabel = styled.h2`
+  display: table-cell;
 `;
 
 const Userpoint = styled.div`
   margin-bottom:1%;
 `;
 
-const UserDescription = styled.div`
-  margin-bottom:1%;
+const UserAddressWrapper = styled.div`
+  display: table;
+`;
+
+const UserAddressLabel = styled.h2`
+  display: table-cell;
+`;
+
+const UserAddress = styled.div`
+  display: table-cell;
 `;
 
 const UserEditButton = styled.div`
@@ -89,28 +96,29 @@ export const UserDetail = ({match}) => {
           REQUEST_STATE.OK === state.fetchState?
           <UserDetailWrapper>
             <UserNameWrapper>
-            <UserNameLabel>
-                {USER_LABEL.USER_NAME}
-              </UserNameLabel>
-              <UserName>
-                {state.user.name}
-              </UserName>
+                <UserNameLabel>
+                  {USER_LABEL.USER_NAME}
+                </UserNameLabel>
+                <UserName>
+                  {state.user.name}
+                </UserName>
             </UserNameWrapper>
-            <UserValueWrapper>
-              
+            <UserPointWrapper>
               <UserPointLabel>
                 {USER_LABEL.USER_POINT}
               </UserPointLabel>
               <Userpoint>
                 {state.user.point}
               </Userpoint>
+            </UserPointWrapper>
+            <UserAddressWrapper>
               <UserAddressLabel>
                 {USER_LABEL.USER_ADDRESS}
               </UserAddressLabel>
-              <UserDescription>
+              <UserAddress>
                 {state.user.address}
-              </UserDescription>
-            </UserValueWrapper>
+              </UserAddress>
+            </UserAddressWrapper>
             <UserEditButton>
               <ThemeProvider theme={ButtonTheme}>
                 <ContainedButton onClick={onClickEditHandle} />
