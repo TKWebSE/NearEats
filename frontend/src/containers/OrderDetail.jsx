@@ -1,6 +1,12 @@
-import React, {Fragment} from 'react'
+import React, {Fragment,useEffect} from 'react'
 
-export const OrderDetail = () => { 
+export const OrderDetail = ({match}) => { 
+
+  useEffect(() => {
+    dispatchEvent({})
+    
+  },[])
+
   return (
     <Fragment>
         sampleCページ

@@ -22,7 +22,6 @@ const UserHeaderWrapper = styled.h1`
 const UserDetailWrapper = styled.div`
   margin-left:5%;
   vertical-align:  middle; 
-  display: table;
 `;
 const UserNameWrapper = styled.div`
   display: table;
@@ -60,7 +59,8 @@ const UserAddress = styled.div`
 `;
 
 const UserEditButton = styled.div`
-  margin-left:80%;
+  margin-left:90%;
+  text-align: right;
 `;
 
 export const UserDetail = ({match}) => { 

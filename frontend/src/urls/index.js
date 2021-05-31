@@ -14,7 +14,7 @@ export const foodShowHistory = (foodId) => `/foods/${foodId}`;
 export const userShow = (userId) => `${DEFAULT_URL}/users/${userId}`;
 export const userCreate = () => `${DEFAULT_URL}/users/create`;
 export const userEdit = (userId) => `${DEFAULT_URL}/users/${userId}/edit`;
-export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}/update`;
+export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}`;
 export const userDelete = (userId) => `${DEFAULT_URL}/users/${userId}/delete`;
 export const userDetailHistory = (userId) => `/users/${userId}`;
 export const userEditHistory = (userId) => `/users/${userId}/edit`;

@@ -33,7 +33,9 @@ module Api
             end
             
             def update
-                user = User.find(id: params[:id])
+                logger.debug("updateこんとろーららららら")
+                logger.debug(params)
+                user = User.find(id: user_params)
                 if user.save
                     render json: {
                         user: user
@@ -52,7 +54,7 @@ module Api
             private 
 
                 def user_params
-                    params.require(:user).permit(:name,:price,:description,:userId)
+                    params.require(:userr).permit(:name,:point,:address,:email, :password)
                 end
         end
     end

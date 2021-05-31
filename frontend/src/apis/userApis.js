@@ -27,7 +27,12 @@ export const userCreateApi = (user) => {
 
 export const userUpdateApi = (user) => {
     return axios.put(userUpdate(user.id),{
-        params:{user:user}
+        userr:{
+            name:user.name,
+            address:user.address,
+            email:user.email,
+            password:user.password,
+        }
     })
     .then((res) => {
         return res.data
