@@ -27,7 +27,7 @@ export const userCreateApi = (user) => {
 
 export const userUpdateApi = (user) => {
     return axios.put(userUpdate(user.id),{
-        userr:{
+        user:{
             name:user.name,
             address:user.address,
             email:user.email,

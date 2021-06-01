@@ -1,18 +1,18 @@
 import axios from 'axios';
-import { orederIndex,orederShow} from '../urls/index'
+import { orderIndex,orderShow,orderUpdate,orderDelete} from '../urls/index'
 
 //order一覧を取得する
 export const orederIndexApis = () => {
-    return axios.get(orederIndex)
+    return axios.get(orderIndex)
     .then(res => {
         return res.data
     })
     .catch((e) => console.error(e))
 }
-export const fetchOrderApis = (user) => {
-    return axios.get(orederShow(user.id),{
+export const fetchOrderApis = (order) => {
+    return axios.get(orderShow(order.id),{
         params:{
-            user:user
+            order:order
         }
     })
     .then(res => {
@@ -21,10 +21,10 @@ export const fetchOrderApis = (user) => {
     .catch(e => console.log(e))
 }
 
-export const updateOrderApis = (user) => {
-    return axios.put(orderUpdate(user.id),{
+export const updateOrderApis = (order) => {
+    return axios.put(orderUpdate(order.id),{
         params:{
-            user:user
+            order:order
         }
     })
     .then(res => {
@@ -33,10 +33,10 @@ export const updateOrderApis = (user) => {
     .catch(e => console.log(e))
 }
 
-export const deleteOrderApis = (user) => {
-    return axios.delete(orderDelete(food.id),{
+export const deleteOrderApis = (order) => {
+    return axios.delete(orderDelete(order.id),{
         params:{
-            user:user
+            order:order
         }
     })
     .then(res => {
