@@ -80,7 +80,7 @@ export default function SwipeableTemporaryDrawer() {
             {list(anchor)}
           </SwipeableDrawer>
         </React.Fragment>
-      ))}
+      ))}                              
     </div>
   );
 }

@@ -9,7 +9,7 @@ import {orderDetailHistory} from "../urls/index";
 const OrderIndexHeader = styled.div`
 `;
 
-export const OrderDetail =() => { 
+export const OrderIndex =() => { 
     const [state,dispatch] = useReducer(orderIndexReducer,initializeState);
     const history = useHistory();
 

@@ -14,7 +14,7 @@ import {FoodCreate} from "./containers/FoodCreate";
 import { FoodDetail } from './containers/FoodDetail';
 import { FoodEdit} from "./containers/FoodEdit";
 
-import {Order} from "./containers/Order";
+import {OrderIndex} from "./containers/OrderIndex";
 import {OrderDetail} from "./containers/OrderDetail";
 
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -95,7 +95,7 @@ function App() {
         <Route
           exact
           path="/orders">
-          <Order />
+          <OrderIndex  />
         </Route>
         //Order詳細画面
         <Route
