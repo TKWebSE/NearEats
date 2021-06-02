@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-
 import {UserDetail} from './containers/UserDetail';
 import {UserCreate} from "./containers/UserCreate";
 import {UserEdit} from "./containers/UserEdit";

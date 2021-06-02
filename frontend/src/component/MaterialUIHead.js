@@ -173,7 +173,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={handleMobileMenuOpen}
+            // onClick={handleMobileMenuOpen}
           >
             <MenuIcon />
           </IconButton>
