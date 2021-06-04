@@ -10,16 +10,19 @@ import {orderDetailHistory} from "../urls/index";
 import {orederIndexApis} from "../apis/orderApis";
 import {OrderIndexCard} from "../component/orderComponent/OrderIndexCard";
 
-const OrderIndexHeader = styled.div`
+const OrderIndexHeader = styled.h1`
+    margin-top:5%;
+    margin-left:5%;
 `;
 const ContentsList = styled.div`
 `;
+
 export const OrderIndex =() => { 
     const [state,dispatch] = useReducer(orderIndexReducer,initializeState);
     const history = useHistory();
-
+    console.log(state)
     useEffect(() => {
-        dispatchEvent({type:oredersActionTypes.FETCHING})
+        dispatch({type:oredersActionTypes.FETCHING})
         orederIndexApis()
         .then((data) => {
             dispatch({
@@ -42,24 +45,27 @@ export const OrderIndex =() => {
                 {ORDER_HEADER_TITLE.ORDER_INDEX}
             </OrderIndexHeader>
             {
-                state.fetchState === REQUEST_STATE.LOADING?
-                    <ContentsList>
+                state.fetchState === REQUEST_STATE.OK?
+                // <OrderDispatch.Provide value={dispatch}>
+                    state.orderList.map((order,index) => 
+                    <Link to={`/orders/${order.id}`}  key={index} style={{ textDecoration: 'none' }}>
+                    
+                        {/* <OrderState.Provide value={order}> */}
+                            order.id
+                            <OrderIndexCard></OrderIndexCard>
+                        {/* </OrderState.Provide> */}
+                    
+                    </Link>
+                    )
+                // </OrderDispatch.Provide>
+                :
+                <ContentsList>
                         <Fragment>
                             <Skeleton variant="rect" width={450} height={300} />
                             <Skeleton variant="rect" width={450} height={300} />
                             <Skeleton variant="rect" width={450} height={300} />
                         </Fragment>
                     </ContentsList>
-                :
-                state.orders.map((order,index)=> 
-                <Link to={`/orders/${order.id}`}  key={index} style={{ textDecoration: 'none' }}>
-                <OrderDispatch.Provide value={dispatch}>
-                    <OrderState.Provide value={order}>
-                        <OrderIndexCard></OrderIndexCard>
-                    </OrderState.Provide>
-                </OrderDispatch.Provide>
-                </Link>
-                )
             }
         </Fragment>
     )  

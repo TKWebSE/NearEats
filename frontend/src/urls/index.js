@@ -20,7 +20,7 @@ export const userDetailHistory = (userId) => `/users/${userId}`;
 export const userEditHistory = (userId) => `/users/${userId}/edit`;
 
 //orderのURL
-export const orderIndex = () => `${DEFAULT_URL}/orders/`;
+export const orderIndex = () => `${DEFAULT_URL}/orders`;
 export const orderShow = (orderId) => `${DEFAULT_URL}/orders/${orderId}`;
 export const orderCreate =() =>  `${DEFAULT_URL}/orders/create`;
 export const orderEdit =() => `${DEFAULT_URL}/orders/edit`;
