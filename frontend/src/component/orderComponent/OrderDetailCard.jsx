@@ -1,6 +1,6 @@
 import React ,{Fragment} from "react";
 import styled from "styled-components";
-import { FoodDispatch } from "../../context/Context";
+import {OrderState,OrderDispatch} from "../../context/Context";
 
 
 const DetailCardWrapper = styled.div`
@@ -24,16 +24,16 @@ export const OrderDetailCard = () => {
         <Fragment>
             <DetailCardWrapper>
                 <OrderFoodName>
-                    {Food.Name} 
+                    {OrderState.FoodName} 
                 </OrderFoodName>
                 <OrderFoodPrice>
-                    {Food.Price}
+                    {OrderState.FoodPrice}
                 </OrderFoodPrice>
                 <OrderFoodMaker>
-                    {Food.Maker}
+                    {OrderState.FoodMaker}
                 </OrderFoodMaker>
                 <OrderStatus>
-                    {Food.status}
+                    {OrderState.status}
                 </OrderStatus>
             </DetailCardWrapper>
         </Fragment>

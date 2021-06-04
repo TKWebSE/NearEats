@@ -100,7 +100,7 @@ function App() {
         //Order詳細画面
         <Route
           exact
-          path="/foods/:orderId"
+          path="/orders/:orderId"
           render={({match}) => 
           <OrderDetail
             match={match}
