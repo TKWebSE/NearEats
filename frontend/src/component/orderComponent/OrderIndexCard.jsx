@@ -1,6 +1,7 @@
-import React ,{ Fragment } from 'react';
+import React ,{ Fragment,useContext } from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {OrderState,OrderDispatch} from "../../context/Context";
 
 import foodImage from "../../images/food-image.jpg";
 
@@ -30,22 +31,33 @@ const FoodPrice = styled.div`
 
 
 //foodを表示するカードコンポーネント
-export const OrderIndexCard = ({order}) => {
+export const OrderIndexCard = () => {
+    const orderState = useContext(OrderState);
+    console.log(orderState)
     return(
     <Fragment>
-        {/* <FoodCardWrapper>
-        <Link to={`foods/${food.id}`} style={{ textDecoration: 'none' }}>
-            <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
-            <TextWrapper>
-                <FoodName>
-                    {food.name}
-                </FoodName>
-                <FoodPrice>
-                    ￥{food.price}
-                </FoodPrice>
-            </TextWrapper>
-        </Link>
-        </FoodCardWrapper> */}
+        {
+            /* <FoodCardWrapper>
+            <Link to={`orders/${orderState.order.id}`} style={{ textDecoration: 'none' }}>
+                <MainfoodImage src={orderImage} alt="orderImage"></MainfoodImage>
+                <TextWrapper>
+                    <FoodName>
+                        {food.name}
+                    </FoodName>
+                    <FoodPrice>
+                        ￥{food.price}
+                    </FoodPrice>
+                </TextWrapper>
+            </Link>
+            </FoodCardWrapper> */
+            // console.log(orderState)
+            // <Fragment>
+            // <h1>"neko"</h1>
+            <div>
+            {orderState.id}
+            </div>
+            // </Fragment>
+        }
     </Fragment>
     )
 }

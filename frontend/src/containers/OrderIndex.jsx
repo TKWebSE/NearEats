@@ -49,11 +49,10 @@ export const OrderIndex =() => {
                 // <OrderDispatch.Provide value={dispatch}>
                     state.orderList.map((order,index) => 
                     <Link to={`/orders/${order.id}`}  key={index} style={{ textDecoration: 'none' }}>
-                    
-                        {/* <OrderState.Provide value={order}> */}
-                            order.id
+                        <OrderState.Provider value={order}>
+                            {/* order.food_id */}
                             <OrderIndexCard></OrderIndexCard>
-                        {/* </OrderState.Provide> */}
+                        </OrderState.Provider>
                     
                     </Link>
                     )

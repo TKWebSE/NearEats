@@ -20,7 +20,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SwipeableTemporaryDrawer() {
+// export function handleCloseDrawer() {
+//   toggleDrawer(anchor, false)
+// }
+
+// export function handleOpenDrawer() {
+//   toggleDrawer(anchor, true)
+// }
+
+export function SwipeableTemporaryDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -28,7 +36,7 @@ export default function SwipeableTemporaryDrawer() {
     bottom: false,
     right: false,
   });
-
+  //DrawerのON,OFFを制御する
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -36,13 +44,11 @@ export default function SwipeableTemporaryDrawer() {
 
     setState({ ...state, [anchor]: open });
   };
-
+  //Drawerで表示するリスト
   const list = (anchor) => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
+
+      // role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
