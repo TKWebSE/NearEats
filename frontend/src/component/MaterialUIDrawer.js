@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 //   toggleDrawer(anchor, true)
 // }
 
-export function SwipeableTemporaryDrawer() {
+export function SwipeableTemporaryDrawer(anchor, open) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -71,6 +71,10 @@ export function SwipeableTemporaryDrawer() {
       </List>
     </div>
   );
+
+  useEffect(()=>{
+    toggleDrawer(anchor, true);
+  })
 
   return (
     <div>

@@ -16,6 +16,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {SwipeableTemporaryDrawer,handleCloseDrawer,handleOpenDrawer} from "../component/MaterialUIDrawer";
 
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -173,6 +174,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={SwipeableTemporaryDrawer("left",true)}
           >
             <MenuIcon />
           </IconButton>
@@ -228,7 +230,7 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
+      {/* <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer> */}
       {renderMobileMenu}
       {renderMenu}
     </div>
