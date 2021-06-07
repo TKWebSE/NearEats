@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 export function SwipeableTemporaryDrawer() {
   const classes = useStyles();
-  const [state, dispacth] = useReducer(headerInitializeState,headerReducer);
+  const [state, dispacth] = useReducer(headerReducer,headerInitializeState);
 
   //DrawerのON,OFFを制御する
   const toggleDrawer = () => (event) => {
@@ -31,7 +31,7 @@ export function SwipeableTemporaryDrawer() {
       return;
     }
 
-    dispacth(headerActionTypes.OPENDRAWER);
+    // dispacth({type:headerActionTypes.OPENDRAWER});
   };
 
   const list = () => (
@@ -59,16 +59,17 @@ export function SwipeableTemporaryDrawer() {
       </List>
     </div>
   );
-
+  console.log(state)
   return (
     <Fragment>
-          <Button onClick={toggleDrawer(true)}>buttomDEATH</Button>
+          <Button onClick={() => dispacth({type:headerActionTypes.OPENDRAWER})}>buttomDEATH</Button>
           <SwipeableDrawer
-            open={state}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
+            open={state.isOpenDrawer}
+            // open={true}
+            onClose={() => dispacth({type:headerActionTypes.CLOSEDRAWER})}
+            onOpen={() => dispacth({type:headerActionTypes.OPENDRAWER})}
           >
-            {list}
+            {list()}
           </SwipeableDrawer>
     </Fragment>
   );

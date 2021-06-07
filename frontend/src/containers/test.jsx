@@ -1,20 +1,16 @@
-import React, {Fragment, useEffect, useReducer}  from 'react' ;
-import {fetchUserApi} from '../apis/userApis';
+import React, { useRef,useState,useEffect } from "react";
 
-export const Restaurants = () => {
-    // const {state,dispatch} useReducer(state,Initialize)
-    const restaurantsList = []
-    useEffect(() => {
-        fetchUserApi()
-        .then((data) =>
-            restaurantsList = data
-        )
-        .catch((e) => console(e))
-    },[])
-    return (
-        <Fragment>
-            レストラン一覧
-            #{restaurantsList}
-        </Fragment>
-    )
+export const Hoge= () =>{
+  const [count,setCount] = useState(0);
+
+  const handleHoge= () =>  {
+      setCount(count+1)
+  }
+
+  return(
+    <div>
+        <div>{count}回押された</div>
+        <button onClick={() => handleHoge()}>HOGEButton</button>
+    </div>
+  )
 }

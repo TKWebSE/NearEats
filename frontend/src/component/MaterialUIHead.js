@@ -86,7 +86,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [state, dispacth] = useReducer(headerInitializeState,headerReducer);
+  const [state, dispacth] = useReducer(headerReducer,headerInitializeState);
   
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -165,7 +165,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
+  
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -175,7 +175,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={SwipeableTemporaryDrawer(true)}
+            onClick={() => dispacth({type:headerActionTypes.OPENDRAWER})}
           >
             <MenuIcon />
           </IconButton>
@@ -231,7 +231,7 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      {/* <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer> */}
+      <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
       {renderMobileMenu}
       {renderMenu}
     </div>

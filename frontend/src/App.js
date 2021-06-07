@@ -21,6 +21,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { headerTheme } from "./style_constants";
 
+import {Hoge} from "./containers/test";
+
 function App() {
   return (
     <Fragment>
@@ -33,7 +35,7 @@ function App() {
         <Route 
           exact
           path="/users/create">
-          <UserCreate />
+          <Hoge />
         </Route>
         //user詳細画面
         <Route 
