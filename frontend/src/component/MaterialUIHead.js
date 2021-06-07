@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useReducer} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,8 +14,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {SwipeableTemporaryDrawer,handleCloseDrawer,handleOpenDrawer} from "../component/MaterialUIDrawer";
-
+import {SwipeableTemporaryDrawer} from "../component/MaterialUIDrawer";
+import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -86,6 +86,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [state, dispacth] = useReducer(headerInitializeState,headerReducer);
   
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -174,7 +175,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={SwipeableTemporaryDrawer("left",true)}
+            onClick={SwipeableTemporaryDrawer(true)}
           >
             <MenuIcon />
           </IconButton>

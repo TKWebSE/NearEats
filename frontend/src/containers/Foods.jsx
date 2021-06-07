@@ -9,7 +9,7 @@ import {
     initializeState,
     foodsActionTypes,
     foodsIndexReducer,
-} from '../reducer/foods';
+} from '../reducer/foodsIndexReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useReducer} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -10,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
 
 const useStyles = makeStyles({
   list: {
@@ -20,37 +21,24 @@ const useStyles = makeStyles({
   },
 });
 
-// export function handleCloseDrawer() {
-//   toggleDrawer(anchor, false)
-// }
-
-// export function handleOpenDrawer() {
-//   toggleDrawer(anchor, true)
-// }
-
-export function SwipeableTemporaryDrawer(anchor, open) {
+export function SwipeableTemporaryDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [state, dispacth] = useReducer(headerInitializeState,headerReducer);
+
   //DrawerのON,OFFを制御する
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = () => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    dispacth(headerActionTypes.OPENDRAWER);
   };
-  //Drawerで表示するリスト
-  const list = (anchor) => (
-    <div
 
-      // role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+  const list = () => (
+    <div
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -72,25 +60,16 @@ export function SwipeableTemporaryDrawer(anchor, open) {
     </div>
   );
 
-  useEffect(()=>{
-    toggleDrawer(anchor, true);
-  })
-
   return (
-    <div>
-      {['left', 'right', 'top', 'bottom'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+    <Fragment>
+          <Button onClick={toggleDrawer(true)}>buttomDEATH</Button>
           <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
+            open={state}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
           >
-            {list(anchor)}
+            {list}
           </SwipeableDrawer>
-        </React.Fragment>
-      ))}                              
-    </div>
+    </Fragment>
   );
 }
