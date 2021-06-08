@@ -28,7 +28,7 @@ function App() {
     <Fragment>
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
-    </ThemeProvider>
+    </ThemeProvider> 
     <Router>
       <Switch>
       //user作成画面

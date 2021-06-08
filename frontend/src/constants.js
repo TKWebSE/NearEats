@@ -7,6 +7,15 @@ export const HTTP_STATUS_CODE = {
     NOT_ACCEPTABLE: 406,
 }
 
+export const DRAWER_TEXT = {
+    FOOD_CREATE_TEXT:"料理の作成",
+    MY_FOOD_TEXT:"MyFood",
+    TASK_TEXT:"MyTask",
+    PROFILE_TEXT:"プロフィール",
+    ORDER_TEXT:"注文履歴",
+    SETTING_TEXT:"設定",
+}
+
 export const FOOD_HEADER_TITLE = {
     FOOD_INDEX:"近くの料理を検索",
     FOOD_CREATE:"料理の作成",
