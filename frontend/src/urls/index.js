@@ -9,6 +9,7 @@ export const foodUpdate = (foodId) => `${DEFAULT_URL}/foods/${foodId}`
 export const foodDelete = (foodId) => `${DEFAULT_URL}/${foodId}/foods`;
 export const foodUpdateHistory = (foodId) => `/foods/${foodId}/edit`;
 export const foodShowHistory = (foodId) => `/foods/${foodId}`;
+export const foodCreateHistory = () => `/foods`;
 
 //userのURL
 export const userShow = (userId) => `${DEFAULT_URL}/users/${userId}`;

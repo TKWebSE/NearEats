@@ -26,16 +26,17 @@ import {Hoge} from "./containers/test";
 function App() {
   return (
     <Fragment>
+
+    <Router>
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
-    <Router>
       <Switch>
       //user作成画面
         <Route 
           exact
           path="/users/create">
-          <Hoge />
+          <UserCreate/>
         </Route>
         //user詳細画面
         <Route 
