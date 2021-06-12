@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_105214) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "password", null: false
+    t.string "password_digest", null: false
     t.text "address"
     t.integer "point", default: 0, null: false
     t.integer "time_required", null: false
