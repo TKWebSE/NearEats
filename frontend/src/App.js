@@ -26,7 +26,6 @@ import {Hoge} from "./containers/test";
 function App() {
   return (
     <Fragment>
-
     <Router>
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
