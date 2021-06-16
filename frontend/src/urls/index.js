@@ -29,3 +29,8 @@ export const orderUpdate = () => `${DEFAULT_URL}/orders/update`;
 export const orderDelete = () =>  `${DEFAULT_URL}/orders/delete`;
 export const orderDetailHistory = (orderId) => `/orders/${orderId}`;
 export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
+
+//session関連のURL
+export const sessionLogin = `${DEFAULT_URL}/session/login`;
+export const sessionLogout = `${DEFAULT_URL}/session/logout`;
+export const sessionIsLogin = `${DEFAULT_URL}/session/islogin`;

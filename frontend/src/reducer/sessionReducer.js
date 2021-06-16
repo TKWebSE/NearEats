@@ -1,12 +1,11 @@
-import { CardActions } from "@material-ui/core";
 import React from "react";
 
-export const initializeState = () => {
+export const initializeState =  {
     sessionUser:[],
-    loggedIn:false,
+    isLogin:false,
 }
 
-export const sessionActionTypes = () => {
+export const sessionActionTypes = {
     LOGINUSER:"LOGIJNUSER",
     LOGOUTUSER:"LOGOUTUSER",
     ISLOGIN:"ISLOGIN",
@@ -14,15 +13,21 @@ export const sessionActionTypes = () => {
 
 export const sessionReducer = (state,action) => {
     switch (action.type) {
-        case sessionActionTypes.C:
+        case sessionActionTypes.LOGINUSER:
             return {
                 ...state,
-                fetchstate:REQUEST_STATE.LOADING,
+                sessionUser:action.payload.user,
+                isLogin:true,
             }
         case  sessionActionTypes.LOGOUTUSER:
             return {
-                fetchstate:REQUEST_STATE.OK,
-                order: action.payload.order,
+                sessionUser:user,
+                isLogin:false,
+            }
+        case sessionActionTypes.ISLOGIN:
+            return {
+                sessionUser:action.payload.user,
+                isLogin:action.payload.islogin,
             }
         default:
             break;

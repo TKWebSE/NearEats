@@ -1,4 +1,4 @@
-import React,{ Fragment } from "react";
+import React,{ Fragment, useEffect } from "react";
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -23,7 +23,26 @@ import { headerTheme } from "./style_constants";
 
 import {Hoge} from "./containers/test";
 
+import {sessionApis} from "./apis/sessionApis";
+import {initializeState,sessionReducer} from "./reducer/sessionReducer";
+import { sessionIsLogin } from "./urls";
+
 function App() {
+  const [state,dispatch] = useReducer(sessionReducer,initializeState);
+
+  useEffect(() => {
+    sessionisLogin()
+    .then((data) => {
+      dispatch({
+        type:sessionIsLogin,
+        payload: {
+          user:data.user
+        },
+      })
+    .catch((e) => console.log(e))  
+    })
+  })
+
   return (
     <Fragment>
     <Router>

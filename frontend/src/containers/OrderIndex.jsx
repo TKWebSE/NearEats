@@ -20,7 +20,6 @@ const ContentsList = styled.div`
 export const OrderIndex =() => { 
     const [state,dispatch] = useReducer(orderIndexReducer,initializeState);
     const history = useHistory();
-    console.log(state)
     useEffect(() => {
         dispatch({type:oredersActionTypes.FETCHING})
         orederIndexApis()
