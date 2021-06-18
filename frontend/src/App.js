@@ -28,20 +28,20 @@ import {initializeState,sessionReducer} from "./reducer/sessionReducer";
 import { sessionIsLogin } from "./urls";
 
 function App() {
-  const [state,dispatch] = useReducer(sessionReducer,initializeState);
+  // const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
-  useEffect(() => {
-    sessionisLogin()
-    .then((data) => {
-      dispatch({
-        type:sessionIsLogin,
-        payload: {
-          user:data.user
-        },
-      })
-    .catch((e) => console.log(e))  
-    })
-  })
+  // useEffect(() => {
+  //   sessionisLogin()
+  //   .then((data) => {
+  //     dispatch({
+  //       type:sessionIsLogin,
+  //       payload: {
+  //         user:data.user
+  //       },
+  //     })
+  //   .catch((e) => console.log(e))  
+  //   })
+  // })
 
   return (
     <Fragment>

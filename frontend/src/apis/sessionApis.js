@@ -12,13 +12,13 @@ export const sessionLoginApis = () => {
 }
 
 //ログアウトする
-export const sessionLogout = () => {
-    return axios.post(sessionLogout())
-    .then(res => {
-        return res.data
-    })
-    .catch((e) => console.log(e))
-}
+// export const sessionLogout = () => {
+//     return axios.post(sessionLogout())
+//     .then(res => {
+//         return res.data
+//     })
+//     .catch((e) => console.log(e))
+// }
 
 //ログイン状態をチェックする
 export const sessionApis = () => {

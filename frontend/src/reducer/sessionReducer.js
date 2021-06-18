@@ -21,7 +21,7 @@ export const sessionReducer = (state,action) => {
             }
         case  sessionActionTypes.LOGOUTUSER:
             return {
-                sessionUser:user,
+                sessionUser:null,
                 isLogin:false,
             }
         case sessionActionTypes.ISLOGIN:

@@ -10,8 +10,8 @@ export const UserCreateCard = () => {
     return(
         <Fragment>
             <UserCreateWrapper>
-                <MaterialUIUserNameLine></MaterialUIUserNameLine>
-                <MaterialUuserAEmailLine>   </MaterialUuserAEmailLine>
+                {/* <MaterialUIUserNameLine></MaterialUIUserNameLine>
+                <MaterialUuserAEmailLine>   </MaterialUuserAEmailLine> */}
                 
             </UserCreateWrapper>
         </Fragment>
