@@ -9,10 +9,9 @@
     user = User.new(
       name: "testユーザー_#{n}",
       email: "email#{n}@yahoo.co.jp",
-      password: "1234",
+      password: "123456",
       address: "#{n}県#{n}町の1-2-3",
       point: 100,
-      time_required: 10,
     )
   
     12.times do |m|

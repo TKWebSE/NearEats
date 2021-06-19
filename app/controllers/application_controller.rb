@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
         include DeviseTokenAuth::Concerns::SetUserByToken
 
-    skip_before_action :verify_authenticity_token
+    skip_before_action :method_name, raise: false    
+    skip_before_action :verify_authenticity_token, raise: false    
 
     helper_method :login!, :current_user
 
