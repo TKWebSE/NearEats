@@ -14,7 +14,7 @@ module Api
                 logger.debug(params)
                 logger.debug(params[:userId])
                 logger.debug("コメント")
-                user = User.find_by(id: params[:userId])
+                user = User.find_by(id: 1)
                 logger.debug(user)
                 render json: {
                     user: user
