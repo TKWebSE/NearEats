@@ -14,11 +14,11 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
             end
               private
               def sign_up_params
-                params.permit(:name, :registration,:email, :img, :password, :password_confirmation)
+                params.require(:registration).permit(:name,:email, :img, :password, :password_confirmation,:address)
               end
       
               def account_update_params
-                params.permit(:name, :nickname, :email, :img)
+                params.require(:registration).permit(:name, :registration, :email, :img)
               end
             # end
         #   end
