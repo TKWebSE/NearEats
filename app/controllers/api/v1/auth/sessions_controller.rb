@@ -1,4 +1,5 @@
-class SessionsController < ApplicationController
+class SessionsController < ::DeviseTokenAuth::SessionsController
+  wrap_parameters format: []
   def login
     @user = User.find_by(email: session_params[:email])
 

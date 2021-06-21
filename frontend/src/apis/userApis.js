@@ -14,6 +14,13 @@ export const fetchUserApi = (userId) => {
     })
     .catch(e => console.log(e))
 }
+// userクリエイト時の暫定sjson
+// {
+//     "name":"nekonekonekko4",
+//     "address":"pekopekopeko",
+//     "email":"nekonekonekko4@yahoo.co.jp",
+//     "password":"123456"
+//   }
 
 export const userCreateApi = (user) => {
     return axios.post(userCreate(user.id),{
