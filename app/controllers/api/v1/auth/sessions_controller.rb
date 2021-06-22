@@ -1,5 +1,4 @@
-class SessionsController < ::DeviseTokenAuth::SessionsController
-  wrap_parameters format: []
+class SessionsController < ApplicationController
   def login
     @user = User.find_by(email: session_params[:email])
 
@@ -28,4 +27,8 @@ class SessionsController < ::DeviseTokenAuth::SessionsController
     def session_params
       params.require(:user).permit(:name, :email, :password)
     end 
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.require(:session).permit(:sign_in, keys: [:session])
+  end
 end
