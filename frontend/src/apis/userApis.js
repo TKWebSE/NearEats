@@ -7,7 +7,7 @@ export const fetchUserApi = (userId) => {
     return axios.get(userShow(userId),{
         params:{
             userId:userId
-        }
+        }   
     })
     .then((res) => {
         return res.data
