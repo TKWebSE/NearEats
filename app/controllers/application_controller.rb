@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     skip_before_action :verify_authenticity_token, raise: false    
     before_action :configure_permitted_parameters, if: :devise_controller?
 
-    helper_method :login!, :current_user
+    helper_method :current_user, :user_signed_in?
 
     def login!
         session[:user_id] = @user.id

@@ -1,11 +1,15 @@
 import axios from "axios";
 import React from "react";
-import {sessionLogin,sessionLogout,sessionIsLogin} from '../urls/index'
+import {signIn,signOut,isLogin} from '../urls/index'
+import Cookies from "js-cookie";
 
 //ログインする
-export const sessionLoginApis = () => {
-    return axios.post(sessionLogin())
+export const signInApi = () => {
+    return axios.post(signIn())
     .then(res => {
+        Cookies.set("access_token", res.headers["access-token"])
+        Cookies.set("client", res.headers["client"])
+        Cookies.set("uid", res.headers["uid"])
         return res.data
     })
     .catch((e) => console.log(e))
@@ -21,7 +25,7 @@ export const sessionLoginApis = () => {
 // }
 
 //ログイン状態をチェックする
-export const sessionApis = () => {
+export const signOutApi = () => {
     return axios.get(sessionIsLogin())
     .then(res => {
         return res.data

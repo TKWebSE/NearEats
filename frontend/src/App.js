@@ -21,7 +21,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { headerTheme } from "./style_constants";
 
-import {Hoge} from "./containers/test";
+import {SignIn} from "./containers/SignIn";
 
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionReducer} from "./reducer/sessionReducer";
@@ -50,7 +50,13 @@ function App() {
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
       <Switch>
-      //user作成画面
+        //signIn作成画面
+        <Route 
+          exact
+          path="/users/signin">
+          <sifnIn/>
+        </Route>
+        //user作成画面
         <Route 
           exact
           path="/users/create">

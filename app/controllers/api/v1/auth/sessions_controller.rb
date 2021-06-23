@@ -7,12 +7,5 @@ class Api::V1::Auth::SessionsController < ApplicationController
       render json: { is_login: false, message: "ユーザーが存在しません" }
     end
   end
-  private
-      def session_params
-        params.require(:user).permit(:name, :email, :password)
-      end 
 
-      def configure_permitted_parameters
-        devise_parameter_sanitizer.require(:session).permit(:sign_in, keys: [:session])
-  end
 end

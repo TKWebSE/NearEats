@@ -31,6 +31,6 @@ export const orderDetailHistory = (orderId) => `/orders/${orderId}`;
 export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
 
 //session関連のURL
-export const sessionLogin = `${DEFAULT_URL}/session/login`;
-export const sessionLogout = `${DEFAULT_URL}/session/logout`;
-export const sessionIsLogin = `${DEFAULT_URL}/session/islogin`;
+export const signIn = `${DEFAULT_URL}/session/login`;
+export const signOut = `${DEFAULT_URL}/session/logout`;
+export const isLogin = `${DEFAULT_URL}/session/islogin`;

@@ -1,25 +1,25 @@
 import React from "react";
 
 export const initializeState =  {
-    sessionUser:[],
+    currentUser:[],
     isLogin:false,
 }
 
 export const sessionActionTypes = {
-    LOGINUSER:"LOGIJNUSER",
-    LOGOUTUSER:"LOGOUTUSER",
+    SIGNIN:"SIGNIN",
+    SIGNOUT:"SIGNOUT",
     ISLOGIN:"ISLOGIN",
 }
 
 export const sessionReducer = (state,action) => {
     switch (action.type) {
-        case sessionActionTypes.LOGINUSER:
+        case sessionActionTypes.SIGNIN:
             return {
                 ...state,
-                sessionUser:action.payload.user,
+                currentUser:action.payload.currentUser,
                 isLogin:true,
             }
-        case  sessionActionTypes.LOGOUTUSER:
+        case  sessionActionTypes.SIGNOUT:
             return {
                 sessionUser:null,
                 isLogin:false,

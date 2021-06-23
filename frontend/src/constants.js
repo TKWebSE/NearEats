@@ -16,6 +16,10 @@ export const DRAWER_TEXT = {
     SETTING_TEXT:"設定",
 }
 
+export const SESSION_HEADER_TITLE = {
+    SIGN_IN:"ログイン",    
+}
+
 export const FOOD_HEADER_TITLE = {
     FOOD_INDEX:"近くの料理を検索",
     FOOD_CREATE:"料理の作成",

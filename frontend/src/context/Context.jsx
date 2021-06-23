@@ -1,5 +1,9 @@
 import React, {createContext} from "react";
 
+//session用のcontext
+export const SessionState = createContext("");
+export const SessionDispatch = createContext("");
+
 //food用context
 export const FoodState = createContext("");
 export const FoodDispatch = createContext("");
