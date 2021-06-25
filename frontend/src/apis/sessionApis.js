@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import {signIn,signOut,isLogin} from '../urls/index'
+import {signIn,signOut,sessionIsLogin} from '../urls/index'
 import Cookies from "js-cookie";
 
 //ログインする
@@ -16,16 +16,23 @@ export const signInApi = () => {
 }
 
 //ログアウトする
-// export const sessionLogout = () => {
-//     return axios.post(sessionLogout())
-//     .then(res => {
-//         return res.data
-//     })
-//     .catch((e) => console.log(e))
-// }
+export const signOutApi = () => {
+    const uid = Cookies.get("uid");
+    const accessToken = Cookies.get("access_token");
+    const client = Cookies.get("client");
+    
+    return axios.delete(signOut(),{
+        params:{
+            uid:uid,
+            accessToken:accessToken,
+            client:client
+        }
+    })
+    .catch((e) => console.log(e))
+}
 
 //ログイン状態をチェックする
-export const signOutApi = () => {
+export const isLoginApi = () => {
     return axios.get(sessionIsLogin())
     .then(res => {
         return res.data
