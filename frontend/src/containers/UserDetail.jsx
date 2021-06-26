@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {fetchUserApi} from "../apis/userApis";
 import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
-import ContainedButton from "../component/MaterialUICommonBotton";
+import ContainedButton from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
 import {userEditHistory} from "../urls/index";
 import {REQUEST_STATE, USER_HEADER_TITLE} from "../constants";

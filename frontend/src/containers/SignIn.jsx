@@ -7,7 +7,7 @@ import {SESSION_HEADER_TITLE} from "../constants";
 import {signInCard} from "../component/sessionComponent/sessionCard";
 import {SessionDispatch,SessionState} from "../context/Context";
 import {foodsIndex} from "../urls/index";
-import {MaterialUILoginButoon} from "../component/sessionComponent/MaterialUISignInButoon";
+import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
 
 const SessionHeader = styled.div`
 `;
@@ -22,7 +22,7 @@ export const SignIn= () =>{
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
   const history = useHistory();
 
-  const submitSignIn= () =>  {
+  function submitSignIn () {
     signInApi()
     .then((data) => {
       dispatch({
@@ -42,13 +42,13 @@ export const SignIn= () =>{
           {SESSION_HEADER_TITLE.SIGN_IN}
         </SessionHeader>
         <SigninWrapper>
-        <SessionDispatch.Provide value={dispatch}>
+        <SessionDispatch.Provider value={dispatch}>
           <SessionState.Provider value={state}>
             <signInCard></signInCard>
           </SessionState.Provider>
-        </SessionDispatch.Provide>
+        </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
-          <MaterialUILoginButoon onClick=|() => dispatcg({type:})}</SubmitbuttomWrapper>omClick={}=></MaterialUILoginButoon>
+          <MaterialUILoginButton onClick={submitSignIn()} />
         </SubmitbuttomWrapper>
         </SigninWrapper>
     </Fragment>

@@ -2,7 +2,7 @@ import React,{Fragment,useEffect, useReducer,Link} from "react";
 import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from "@material-ui/lab/Skeleton"
-import CommonButton from "../component/MaterialUICommonBotton";
+import CommonButton from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
 import { DeleteButton } from "../component/MaterialUIButtons";
 import {REQUEST_STATE,FOOD_HEADER_TITLE} from "../constants";

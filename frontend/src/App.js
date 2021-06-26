@@ -50,11 +50,11 @@ function App() {
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
       <Switch>
-        //signIn作成画面
+        //signIn画面
         <Route 
           exact
           path="/users/signin">
-          <sifnIn/>
+          <SignIn/>
         </Route>
         //user作成画面
         <Route 

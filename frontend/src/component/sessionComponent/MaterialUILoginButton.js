@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUILoginButoon({onClick})  {
+export function MaterialUILoginButton({onClick})   {
     const classes = useStyles();
   
     return (
