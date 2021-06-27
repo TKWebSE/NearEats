@@ -1,6 +1,6 @@
 import React, { Fragment,useRef,useReducer,useEffect } from "react";
 import styled from "styled-components";
-import {initializeState,sessionActionTypes,sessionReducer} from "../reducer/sessionReducer";
+import {initializeState,signInActionTypes,signInReducer} from "../reducer/signInReducer";
 import { useHistory } from "react-router";
 import {signInApi} from "../apis/sessionApis";
 import {SESSION_HEADER_TITLE} from "../constants";
@@ -19,14 +19,14 @@ const SubmitbuttomWrapper = styled.div`
 `;
 
 export const SignIn= () =>{
-  const [state,dispatch] = useReducer(sessionReducer,initializeState);
+  const [state,dispatch] = useReducer(signInReducer,initializeState);
   const history = useHistory();
 
   function submitSignIn () {
-    signInApi()
+    signInApi(state.user)
     .then((data) => {
       dispatch({
-          type:sessionActionTypes.SIGNIN,
+          type:signInActionTypes.SIGNIN,
           payload: {
             currentUser: data.currentUser
           },

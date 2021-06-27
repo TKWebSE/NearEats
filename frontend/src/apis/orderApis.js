@@ -5,7 +5,6 @@ import { orderIndex,orderShow,orderUpdate,orderDelete} from '../urls/index'
 export const orederIndexApis = () => {
     return axios.get(orderIndex())
     .then(res => {
-        console.log(res)
         return res.data
     })
     .catch((e) => console.error(e))

@@ -4,8 +4,15 @@ import {signIn,signOut,sessionIsLogin} from '../urls/index'
 import Cookies from "js-cookie";
 
 //ログインする
-export const signInApi = () => {
-    return axios.post(signIn())
+export const signInApi = (user) => {
+    console.log(signIn)
+    return axios.post(signIn,{
+        params:{
+            email:user.email,
+            password:user.password,
+            passwprdComfirm:user.passwprdComfirm
+        }
+    })
     .then(res => {
         Cookies.set("access_token", res.headers["access-token"])
         Cookies.set("client", res.headers["client"])
