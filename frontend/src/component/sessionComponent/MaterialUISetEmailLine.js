@@ -1,7 +1,7 @@
 import React,{Fragment,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {sessionActionTypes} from "../../reducer/sessionReducer";
+import {signInActionTypes} from "../../reducer/signInReducer";
 import {SessionState,SessionDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 //signInで使用するEmailのテキストフィールドコンポーネント
 export function MaterialUISetEmailLine() {
   const classes = useStyles();
-  const SessionState = useContext(SessionState)
-  const SessionDispatch = useContext(SessionDispatch)
+  const SessionEmailState = useContext(SessionState)
+  const SessionEmailDispatch = useContext(SessionDispatch)
 
   const handleChange = (event) => {
-    SessionDispatch({
-      type:sessionActionTypes.SETTINGEMAIL,
+    SessionEmailDispatch({
+      type:signInActionTypes.SETTINGEMAIL,
       payload:{
         email: event.target.value
       }
@@ -31,7 +31,7 @@ export function MaterialUISetEmailLine() {
   return (
     <Fragment>
         {
-        SessionState.user === undefined || SessionState.user === null?
+        SessionEmailState.user === undefined || SessionEmailState.user === null?
         <Fragment>
             LOADING
         </Fragment>
@@ -43,7 +43,7 @@ export function MaterialUISetEmailLine() {
             label="Email" 
             variant="outlined" 
             fullWidth
-            value={SessionState.user.email}
+            value={SessionEmailState.user.email}
             onChange={handleChange}
         />
         </form>

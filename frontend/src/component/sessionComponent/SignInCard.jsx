@@ -2,8 +2,7 @@ import React ,{Fragment} from "react";
 import styled from "styled-components";
 import { MaterialUIUserPasswordLine } from "../userComponent/MaterialUIUserPasswordLine";
 import {MaterialUISetEmailLine} from "./MaterialUISetEmailLine";
-import {MaterialUISetPasswordLine} from "../sessionComponent/MaterialUISetPasswordLine";
-import {MaterialUISetPasswordComfirmLine} from "../sessionComponent/MaterialUISetPasswordComfirmLine";
+import {MaterialUISetPasswordLine} from "./MaterialUISetPasswordLine";
 
 const EmailWrapper = styled.div`
 `;
@@ -11,10 +10,7 @@ const EmailWrapper = styled.div`
 const PasswordWrapper = styled.div`
 `;
 
-const PasswordConfirmWrapper = styled.div`
-`;
-
-export const signInCard = () => {
+export const SignInCard = () => {
 
     return (
         <Fragment> 
@@ -24,9 +20,6 @@ export const signInCard = () => {
             <PasswordWrapper>
                 <MaterialUISetPasswordLine></MaterialUISetPasswordLine>
             </PasswordWrapper>
-            <PasswordConfirmWrapper>
-                <MaterialUISetPasswordComfirmLine></MaterialUISetPasswordComfirmLine>
-            </PasswordConfirmWrapper>
         </Fragment>
     )
 }

@@ -1,11 +1,12 @@
 import React from "react";
 
 export const initializeState =  {
-    currentUser:[],
+    user:[],
     isLogin:false,
 }
 
 export const signInActionTypes = {
+    SIGNIN:"SIGNIN",
     SETTINGEMAIL:"SETTINGEMAIL",
     SETTINGPASSWORD:"SETTINGPASSWORD",
     SETTINGPASSWORDCONFIRM:"SETTINGPASSWORDCONFIRM",
@@ -13,20 +14,31 @@ export const signInActionTypes = {
 
 export const signInReducer = (state,action) => {
     switch (action.type) {
-        case signInActionTypes.SETTINGEMAIL:
+        case signInActionTypes.SIGNIN:
             return {
                 ...state,
-                currentUser:action.payload.currentUser,
+                user:action.payload.user,
                 isLogin:true,
+            }
+        case signInActionTypes.SETTINGEMAIL:
+            return {
+                user:{
+                    id: state.user.id,
+                    email:action.payload.email,
+                    password:state.user.password,
+                }
             }
         case  signInActionTypes.SETTINGPASSWORD:
             return {
-                sessionUser:null,
-                isLogin:false,
+                user:{
+                    id: state.user.id,
+                    email:state.user.email,
+                    password:action.payload.password,
+                }
             }
         case signInActionTypes.SETTINGPASSWORDCONFIRM:
             return {
-                sessionUser:action.payload.user,
+                user:action.payload.user,
                 isLogin:action.payload.islogin,
             }
         default:

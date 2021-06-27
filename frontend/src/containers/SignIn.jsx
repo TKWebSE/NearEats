@@ -4,12 +4,12 @@ import {initializeState,signInActionTypes,signInReducer} from "../reducer/signIn
 import { useHistory } from "react-router";
 import {signInApi} from "../apis/sessionApis";
 import {SESSION_HEADER_TITLE} from "../constants";
-import {signInCard} from "../component/sessionComponent/sessionCard";
+import {SignInCard} from "../component/sessionComponent/SignInCard";
 import {SessionDispatch,SessionState} from "../context/Context";
 import {foodsIndex} from "../urls/index";
 import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
 
-const SessionHeader = styled.div`
+const SignImnHeader = styled.h1`
 `;
 
 const SigninWrapper = styled.div`
@@ -21,6 +21,7 @@ const SubmitbuttomWrapper = styled.div`
 export const SignIn= () =>{
   const [state,dispatch] = useReducer(signInReducer,initializeState);
   const history = useHistory();
+
 
   function submitSignIn () {
     signInApi(state.user)
@@ -38,17 +39,17 @@ export const SignIn= () =>{
 
   return(
     <Fragment>
-        <SessionHeader>
+        <SignImnHeader>
           {SESSION_HEADER_TITLE.SIGN_IN}
-        </SessionHeader>
+        </SignImnHeader>
         <SigninWrapper>
         <SessionDispatch.Provider value={dispatch}>
           <SessionState.Provider value={state}>
-            <signInCard></signInCard>
+            <SignInCard></SignInCard>
           </SessionState.Provider>
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
-          <MaterialUILoginButton onClick={submitSignIn()} />
+          <MaterialUILoginButton onClick={() => submitSignIn()} />
         </SubmitbuttomWrapper>
         </SigninWrapper>
     </Fragment>

@@ -1,7 +1,7 @@
 import React,{Fragment,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {sessionActionTypes} from "../../reducer/sessionReducer";
+import {signInActionTypes} from "../../reducer/signInReducer";
 import {SessionState,SessionDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 //signInで使用するpasswordのテキストフィールドコンポーネント
 export function MaterialUISetPasswordLine() {
   const classes = useStyles();
-  const SessionState = useContext(SessionState)
-  const SessionDispatch = useContext(SessionDispatch)
+  const SessionPasswordState = useContext(SessionState)
+  const SessionPasswordDispatch = useContext(SessionDispatch)
 
   const handleChange = (event) => {
-    SessionDispatch({
-      type:sessionActionTypes.SETTINGEMAIL,
+    SessionPasswordDispatch({
+      type:signInActionTypes.SETTINGEMAIL,
       payload:{
         password: event.target.value
       }
@@ -31,7 +31,7 @@ export function MaterialUISetPasswordLine() {
   return (
     <Fragment>
         {
-        SessionState.user === undefined || SessionState.user === null?
+        SessionPasswordState.user === undefined || SessionPasswordState.user === null?
         <Fragment>
             LOADING
         </Fragment>
@@ -40,10 +40,10 @@ export function MaterialUISetPasswordLine() {
         <form className={classes.root} noValidate autoComplete="off">
         <TextField 
             id="outlined-basic" 
-            label="Email" 
+            label="Password" 
             variant="outlined" 
             fullWidth
-            value={SessionState.user.password}
+            value={SessionPasswordState.user.password}
             onChange={handleChange}
         />
         </form>

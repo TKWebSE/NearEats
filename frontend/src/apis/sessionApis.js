@@ -10,7 +10,6 @@ export const signInApi = (user) => {
         params:{
             email:user.email,
             password:user.password,
-            passwprdComfirm:user.passwprdComfirm
         }
     })
     .then(res => {
