@@ -1,7 +1,10 @@
 import React from "react";
 
 export const initializeState =  {
-    user:[],
+    user:{  
+            email:null,
+            password:null,
+        },
     isLogin:false,
 }
 

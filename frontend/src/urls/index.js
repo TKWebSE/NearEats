@@ -2,7 +2,8 @@ const BASE_URL = "http://localhost:3000";
 const API_V1 = "/api/v1" 
 const AUTH = "/auth"
 
-const DEFAULT_URL = 'http://localhost:3000/api/v1';
+const DEFAULT_URL = 'http://localhost:3000/${API_V1}';
+const API_URL = 'http://localhost:3000/${API_V1}';
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
 //foodのURL
@@ -35,6 +36,6 @@ export const orderDetailHistory = (orderId) => `/orders/${orderId}`;
 export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
 
 //session関連のURL
-export const signIn = `${DEFAULT_URL}/session/signin`;
-export const signOut = `${DEFAULT_URL}/session/signout`;
-export const sessionIsLogin = `${DEFAULT_URL}/session/islogin`;
+export const signIn = `${AUTH_URL}/session/signin`;
+export const signOut = `${AUTH_URL}/session/signout`;
+export const sessionIsLogin = `${AUTH_URL}/session/islogin`;
