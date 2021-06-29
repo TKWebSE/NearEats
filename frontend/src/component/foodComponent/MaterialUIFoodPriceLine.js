@@ -29,10 +29,6 @@ export function MaterialUIFoodPriceLine() {
       })
     };
 
-    useEffect(()=>{
-      console.log(FoodPriceState)
-    },[]);
-
     return (
       <Fragment>
       {

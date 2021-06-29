@@ -21,12 +21,13 @@ export function MaterialUISetPasswordLine() {
 
   const handleChange = (event) => {
     SessionPasswordDispatch({
-      type:signInActionTypes.SETTINGEMAIL,
+      type:signInActionTypes.SETTINGPASSWORD,
       payload:{
         password: event.target.value
       }
     })
   };
+  console.log(SessionPasswordState)
   
   return (
     <Fragment>

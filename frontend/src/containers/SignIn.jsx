@@ -8,11 +8,16 @@ import {SignInCard} from "../component/sessionComponent/SignInCard";
 import {SessionDispatch,SessionState} from "../context/Context";
 import {foodsIndex} from "../urls/index";
 import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
+import { ThemeProvider } from '@material-ui/core/styles';
+import {ButtonTheme} from "../style_constants";
 
 const SignImnHeader = styled.h1`
+  margin-top:3%;
+  margin-bottom:3%;
 `;
 
 const SigninWrapper = styled.div`
+  margin-bottom:5%;
 `;
 
 const SubmitbuttomWrapper = styled.div`
@@ -49,7 +54,9 @@ export const SignIn= () =>{
           </SessionState.Provider>
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
+        <ThemeProvider theme={ButtonTheme}>
           <MaterialUILoginButton onClick={() => submitSignIn()} />
+        </ThemeProvider>
         </SubmitbuttomWrapper>
         </SigninWrapper>
     </Fragment>
