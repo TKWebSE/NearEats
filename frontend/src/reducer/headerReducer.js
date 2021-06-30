@@ -13,7 +13,6 @@ export const headerActionTypes = {
 export const headerReducer = (state,action) => {
     switch (action.type) {
         case headerActionTypes.OPENDRAWER:
-            console.log(action)
             return {
                 isOpenDrawer:true,
                 fetchState:REQUEST_STATE.OPENDRAWER,

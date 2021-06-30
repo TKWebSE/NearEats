@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000";
 const API_V1 = "/api/v1" 
 const AUTH = "/auth"
 
-const DEFAULT_URL = 'http://localhost:3000/${API_V1}';
+const DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
 //foodのURL
@@ -11,6 +11,7 @@ export const foodShow = (foodId) => `${DEFAULT_URL}/foods/${foodId}`;
 export const foodCreate = `${DEFAULT_URL}/foods`;
 export const foodUpdate = (foodId) => `${DEFAULT_URL}/foods/${foodId}`
 export const foodDelete = (foodId) => `${DEFAULT_URL}/${foodId}/foods`;
+export const foodsIndexHistory = `/foods`
 export const foodUpdateHistory = (foodId) => `/foods/${foodId}/edit`;
 export const foodShowHistory = (foodId) => `/foods/${foodId}`;
 export const foodCreateHistory = () => `/foods`;
@@ -35,6 +36,6 @@ export const orderDetailHistory = (orderId) => `/orders/${orderId}`;
 export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
 
 //session関連のURL
-export const signIn = `${AUTH_URL}/signin`;
+export const signIn = `${AUTH_URL}/sign_in`;
 export const signOut = `${AUTH_URL}/session/signout`;
 export const sessionIsLogin = `${AUTH_URL}/session/islogin`;

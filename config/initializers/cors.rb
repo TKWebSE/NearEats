@@ -10,7 +10,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins 'http://localhost:3001'
 
     resource '*',
-      headers: :any,
+      headers: :any,uid,access-token,client
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
       credentials: true
   end

@@ -7,15 +7,18 @@ import Cookies from "js-cookie";
 export const signInApi = (user) => {
     console.log(signIn)
     return axios.post(signIn,{
-        params:{
             email:user.email,
             password:user.password,
-        }
     })
     .then(res => {
+        console.log(res)
+        console.log(res.headers)
+        Cookies.set("user_id", res.data.data["id"])
         Cookies.set("access_token", res.headers["access-token"])
         Cookies.set("client", res.headers["client"])
         Cookies.set("uid", res.headers["uid"])
+        Cookies.set('name', '桃山ミライ')
+        console.log(Cookies.get())
         return res.data
     })
     .catch((e) => console.log(e))

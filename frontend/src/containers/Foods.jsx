@@ -11,7 +11,7 @@ import {
     foodsIndexReducer,
 } from '../reducer/foodsIndexReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
-
+import Cookies from "js-cookie";
 
 
 const FoodsWrapper = styled.div`
@@ -42,7 +42,7 @@ const FoodCards = styled(FoodCard)`
 
 export const Foods = () => {
     const [state,dispatch] = useReducer(foodsIndexReducer,initializeState);
-
+    console.log(Cookies.get())
     useEffect(() => {
         dispatch({type: foodsActionTypes.FETCHING})
         fetchFoodsIndexApi()

@@ -27,7 +27,6 @@ export function MaterialUISetPasswordLine() {
       }
     })
   };
-  console.log(SessionPasswordState)
   
   return (
     <Fragment>

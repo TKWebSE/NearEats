@@ -6,18 +6,20 @@ import {signInApi} from "../apis/sessionApis";
 import {SESSION_HEADER_TITLE} from "../constants";
 import {SignInCard} from "../component/sessionComponent/SignInCard";
 import {SessionDispatch,SessionState} from "../context/Context";
-import {foodsIndex} from "../urls/index";
+import {foodsIndexHistory} from "../urls/index";
 import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
+import Cookies from "js-cookie";
 
 const SignImnHeader = styled.h1`
-  margin-top:3%;
-  margin-bottom:3%;
+  margin-top:5%;
+  margin-left:7%;
 `;
 
 const SigninWrapper = styled.div`
-  margin-bottom:5%;
+margin-left:5%;
+margin-right:5%;
 `;
 
 const SubmitbuttomWrapper = styled.div`
@@ -37,7 +39,8 @@ export const SignIn= () =>{
             currentUser: data.currentUser
           },
       });
-      history.push(foodsIndex);
+      console.log(Cookies.get())
+      history.push(foodsIndexHistory);
     })
     .catch((e) => console.log(e))
   }
