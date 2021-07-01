@@ -40,7 +40,7 @@ export function MaterialUIUserEmailLine() {
         <form className={classes.root} noValidate autoComplete="off">
         <TextField 
             id="outlined-basic" 
-            label="メールアドレス" 
+            label="Email" 
             variant="outlined" 
             fullWidth
             value={userEmailState.user.email}

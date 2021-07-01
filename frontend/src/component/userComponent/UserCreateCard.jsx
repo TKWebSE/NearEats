@@ -1,15 +1,15 @@
 import React, {Fragment} from "react";
 import styled from "styled-components";
 import {MaterialUIUserNameLine} from "./MaterialUIUserNameLine";
-import {MaterialUISetEmailLine} from "../sessionComponent/MaterialUISetEmailLine";
-import {MaterialUISetPasswordLine} from "../sessionComponent/MaterialUISetPasswordLine";
-import {MaterialUIUserPasswordComfirmationLine} from "../sessionComponent/MaterialUISetPasswordComfirmLine";
+import {MaterialUIUserEmailLine} from "../MaterialUIUserEmailLine";
+import {MaterialUIUserPasswordLine} from "../MaterialUIUserPasswordLine";
+import {MaterialUIUserPasswordComfirmationLine} from "./MaterialUISetPasswordComfirmLine";
 
 const UserCreateWrapper = styled.div`
 `;
 
 const CreatetUserNameWrapper = styled.div`
-margin-bottom:5%;
+
 `;
 
 const CreatetUserEmailWrapper = styled.div`
@@ -29,10 +29,10 @@ export const UserCreateCard = () => {
                     <MaterialUIUserNameLine></MaterialUIUserNameLine>
                 </CreatetUserNameWrapper>
                 <CreatetUserEmailWrapper>
-                    <MaterialUISetEmailLine> </MaterialUISetEmailLine>
+                    <MaterialUIUserEmailLine> </MaterialUIUserEmailLine>
                 </CreatetUserEmailWrapper>
                 <CreatetUserPasswordWrapper>
-                    <MaterialUISetPasswordLine></MaterialUISetPasswordLine>
+                    <MaterialUIUserPasswordLine></MaterialUIUserPasswordLine>
                 </CreatetUserPasswordWrapper>
                 <CreatetUserPasswordComfirmationWrapper>
                     <MaterialUIUserPasswordComfirmationLine></MaterialUIUserPasswordComfirmationLine>

@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUILoginButton({onClick})   {
+export function MaterialUILoginButton({onClick , btnLabel})   {
     const classes = useStyles();
-  
+    console.log(btnLabel)
     return (
       <div>
         <Button
@@ -23,7 +23,7 @@ export function MaterialUILoginButton({onClick})   {
           className={classes.button}
           onClick={onClick}
         >
-        ログイン
+        {btnLabel}
       </Button>
       </div>
     )

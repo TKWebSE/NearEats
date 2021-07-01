@@ -2,9 +2,8 @@ import React,{Fragment,useEffect, useReducer,Link} from "react";
 import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from "@material-ui/lab/Skeleton"
-import CommonButton from "../component/MaterialUICommonButton";
+import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
-import { DeleteButton } from "../component/MaterialUIButtons";
 import {REQUEST_STATE,FOOD_HEADER_TITLE} from "../constants";
 import { fetchFoodApi } from "../apis/foodApis";
 import { initializeState,
@@ -72,9 +71,8 @@ export const FoodDetail = ({match})=> {
                        <FoodDetailCard {...state.food}></FoodDetailCard>
                     </FoodCardWrapper>
                     <ThemeProvider theme={ButtonTheme}>
-                        <CommonButton onClick={onClickHandle}/>
+                        <MaterialUICommonButton onClick={onClickHandle} btnLabel={"編集する"}/>
                     </ThemeProvider>
-                    {/* <DeleteButton></DeleteButton> */}
                 </Fragment>
             }
             </DetailWrapper>

@@ -58,7 +58,7 @@ export const SignIn= () =>{
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
         <ThemeProvider theme={ButtonTheme}>
-          <MaterialUILoginButton onClick={() => submitSignIn()} />
+          <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={"ログイン"}/>
         </ThemeProvider>
         </SubmitbuttomWrapper>
         </SigninWrapper>

@@ -7,19 +7,22 @@ import { initializeState,userCreateReducer } from "../reducer/userCreateReducer"
 import {UserDispatch,UserState} from "../context/Context";
 // import {userShowHistory} from "../urls/index";
 import {UserCreateCard} from "../component/userComponent/UserCreateCard";
-
+import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
+import { ThemeProvider } from '@material-ui/core/styles';
+import {ButtonTheme} from "../style_constants";
 
 const UserCreateWrapper = styled.div`
+    margin-left:5%;
 `;
 
 const UserCreateHeader = styled.h1`
-    margin-left:5%;
-    margin-right:5%;
 `;
 
 const UserCreateCardWrapper = styled.div`
-    margin-left:5%;
-    margin-right:5%;
+
+`;
+
+const UserCreateSubmitWrapper = styled.div`
 `;
 
 export const UserCreate = () => {
@@ -47,6 +50,11 @@ export const UserCreate = () => {
                         </UserState.Provider>
                     </UserDispatch.Provider>
                 </UserCreateCardWrapper>
+                <UserCreateSubmitWrapper>
+                    <ThemeProvider theme={ButtonTheme}>
+                        <MaterialUICommonButton onClick={SubmitHandle} btnLabel={"作成"}/>
+                    </ThemeProvider>
+                </UserCreateSubmitWrapper>
             </UserCreateWrapper>
         </Fragment>
     )
