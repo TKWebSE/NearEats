@@ -18,8 +18,8 @@ const SignImnHeader = styled.h1`
 `;
 
 const SigninWrapper = styled.div`
-margin-left:5%;
-margin-right:5%;
+  margin-left:5%;
+  margin-right:5%;
 `;
 
 const SubmitbuttomWrapper = styled.div`

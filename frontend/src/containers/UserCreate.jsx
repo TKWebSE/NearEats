@@ -12,7 +12,14 @@ import {UserCreateCard} from "../component/userComponent/UserCreateCard";
 const UserCreateWrapper = styled.div`
 `;
 
-const UserCreateHeader = styled.div`
+const UserCreateHeader = styled.h1`
+    margin-left:5%;
+    margin-right:5%;
+`;
+
+const UserCreateCardWrapper = styled.div`
+    margin-left:5%;
+    margin-right:5%;
 `;
 
 export const UserCreate = () => {
@@ -33,11 +40,13 @@ export const UserCreate = () => {
                 <UserCreateHeader>
                     {USER_HEADER_TITLE.USER_CREATE}
                 </UserCreateHeader>
-                <UserDispatch.Provide value={dispatch}>
-                    <UserState.Provide value={state}>
-                        <UserCreateCard></UserCreateCard>
-                    </UserState.Provide>
-                </UserDispatch.Provide>
+                <UserCreateCardWrapper>
+                    <UserDispatch.Provider value={dispatch}>
+                        <UserState.Provider value={state}>
+                            <UserCreateCard></UserCreateCard>
+                        </UserState.Provider>
+                    </UserDispatch.Provider>
+                </UserCreateCardWrapper>
             </UserCreateWrapper>
         </Fragment>
     )

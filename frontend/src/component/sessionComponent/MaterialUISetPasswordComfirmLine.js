@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //signInで使用するEmailのテキストフィールドコンポーネント
-export function MaterialUISetPasswordComfirmLine() {
+export function MaterialUIUserPasswordComfirmationLine() {
   const classes = useStyles();
   const SessionPasswordConfirmationState = useContext(SessionState)
   const SessioPasswordConfirmationDispatch = useContext(SessionDispatch)
