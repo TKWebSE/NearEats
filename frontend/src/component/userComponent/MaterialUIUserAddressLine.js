@@ -1,7 +1,7 @@
 import React, { Fragment,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {userEditActionTypes} from "../../reducer/userEditReducer";
+import {userActionTypes} from "../../reducer/userReducer";
 import {UserState,UserDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 //userの住所を設定するためのTextFieldコンポーネント
 export function MaterialUIUserAddressLine() {
     const classes = useStyles();
-    const userAddressState = useContext(UserState);
-    const userAddressDispatch = useContext(UserDispatch);
+    const state = useContext(UserState);
+    const dispatch = useContext(UserDispatch);
 
     const handleChange = (event) => {
-        userAddressDispatch({
-            type:userEditActionTypes.SETTINGUSERADDRESS,
+        dispatch({
+            type:userActionTypes.SETTINGUSERADDRESS,
             payload:{
                 address:event.target.value
             }
@@ -31,7 +31,7 @@ export function MaterialUIUserAddressLine() {
     return (
     <Fragment>
       {
-      userAddressState.user === undefined || userAddressState.user === null?
+      state.user === undefined || state.user === null?
       <Fragment>
           LOADING
       </Fragment>
@@ -43,7 +43,7 @@ export function MaterialUIUserAddressLine() {
             label="住所" 
             variant="outlined" 
             fullWidth
-            value={userAddressState.user.address}
+            value={state.user.address}
             onChange={handleChange}
         />
         </form>

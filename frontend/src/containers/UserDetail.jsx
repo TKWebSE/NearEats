@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {fetchUserApi} from "../apis/userApis";
-import {initializeState,usersActionTypes,userDetailReducer} from "../reducer/userDetailReducer";
+import {initializeState,userActionTypes,userReducer} from "../reducer/userReducer";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
 import {userEditHistory} from "../urls/index";
@@ -64,16 +64,16 @@ const UserEditButton = styled.div`
 `;
 
 export const UserDetail = ({match}) => { 
-  const [state,dispatch] = useReducer(userDetailReducer,initializeState);
+  const [state,dispatch] = useReducer(userReducer,initializeState);
   const history = useHistory();
   
   useEffect(() => {
-    dispatch({type:usersActionTypes.FETCHING});
+    dispatch({type:userActionTypes.FETCHING});
     console.log(state)
     fetchUserApi(match.params.userId)
       .then((data) => {
         dispatch({
-          type:usersActionTypes.FETCH_SUCCESS,
+          type:userActionTypes.FETCH_SUCCESS,
           payload:{
             user:data.user
           }

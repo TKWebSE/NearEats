@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
 import {userCreateApi} from "../apis/userApis";
-import { initializeState,userCreateReducer } from "../reducer/userCreateReducer";
+import { initializeState,userReducer } from "../reducer/userReducer";
 import {UserDispatch,UserState} from "../context/Context";
 // import {userShowHistory} from "../urls/index";
 import {UserCreateCard} from "../component/userComponent/UserCreateCard";
@@ -12,7 +12,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
 
 const UserCreateWrapper = styled.div`
-    margin-left:5%;
+    margin-left:10%;
+    margin-right:10%;
 `;
 
 const UserCreateHeader = styled.h1`
@@ -23,10 +24,12 @@ const UserCreateCardWrapper = styled.div`
 `;
 
 const UserCreateSubmitWrapper = styled.div`
+    margin-left:90%;
+    text-align: right;
 `;
 
 export const UserCreate = () => {
-    const [state,dispatch] = useReducer(userCreateReducer,initializeState)
+    const [state,dispatch] = useReducer(userReducer,initializeState)
     const history = useHistory();
 
     function SubmitHandle() {

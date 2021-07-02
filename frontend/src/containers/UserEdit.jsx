@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
 import { fetchUserApi,userUpdateApi } from "../apis/userApis";
 import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
-import {initializeState,userEditActionTypes,userEditReducer} from "../reducer/userEditReducer";
+import {initializeState,userActionTypes,userReducer} from "../reducer/userReducer";
 import {userDetailHistory} from "../urls/index";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {UserEditCard} from "../component/userComponent/UserEditCard";
@@ -28,16 +28,16 @@ const UserEditButton = styled.div`
 
 
 export const UserEdit = ({match}) => {
-    const [state,dispatch] = useReducer(userEditReducer,initializeState);
+    const [state,dispatch] = useReducer(userReducer,initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({type:userEditActionTypes.FETCHING});
+        dispatch({type:userActionTypes.FETCHING});
         fetchUserApi(match.params.userId)
         .then((data) => {
             console.log(state)
             dispatch({
-                type:userEditActionTypes.FETCH_SUCCESS,
+                type:userActionTypes.FETCH_SUCCESS,
                 payload:{
                     user:data.user
                 },

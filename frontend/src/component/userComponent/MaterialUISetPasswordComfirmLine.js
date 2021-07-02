@@ -1,8 +1,8 @@
 import React,{Fragment,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {signInActionTypes} from "../../reducer/signInReducer";
-import {SessionState,SessionDispatch} from "../../context/Context";
+import {userActionTypes} from "../../reducer/userReducer";
+import {UserState,UserDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,22 +16,22 @@ const useStyles = makeStyles((theme) => ({
 //signInで使用するEmailのテキストフィールドコンポーネント
 export function MaterialUIUserPasswordComfirmationLine() {
   const classes = useStyles();
-  const SessionPasswordConfirmationState = useContext(SessionState)
-  const SessioPasswordConfirmationDispatch = useContext(SessionDispatch)
+  const state = useContext(UserState)
+  const dispatch = useContext(UserDispatch)
 
   const handleChange = (event) => {
-    SessioPasswordConfirmationDispatch({
-      type:signInActionTypes.SETTINGEMAIL,
+    dispatch({
+      type:userActionTypes.SETTINGUSERPASSWORDCONFIRMATION,
       payload:{
-        email: event.target.value
+        passwordConfirmation: event.target.value
       }
     })
   };
-  
+
   return (
     <Fragment>
         {
-        SessionPasswordConfirmationState.user === undefined || SessionPasswordConfirmationState.user === null?
+        state.user === undefined || state.user === null?
         <Fragment>
             LOADING
         </Fragment>
@@ -40,10 +40,10 @@ export function MaterialUIUserPasswordComfirmationLine() {
         <form className={classes.root} noValidate autoComplete="off">
         <TextField 
             id="outlined-basic" 
-            label="Email" 
+            label="パスワード確認" 
             variant="outlined" 
             fullWidth
-            value={SessionPasswordConfirmationState.user.email}
+            value={state.user.passwordConfirmation}
             onChange={handleChange}
         />
         </form>

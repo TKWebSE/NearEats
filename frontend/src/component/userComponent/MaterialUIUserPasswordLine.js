@@ -1,7 +1,7 @@
 import React, { Fragment,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {userEditActionTypes} from "../../reducer/userEditReducer";
+import {userActionTypes} from "../../reducer/userReducer";
 import {UserState,UserDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 //userのメールアドレスを設定するためのTextFieldコンポーネント
 export function MaterialUIUserPasswordLine() {
     const classes = useStyles();
-    const userPasswordState = useContext(UserState);
-    const userPasswordDispatch = useContext(UserDispatch);
+    const state = useContext(UserState);
+    const dispatch = useContext(UserDispatch);
 
     const handleChange = (event) => {
-        userPasswordDispatch({
-            type:userEditActionTypes.SETTINGUSERPASSWORD,
+      dispatch({
+            type:userActionTypes.SETTINGUSERPASSWORD,
             payload:{
                 password:event.target.value
             }
@@ -31,7 +31,7 @@ export function MaterialUIUserPasswordLine() {
     return (
     <Fragment>
       {
-      userPasswordState.user === undefined || userPasswordState.user === null?
+      state.user === undefined || state.user === null?
       <Fragment>
           LOADING
       </Fragment>
@@ -43,7 +43,7 @@ export function MaterialUIUserPasswordLine() {
             label="パスワード" 
             variant="outlined" 
             fullWidth
-            value={userPasswordState.user.password}
+            value={state.user.password}
             onChange={handleChange}
         />
         </form>

@@ -1,7 +1,7 @@
 import React, { Fragment,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {userEditActionTypes} from "../../reducer/userEditReducer";
+import {userActionTypes} from "../../reducer/userReducer";
 import {UserState,UserDispatch} from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 //userのメールアドレスを設定するためのTextFieldコンポーネント
 export function MaterialUIUserEmailLine() {
     const classes = useStyles();
-    const userEmailState = useContext(UserState);
-    const userEmailDispatch = useContext(UserDispatch);
+    const State = useContext(UserState);
+    const dispatch = useContext(UserDispatch);
 
     const handleChange = (event) => {
-        userEmailDispatch({
-            type:userEditActionTypes.SETTINGUSEREMAIL,
+      dispatch({
+            type:userActionTypes.SETTINGUSEREMAIL,
             payload:{
                 email:event.target.value
             }
@@ -31,7 +31,7 @@ export function MaterialUIUserEmailLine() {
     return (
     <Fragment>
       {
-      userEmailState.user === undefined || userEmailState.user === null?
+      State.user === undefined || State.user === null?
       <Fragment>
           LOADING
       </Fragment>
@@ -43,7 +43,7 @@ export function MaterialUIUserEmailLine() {
             label="Email" 
             variant="outlined" 
             fullWidth
-            value={userEmailState.user.email}
+            value={State.user.email}
             onChange={handleChange}
         />
         </form>

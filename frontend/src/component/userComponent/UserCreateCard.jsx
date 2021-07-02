@@ -1,9 +1,9 @@
 import React, {Fragment} from "react";
 import styled from "styled-components";
 import {MaterialUIUserNameLine} from "./MaterialUIUserNameLine";
-import {MaterialUIUserEmailLine} from "../MaterialUIUserEmailLine";
-import {MaterialUIUserPasswordLine} from "../MaterialUIUserPasswordLine";
-import {MaterialUIUserPasswordComfirmationLine} from "./MaterialUISetPasswordComfirmLine";
+import {MaterialUIUserEmailLine} from "../userComponent/MaterialUIUserEmailLine";
+import {MaterialUIUserPasswordLine} from "../userComponent/MaterialUIUserPasswordLine";
+import {MaterialUIUserPasswordComfirmationLine} from "../userComponent/MaterialUISetPasswordComfirmLine";
 
 const UserCreateWrapper = styled.div`
 `;
