@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {MaterialUIUserNameLine} from "./MaterialUIUserNameLine";
 import {MaterialUIUserEmailLine} from "../userComponent/MaterialUIUserEmailLine";
 import {MaterialUIUserPasswordLine} from "../userComponent/MaterialUIUserPasswordLine";
-import {MaterialUIUserPasswordComfirmationLine} from "../userComponent/MaterialUISetPasswordComfirmLine";
+import {MaterialUISetPasswordConfirmationLine} from "../userComponent/MaterialUISetPasswordConfirmationLine";
 
 const UserCreateWrapper = styled.div`
 `;
@@ -35,7 +35,7 @@ export const UserCreateCard = () => {
                     <MaterialUIUserPasswordLine></MaterialUIUserPasswordLine>
                 </CreatetUserPasswordWrapper>
                 <CreatetUserPasswordComfirmationWrapper>
-                    <MaterialUIUserPasswordComfirmationLine></MaterialUIUserPasswordComfirmationLine>
+                    <MaterialUISetPasswordConfirmationLine></MaterialUISetPasswordConfirmationLine>
                 </CreatetUserPasswordComfirmationWrapper>
             </UserCreateWrapper>
         </Fragment>

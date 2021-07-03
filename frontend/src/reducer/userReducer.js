@@ -3,17 +3,24 @@ import { REQUEST_STATE } from "../constants";
 
 export const initializeState = {
     fetchState:REQUEST_STATE.INITIAL,
-    user:"null",
+    user:{
+        id:null,
+        name:"",
+        email:"",
+        password:"",
+        passwordConfirmation:"",
+        address:"",
+    },
 }
 
 export const userActionTypes = {
     FETCHING:"FETCHING",
     FETCH_SUCCESS:"FETCH_SUCCESS",
     SETTINGUSERNAME:"SETTINGUSERNAME",
-    SETTINGUSERADDRESS:"SETTINGUSERADDRESS",
     SETTINGUSEREMAIL:"SETTINGUSEREMAIL",
     SETTINGUSERPASSWORD:"SETTINGUSERPASSWORD",
     SETTINGUSERPASSWORDCONFIRMATION:"SETTINGUSERPASSWORDCONFIRMATION",
+    SETTINGUSERADDRESS:"SETTINGUSERADDRESS",
 }
 
 export const userReducer = (state,action) => {
@@ -35,18 +42,6 @@ export const userReducer = (state,action) => {
                     id: state.user.id,
                     name: action.payload.name,
                     address: state.user.address,
-                    email:state.user.email,
-                    password:state.user.password,
-                    passwordConfirmation:state.user.passwordConfirmation,
-                }
-            }
-        case userActionTypes.SETTINGUSERADDRESS:
-            return {
-                fetchState:REQUEST_STATE.OK,
-                user:{
-                    id: state.user.id,
-                    name:state.user.name,
-                    address:action.payload.address,
                     email:state.user.email,
                     password:state.user.password,
                     passwordConfirmation:state.user.passwordConfirmation,
@@ -87,6 +82,18 @@ export const userReducer = (state,action) => {
                     email:state.user.email,
                     password:state.user.password,
                     passwordConfirmation:action.payload.passwordConfirmation,
+                }
+            }
+        case userActionTypes.SETTINGUSERADDRESS:
+            return {
+                fetchState:REQUEST_STATE.OK,
+                user:{
+                    id: state.user.id,
+                    name:state.user.name,
+                    address:action.payload.address,
+                    email:state.user.email,
+                    password:state.user.password,
+                    passwordConfirmation:state.user.passwordConfirmation,
                 }
             }
         default:

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {userShow,userCreate,userUpdate,userDelete} from "../urls/index";
+import {userShow,signUp,userUpdate,userDelete} from "../urls/index";
 
 //特定のユーザーを取得する
 //editとdetailで使用
@@ -18,13 +18,12 @@ export const fetchUserApi = (userId) => {
 
 //ユーザーを作成する
 export const userCreateApi = (user) => {
-    return axios.post(userCreate(user.id),{
-        params:{
-            namme:user.name,
-            email:user.email,
-            password:user.password,
-            password_confirmation:user.password_confirmation
-        }
+    console.log(user)
+    return axios.post(signUp,{
+        name:user.name,
+        email:user.email,
+        apassword:user.password,
+        password_confirmation:user.passwordConfirmation
     })
     .then((res) => {
         return res.data

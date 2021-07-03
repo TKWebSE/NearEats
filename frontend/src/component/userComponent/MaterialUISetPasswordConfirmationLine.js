@@ -14,12 +14,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //signInで使用するEmailのテキストフィールドコンポーネント
-export function MaterialUIUserPasswordComfirmationLine() {
+export function MaterialUISetPasswordConfirmationLine() {
   const classes = useStyles();
   const state = useContext(UserState)
   const dispatch = useContext(UserDispatch)
 
   const handleChange = (event) => {
+    console.log(state)
     dispatch({
       type:userActionTypes.SETTINGUSERPASSWORDCONFIRMATION,
       payload:{
@@ -27,7 +28,7 @@ export function MaterialUIUserPasswordComfirmationLine() {
       }
     })
   };
-
+  console.log(state)
   return (
     <Fragment>
         {
@@ -43,7 +44,7 @@ export function MaterialUIUserPasswordComfirmationLine() {
             label="パスワード確認" 
             variant="outlined" 
             fullWidth
-            value={state.user.passwordConfirmation}
+            value={state.user.passwordConfirmation }
             onChange={handleChange}
         />
         </form>
