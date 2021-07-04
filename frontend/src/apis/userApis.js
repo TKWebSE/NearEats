@@ -22,7 +22,7 @@ export const userCreateApi = (user) => {
     return axios.post(signUp,{
         name:user.name,
         email:user.email,
-        apassword:user.password,
+        password:user.password,
         password_confirmation:user.passwordConfirmation
     })
     .then((res) => {
