@@ -39,4 +39,4 @@ export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
 export const signUp = `${AUTH_URL}`;
 export const signIn = `${AUTH_URL}/sign_in`;
 export const signOut = `${AUTH_URL}/session/signout`;
-export const sessionIsLogin = `${AUTH_URL}/session/islogin`;
+export const sessionIsLogin = `${AUTH_URL}/sessions`;

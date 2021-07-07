@@ -10,6 +10,8 @@ import {UserCreateCard} from "../component/userComponent/UserCreateCard";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
+import { sessionIsLogin } from "../urls";
+import {isLoginApi} from "../apis/sessionApis";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -35,10 +37,15 @@ export const UserCreate = () => {
     function SubmitHandle() {
         userCreateApi(state.user)
         .then((data) => {
+            isLoginApi(data.user)
+            .then((data) => {
+            console.log(data)
+        })
             console.log(data)
             // history.pushState(userShowHistory(1))
         })
         .catch(e => console.log(e))
+        
     }
     return(
         <Fragment>

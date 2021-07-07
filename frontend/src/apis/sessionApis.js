@@ -42,7 +42,7 @@ export const signOutApi = () => {
 
 //ログイン状態をチェックする
 export const isLoginApi = () => {
-    return axios.get(sessionIsLogin())
+    return axios.get(sessionIsLogin)
     .then(res => {
         return res.data
     })

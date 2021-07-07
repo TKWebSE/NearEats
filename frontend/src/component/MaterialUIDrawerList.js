@@ -16,6 +16,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import {foodCreateHistory,userDetailHistory} from "../urls/index";
+import {isLoginApi} from "../apis/sessionApis";
 
 export const MaterialUIDrawerList = () => {
     const history = useHistory();
@@ -52,6 +53,10 @@ export const MaterialUIDrawerList = () => {
     //   onKeyDown={toggleDrawer(false)}
     >
       <List>
+          <ListItem button onClick={() => isLoginApi()}>
+            <ListItemIcon><FastfoodIcon /></ListItemIcon>
+            <ListItemText primary={DRAWER_TEXT.FOOD_CREATE_TEXT} />
+        </ListItem>
         <ListItem button onClick={() => createFoodLink()}>
             <ListItemIcon><FastfoodIcon /></ListItemIcon>
             <ListItemText primary={DRAWER_TEXT.FOOD_CREATE_TEXT} />

@@ -11,6 +11,7 @@ import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILog
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
 import Cookies from "js-cookie";
+import {isLoginApi} from "../apis/sessionApis";
 
 const SignImnHeader = styled.h1`
   margin-top:5%;
@@ -33,6 +34,8 @@ export const SignIn= () =>{
   function submitSignIn () {
     signInApi(state.user)
     .then((data) => {
+      const dataaru = isLoginApi(data.user)
+        console.log(dataaru)
       dispatch({
           type:signInActionTypes.SIGNIN,
           payload: {
