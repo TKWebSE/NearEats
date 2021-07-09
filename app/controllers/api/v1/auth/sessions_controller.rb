@@ -4,8 +4,7 @@ class Api::V1::Auth::SessionsController < ApplicationController
   def index
     logger.debug("こめんとだよ～＝＝＝＝")
     logger.debug(current_api_v1_user ==nil)
-    neko = current_api_v1_user
-    logger.debug(neko)
+    logger.debug(current_api_v1_user)
     logger.debug("あ、あ、こめんとだよ～＝＝＝＝")
     logger.debug(api_v1_user_signed_in?)
     logger.debug("ぺこぺこぺこぺこ")

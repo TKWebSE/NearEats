@@ -42,7 +42,16 @@ export const signOutApi = () => {
 
 //ログイン状態をチェックする
 export const isLoginApi = () => {
-    return axios.get(sessionIsLogin)
+    const uid = Cookies.get("uid");
+    const accessToken = Cookies.get("access_token");
+    const client = Cookies.get("client");
+    return axios.get(sessionIsLogin,{
+        headers: {
+          'access-token': accessToken,
+          client: client,
+          uid: uid
+        },
+      })
     .then(res => {
         return res.data
     })

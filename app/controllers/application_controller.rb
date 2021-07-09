@@ -18,6 +18,6 @@ class ApplicationController < ActionController::API
   private
 
     def http_header_log
-      logger.info("access-token:#{request.headers[:HTTP_API_VERSION]}")
+      request.headers.sort.map { |k, v| logger.info "#{k}:#{v}" }
     end
 end
