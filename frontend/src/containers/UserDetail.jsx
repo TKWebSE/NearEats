@@ -26,7 +26,7 @@ const UserDetailWrapper = styled.div`
 const UserNameWrapper = styled.div`
   display: table;
 `;
-const UserNameLabel = styled.h1` 
+const UserNameLabel = styled.div` 
   display: table-cell;
 `;
 
@@ -34,11 +34,11 @@ const UserName = styled.div`
   margin-bottom:1%;
 `;
 
-const UserPointWrapper = styled.h2`
+const UserPointWrapper = styled.div`
   display: table;
 `;
 
-const UserPointLabel = styled.h2`
+const UserPointLabel = styled.div`
   display: table-cell;
 `;
 
@@ -50,7 +50,7 @@ const UserAddressWrapper = styled.div`
   display: table;
 `;
 
-const UserAddressLabel = styled.h2`
+const UserAddressLabel = styled.div`
   display: table-cell;
 `;
 
