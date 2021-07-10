@@ -42,7 +42,7 @@ const FoodCards = styled(FoodCard)`
 
 export const Foods = () => {
     const [state,dispatch] = useReducer(foodsIndexReducer,initializeState);
-    console.log(Cookies.get())
+
     useEffect(() => {
         dispatch({type: foodsActionTypes.FETCHING})
         fetchFoodsIndexApi()
@@ -73,8 +73,8 @@ export const Foods = () => {
                         </Fragment>
                     </ContentsList>
                 :
-                state.foodsList.map((food) =>
-                <ContentsList>
+                state.foodsList.map((food,i) =>
+                <ContentsList key={i}>
                     <Fragment>
                         <FoodCard food={food}></FoodCard>
                     </Fragment>

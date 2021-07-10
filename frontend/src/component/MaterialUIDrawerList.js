@@ -17,9 +17,11 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import {foodCreateHistory,userDetailHistory} from "../urls/index";
 import {isLoginApi} from "../apis/sessionApis";
+import Cookies from "js-cookie";
 
 export const MaterialUIDrawerList = () => {
     const history = useHistory();
+    const userId = Cookies.get("user_id");
 
     function createFoodLink () {
         history.push(foodCreateHistory());
@@ -35,15 +37,15 @@ export const MaterialUIDrawerList = () => {
     
     //認証機能実装後改修予定(idを受け取る)
     function profileLink () {
-        history.push(userDetailHistory(1));
+        history.push(userDetailHistory(userId));
     }
 
     function orderLink () {
-        history.push(userDetailHistory(1));
+        history.push(userDetailHistory(userId));
     }
 
     function settingLink () {
-        history.push(userDetailHistory(1));
+        history.push(userDetailHistory(userId));
     }
 
     return (
@@ -53,10 +55,6 @@ export const MaterialUIDrawerList = () => {
     //   onKeyDown={toggleDrawer(false)}
     >
       <List>
-          <ListItem button onClick={() => isLoginApi()}>
-            <ListItemIcon><FastfoodIcon /></ListItemIcon>
-            <ListItemText primary={DRAWER_TEXT.FOOD_CREATE_TEXT} />
-        </ListItem>
         <ListItem button onClick={() => createFoodLink()}>
             <ListItemIcon><FastfoodIcon /></ListItemIcon>
             <ListItemText primary={DRAWER_TEXT.FOOD_CREATE_TEXT} />
