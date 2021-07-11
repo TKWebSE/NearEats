@@ -108,6 +108,13 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleDrawer = () => {
+    state.isOpenDrawer?
+      dispacth({type:headerActionTypes.CLOSEDRAWER})
+    :
+      dispacth({type:headerActionTypes.OPENDRAWER})
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -175,7 +182,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={() => dispacth({type:headerActionTypes.OPENDRAWER})}
+            onClick={() => handleDrawer}
           >
             <MenuIcon />
           </IconButton>
