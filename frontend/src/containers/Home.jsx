@@ -13,18 +13,20 @@ import {FoodDetailCard} from "../component/foodComponent/FoodDetailCard";
 import {useHistory} from "react-router-dom";
 import {foodUpdateHistory} from "../urls/index";
 
-const DetailWrapper = styled.div`
+const HomeWrapper = styled.div`
     margin-left:20%;
     margin-right:20%;
 `;
 
-const LoadingWrapper = styled.div`
-    
-`;
-
-const FoodDetailHeader = styled.h1`
+const TitleWrapper = styled.h1`
     margin-top:3%;
     margin-bottom:3%;
+`;
+
+const TitleWrapper = styled.div`
+`;
+
+const SignInWrapper = styled.div`
 `;
 
 const FoodCardWrapper = styled.div`
@@ -42,16 +44,15 @@ export const Home = ()=> {
         <Fragment>
             <HomeWrapper>
                 <TitleWrapper>
-                    {HOME_TITLE}
+                    {HOME_TITLE.HOME_TITLE}
                 </TitleWrapper>
+                <SignUpWrapper>
+                    {HOME_TITLE.SIGNIN_BUTTON_LABEL} 
+                </SignUpWrapper>
+                <SignInWrapper>
+                   {HOME_TITLE.SOGNUP_BUTTON_LABEL}
+                </SignInWrapper>
             {
-            REQUEST_STATE.LOADING === state.fetchState?
-                <Fragment>
-                    <LoadingWrapper>
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </LoadingWrapper>
-                </Fragment>
-            :
                 <Fragment>
                     <FoodCardWrapper>
                        <FoodDetailCard {...state.food}></FoodDetailCard>
@@ -61,7 +62,7 @@ export const Home = ()=> {
                     </ThemeProvider>
                 </Fragment>
             }
-            </DetailWrapper>
+            </HomeWrapper>
         </Fragment>
     )
 }

@@ -9,6 +9,8 @@ export const HTTP_STATUS_CODE = {
 
 export const HOME_TITLE = {
     HOME_TITLE:"Near-Eats",
+    SIGNIN_BUTTON_LABEL:"ログイン",
+    SOGNUP_BUTTON_LABEL:"新規作成",
 }
 
 export const DRAWER_TEXT = {
