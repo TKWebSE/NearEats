@@ -13,6 +13,7 @@ export const headerActionTypes = {
 export const headerReducer = (state,action) => {
     switch (action.type) {
         case headerActionTypes.OPENDRAWER:
+            console.log("nekoneko")
             return {
                 isOpenDrawer:true,
                 fetchState:REQUEST_STATE.OPENDRAWER,

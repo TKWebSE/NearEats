@@ -109,10 +109,14 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleDrawer = () => {
-    state.isOpenDrawer?
+    if(state.isOpenDrawer){
+      console.log("あけるん")
       dispacth({type:headerActionTypes.CLOSEDRAWER})
-    :
+    }else{
+      console.log("しめるん")
+      console.log(state)
       dispacth({type:headerActionTypes.OPENDRAWER})
+    }
   }
 
   const menuId = 'primary-search-account-menu';
@@ -182,10 +186,10 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={() => handleDrawer}
           >
-            <MenuIcon />
+            <MenuIcon onClick={() => handleDrawer()}/>
           </IconButton>
+          <button onClick={() => handleDrawer()}>aaaaa</button>
           <Typography className={classes.title} variant="h5" noWrap>
             Near-Eats
           </Typography>
@@ -238,7 +242,11 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
+      <SessionDispatch.Provider value={dispatch}>
+        <SessionState.Provider value={state}></SessionState.Provider>
+          <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
+        </SessionState.Provider>
+      </SessionDispatch.Provider>
       {renderMobileMenu}
       {renderMenu}
     </div>
