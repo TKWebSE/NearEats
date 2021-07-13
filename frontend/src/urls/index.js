@@ -6,6 +6,8 @@ const DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
 //foodのURL
+export const foodsIndexLink = `/foods`;
+export const foodDetailLink = (foodId) => `/foods/${foodId}`;
 export const foodsIndex = `${DEFAULT_URL}/foods`;
 export const foodShow = (foodId) => `${DEFAULT_URL}/foods/${foodId}`;
 export const foodCreate = `${DEFAULT_URL}/foods`;

@@ -50,6 +50,12 @@ function App() {
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
       <Switch>
+      //HOME画面
+        <Route 
+          exact
+          path="/home">
+          <SignIn/>
+        </Route>
         //signIn画面
         <Route 
           exact

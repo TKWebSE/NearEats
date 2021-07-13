@@ -1,4 +1,5 @@
 import React,{useState,useReducer} from 'react';
+import styled from "styled-components";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,6 +17,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {SwipeableTemporaryDrawer} from "../component/MaterialUIDrawer";
 import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
+import {SessionDispatch,SessionState} from "../context/Context";
+import { Link } from "react-router-dom";
+import {foodsIndexLink} from "../urls/index"
+import {HOME_TITLE} from "../constants";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -81,6 +86,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const TitleWrapper = styled.div`
+  color: #FFF;
+`;
+
+
 //ヘッダーのファンクション
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -110,11 +120,8 @@ export default function PrimarySearchAppBar() {
 
   const handleDrawer = () => {
     if(state.isOpenDrawer){
-      console.log("あけるん")
       dispacth({type:headerActionTypes.CLOSEDRAWER})
     }else{
-      console.log("しめるん")
-      console.log(state)
       dispacth({type:headerActionTypes.OPENDRAWER})
     }
   }
@@ -189,10 +196,13 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon onClick={() => handleDrawer()}/>
           </IconButton>
-          <button onClick={() => handleDrawer()}>aaaaa</button>
-          <Typography className={classes.title} variant="h5" noWrap>
-            Near-Eats
-          </Typography>
+          <TitleWrapper>
+            <Link to={foodsIndexLink} style={{ textDecoration: 'none' ,color: '#FFF'}}>
+              <Typography className={classes.title} variant="h5" noWrap textPrimary={"#000"}>
+                {HOME_TITLE.HOME_TITLE}
+              </Typography>
+            </Link>
+          </TitleWrapper>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -242,8 +252,8 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <SessionDispatch.Provider value={dispatch}>
-        <SessionState.Provider value={state}></SessionState.Provider>
+      <SessionDispatch.Provider value={dispacth}>
+        <SessionState.Provider value={state}>
           <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
         </SessionState.Provider>
       </SessionDispatch.Provider>

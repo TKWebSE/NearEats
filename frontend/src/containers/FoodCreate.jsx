@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect, useReducer} from "react";
 import styled from "styled-components";
-
 import {ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
 import {FOOD_HEADER_TITLE} from "../constants";
@@ -14,6 +13,8 @@ import {FoodState,FoodDispatch} from "../context/Context";
 import {FoodCreateCard} from "../component/foodComponent/FoodCreateCard";
 
 const FoodCreateWrappwer = styled.div`
+    margin-left:20%;
+    margin-right:20%;
 `;
 
 const FoodCreateHeader = styled.h1`

@@ -7,6 +7,10 @@ export const HTTP_STATUS_CODE = {
     NOT_ACCEPTABLE: 406,
 }
 
+export const HOME_TITLE = {
+    HOME_TITLE:"Near-Eats",
+}
+
 export const DRAWER_TEXT = {
     FOOD_CREATE_TEXT:"料理の作成",
     MY_FOOD_TEXT:"MyFood",

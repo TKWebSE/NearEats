@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 //userのメールアドレスを設定するためのTextFieldコンポーネント
 export function MaterialUIUserEmailLine() {
     const classes = useStyles();
-    const State = useContext(UserState);
+    const state = useContext(UserState);
     const dispatch = useContext(UserDispatch);
 
     const handleChange = (event) => {
@@ -31,7 +31,7 @@ export function MaterialUIUserEmailLine() {
     return (
     <Fragment>
       {
-      State.user === undefined || State.user === null?
+      state.user === undefined || state.user === null?
       <Fragment>
           LOADING
       </Fragment>
@@ -43,7 +43,7 @@ export function MaterialUIUserEmailLine() {
             label="Email" 
             variant="outlined" 
             fullWidth
-            value={State.user.email}
+            value={state.user.email}
             onChange={handleChange}
         />
         </form>

@@ -1,8 +1,8 @@
 import React ,{ Fragment } from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 import foodImage from "../../images/food-image.jpg";
+import {foodDetailLink} from "../../urls/index";
 
 const FoodCardWrapper = styled.div`
     text-align:center;
@@ -34,7 +34,7 @@ export const FoodCard = ({food}) => {
     return(
     <Fragment>
         <FoodCardWrapper>
-        <Link to={`foods/${food.id}`} style={{ textDecoration: 'none' }}>
+        <Link to={foodDetailLink(food.id)} style={{ textDecoration: 'none' }}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
             <TextWrapper>
                 <FoodName>
