@@ -20,11 +20,12 @@ export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId
 
 //userのURL
 export const userShowURL = (userId) => `/users/${userId}`;
+export const userCreateURL = `/users/create`;
 export const userEditURL = (userId) => `/users/${userId}/edit`;
 
 //userのBackendURL
 export const userShowBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userShowURL(userId)}`;
-export const userCreateBackendURL = () => `${AUTH_URL}/users/create`;
+export const userCreateBackendURL = () => `${AUTH_URL}${userCreateURL}`;
 export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
 export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
@@ -42,7 +43,10 @@ export const orderUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders
 export const orderDeleteBackendURL = () =>  `${BACKEND_DEFAULT_URL}/orders/delete`;
 
 //session関連のURL
+export const signInURL = `/users/signin`;
+
+//session関連のBackendURL
 export const signUpBackendURL = `${AUTH_URL}`;
-export const signInBackendURL = `${AUTH_URL}/sign_in`;
+export const signInBackendURL = `${AUTH_URL}${signInURL}`;
 export const signOutBackendURL = `${AUTH_URL}/session/signout`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;

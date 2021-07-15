@@ -9,9 +9,8 @@ import { initializeState,
          foodDetailActionTypes,
          foodDetailReducer} from "../reducer/foodDetail";
 import {useHistory} from "react-router-dom";
-import {foodUpdateURL} from "../urls/index";
+import {userCreateURL,signInURL} from "../urls/index";
 import {HOME_TITLE} from "../constants";
-import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 
 const HomeWrapper = styled.div`
     margin-left:20%;
@@ -23,21 +22,28 @@ const TitleWrapper = styled.h1`
     margin-bottom:3%;
 `;
 
+const SubTitleWrapper = styled.div`
+`;
+
 const SignUpWrapper = styled.div`
 `;
 
 const SignInWrapper = styled.div`
 `;
 
+const ImgWrapper = styled.div`
+`;
+
+
 export const Home = ()=> {
     const history = useHistory();
 
     function signUpHandle() {
-        history.push(foodUpdateURL())
+        history.push(userCreateURL)
     }
 
     function signInHandle() {
-        history.push(foodUpdateURL())
+        history.push(signInURL)
     }
 
     return (
@@ -46,24 +52,19 @@ export const Home = ()=> {
                 <TitleWrapper>
                     {HOME_TITLE.HOME_TITLE}
                 </TitleWrapper>
-                <SignUpWrapper>
-                    <MaterialUICommonButton onClick={() => signUpHandle()} btnLabel={HOME_TITLE.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
-                    {HOME_TITLE.SOGNUP_BUTTON_LABEL} 
-                </SignUpWrapper>
-                <SignInWrapper>
-                <MaterialUICommonButton onClick={() => signInHandle()} btnLabel={HOME_TITLE.SIGNIN_BUTTON_LABEL}></MaterialUICommonButton>
-                   {HOME_TITLE.SIGNIN_BUTTON_LABEL}
-                </SignInWrapper>
-            {
-                <Fragment>
-                    {/* <FoodCardWrapper>
-                       <FoodDetailCard {...state.food}></FoodDetailCard>
-                    </FoodCardWrapper>
-                    <ThemeProvider theme={ButtonTheme}>
-                        <MaterialUICommonButton onClick={onClickHandle} btnLabel={"編集する"}/>
-                    </ThemeProvider> */}
-                </Fragment>
-            }
+                <SubTitleWrapper>
+                     {HOME_TITLE.SUB_TITLE}
+                </SubTitleWrapper>
+                <ThemeProvider theme={ButtonTheme}>
+                    <SignUpWrapper>
+                        <MaterialUICommonButton onClick={() => signUpHandle()} btnLabel={HOME_TITLE.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
+                    </SignUpWrapper>
+                    <SignInWrapper>
+                    <MaterialUICommonButton onClick={() => signInHandle()} btnLabel={HOME_TITLE.SIGNIN_BUTTON_LABEL}></MaterialUICommonButton>
+                    </SignInWrapper>
+                </ThemeProvider>
+                <ImgWrapper>
+                </ImgWrapper>
             </HomeWrapper>
         </Fragment>
     )

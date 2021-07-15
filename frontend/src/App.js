@@ -1,4 +1,4 @@
-import React,{ Fragment, useEffect } from "react";
+import React,{ Fragment, useEffect,useReducer } from "react";
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -28,7 +28,7 @@ import {initializeState,sessionReducer} from "./reducer/sessionReducer";
 import { sessionIsLogin } from "./urls";
 
 function App() {
-  // const [state,dispatch] = useReducer(sessionReducer,initializeState);
+  const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
   // useEffect(() => {
   //   sessionisLogin()
@@ -46,9 +46,12 @@ function App() {
   return (
     <Fragment>
     <Router>
+    {/* {
+    if state.currentUser ===  currentUser */}
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
+    // }
       <Switch>
       //HOME画面
         <Route 
