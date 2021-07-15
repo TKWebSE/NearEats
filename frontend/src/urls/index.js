@@ -2,43 +2,47 @@ const BASE_URL = "http://localhost:3000";
 const API_V1 = "/api/v1" 
 const AUTH = "/auth"
 
-const DEFAULT_URL = `http://localhost:3000${API_V1}`;
+const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
 //foodのURL
-export const foodsIndexLink = `/foods`;
-export const foodDetailLink = (foodId) => `/foods/${foodId}`;
-export const foodsIndex = `${DEFAULT_URL}/foods`;
-export const foodShow = (foodId) => `${DEFAULT_URL}/foods/${foodId}`;
-export const foodCreate = `${DEFAULT_URL}/foods`;
-export const foodUpdate = (foodId) => `${DEFAULT_URL}/foods/${foodId}`
-export const foodDelete = (foodId) => `${DEFAULT_URL}/${foodId}/foods`;
-export const foodsIndexHistory = `/foods`
-export const foodCreateHistory = () => `/foods/create`;
-export const foodUpdateHistory = (foodId) => `/foods/${foodId}/edit`;
-export const foodShowHistory = (foodId) => `/foods/${foodId}`;
+export const foodsIndexURL = `/foods`;
+export const foodCreateURL = `/foods/create`;
+export const foodShowURL = (foodId) => `/foods/${foodId}`;
+export const foodUpdateURL = (foodId) => `/foods/${foodId}/edit`;
+
+//foodのBackendURL
+export const foodsIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
+export const foodCreateBackendURL = `${BACKEND_DEFAULT_URL}${foodCreateURL}`;
+export const foodShowBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodShowURL(foodId)}`;
+export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpdateURL()}`
+export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
 
 //userのURL
-export const userShow = (userId) => `${DEFAULT_URL}/users/${userId}`;
-export const userCreate = () => `${AUTH_URL}/users/create`;
-export const userEdit = (userId) => `${DEFAULT_URL}/users/${userId}/edit`;
-export const userUpdate = (userId) => `${DEFAULT_URL}/users/${userId}`;
-export const userDelete = (userId) => `${DEFAULT_URL}/users/${userId}/delete`;
-export const userDetailHistory = (userId) => `/users/${userId}`;
-export const userEditHistory = (userId) => `/users/${userId}/edit`;
+export const userShowURL = (userId) => `/users/${userId}`;
+export const userEditURL = (userId) => `/users/${userId}/edit`;
+
+//userのBackendURL
+export const userShowBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userShowURL(userId)}`;
+export const userCreateBackendURL = () => `${AUTH_URL}/users/create`;
+export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
+export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
+export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
 
 //orderのURL
-export const orderIndex = () => `${DEFAULT_URL}/orders`;
-export const orderShow = (orderId) => `${DEFAULT_URL}/orders/${orderId}`;
-export const orderCreate =() =>  `${DEFAULT_URL}/orders/create`;
-export const orderEdit =() => `${DEFAULT_URL}/orders/edit`;
-export const orderUpdate = () => `${DEFAULT_URL}/orders/update`;
-export const orderDelete = () =>  `${DEFAULT_URL}/orders/delete`;
-export const orderDetailHistory = (orderId) => `/orders/${orderId}`;
-export const orderEditHistory = (orderId) => `/orders/${orderId}/edot`;
+export const orderShowURL = (orderId) => `/orders/${orderId}`;
+export const orderEditURL = (orderId) => `/orders/${orderId}/edot`;
+
+//orderのBackendURL
+export const orderIndexBackendURL = () => `${BACKEND_DEFAULT_URL}/orders`;
+export const orderShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}`;
+export const orderCreateBackendURL =() =>  `${BACKEND_DEFAULT_URL}/orders/create`;
+export const orderEditBackendURL =(orderId) => `${BACKEND_DEFAULT_URL}${orderEditURL(orderId)}`;
+export const orderUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders/${orderId}/update`;
+export const orderDeleteBackendURL = () =>  `${BACKEND_DEFAULT_URL}/orders/delete`;
 
 //session関連のURL
-export const signUp = `${AUTH_URL}`;
-export const signIn = `${AUTH_URL}/sign_in`;
-export const signOut = `${AUTH_URL}/session/signout`;
-export const sessionIsLogin = `${AUTH_URL}/sessions`;
+export const signUpBackendURL = `${AUTH_URL}`;
+export const signInBackendURL = `${AUTH_URL}/sign_in`;
+export const signOutBackendURL = `${AUTH_URL}/session/signout`;
+export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;

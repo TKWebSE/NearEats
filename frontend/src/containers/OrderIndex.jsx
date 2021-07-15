@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { REQUEST_STATE,ORDER_HEADER_TITLE } from "../constants";
 import {OrderDispatch,OrderState} from "../context/Context";
 import { initializeState,oredersActionTypes,orderIndexReducer } from "../reducer/orderIndexReducer";
-import {orderDetailHistory} from "../urls/index";
+import {orderShowURL} from "../urls/index";
 import {orederIndexApis} from "../apis/orderApis";
 import {OrderIndexCard} from "../component/orderComponent/OrderIndexCard";
 
@@ -35,7 +35,7 @@ export const OrderIndex =() => {
     },[])
 
     function onClickHandle() {
-        history.push(orderDetailHistory())
+        history.push(orderShowURL())
     }
 
     return(

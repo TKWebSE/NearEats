@@ -19,7 +19,7 @@ import {SwipeableTemporaryDrawer} from "../component/MaterialUIDrawer";
 import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
 import {SessionDispatch,SessionState} from "../context/Context";
 import { Link } from "react-router-dom";
-import {foodsIndexLink} from "../urls/index"
+import {foodsIndexURL} from "../urls/index";
 import {HOME_TITLE} from "../constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -197,7 +197,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon onClick={() => handleDrawer()}/>
           </IconButton>
           <TitleWrapper>
-            <Link to={foodsIndexLink} style={{ textDecoration: 'none' ,color: '#FFF'}}>
+            <Link to={foodsIndexURL} style={{ textDecoration: 'none' ,color: '#FFF'}}>
               <Typography className={classes.title} variant="h5" noWrap textPrimary={"#000"}>
                 {HOME_TITLE.HOME_TITLE}
               </Typography>

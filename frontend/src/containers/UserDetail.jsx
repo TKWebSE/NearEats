@@ -6,7 +6,7 @@ import {fetchUserApi} from "../apis/userApis";
 import {initializeState,userActionTypes,userReducer} from "../reducer/userReducer";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
-import {userEditHistory} from "../urls/index";
+import {userEditURL} from "../urls/index";
 import {REQUEST_STATE, USER_HEADER_TITLE} from "../constants";
 import {useHistory} from "react-router-dom";
 import {USER_LABEL} from "../constants";
@@ -69,7 +69,6 @@ export const UserDetail = ({match}) => {
   
   useEffect(() => {
     dispatch({type:userActionTypes.FETCHING});
-    console.log(state)
     fetchUserApi(match.params.userId)
       .then((data) => {
         dispatch({
@@ -78,13 +77,12 @@ export const UserDetail = ({match}) => {
             user:data.user
           }
         });
-        console.log(data)
       })
     .catch(e => console.log(e));
   },[]);
   
   function onClickEditHandle() {
-    history.push(userEditHistory(state.user.id))
+    history.push(userEditURL(state.user.id))
   }
 
   return (

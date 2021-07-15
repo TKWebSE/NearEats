@@ -1,11 +1,16 @@
 import React from "react";
 import axios from "axios";
-import {userShow,signUp,userUpdate,userDelete} from "../urls/index";
+import {
+    userShowBackendURL,
+    signUpBackendURL,
+    userUpdateBackendURL,
+    userDeleteBackendURL
+} from "../urls/index";
 
 //特定のユーザーを取得する
 //editとdetailで使用
 export const fetchUserApi = (userId) => {
-    return axios.get(userShow(userId),{
+    return axios.get(userShowBackendURL(userId),{
         params:{
             userId:userId
         }   
@@ -18,8 +23,7 @@ export const fetchUserApi = (userId) => {
 
 //ユーザーを作成する
 export const userCreateApi = (user) => {
-    console.log(user)
-    return axios.post(signUp,{
+    return axios.post(signUpBackendURL,{
         name:user.name,
         email:user.email,
         password:user.password,
@@ -33,7 +37,7 @@ export const userCreateApi = (user) => {
 
 //ユーザーを更新する
 export const userUpdateApi = (user) => {
-    return axios.put(userUpdate(user.id),{
+    return axios.put(userUpdateBackendURL(user.id),{
         user:{
             name:user.name,
             address:user.address,
@@ -49,7 +53,7 @@ export const userUpdateApi = (user) => {
 
 //ユーザーを削除する
 export const UserDelete = (user) => {
-    return axios.delete(userDelete,{
+    return axios.delete(userDeleteBackendURL(user.id),{
         params:{
             user:user
         }

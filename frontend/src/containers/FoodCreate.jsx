@@ -8,7 +8,7 @@ import { initializeState,
         foodCreateReducer } from "../reducer/foodCreateReducer";
 import {createFoodApi} from "../apis/foodApis";
 import {useHistory} from "react-router-dom";
-import {foodShowHistory} from "../urls/index";
+import {foodShowURL} from "../urls/index";
 import {FoodState,FoodDispatch} from "../context/Context";
 import {FoodCreateCard} from "../component/foodComponent/FoodCreateCard";
 
@@ -32,7 +32,7 @@ export const FoodCreate = () => {
         const user_id = 1
         createFoodApi(state.food,user_id)
         .then((data) => {
-            history.push(foodShowHistory(data.food.id))
+            history.push(foodShowURL(data.food.id))
         })
         .catch(e => console.log(e))
     }

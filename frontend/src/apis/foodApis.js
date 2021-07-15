@@ -1,10 +1,16 @@
 import axios from "axios";
 import { useReducer } from "react";
-import { foodsIndex ,foodShow,foodCreate,foodUpdate,foodDelete} from "../urls/index";
+import { 
+    foodsIndexBackendURL ,
+    foodShowBackendURL,
+    foodCreateBackendURL,
+    foodUpdateBackendURL,
+    foodDeleteBackendURL
+} from "../urls/index";
 
 //food一覧を取得する
 export const fetchFoodsIndexApi = () => {
-    return axios.get(foodsIndex)
+    return axios.get(foodsIndexBackendURL)
     .then(res =>{
         return res.data
     }
@@ -13,7 +19,7 @@ export const fetchFoodsIndexApi = () => {
 }
 //特定のfoodを取得する(editでも使用している)
 export const fetchFoodApi = (food_id) => {
-    return axios.get(foodShow(food_id),{
+    return axios.get(foodShowBackendURL(food_id),{
     params: {
         foodId:food_id
     }
@@ -26,9 +32,7 @@ export const fetchFoodApi = (food_id) => {
 }
 
 export const createFoodApi = (food,user_id) => {
-    console.log(foodCreate)
-    console.log(food)
-    return axios.post(foodCreate,{
+    return axios.post(foodCreateBackendURL,{
         food:{
             name:food.name,
             price:food.price,
@@ -43,7 +47,7 @@ export const createFoodApi = (food,user_id) => {
 }
 
 export const updateFoodApi = (food) => {
-    return axios.put(foodUpdate(food.id),{
+    return axios.put(foodUpdateBackendURL(food.id),{
         food:{
             name:food.name,
             price:food.price,
@@ -57,7 +61,7 @@ export const updateFoodApi = (food) => {
 }
 
 export const deleteFoodApi = (food) => {
-    return axios.delete(foodDelete(food.id),{
+    return axios.delete(foodDeleteBackendURL(food.id),{
         food:food
     })
     .then((res) =>{

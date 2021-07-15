@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { fetchUserApi,userUpdateApi } from "../apis/userApis";
 import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
 import {initializeState,userActionTypes,userReducer} from "../reducer/userReducer";
-import {userDetailHistory} from "../urls/index";
+import {userShowURL} from "../urls/index";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {UserEditCard} from "../component/userComponent/UserEditCard";
 import {ButtonTheme} from "../style_constants";
@@ -49,7 +49,7 @@ export const UserEdit = ({match}) => {
     function submitHandle() {
         userUpdateApi(state.user)
         .then(
-            history.push(userDetailHistory(state.user.id))
+            history.push(userShowURL(state.user.id))
         )
     }
 

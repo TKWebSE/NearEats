@@ -22,7 +22,7 @@ import PrimarySearchAppBar from "./component/MaterialUIHead";
 import { headerTheme } from "./style_constants";
 
 import {SignIn} from "./containers/SignIn";
-
+import { Home } from "./containers/Home";
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionReducer} from "./reducer/sessionReducer";
 import { sessionIsLogin } from "./urls";
@@ -54,7 +54,7 @@ function App() {
         <Route 
           exact
           path="/home">
-          <SignIn/>
+          <Home/>
         </Route>
         //signIn画面
         <Route 

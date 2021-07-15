@@ -1,12 +1,11 @@
 import axios from "axios";
 import React from "react";
-import {signIn,signOut,sessionIsLogin} from '../urls/index'
+import {signInBackendURL,signOutBackendURL,sessionIsLoginBackendURL} from '../urls/index'
 import Cookies from "js-cookie";
 
 //ログインする
 export const signInApi = (user) => {
-    console.log(signIn)
-    return axios.post(signIn,{
+    return axios.post(signInBackendURL,{
             email:user.email,
             password:user.password,
     })
@@ -26,7 +25,7 @@ export const signOutApi = () => {
     const accessToken = Cookies.get("access_token");
     const client = Cookies.get("client");
     
-    return axios.delete(signOut(),{
+    return axios.delete(signOutBackendURL(),{
         params:{
             uid:uid,
             accessToken:accessToken,
@@ -41,7 +40,7 @@ export const isLoginApi = () => {
     const uid = Cookies.get("uid");
     const accessToken = Cookies.get("access_token");
     const client = Cookies.get("client");
-    return axios.get(sessionIsLogin,{
+    return axios.get(sessionIsLoginBackendURL,{
         headers: {
           'access-token': accessToken,
           client: client,

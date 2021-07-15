@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
 import { initializeState,orderDetailActionTypes,orderDetailReducer} from "../reducer/orderDetailReducer";
 import {fetchOrderApis} from "../apis/orderApis";
-import {orderEditHistory} from "../urls/index";
+import {orderEditURL} from "../urls/index";
 import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
 import {OrderDispatch,OrderState} from "../context/Context";
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -40,7 +40,7 @@ export const OrderDetail = ({match}) => {
   },[]);
 
   function submitHandle() {
-     history.push(orderEditHistory(state.user.id))
+     history.push(orderEditURL(state.user.id))
   }
 
   return (

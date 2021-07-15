@@ -15,7 +15,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import {foodCreateHistory,userDetailHistory} from "../urls/index";
+import {foodCreateURL,userShowURL} from "../urls/index";
 import {isLoginApi} from "../apis/sessionApis";
 import Cookies from "js-cookie";
 
@@ -24,28 +24,28 @@ export const MaterialUIDrawerList = () => {
     const userId = Cookies.get("user_id");
 
     function createFoodLink () {
-        history.push(foodCreateHistory());
+        history.push(foodCreateURL);
     }
 
     function myFoodLink () {
-        history.push(userDetailHistory(1));
+        history.push(userShowURL(1));
     }
 
     function myTaskLink () {
-        history.push(userDetailHistory(1));
+        history.push(userShowURL(1));
     }
     
     //認証機能実装後改修予定(idを受け取る)
     function profileLink () {
-        history.push(userDetailHistory(userId));
+        history.push(userShowURL(userId));
     }
 
     function orderLink () {
-        history.push(userDetailHistory(userId));
+        history.push(userShowURL(userId));
     }
 
     function settingLink () {
-        history.push(userDetailHistory(userId));
+        history.push(userShowURL(userId));
     }
 
     return (

@@ -6,7 +6,7 @@ import {signInApi} from "../apis/sessionApis";
 import {SESSION_HEADER_TITLE} from "../constants";
 import {SignInCard} from "../component/sessionComponent/SignInCard";
 import {SessionDispatch,SessionState} from "../context/Context";
-import {foodsIndexHistory} from "../urls/index";
+import {foodsIndexURL} from "../urls/index";
 import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
@@ -43,7 +43,7 @@ export const SignIn= () =>{
           },
       });
       console.log(Cookies.get())
-      history.push(foodsIndexHistory);
+      history.push(foodsIndexURL);
     })
     .catch((e) => console.log(e))
   }

@@ -10,7 +10,7 @@ import { initializeState,foodEditActionTypes,foodEditReducer } from "../reducer/
 import {FoodEditCard} from "../component/foodComponent/FoodEditCard";
 import { FoodDispatch,FoodState } from '../context/Context';
 import {useHistory} from "react-router-dom";
-import {foodShowHistory} from "../urls/index";
+import {foodShowURL} from "../urls/index";
 
 const DetailWrapper = styled.div`
   margin-left:20%;
@@ -48,7 +48,7 @@ export const FoodEdit = ({match}) => {
   const submitHandle=(e) => {
     updateFoodApi(state.food)
     .then((data) => {
-      history.push(foodShowHistory(data.food.id))
+      history.push(foodShowURL(data.food.id))
     })
     .catch(e => console.log(e))
   }
