@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import {isLoginApi} from "./apis/sessionApis";
 import {UserDetail} from './containers/UserDetail';
 import {UserCreate} from "./containers/UserCreate";
 import {UserEdit} from "./containers/UserEdit";
@@ -24,34 +25,34 @@ import { headerTheme } from "./style_constants";
 import {SignIn} from "./containers/SignIn";
 import { Home } from "./containers/Home";
 import {sessionApis} from "./apis/sessionApis";
-import {initializeState,sessionReducer} from "./reducer/sessionReducer";
-import { sessionIsLogin } from "./urls";
+import {initializeState,sessionActionTypes,sessionReducer} from "./reducer/sessionReducer";
 
 function App() {
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
-  // useEffect(() => {
-  //   sessionisLogin()
-  //   .then((data) => {
-  //     dispatch({
-  //       type:sessionIsLogin,
-  //       payload: {
-  //         user:data.user
-  //       },
-  //     })
-  //   .catch((e) => console.log(e))  
-  //   })
-  // })
+  useEffect(() => {
+
+      isLoginApi()
+      .then((data)=>{
+        dispatch({
+          type:sessionActionTypes.ISLOGIN,
+          payload: {
+            currentUser:data.user
+          },
+          payload: {
+            is_login:data.is_login
+          },
+        })
+      })
+      .catch((e) => console.log(e))
+  })
 
   return (
     <Fragment>
     <Router>
-    {/* {
-    if state.currentUser ===  currentUser */}
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
-    // }
       <Switch>
       //HOME画面
         <Route 

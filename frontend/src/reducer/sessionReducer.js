@@ -21,12 +21,12 @@ export const sessionReducer = (state,action) => {
             }
         case  sessionActionTypes.SIGNOUT:
             return {
-                sessionUser:null,
+                currentUser:null,
                 isLogin:false,
             }
         case sessionActionTypes.ISLOGIN:
             return {
-                sessionUser:action.payload.user,
+                currentUser:action.payload.currentUser,
                 isLogin:action.payload.islogin,
             }
         default:
