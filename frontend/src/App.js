@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import {isLoginApi} from "./apis/sessionApis";
 import {UserDetail} from './containers/UserDetail';
@@ -27,25 +28,39 @@ import { Home } from "./containers/Home";
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionActionTypes,sessionReducer} from "./reducer/sessionReducer";
 
+function PrivateRoute({ component: Component}){
+  const [state,dispatch] = useReducer(sessionReducer,initializeState);
+
+  return(
+  state.isLogin?
+    <Component/>
+  :
+    <Redirect
+    to={{
+      pathname: "/users/signin",
+    }}
+/>
+  )
+}
+
 function App() {
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
   useEffect(() => {
-
-      isLoginApi()
-      .then((data)=>{
-        dispatch({
-          type:sessionActionTypes.ISLOGIN,
-          payload: {
-            currentUser:data.user
-          },
-          payload: {
-            is_login:data.is_login
-          },
-        })
+    isLoginApi()
+    .then((data)=>{
+      dispatch({
+        type:sessionActionTypes.ISLOGIN,
+        payload: {
+          currentUser:data.user
+        },
+        payload: {
+          is_login:data.is_login
+        },
       })
-      .catch((e) => console.log(e))
-  })
+    })
+    .catch((e) => console.log(e))
+  },[])
 
   return (
     <Fragment>
@@ -55,23 +70,26 @@ function App() {
     </ThemeProvider> 
       <Switch>
       //HOME画面
-        <Route 
+        <PrivateRoute 
           exact
-          path="/home">
-          <Home/>
-        </Route>
+          path="/home"
+          component={Home}>
+          {/* <Home/> */}
+        </PrivateRoute>
         //signIn画面
         <Route 
           exact
           path="/users/signin">
           <SignIn/>
         </Route>
-        //user作成画面
-        <Route 
-          exact
-          path="/users/create">
-          <UserCreate/>
-        </Route>
+        {/* <AuthenticatedGuard> */}
+          //user作成画面
+          <Route 
+            exact
+            path="/users/create">
+            <UserCreate/>
+          </Route>
+        {/* </AuthenticatedGuard> */}
         //user詳細画面
         <Route 
           exact
