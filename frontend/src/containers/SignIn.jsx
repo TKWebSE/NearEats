@@ -30,7 +30,6 @@ export const SignIn= () =>{
   const [state,dispatch] = useReducer(signInReducer,initializeState);
   const history = useHistory();
 
-
   function submitSignIn () {
     signInApi(state.user)
     .then((data) => {

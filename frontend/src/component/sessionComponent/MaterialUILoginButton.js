@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function MaterialUILoginButton({onClick , btnLabel})   {
     const classes = useStyles();
-    console.log(btnLabel)
+
     return (
       <div>
         <Button

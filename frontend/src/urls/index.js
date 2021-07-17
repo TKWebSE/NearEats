@@ -5,6 +5,9 @@ const AUTH = "/auth"
 const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
+//HomeのURL
+export const homeURL = "/home" ;
+
 //foodのURL
 export const foodsIndexURL = `/foods`;
 export const foodCreateURL = `/foods/create`;

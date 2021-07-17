@@ -6,6 +6,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import {PrivateOnlyRoute} from "./authComponent/PrivateRoute";
+import {GuestOnlyRoute} from "./authComponent/GuestRoute";
 import {isLoginApi} from "./apis/sessionApis";
 import {UserDetail} from './containers/UserDetail';
 import {UserCreate} from "./containers/UserCreate";
@@ -27,82 +29,70 @@ import {SignIn} from "./containers/SignIn";
 import { Home } from "./containers/Home";
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionActionTypes,sessionReducer} from "./reducer/sessionReducer";
+import {SessionDispatch,SessionState} from "./context/Context";
 
-function PrivateRoute({ component: Component}){
-  const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
-  return(
-  state.isLogin?
-    <Component/>
-  :
-    <Redirect
-    to={{
-      pathname: "/users/signin",
-    }}
-/>
-  )
-}
+
 
 function App() {
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
 
-  useEffect(() => {
-    isLoginApi()
-    .then((data)=>{
-      dispatch({
-        type:sessionActionTypes.ISLOGIN,
-        payload: {
-          currentUser:data.user
-        },
-        payload: {
-          is_login:data.is_login
-        },
-      })
-    })
-    .catch((e) => console.log(e))
-  },[])
+  // useEffect(() => {
+  //   isLoginApi()
+  //   .then((data)=>{
+  //     dispatch({
+  //       type:sessionActionTypes.ISLOGIN,
+  //       payload: {
+  //         currentUser:data.user
+  //       },
+  //       payload: {
+  //         is_login:data.is_login
+  //       },
+  //     })
+  //   })
+  //   .catch((e) => console.log(e))
+  // },[])
 
   return (
     <Fragment>
+    <SessionDispatch.Provider value={dispatch}>
+    <SessionState.Provider value={state}>
     <Router>
     <ThemeProvider theme={headerTheme}>
         <PrimarySearchAppBar></PrimarySearchAppBar>
     </ThemeProvider> 
       <Switch>
       //HOME画面
-        <PrivateRoute 
+        <GuestOnlyRoute 
           exact
           path="/home"
           component={Home}>
-          {/* <Home/> */}
-        </PrivateRoute>
+        </GuestOnlyRoute>
         //signIn画面
-        <Route 
+        <GuestOnlyRoute 
           exact
-          path="/users/signin">
-          <SignIn/>
-        </Route>
-        {/* <AuthenticatedGuard> */}
-          //user作成画面
-          <Route 
-            exact
-            path="/users/create">
-            <UserCreate/>
-          </Route>
-        {/* </AuthenticatedGuard> */}
+          path="/users/signin"
+          component={SignIn}>
+        </GuestOnlyRoute>
+        //user作成画面
+        <GuestOnlyRoute 
+          exact
+          path="/users/create"
+          component={UserCreate}>
+        </GuestOnlyRoute>
         //user詳細画面
-        <Route 
+        <PrivateOnlyRoute 
           exact
           path="/users/:userId"
-          render ={({match}) => 
-            <UserDetail 
+          render={({match}) => 
+            <UserDetail
               match={match}
             />
           }
-        >          
-        </Route>
+        >     
+        </PrivateOnlyRoute>
         //user編集画面
-        <Route 
+        <PrivateOnlyRoute 
           exact
           path="/users/:userId/edit"
           render ={({match}) => 
@@ -111,21 +101,23 @@ function App() {
             />
           }
         >          
-        </Route>
+        </PrivateOnlyRoute>
         //food一覧
-        <Route
+        <PrivateOnlyRoute
           exact
-          path="/foods">
-          <Foods />
-        </Route>
+          path="/foods"
+          component={Foods}
+        >
+        </PrivateOnlyRoute>
         //food作成画面
-        <Route
+        <PrivateOnlyRoute
           exact
-          path="/foods/create">
-          <FoodCreate />
-        </Route>
+          path="/foods/create"
+          component ={FoodCreate}
+        >
+        </PrivateOnlyRoute>
         //food詳細画面
-        <Route
+        <PrivateOnlyRoute
           exact
           path="/foods/:foodId"
           render ={({match}) => 
@@ -134,9 +126,9 @@ function App() {
             />
           }
         >
-        </Route>
+        </PrivateOnlyRoute>
         //food編集画面
-        <Route
+        <PrivateOnlyRoute
           exact
           path="/foods/:foodId/edit"
           render={({match}) => 
@@ -145,15 +137,15 @@ function App() {
           />
           }
         >
-        </Route>
+        </PrivateOnlyRoute>
         //order一覧画面
-        <Route
+        <PrivateOnlyRoute
           exact
-          path="/orders">
-          <OrderIndex  />
-        </Route>
+          path="/orders"
+          component={OrderIndex}>
+        </PrivateOnlyRoute>
         //Order詳細画面
-        <Route
+        <PrivateOnlyRoute
           exact
           path="/orders/:orderId"
           render={({match}) => 
@@ -162,9 +154,11 @@ function App() {
           />
           }
         >
-        </Route>
+        </PrivateOnlyRoute>
       </Switch>
     </Router>
+    </SessionState.Provider>
+    </SessionDispatch.Provider>
     </Fragment>
   );
 }
