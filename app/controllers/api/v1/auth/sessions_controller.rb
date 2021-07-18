@@ -9,9 +9,9 @@ class Api::V1::Auth::SessionsController < ApplicationController
     logger.debug(api_v1_user_signed_in?)
     logger.debug("ぺこぺこぺこぺこ")
     if current_api_v1_user
-      render json: { is_login: true, data: current_api_v1_user }
+      render json: { is_login: true, user: current_api_v1_user }
     else
-      render json: { is_login: false, message: current_api_v1_user }
+      render json: { is_login: false, user: current_api_v1_user }
     end
   end
 

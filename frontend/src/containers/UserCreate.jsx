@@ -37,10 +37,10 @@ export const UserCreate = () => {
     function SubmitHandle() {
         userCreateApi(state.user)
         .then((data) => {
-            isLoginApi(data.user)
-            .then((data) => {
+            // isLoginApi(data.user)
+            // .then((data) => {
             console.log(data)
-        })
+        // })
             console.log(data)
             // history.pushState(userShowHistory(1))
         })

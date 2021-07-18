@@ -2,7 +2,7 @@ import React from "react";
 
 export const initializeState =  {
     currentUser:{},
-    isLogin:false,
+    isLogin:true,
 }
 
 export const sessionActionTypes = {
@@ -25,9 +25,10 @@ export const sessionReducer = (state,action) => {
                 isLogin:false,
             }
         case sessionActionTypes.ISLOGIN:
+            console.log(action.payload.data)
             return {
-                currentUser:action.payload.currentUser,
-                isLogin:action.payload.islogin,
+                currentUser:action.payload.data.user,
+                isLogin:action.payload.data.isLogin,
             }
         default:
             break;

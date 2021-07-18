@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
     before_action :configure_permitted_parameters, if: :devise_controller?
 
     helper_method :current_api_v1_user, :api_v1_user_signed_in?
-    before_action :http_header_log
+    # before_action :http_header_log
 
     # def current_user
     #     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -15,9 +15,9 @@ class ApplicationController < ActionController::API
         devise_parameter_sanitizer.permit(:sign_up, keys: [:address])
     end
 
-  private
+  # private
 
-    def http_header_log
-      request.headers.sort.map { |k, v| logger.info "#{k}:#{v}" }
-    end
+  #   def http_header_log
+  #     request.headers.sort.map { |k, v| logger.info "#{k}:#{v}" }
+  #   end
 end
