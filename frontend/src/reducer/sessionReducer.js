@@ -26,9 +26,10 @@ export const sessionReducer = (state,action) => {
             }
         case sessionActionTypes.ISLOGIN:
             console.log(action.payload.data)
+            console.log(action.payload.data)
             return {
                 currentUser:action.payload.data.user,
-                isLogin:action.payload.data.isLogin,
+                isLogin:action.payload.data.is_login,
             }
         default:
             break;

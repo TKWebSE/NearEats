@@ -46,10 +46,10 @@ export const orderUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders
 export const orderDeleteBackendURL = () =>  `${BACKEND_DEFAULT_URL}/orders/delete`;
 
 //session関連のURL
-export const signInURL = `/users/signin`;
+export const signInURL = `/sign_in`;
 
 //session関連のBackendURL
 export const signUpBackendURL = `${AUTH_URL}`;
 export const signInBackendURL = `${AUTH_URL}${signInURL}`;
-export const signOutBackendURL = `${AUTH_URL}/session/signout`;
+export const signOutBackendURL = `${AUTH_URL}/session/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;

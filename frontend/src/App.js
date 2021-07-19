@@ -74,7 +74,7 @@ function App() {
           //signIn画面
           <GuestOnlyRoute 
             exact
-            path="/users/signin"
+            path="/signin"
             component={SignIn}>
           </GuestOnlyRoute>
           //user作成画面

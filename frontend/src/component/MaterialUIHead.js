@@ -20,7 +20,8 @@ import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/
 import {SessionDispatch,SessionState} from "../context/Context";
 import { Link } from "react-router-dom";
 import {foodsIndexURL} from "../urls/index";
-import {HOME_TITLE} from "../constants";
+import {HOME_TITLE,HEADER_TEXT} from "../constants";
+import {signOutApi} from "../apis/sessionApis";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -118,6 +119,7 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  //左サイドバーを制御する
   const handleDrawer = () => {
     if(state.isOpenDrawer){
       dispacth({type:headerActionTypes.CLOSEDRAWER})
@@ -126,6 +128,11 @@ export default function PrimarySearchAppBar() {
     }
   }
 
+  const handleSignOut = () => {
+    signOutApi()
+    handleMenuClose();
+  }
+  //右側のアカウント関連メニュー
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -137,8 +144,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{HEADER_TEXT.PROFILE_TEXT}</MenuItem>
+      <MenuItem onClick={handleSignOut}>{HEADER_TEXT.SIGNOUT_TEXT}</MenuItem>
     </Menu>
   );
 

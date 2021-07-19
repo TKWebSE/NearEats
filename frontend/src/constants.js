@@ -14,6 +14,11 @@ export const HOME_TITLE = {
     SOGNUP_BUTTON_LABEL:"新規登録",
 }
 
+export const HEADER_TEXT = {
+    PROFILE_TEXT:"プロフィール",
+    SIGNOUT_TEXT:"ログアウト",
+}
+
 export const DRAWER_TEXT = {
     FOOD_CREATE_TEXT:"料理の作成",
     MY_FOOD_TEXT:"MyFood",

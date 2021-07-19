@@ -12,6 +12,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
 import { sessionIsLogin } from "../urls";
 import {isLoginApi} from "../apis/sessionApis";
+import {foodsIndexURL} from "../urls/index";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -42,7 +43,7 @@ export const UserCreate = () => {
             console.log(data)
         // })
             console.log(data)
-            // history.pushState(userShowHistory(1))
+            history.push(foodsIndexURL)
         })
         .catch(e => console.log(e))
         

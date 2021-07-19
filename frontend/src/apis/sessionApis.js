@@ -27,10 +27,16 @@ export const signOutApi = () => {
     
     return axios.delete(signOutBackendURL(),{
         params:{
+            'access-token': accessToken,
+            client:client,
             uid:uid,
-            accessToken:accessToken,
-            client:client
         }
+    })
+    .then(() => {
+        Cookies.set("user_id", null)
+        Cookies.set("access_token", null)
+        Cookies.set("client", null)
+        Cookies.set("uid", null)
     })
     .catch((e) => console.log(e))
 }
