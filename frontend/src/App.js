@@ -32,38 +32,25 @@ import { Home } from "./containers/Home";
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionActionTypes,sessionReducer} from "./reducer/sessionReducer";
 import {SessionDispatch,SessionState} from "./context/Context";
+import Cookies from "js-cookie";
 
 function App() {
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
-  // const lo = useLocation();
-  // console.log(useHistory());
-  // console.log(his)
-  // console.log(lo)
-  useEffect(() => {
-    console.log("ここでろぐいんじょうたいを確認")
-    // isLoginApi()
-    // .then((data)=>{
-    //   dispatch({
-    //     type:sessionActionTypes.ISLOGIN,
-    //     payload: {
-    //       currentUser:data.user
-    //     },
-    //     payload: {
-    //       is_login:data.is_login
-    //     },
-    //   })
-    // })
-    // .catch((e) => console.log(e))
-  },[])
+  console.log(Cookies.get())
 
   return (
     <Fragment>
       <SessionDispatch.Provider value={dispatch}>
       <SessionState.Provider value={state}>
       <Router>
-      <ThemeProvider theme={headerTheme}>
-          <PrimarySearchAppBar></PrimarySearchAppBar>
-      </ThemeProvider> 
+      {
+        state.isLogin?
+        <ThemeProvider theme={headerTheme}>
+            <PrimarySearchAppBar></PrimarySearchAppBar>
+        </ThemeProvider>
+        :
+        null
+      }
         <Switch>
         //HOME画面
           <GuestOnlyRoute 

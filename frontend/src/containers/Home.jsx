@@ -1,13 +1,8 @@
 import React,{Fragment,useEffect, useReducer,Link} from "react";
 import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
-import Skeleton from "@material-ui/lab/Skeleton"
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
-import { fetchFoodApi } from "../apis/foodApis";
-import { initializeState,
-         foodDetailActionTypes,
-         foodDetailReducer} from "../reducer/foodDetail";
 import {useHistory} from "react-router-dom";
 import {userCreateURL,signInURL} from "../urls/index";
 import {HOME_TITLE} from "../constants";

@@ -25,8 +25,6 @@ export const sessionReducer = (state,action) => {
                 isLogin:false,
             }
         case sessionActionTypes.ISLOGIN:
-            console.log(action.payload.data)
-            console.log(action.payload.data)
             return {
                 currentUser:action.payload.data.user,
                 isLogin:action.payload.data.is_login,

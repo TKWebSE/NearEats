@@ -1,4 +1,4 @@
-import React,{useState,useReducer} from 'react';
+import React,{useState,useReducer,useContext} from 'react';
 import styled from "styled-components";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,11 +17,14 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {SwipeableTemporaryDrawer} from "../component/MaterialUIDrawer";
 import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
+import {sessionActionTypes} from "../reducer/sessionReducer";
 import {SessionDispatch,SessionState} from "../context/Context";
 import { Link } from "react-router-dom";
 import {foodsIndexURL} from "../urls/index";
 import {HOME_TITLE,HEADER_TEXT} from "../constants";
 import {signOutApi} from "../apis/sessionApis";
+import {useHistory} from "react-router-dom";
+import {homeURL} from "../urls/index";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -98,7 +101,10 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [state, dispacth] = useReducer(headerReducer,headerInitializeState);
-  
+  const SessionUserState = useContext(SessionState);
+  const SessionUserDispatch = useContext(SessionDispatch);
+  const history = useHistory();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -130,7 +136,14 @@ export default function PrimarySearchAppBar() {
 
   const handleSignOut = () => {
     signOutApi()
+    .then((data) => {
+      console.log(data)
+      SessionUserDispatch({
+        type:sessionActionTypes.SIGNOUT,
+      });
+    })
     handleMenuClose();
+    history.push(homeURL)
   }
   //右側のアカウント関連メニュー
   const menuId = 'primary-search-account-menu';
