@@ -40,6 +40,7 @@ function App() {
 
   return (
     <Fragment>
+      {state.isLogin?}
       <SessionDispatch.Provider value={dispatch}>
       <SessionState.Provider value={state}>
       <Router>
