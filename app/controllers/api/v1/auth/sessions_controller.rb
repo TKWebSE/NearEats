@@ -1,6 +1,10 @@
 class Api::V1::Auth::SessionsController < ApplicationController
   # before_action :authenticate_api_v1_user!
 
+  def create 
+    logger.debug("んなぁああああああい")
+    logger.debug(params)
+  end
   def index
     logger.debug("こめんとだよ～＝＝＝＝")
     logger.debug(current_api_v1_user ==nil)

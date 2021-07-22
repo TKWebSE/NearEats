@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
     #     @current_user ||= User.find(session[:user_id]) if session[:user_id]
     # end
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:address])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:confirm_success_url])
     end
 
   # private
