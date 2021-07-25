@@ -1,4 +1,5 @@
 import React,{useContext,useEffect} from "react";
+import styled from "styled-components";
 import {
     Route,
     Redirect,
@@ -7,7 +8,12 @@ import {SessionState,SessionDispatch} from "../context/Context";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import {homeURL} from "../urls/index"
 import {isLoginApi} from "../apis/sessionApis";
+import { REQUEST_STATE } from "../constants";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+const CircleWrapper = styled.div`
+  text-align:center;
+`;
 
 export function PrivateOnlyRoute(props){
     const SessionAuthState = useContext(SessionState);
@@ -15,6 +21,9 @@ export function PrivateOnlyRoute(props){
     
     //ログイン状態をページ遷移のタイミングで確認する
     useEffect(() => {
+        SessionAuthDispatch({
+            type:sessionActionTypes.FETCHING,
+        })
         isLoginApi()
         .then((data)=>{
             console.log(data)
@@ -30,15 +39,20 @@ export function PrivateOnlyRoute(props){
     console.log(SessionAuthState)
 
     return(
-        SessionAuthState.isLogin?
-            <Route {...props}
-                match={props.computedMatch}
-            />
+        SessionAuthState.fetchSessionState === REQUEST_STATE.OK?
+            SessionAuthState.isLogin?
+                <Route {...props}
+                    match={props.computedMatch}
+                />
+            :
+                <Redirect
+                    to={{
+                    pathname: homeURL,
+                    }}
+                />
         :
-            <Redirect
-                to={{
-                pathname: homeURL,
-                }}
-            />
+            <CircleWrapper>
+                <CircularProgress/>
+            </CircleWrapper>     
     )
   }

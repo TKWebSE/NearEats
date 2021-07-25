@@ -21,7 +21,7 @@ import {sessionActionTypes} from "../reducer/sessionReducer";
 import {SessionDispatch,SessionState} from "../context/Context";
 import { Link } from "react-router-dom";
 import {foodsIndexURL} from "../urls/index";
-import {HOME_TITLE,HEADER_TEXT} from "../constants";
+import {HOME_TEXT,HEADER_TEXT} from "../constants";
 import {signOutApi} from "../apis/sessionApis";
 import {useHistory} from "react-router-dom";
 import {homeURL} from "../urls/index";
@@ -219,7 +219,7 @@ export default function PrimarySearchAppBar() {
           <TitleWrapper>
             <Link to={foodsIndexURL} style={{ textDecoration: 'none' ,color: '#FFF'}}>
               <Typography className={classes.title} variant="h5" noWrap textPrimary={"#000"}>
-                {HOME_TITLE.HOME_TITLE}
+                {HOME_TEXT.HOME_TITLE}
               </Typography>
             </Link>
           </TitleWrapper>
