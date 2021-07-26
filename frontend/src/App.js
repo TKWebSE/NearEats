@@ -24,7 +24,8 @@ import {OrderIndex} from "./containers/OrderIndex";
 import {OrderDetail} from "./containers/OrderDetail";
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import PrimarySearchAppBar from "./component/MaterialUIHead";
+import MaterialUIPrivateHeader from "./component/MaterialUIPrivateHeader";
+import MaterialUIGuestHeader from "./component/MaterialUIGuestHeader";
 import { headerTheme } from "./style_constants";
 
 import {SignIn} from "./containers/SignIn";
@@ -43,14 +44,14 @@ function App() {
       <SessionDispatch.Provider value={dispatch}>
       <SessionState.Provider value={state}>
       <Router>
+      <ThemeProvider theme={headerTheme}>
       {
         state.isLogin?
-        <ThemeProvider theme={headerTheme}>
-            <PrimarySearchAppBar></PrimarySearchAppBar>
-        </ThemeProvider>
+          <MaterialUIPrivateHeader></MaterialUIPrivateHeader>
         :
-        null
+          <MaterialUIGuestHeader></MaterialUIGuestHeader>
       }
+      </ThemeProvider>
         <Switch>
         //HOME画面
           <GuestOnlyRoute 

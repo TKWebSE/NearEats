@@ -15,7 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {SwipeableTemporaryDrawer} from "../component/MaterialUIDrawer";
+import {SwipeableTemporaryDrawer} from "./MaterialUIDrawer";
 import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import {SessionDispatch,SessionState} from "../context/Context";
@@ -96,7 +96,7 @@ const TitleWrapper = styled.div`
 
 
 //ヘッダーのファンクション
-export default function PrimarySearchAppBar() {
+export default function MaterialUIPrivateHeader() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);

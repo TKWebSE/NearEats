@@ -7,6 +7,12 @@ export const HTTP_STATUS_CODE = {
     NOT_ACCEPTABLE: 406,
 }
 
+export const HEADER_TEXT = {
+    HEADER_TITLE:"Near-Eats",
+    PROFILE_TEXT:"プロフィール",
+    SIGNOUT_TEXT:"ログアウト",
+}
+
 export const HOME_TEXT = {
     HOME_TITLE:"Near-Eats",
     SUB_TITLE:"ご近所の家庭料理をあなたの元へ",
@@ -16,11 +22,6 @@ export const HOME_TEXT = {
     BUYER_TEXT:"お近くにお住まいの方の料理を楽しむことができます。世界に一つだけの料理を味わってみませんか？",
     SELLER_TITLE:"あなたの料理を販売",
     SELLER_TEXT:"あなたが作った料理を配達し販売することができます。あなたの家のキッチンから始めてみませんか？",
-}
-
-export const HEADER_TEXT = {
-    PROFILE_TEXT:"プロフィール",
-    SIGNOUT_TEXT:"ログアウト",
 }
 
 export const DRAWER_TEXT = {
