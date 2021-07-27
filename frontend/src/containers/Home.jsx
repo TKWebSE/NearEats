@@ -36,6 +36,7 @@ const SignInWrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
+width:00%;
 float:left;
 `;
 
@@ -86,7 +87,11 @@ export const Home = ()=> {
 
     return (
         <Fragment>
+            <ImgWrapper>
+                    <HomeMainImage src={homeMainImage} alt="homeMainImage"></HomeMainImage>
+                </ImgWrapper>
             <HomeWrapper>
+                
                 <LeftSideWrapper>
                     <TitleWrapper>
                         {HOME_TEXT.HOME_TITLE}
@@ -103,9 +108,7 @@ export const Home = ()=> {
                         </SignInWrapper>
                     </ThemeProvider>
                 </LeftSideWrapper>
-                <ImgWrapper>
-                    <HomeMainImage src={homeMainImage} alt="homeMainImage"></HomeMainImage>
-                </ImgWrapper>
+                
                 <ServiceWrapper>
                     <BuyerWrapper>
                         <BuyerImageWrapper/>

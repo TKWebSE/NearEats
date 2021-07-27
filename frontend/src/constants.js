@@ -10,6 +10,8 @@ export const HTTP_STATUS_CODE = {
 export const HEADER_TEXT = {
     HEADER_TITLE:"Near-Eats",
     PROFILE_TEXT:"プロフィール",
+    SIGNIN_HEADER_LABEL:"ログイン",
+    SOGNUP_HEADER_LABEL:"新規登録",
     SIGNOUT_TEXT:"ログアウト",
 }
 
