@@ -17,7 +17,7 @@ export const HEADER_TEXT = {
 
 export const HOME_TEXT = {
     HOME_TITLE:"Near-Eats",
-    SUB_TITLE:"ご近所の家庭料理をあなたの元へ",
+    SUB_TITLE:"地域の家庭料理をあなたの食卓に",
     SIGNIN_BUTTON_LABEL:"ログイン",
     SOGNUP_BUTTON_LABEL:"新規登録",
     BUYER_TITLE:"ご近所の家庭料理を購入",

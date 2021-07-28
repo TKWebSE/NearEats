@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
     Route,
     Redirect,
+    useLocation,
   } from "react-router-dom";
 import {SessionState,SessionDispatch} from "../context/Context";
 import {sessionActionTypes} from "../reducer/sessionReducer";
@@ -18,6 +19,7 @@ const CircleWrapper = styled.div`
 export function PrivateOnlyRoute(props){
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch);
+    const location = useLocation();
     
     //ログイン状態をページ遷移のタイミングで確認する
     useEffect(() => {
@@ -35,7 +37,7 @@ export function PrivateOnlyRoute(props){
         })
         })
         .catch((e) => console.log(e))
-    },[])
+    },[location])
     console.log(SessionAuthState)
 
     return(
