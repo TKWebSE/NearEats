@@ -1,5 +1,6 @@
 import React,{Fragment,useEffect, useReducer,Link} from "react";
 import styled from "styled-components";
+import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {ButtonTheme} from "../style_constants";
@@ -14,12 +15,16 @@ const HomeWrapper = styled.div`
 
 const MainWrapper = styled.div`
     position:relative;
+    padding-bottom:20%;
 `;
 
 const MainTextWrapper = styled.div`
     position:absolute;
     top: 20%;
     left: 20%;
+    ${media.lessThan("medium")`
+        top:10%;
+    `}
 `;
 
 const TitleWrapper = styled.h1`
@@ -28,6 +33,16 @@ const TitleWrapper = styled.h1`
     color:white;
     text-shadow:1px 1px 0 black;
     opacity: 0.7;
+    ${media.lessThan("medium")`
+        margin-bottom:1%;
+        font-size:250%;
+    `}
+    ${media.lessThan("small")`
+        margin-bottom:1%;
+        font-size:250%;
+        opacity: 0.5;
+    `}
+
 `;
 
 const SubTitleWrapper = styled.div`
@@ -36,11 +51,20 @@ const SubTitleWrapper = styled.div`
     color:white;
     text-shadow:1px 1px 0 black;
     opacity: 0.7;
+    ${media.lessThan("small")`
+        margin-bottom:1%;
+        font-size:100%;
+        opacity: 0.5;
+    `}
 `;
 
 const SignUpWrapper = styled.div`
-    padding-top:40%;
+    padding-top:20%;
     font-size: 20%;
+    ${media.lessThan("small")`
+        padding-top:10%;
+        font-size: 20%;
+    `}
 `;
 
 const SignInWrapper = styled.div`
@@ -55,10 +79,6 @@ const HomeMainImage = styled.img`
 `;
 
 const ServiceWrapper = styled.div`
-    position:absolute;
-    top:110%;
-    left:20%;
-    bottom:20%;
 `;
 
 const BuyerWrapper = styled.div`
@@ -98,6 +118,29 @@ export const Home = ()=> {
     function signInHandle() {
         history.push(signInURL)
     }
+    function GetWindowSize () {
+        var w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+        console.log(x)
+        switch(x){
+            case x <= 450:
+                console.log(x)
+                 return {small:"small"}
+            case x <=768:
+                return {large:"large"}
+            case x <= 1170:
+                return {midium:"midium"}
+            case x  > 1170:
+                return {huge:"huge"}
+            default:
+                throw Error();
+        }
+    }
+    console.log(GetWindowSize())
 
     return (
         <Fragment>
@@ -115,7 +158,7 @@ export const Home = ()=> {
                     </SubTitleWrapper>
                     <ThemeProvider theme={ButtonTheme}>
                         <SignUpWrapper>
-                            <MaterialUICommonButton onClick={() => signUpHandle()} btnLabel={HOME_TEXT.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
+                            <MaterialUICommonButton size="small" onClick={() => signUpHandle()} btnLabel={HOME_TEXT.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
                         </SignUpWrapper>
                         <SignInWrapper>
                             <MaterialUICommonButton onClick={() => signInHandle()} btnLabel={HOME_TEXT.SIGNIN_BUTTON_LABEL}></MaterialUICommonButton>
