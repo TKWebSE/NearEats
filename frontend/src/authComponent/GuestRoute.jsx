@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const CircleWrapper = styled.div`
   text-align:center;
+  padding-top:25%;
 `;
 
 export function GuestOnlyRoute(props){

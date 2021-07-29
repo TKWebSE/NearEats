@@ -20,10 +20,17 @@ export const HOME_TEXT = {
     SUB_TITLE:"地域の家庭料理をあなたの食卓に",
     SIGNIN_BUTTON_LABEL:"ログイン",
     SOGNUP_BUTTON_LABEL:"新規登録",
-    BUYER_TITLE:"ご近所の家庭料理を購入",
+    BUYER_TITLE:"地域の家庭料理を楽しめる",
     BUYER_TEXT:"お近くにお住まいの方の料理を楽しむことができます。世界に一つだけの料理を味わってみませんか？",
     SELLER_TITLE:"あなたの料理を販売",
     SELLER_TEXT:"あなたが作った料理を配達し販売することができます。あなたの家のキッチンから始めてみませんか？",
+    HOWTO_TITLE:"あなたのキッチンから料理を届けるには？",
+    HOWTO_UPLOAD_TITLE:"1.料理を出品する！",
+    HOWTO_UPLOAD_TEXT:"あなたの料理をアプリ上に出品しましょう。写真が命です。",
+    HOWTO_GETTASK_AND_COOK_TITLE:"2.料理が購入されたら、調理！",
+    HOWTO_GETTASK_AND_COOK_TEXT:"料理が購入されたら、さっそく調理していきましょう。使い捨ての容器に盛り付けることをお勧めします。",
+    HOWTO_DELIVER_FOOD_TITLE:"3.所定の場所までお届け！",
+    HOWTO_DELIVER_FOOD_TEXT:"アプリの表示に沿って、完成した料理を配達しましょう。",
 }
 
 export const DRAWER_TEXT = {

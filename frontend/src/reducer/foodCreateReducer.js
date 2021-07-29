@@ -4,9 +4,9 @@ import { foodCreate } from "../urls";
 
 export const initializeState = {
     food:{
-        name:"nameeeeeee",
-        price:100,
-        description:"desdesceeeee",
+        name:"",
+        price:0,
+        description:"",
     },
 }
 

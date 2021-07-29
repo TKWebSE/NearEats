@@ -14,13 +14,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const CircleWrapper = styled.div`
   text-align:center;
+  padding-top:25%;
 `;
 
 export function PrivateOnlyRoute(props){
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch);
     const location = useLocation();
-    
+
     //ログイン状態をページ遷移のタイミングで確認する
     useEffect(() => {
         SessionAuthDispatch({

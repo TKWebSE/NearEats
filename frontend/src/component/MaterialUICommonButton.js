@@ -8,13 +8,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUICommonButton({size,onClick , btnLabel})   {
+export function MaterialUICommonButton({onClick , btnLabel})   {
     const classes = useStyles();
 
     return (
       <div>
         <Button
-          size={size}
+          size="medium"
           variant="contained"
           color="primary"
           className={classes.button}

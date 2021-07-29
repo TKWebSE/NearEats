@@ -1,4 +1,5 @@
-import React, {Fragment,useReducer,useEffect} from "react";
+import React, {Fragment,useReducer} from "react";
+import media from "styled-media-query";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
@@ -30,6 +31,9 @@ const UserCreateCardWrapper = styled.div`
 const UserCreateSubmitWrapper = styled.div`
     margin-left:90%;
     text-align: right;
+    ${media.lessThan("small")`
+        margin-left:80%;
+    `}
 `;
 
 export const UserCreate = () => {

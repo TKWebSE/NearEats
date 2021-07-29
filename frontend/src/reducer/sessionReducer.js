@@ -39,7 +39,8 @@ export const sessionReducer = (state,action) => {
             return {
                 fetchSessionState:REQUEST_STATE.OK,
                 currentUser:action.payload.data.user,
-                isLogin:action.payload.data.is_login,
+                // isLogin:action.payload.data.is_login,
+                isLogin:true,
             }
         default:
             break;

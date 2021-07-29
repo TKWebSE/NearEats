@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useReducer} from 'react';
 import styled from "styled-components";
+import media from "styled-media-query";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
 

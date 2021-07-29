@@ -43,7 +43,6 @@ export default function MaterialUIGuestHeader() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-            
           <Typography variant="h6" className={classes.title}>
           <TypographyWrapper>
             <Link to={homeURL} style={{ textDecoration: 'none' ,color: '#FFF'}}>
@@ -51,8 +50,8 @@ export default function MaterialUIGuestHeader() {
             </Link>
             </TypographyWrapper>
           </Typography>
-          <Button color="inherit" onClick={() => signUpHandle()}>{HEADER_TEXT.SIGNIN_HEADER_LABEL}</Button>
-          <Button color="inherit" onClick={() => signInHandle()}>{HEADER_TEXT.SOGNUP_HEADER_LABEL}</Button>
+          <Button color="inherit" onClick={() => signInHandle()}>{HEADER_TEXT.SIGNIN_HEADER_LABEL}</Button>
+          <Button color="inherit" onClick={() => signUpHandle()}>{HEADER_TEXT.SOGNUP_HEADER_LABEL}</Button>
         </Toolbar>
       </AppBar>
     </div>

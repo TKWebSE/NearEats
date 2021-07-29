@@ -16,6 +16,7 @@ import {UserCreate} from "./containers/UserCreate";
 import {UserEdit} from "./containers/UserEdit";
 
 import {Foods} from './containers/Foods.jsx';
+import {MyFoods} from './containers/MyFoods.jsx';
 import {FoodCreate} from "./containers/FoodCreate";
 import { FoodDetail } from './containers/FoodDetail';
 import { FoodEdit} from "./containers/FoodEdit";
@@ -93,12 +94,18 @@ function App() {
             }
           >          
           </PrivateOnlyRoute>
-          //food一覧
+          //foods一覧
           <PrivateOnlyRoute
             exact
             path="/foods"
             component={Foods}
           >
+          //Myfoods一覧
+          <PrivateOnlyRoute
+            exact
+            path="/myfoods"
+            component={MyFoods}
+          ></PrivateOnlyRoute> 
           </PrivateOnlyRoute>
           //food作成画面
           <PrivateOnlyRoute
