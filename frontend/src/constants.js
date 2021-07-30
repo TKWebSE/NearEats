@@ -48,6 +48,7 @@ export const SESSION_HEADER_TITLE = {
 
 export const FOOD_HEADER_TITLE = {
     FOOD_INDEX:"近くの料理を検索",
+    MYFOOD:"出品した料理一覧",
     FOOD_CREATE:"料理の作成",
     FOOD_DETAIL:"料理の詳細",
     FOOD_EDIT:"料理の編集",

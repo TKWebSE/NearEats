@@ -8,7 +8,6 @@ import {
 import {SessionState,SessionDispatch} from "../context/Context";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import {foodsIndexURL} from "../urls/index";
-import {useHistory} from "react-router-dom";
 import {isLoginApi} from "../apis/sessionApis";
 import { REQUEST_STATE } from "../constants";
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -28,18 +27,19 @@ export function GuestOnlyRoute(props){
         SessionAuthDispatch({
             type:sessionActionTypes.FETCHING,
         })
+        console.log("にんしょうちぇっくさどう")
         isLoginApi()
         .then((data)=>{
             console.log(data)
-        SessionAuthDispatch({
-            type:sessionActionTypes.ISLOGIN,
-            payload: {
-                data:data
-            },
-        })
+            SessionAuthDispatch({
+                type:sessionActionTypes.ISLOGIN,
+                payload: {
+                    data:data
+                },
+            })
         })
         .catch((e) => console.log(e))
-    },[location])
+    },[location.pathname])
     console.log(SessionAuthState)
 
     return(

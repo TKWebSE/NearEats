@@ -18,22 +18,32 @@ import Cookies from "js-cookie";
 const FoodsWrapper = styled.div`
     display: inline-block
     float:left;
-    margin-right:5%;
-    margin-left:5%;
+    paddding-right:10%;
+    padding-left:10%;
     margin-top:5%;
 `;
 
 const FoodsIndexTitle = styled.h2`
     margin-top:0px;
+    font-size:180%;
+    ${media.lessThan("large")`
+        font-size:160%;
+    `}
+    ${media.lessThan("midium")`
+        font-size:150%;
+    `}
 `;
 
 const ContentsList = styled.div`
     display: flex;
     justify-content: space-around;
     float:left;
-    width:18%;
+    width:20%;
     margin-left:1%;
     margin-right:1%;
+    ${media.lessThan("medium")`
+        width:15%;
+    `}
 `;
 
 const FoodCards = styled(FoodCard)`

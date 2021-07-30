@@ -31,6 +31,7 @@ export const fetchFoodApi = (food_id) => {
     .catch(e => console.log(e));
 }
 
+//foodを新規登録する
 export const createFoodApi = (food,user_id) => {
     return axios.post(foodCreateBackendURL,{
         food:{
@@ -46,6 +47,7 @@ export const createFoodApi = (food,user_id) => {
     .catch(e => console.log(e))
 }
 
+//foodを更新する
 export const updateFoodApi = (food) => {
     return axios.put(foodUpdateBackendURL(food.id),{
         food:{
@@ -60,6 +62,7 @@ export const updateFoodApi = (food) => {
     .catch(e => console.log(e));
 }
 
+//foodを削除する
 export const deleteFoodApi = (food) => {
     return axios.delete(foodDeleteBackendURL(food.id),{
         food:food

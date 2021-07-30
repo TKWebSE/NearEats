@@ -62,7 +62,7 @@ export const MyFoods = () => {
         <Fragment>
             <FoodsWrapper>
                 <FoodsIndexTitle>
-                    {FOOD_HEADER_TITLE.FOOD_INDEX}
+                    {FOOD_HEADER_TITLE.MYFOOD}
                 </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.LOADING?

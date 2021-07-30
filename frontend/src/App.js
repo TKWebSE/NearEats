@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import {PrivateOnlyRoute} from "./authComponent/PrivateRoute";
 import {GuestOnlyRoute} from "./authComponent/GuestRoute";
+import { REQUEST_STATE } from "./constants";
 import {isLoginApi} from "./apis/sessionApis";
 import {UserDetail} from './containers/UserDetail';
 import {UserCreate} from "./containers/UserCreate";
@@ -38,8 +39,8 @@ import Cookies from "js-cookie";
 
 function App() {
   const [state,dispatch] = useReducer(sessionReducer,initializeState);
-  console.log(Cookies.get())
 
+  console.log(Cookies.get())
   return (
     <Fragment>
       <SessionDispatch.Provider value={dispatch}>
@@ -47,10 +48,13 @@ function App() {
       <Router>
       <ThemeProvider theme={headerTheme}>
       {
-        state.isLogin?
-          <MaterialUIPrivateHeader></MaterialUIPrivateHeader>
+        state.fetchSessionState === REQUEST_STATE.OK?
+          state.isLogin?
+            <MaterialUIPrivateHeader></MaterialUIPrivateHeader>
+          :
+            <MaterialUIGuestHeader></MaterialUIGuestHeader>
         :
-          <MaterialUIGuestHeader></MaterialUIGuestHeader>
+        null
       }
       </ThemeProvider>
         <Switch>
@@ -100,12 +104,13 @@ function App() {
             path="/foods"
             component={Foods}
           >
+          </PrivateOnlyRoute> 
           //Myfoods一覧
           <PrivateOnlyRoute
             exact
             path="/myfoods"
             component={MyFoods}
-          ></PrivateOnlyRoute> 
+          >
           </PrivateOnlyRoute>
           //food作成画面
           <PrivateOnlyRoute

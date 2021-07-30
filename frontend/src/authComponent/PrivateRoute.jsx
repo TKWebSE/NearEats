@@ -22,23 +22,24 @@ export function PrivateOnlyRoute(props){
     const SessionAuthDispatch = useContext(SessionDispatch);
     const location = useLocation();
 
-    //ログイン状態をページ遷移のタイミングで確認する
+    // ログイン状態をページ遷移のタイミングで確認する
     useEffect(() => {
         SessionAuthDispatch({
             type:sessionActionTypes.FETCHING,
         })
+        console.log("Private側の認証確認中")
         isLoginApi()
         .then((data)=>{
             console.log(data)
-        SessionAuthDispatch({
-            type:sessionActionTypes.ISLOGIN,
-            payload: {
-                data:data
-            },
-        })
+            SessionAuthDispatch({
+                type:sessionActionTypes.ISLOGIN,
+                payload: {
+                    data:data
+                },
+            })
         })
         .catch((e) => console.log(e))
-    },[location])
+    },[location.pathname])
     console.log(SessionAuthState)
 
     return(

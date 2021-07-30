@@ -22,10 +22,12 @@ const FoodName = styled.h1`
     margin-top:5%;
     margin-bottom:0px;
     text-decoration: none;
+    font-size:180%;
 `;
 
 const FoodPrice = styled.div`
-    margin-left:5%;
+    // margin-left:5%;
+    font-size:150%;
 `;
 
 
