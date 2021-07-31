@@ -35,7 +35,7 @@ export const HOME_TEXT = {
 
 export const DRAWER_TEXT = {
     FOOD_CREATE_TEXT:"料理の作成",
-    MY_FOOD_TEXT:"MyFood",
+    MY_FOOD_TEXT:"MyFoods",
     TASK_TEXT:"MyTask",
     PROFILE_TEXT:"プロフィール",
     ORDER_TEXT:"注文履歴",

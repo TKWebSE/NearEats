@@ -15,7 +15,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import {foodCreateURL,userShowURL} from "../urls/index";
+import {foodCreateURL,myFoodsURL,userShowURL} from "../urls/index";
 import {isLoginApi} from "../apis/sessionApis";
 import Cookies from "js-cookie";
 
@@ -28,7 +28,7 @@ export const MaterialUIDrawerList = () => {
     }
 
     function myFoodLink () {
-        history.push(userShowURL(1));
+        history.push(myFoodsURL);
     }
 
     function myTaskLink () {

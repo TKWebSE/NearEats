@@ -5,19 +5,19 @@ export const initializeState = {
     foodsList: []
 }
 
-export const foodsActionTypes = {
+export const foodsListActionTypes = {
     FETCHING: "FETCHING",
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const foodsIndexReducer = (state,action) => {
+export const foodsListReducer = (state,action) => {
     switch (action.type) {
-        case foodsActionTypes.FETCHING:
+        case foodsListActionTypes.FETCHING:
             return {
                 ...state,
                 fetchState:REQUEST_STATE.LOADING,
             }
-        case foodsActionTypes.FETCH_SUCCESS:
+        case foodsListActionTypes.FETCH_SUCCESS:
             return {
                 fetchState: REQUEST_STATE.OK,
                 foodsList: action.payload.foods,

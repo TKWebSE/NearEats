@@ -1,5 +1,6 @@
 import React ,{ Fragment } from 'react';
 import styled from "styled-components";
+import media from "styled-media-query";
 import { Link } from "react-router-dom";
 import foodImage from "../../images/food-image.jpg";
 import {foodShowURL} from "../../urls/index";
@@ -23,11 +24,28 @@ const FoodName = styled.h1`
     margin-bottom:0px;
     text-decoration: none;
     font-size:180%;
+    ${media.lessThan("large")`
+        font-size:150%;
+    `}
+    ${media.lessThan("medium")`
+        font-size:120%;
+    `}
+    ${media.lessThan("small")`
+        font-size:110%;
+    `}
 `;
 
 const FoodPrice = styled.div`
-    // margin-left:5%;
     font-size:150%;
+    ${media.lessThan("large")`
+        font-size:120%;
+    `}
+    ${media.lessThan("medium")`
+        font-size:100%;
+    `}
+    ${media.lessThan("small")`
+        font-size:90%;
+    `}
 `;
 
 

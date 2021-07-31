@@ -8,9 +8,9 @@ import { fetchFoodsIndexApi } from '../apis/foodApis';
 import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
 import { 
     initializeState,
-    foodsActionTypes,
-    foodsIndexReducer,
-} from '../reducer/foodsIndexReducer';
+    foodsListActionTypes,
+    foodsListReducer,
+} from '../reducer/foodsListReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
 import Cookies from "js-cookie";
 
@@ -18,8 +18,8 @@ import Cookies from "js-cookie";
 const FoodsWrapper = styled.div`
     display: inline-block
     float:left;
-    paddding-right:10%;
-    padding-left:10%;
+    margin-right:10%;
+    margin-left:10%;
     margin-top:5%;
 `;
 
@@ -29,8 +29,11 @@ const FoodsIndexTitle = styled.h2`
     ${media.lessThan("large")`
         font-size:160%;
     `}
-    ${media.lessThan("midium")`
-        font-size:150%;
+    ${media.lessThan("medium")`
+        font-size:130%;
+    `}
+    ${media.lessThan("small")`
+        font-size:110%;
     `}
 `;
 
@@ -38,11 +41,14 @@ const ContentsList = styled.div`
     display: flex;
     justify-content: space-around;
     float:left;
-    width:20%;
+    width:23%;
     margin-left:1%;
     margin-right:1%;
     ${media.lessThan("medium")`
-        width:15%;
+        width:30%;
+    `}
+    ${media.lessThan("small")`
+        width:48%;
     `}
 `;
 
@@ -52,14 +58,14 @@ const FoodCards = styled(FoodCard)`
 `;
 
 export const Foods = () => {
-    const [state,dispatch] = useReducer(foodsIndexReducer,initializeState);
+    const [state,dispatch] = useReducer(foodsListReducer,initializeState);
 
     useEffect(() => {
-        dispatch({type: foodsActionTypes.FETCHING})
+        dispatch({type: foodsListActionTypes.FETCHING})
         fetchFoodsIndexApi()
         .then((data) => {
             dispatch({
-                type: foodsActionTypes.FETCH_SUCCESS,
+                type: foodsListActionTypes.FETCH_SUCCESS,
                 payload: {
                     foods: data.foods
                 },

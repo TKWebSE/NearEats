@@ -10,6 +10,7 @@ export const homeURL = "/home" ;
 
 //foodのURL
 export const foodsIndexURL = `/foods`;
+export const myFoodsURL = `/myfoods`;
 export const foodCreateURL = `/foods/create`;
 export const foodShowURL = (foodId) => `/foods/${foodId}`;
 export const foodUpdateURL = (foodId) => `/foods/${foodId}/edit`;
