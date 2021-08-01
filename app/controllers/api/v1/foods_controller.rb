@@ -9,6 +9,24 @@ module Api
                 }, status: :ok
             end
 
+            def MyFoodsIndex
+                user = User.find(id: params[:id])
+                foods = Food.where(user_id: user.id)
+
+                render json: {
+                    foods: foods
+                }, status: :ok
+            end
+
+            def searchIndex
+                user = User.find(id: params[:id])
+                foods = Food.where(user_id: user.id)
+
+                render json: {
+                    foods: foods
+                }, status: :ok
+            end
+
             def show 
                 food = Food.find_by(id: params[:id])
 
