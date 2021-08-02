@@ -18,7 +18,7 @@ export const fetchFoodsIndexApi = () => {
     .catch(e=> console.log(e))
 }
 //特定のfoodを取得する(editでも使用している)
-export const fetchFoodApi = (food_id) => {
+export const fetchMyFoodsIndex = (food_id) => {
     return axios.get(foodShowBackendURL(food_id),{
     params: {
         foodId:food_id

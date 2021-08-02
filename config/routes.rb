@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :foods do
-          get searchIndex
-          get MyFoodsIndex
+          get 'searchIndex', to: 'foods#searchIndex'
+          get 'fetchMyFoodsIndex', to: 'foods#fetchMyFoodsIndex'
       end
       resources :orders
 
