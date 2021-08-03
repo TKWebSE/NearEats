@@ -22,6 +22,7 @@ export const userActionTypes = {
     SETTINGUSERPASSWORD:"SETTINGUSERPASSWORD",
     SETTINGUSERPASSWORDCONFIRMATION:"SETTINGUSERPASSWORDCONFIRMATION",
     SETTINGUSERADDRESS:"SETTINGUSERADDRESS",
+    SETTINGMESSAGE:"SETTINGMESSAGE",
 }
 
 export const userReducer = (state,action) => {
@@ -35,6 +36,7 @@ export const userReducer = (state,action) => {
             return {
                 fetchState:REQUEST_STATE.OK,
                 user:action.payload.user,
+                message:state.message,
             }
         case userActionTypes.SETTINGUSERNAME:
             return{
@@ -46,7 +48,8 @@ export const userReducer = (state,action) => {
                     email:state.user.email,
                     password:state.user.password,
                     passwordConfirmation:state.user.passwordConfirmation,
-                }
+                },
+                message:state.message,
             }
         case userActionTypes.SETTINGUSEREMAIL:
             return {
@@ -58,7 +61,8 @@ export const userReducer = (state,action) => {
                     email:action.payload.email,
                     password:state.user.password,
                     passwordConfirmation:state.user.passwordConfirmation,
-                }
+                },
+                message:state.message,
             }
         case userActionTypes.SETTINGUSERPASSWORD:
             return {
@@ -70,7 +74,8 @@ export const userReducer = (state,action) => {
                     email:state.user.email,
                     password:action.payload.password,
                     passwordConfirmation:state.user.passwordConfirmation,
-                }
+                },
+                message:state.message,
             }
         case userActionTypes.SETTINGUSERPASSWORDCONFIRMATION:
             console.log(action)
@@ -83,7 +88,8 @@ export const userReducer = (state,action) => {
                     email:state.user.email,
                     password:state.user.password,
                     passwordConfirmation:action.payload.passwordConfirmation,
-                }
+                },
+                message:state.message,
             }
         case userActionTypes.SETTINGUSERADDRESS:
             return {
@@ -95,7 +101,21 @@ export const userReducer = (state,action) => {
                     email:state.user.email,
                     password:state.user.password,
                     passwordConfirmation:state.user.passwordConfirmation,
-                }
+                },
+                message:state.message,
+            }
+        case userActionTypes.SETTINGMESSAGE:
+            return {
+                fetchState:REQUEST_STATE.OK,
+                user:{
+                    id: state.user.id,
+                    name:state.user.name,
+                    address:action.payload.address,
+                    email:state.user.email,
+                    password:state.user.password,
+                    passwordConfirmation:state.user.passwordConfirmation,
+                },
+                message:action.payload.message,
             }
         default:
             throw new Error();

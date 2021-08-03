@@ -4,7 +4,8 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
 import {userCreateApi} from "../apis/userApis";
-import { initializeState,userReducer } from "../reducer/userReducer";
+import { initializeState,userReducer,userActionTypes} from "../reducer/userReducer";
+import {SessionState,SessionDispatch} from "../context/Context";
 import {UserDispatch,UserState} from "../context/Context";
 // import {userShowHistory} from "../urls/index";
 import {UserCreateCard} from "../component/userComponent/UserCreateCard";
@@ -14,8 +15,8 @@ import {ButtonTheme} from "../style_constants";
 import { sessionIsLogin } from "../urls";
 import {signInApi,isLoginApi} from "../apis/sessionApis";
 import {signInURL,userCreateURL} from "../urls/index";
-import {SessionState,SessionDispatch} from "../context/Context";
 import {sessionActionTypes} from "../reducer/sessionReducer";
+import { HTTP_STATUS_CODE,MESSAGE_TEXT,ERROR_MESSAGE } from "../constants";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -43,20 +44,34 @@ const UserCreateSubmitWrapper = styled.div`
 `;
 
 export const UserCreate = () => {
-    const [state,dispatch] = useReducer(userReducer,initializeState)
+    const [state,dispatch] = useReducer(userReducer,initializeState);
     const SessionAuthState = useContext(SessionState);
-    const SessionAuthDispatch = useContext(SessionDispatch)
+    const SessionAuthDispatch = useContext(SessionDispatch);
     const history = useHistory();
 
     function SubmitHandle() {
         userCreateApi(state.user)
         .then((data) => {
-            console.log(data)
+            SessionAuthDispatch({
+                type:sessionActionTypes.SETTINGMESSAGE,
+                payload: {
+                    message: MESSAGE_TEXT.SUCCESS_SIGNUP_MESSAGE
+                },
+            })
             history.push(signInURL)
         })
         .catch((e) => {
-            console.log(e)
-            history.push(userCreateURL)
+            if(e.response.status === HTTP_STATUS_CODE.UNPROCESSABLE_ENTITY){
+                dispatch({
+                    type:userActionTypes.SETTINGMESSAGE,
+                    payload: {
+                        message: ERROR_MESSAGE.USER_SIGNUP_ERROR
+                    },
+                })
+                history.push(userCreateURL)
+            } else {
+                throw e;
+            }
         })
     }
 

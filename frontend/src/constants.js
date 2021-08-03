@@ -4,7 +4,18 @@ export const REQUEST_STATE = {
     OK: 'OK',
 }
 export const HTTP_STATUS_CODE = {
+    UN_AUTHORIZED:401,
+    UNPROCESSABLE_ENTITY: 422,
     NOT_ACCEPTABLE: 406,
+}
+
+export const MESSAGE_TEXT = {
+    SUCCESS_SIGNUP_MESSAGE:"新規登録できました。ログインしてみましょう!",
+}
+
+export const ERROR_MESSAGE = {
+    USER_SIGNUP_ERROR:"ユーザーを新規作成できませんでした",
+    USER_SIGNIN_ERROR:"ログインできませんでした。メールアドレス、パスワードを再度入力してください",
 }
 
 export const HEADER_TEXT = {

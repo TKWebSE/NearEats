@@ -32,7 +32,10 @@ export const userCreateApi = (user) => {
     .then((res) => {
         return res.data
     })
-    .catch(e => console.log(e))
+    .catch((e) => {
+        console.log(e)
+        throw e
+    })
 }
 
 //ユーザーを更新する

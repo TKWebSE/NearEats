@@ -16,7 +16,9 @@ export const signInApi = (user) => {
         Cookies.set("uid", res.headers["uid"])
         return res.data
     })
-    .catch((e) => console.log(e))
+    .catch((e) => {
+        throw e
+    })
 }
 
 //ログアウトする
