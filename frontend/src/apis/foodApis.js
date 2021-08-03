@@ -11,18 +11,34 @@ import {
 //food一覧を取得する
 export const fetchFoodsIndexApi = () => {
     return axios.get(foodsIndexBackendURL)
+        .then(res =>{
+            return res.data
+        }
+    )
+    .catch(e=> console.log(e))
+}
+//現在のアカウントが登録したfoodの一覧を取得する
+export const fetchMyFoodsIndex = (user_id) => {
+    return axios.get(foodsIndexBackendURL,{
+            params: {
+                user_id:user_id
+            }
+        })
     .then(res =>{
+        console.log("ここみたし")
+        console.log(res)
         return res.data
     }
     )
     .catch(e=> console.log(e))
 }
+
 //特定のfoodを取得する(editでも使用している)
-export const fetchMyFoodsIndex = (food_id) => {
+export const fetchFoodApi = (food_id) => {
     return axios.get(foodShowBackendURL(food_id),{
-    params: {
-        foodId:food_id
-    }
+        params: {
+            foodId:food_id
+        }
     })
     .then((res)=>{
         return res.data

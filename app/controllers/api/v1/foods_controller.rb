@@ -8,7 +8,7 @@ module Api
                     foods: foods
                 }, status: :ok
             end
-
+            
             def fetchMyFoodsIndex
                 user = User.find(id: params[:id])
                 foods = Food.where(user_id: user.id)

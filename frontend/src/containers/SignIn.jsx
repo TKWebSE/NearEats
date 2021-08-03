@@ -34,8 +34,6 @@ export const SignIn= () =>{
   function submitSignIn () {
     signInApi(state.user)
     .then((data) => {
-      const dataaru = isLoginApi(data.user)
-        console.log(dataaru)
       dispatch({
           type:signInActionTypes.SIGNIN,
           payload: {

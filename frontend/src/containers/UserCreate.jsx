@@ -1,4 +1,4 @@
-import React, {Fragment,useReducer} from "react";
+import React, {Fragment,useReducer,useContext} from "react";
 import media from "styled-media-query";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -13,8 +13,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
 import { sessionIsLogin } from "../urls";
 import {signInApi,isLoginApi} from "../apis/sessionApis";
-import {foodsIndexURL} from "../urls/index";
-
+import {signInURL,userCreateURL} from "../urls/index";
+import {SessionState,SessionDispatch} from "../context/Context";
+import {sessionActionTypes} from "../reducer/sessionReducer";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -22,6 +23,11 @@ const UserCreateWrapper = styled.div`
 `;
 
 const UserCreateHeader = styled.h1`
+`;
+
+const MessageWrapper = styled.h2`
+    color:red;
+    padding-left:1%;
 `;
 
 const UserCreateCardWrapper = styled.div`
@@ -38,24 +44,36 @@ const UserCreateSubmitWrapper = styled.div`
 
 export const UserCreate = () => {
     const [state,dispatch] = useReducer(userReducer,initializeState)
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch)
     const history = useHistory();
 
     function SubmitHandle() {
         userCreateApi(state.user)
         .then((data) => {
             console.log(data)
-            signInApi(data.user)
-            history.push(foodsIndexURL)
+            history.push(signInURL)
         })
-        .catch(e => console.log(e))
-        
+        .catch((e) => {
+            console.log(e)
+            history.push(userCreateURL)
+        })
     }
+
     return(
         <Fragment>
             <UserCreateWrapper>
                 <UserCreateHeader>
                     {USER_HEADER_TITLE.USER_CREATE}
                 </UserCreateHeader>
+                {
+                    state.message === ""?
+                        null
+                    :
+                    <MessageWrapper>
+                        {state.message}
+                    </MessageWrapper>
+                }
                 <UserCreateCardWrapper>
                     <UserDispatch.Provider value={dispatch}>
                         <UserState.Provider value={state}>

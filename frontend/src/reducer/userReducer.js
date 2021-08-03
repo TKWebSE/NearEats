@@ -11,6 +11,7 @@ export const initializeState = {
         passwordConfirmation:"",
         address:"",
     },
+    message:"",
 }
 
 export const userActionTypes = {

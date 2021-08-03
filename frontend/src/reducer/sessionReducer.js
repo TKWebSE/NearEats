@@ -3,8 +3,8 @@ import { REQUEST_STATE } from "../constants";
 
 export const initializeState =  {
     fetchSessionState:REQUEST_STATE.INITIAL,
-    currentUser:{},
-    isLogin:true,
+    currentUser:[],
+    isLogin:false,
 }
 
 export const sessionActionTypes = {
@@ -40,7 +40,6 @@ export const sessionReducer = (state,action) => {
                 fetchSessionState:REQUEST_STATE.OK,
                 currentUser:action.payload.data.user,
                 isLogin:action.payload.data.is_login,
-                isLogin:true,
             }
         default:
             break;

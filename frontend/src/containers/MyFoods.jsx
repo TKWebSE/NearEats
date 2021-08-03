@@ -1,10 +1,10 @@
-import React, {Fragment, useEffect, useReducer} from 'react';
+import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
-
-import { fetchFoodsIndexApi } from '../apis/foodApis';
+import {SessionState,SessionDispatch} from "../context/Context";
+import { fetchMyFoodsIndex } from '../apis/foodApis';
 import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
 import { 
     initializeState,
@@ -59,10 +59,14 @@ const FoodCards = styled(FoodCard)`
 
 export const MyFoods = () => {
     const [state,dispatch] = useReducer(foodsListReducer,initializeState);
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
         dispatch({type: foodsListActionTypes.FETCHING})
-        fetchFoodsIndexApi()
+        fetchMyFoodsIndex(1
+            // SessionAuthState.currentUser.id
+            )
         .then((data) => {
             dispatch({
                 type: foodsListActionTypes.FETCH_SUCCESS,
@@ -78,7 +82,7 @@ export const MyFoods = () => {
         <Fragment>
             <FoodsWrapper>
                 <FoodsIndexTitle>
-                    {FOOD_HEADER_TITLE.FOOD_INDEX}
+                    {FOOD_HEADER_TITLE.MYFOOD}
                 </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.LOADING?
