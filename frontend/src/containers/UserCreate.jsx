@@ -7,7 +7,6 @@ import {userCreateApi} from "../apis/userApis";
 import { initializeState,userReducer,userActionTypes} from "../reducer/userReducer";
 import {SessionState,SessionDispatch} from "../context/Context";
 import {UserDispatch,UserState} from "../context/Context";
-// import {userShowHistory} from "../urls/index";
 import {UserCreateCard} from "../component/userComponent/UserCreateCard";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -18,7 +17,7 @@ import {signInURL,userCreateURL} from "../urls/index";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import { HTTP_STATUS_CODE,MESSAGE_TEXT,ERROR_MESSAGE } from "../constants";
 import Snackbar from '@material-ui/core/Snackbar';
-import CustomizedSnackbars from "../component/MaterialUISnackber";
+import {MaterialUIErrorSnackber} from "../component/MaterialUIErrorSnackber";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -28,7 +27,7 @@ const UserCreateWrapper = styled.div`
 const UserCreateHeader = styled.h1`
 `;
 
-const MessageWrapper = styled.h2`
+const MessageWrapper = styled.div`
     color:red;
     padding-left:1%;
 `;
@@ -52,6 +51,12 @@ export const UserCreate = () => {
     const history = useHistory();
 
     function SubmitHandle() {
+        dispatch({
+            type:userActionTypes.SETTINGMESSAGE,
+            payload: {
+                message:""
+            },
+        })
         userCreateApi(state.user)
         .then((data) => {
             SessionAuthDispatch({
@@ -82,22 +87,27 @@ export const UserCreate = () => {
             <UserCreateWrapper>
                 <UserCreateHeader>
                     {USER_HEADER_TITLE.USER_CREATE}
-                </UserCreateHeader>\
-                    <MessageWrapper>
-                        <CustomizedSnackbars message={state.message}/>
-                    </MessageWrapper>
-                <UserCreateCardWrapper>
+                </UserCreateHeader>
                     <UserDispatch.Provider value={dispatch}>
                         <UserState.Provider value={state}>
-                            <UserCreateCard></UserCreateCard>
-                        </UserState.Provider>
-                    </UserDispatch.Provider>
-                </UserCreateCardWrapper>
-                <UserCreateSubmitWrapper>
-                    <ThemeProvider theme={ButtonTheme}>
-                        <MaterialUICommonButton onClick={SubmitHandle} btnLabel={"作成"}/>
-                    </ThemeProvider>
-                </UserCreateSubmitWrapper>
+                        {
+                            state.message !== ""?
+                            <MessageWrapper>
+                                <MaterialUIErrorSnackber message={state.message}/>
+                            </MessageWrapper>
+                            :
+                            null
+                        }
+                        <UserCreateCardWrapper>
+                                    <UserCreateCard></UserCreateCard>
+                        </UserCreateCardWrapper>
+                        <UserCreateSubmitWrapper>
+                            <ThemeProvider theme={ButtonTheme}>
+                                <MaterialUICommonButton onClick={SubmitHandle} btnLabel={"作成"}/>
+                            </ThemeProvider>
+                        </UserCreateSubmitWrapper>
+                    </UserState.Provider>
+                </UserDispatch.Provider>
             </UserCreateWrapper>
         </Fragment>
     )
