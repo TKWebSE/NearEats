@@ -17,6 +17,8 @@ import {signInApi,isLoginApi} from "../apis/sessionApis";
 import {signInURL,userCreateURL} from "../urls/index";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import { HTTP_STATUS_CODE,MESSAGE_TEXT,ERROR_MESSAGE } from "../constants";
+import Snackbar from '@material-ui/core/Snackbar';
+import CustomizedSnackbars from "../component/MaterialUISnackber";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -80,15 +82,10 @@ export const UserCreate = () => {
             <UserCreateWrapper>
                 <UserCreateHeader>
                     {USER_HEADER_TITLE.USER_CREATE}
-                </UserCreateHeader>
-                {
-                    state.message === ""?
-                        null
-                    :
+                </UserCreateHeader>\
                     <MessageWrapper>
-                        {state.message}
+                        <CustomizedSnackbars message={state.message}/>
                     </MessageWrapper>
-                }
                 <UserCreateCardWrapper>
                     <UserDispatch.Provider value={dispatch}>
                         <UserState.Provider value={state}>
