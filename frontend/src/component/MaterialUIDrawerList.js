@@ -16,7 +16,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import {foodsIndexURL,foodCreateURL,myFoodsURL,userShowURL} from "../urls/index";
+import {foodsIndexURL,foodCreateURL,myFoodsURL,myTaskIndexURL,userShowURL,ordersIndexURL} from "../urls/index";
 import {isLoginApi} from "../apis/sessionApis";
 import Cookies from "js-cookie";
 
@@ -37,7 +37,7 @@ export const MaterialUIDrawerList = () => {
     }
 
     function myTaskLink () {
-        history.push(userShowURL(1));
+        history.push(myTaskIndexURL);
     }
     
     //認証機能実装後改修予定(idを受け取る)
@@ -45,8 +45,8 @@ export const MaterialUIDrawerList = () => {
         history.push(userShowURL(userId));
     }
 
-    function orderLink () {
-        history.push(userShowURL(userId));
+    function ordersLink () {
+        history.push(ordersIndexURL);
     }
 
     function settingLink () {
@@ -83,7 +83,7 @@ export const MaterialUIDrawerList = () => {
             <ListItemIcon><AccountCircleIcon /></ListItemIcon>
             <ListItemText primary={DRAWER_TEXT.PROFILE_TEXT} />
         </ListItem>
-        <ListItem button onClick={() => orderLink()}>
+        <ListItem button onClick={() => ordersLink()}>
             <ListItemIcon><InboxIcon /></ListItemIcon>
             <ListItemText primary={DRAWER_TEXT.ORDER_TEXT} />
         </ListItem>

@@ -20,7 +20,7 @@ export const fetchFoodsIndexApi = () => {
 }
 //現在のアカウントが登録したfoodの一覧を取得する
 export const fetchMyFoodsIndex = (user_id) => {
-    return axios.get(MyfoodsIndexBackendURL,{
+    return axios.get(MyfoodsIndexBackendURL(user_id),{
             params: {
                 user_id:user_id
             }
@@ -66,6 +66,7 @@ export const createFoodApi = (food,user_id) => {
 
 //foodを更新する
 export const updateFoodApi = (food) => {
+    console.log(food)
     return axios.put(foodUpdateBackendURL(food.id),{
         food:{
             name:food.name,
@@ -89,16 +90,3 @@ export const deleteFoodApi = (food) => {
     })
     .catch(e => console.log(e));
 }
-// //foodwosyutokusi,
-// export const editfoodApi =　(food_id) => {
-//     return axios.get(foodEdit(food_id),{
-//         params:{
-//             foodId:food_id,
-//         }
-//     })
-//     .then((res) => {
-//         return res.data
-//     }
-//     )
-//     .catch(e => console.log(e));
-// }

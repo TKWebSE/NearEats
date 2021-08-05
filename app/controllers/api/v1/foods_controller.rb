@@ -2,7 +2,7 @@ module Api
     module V1
         class FoodsController < ApplicationController
             def index
-                foods = Food.all
+                foods = Food.all.order(updated_at: "DESC");
                 
                 render json: {
                     foods: foods
@@ -10,8 +10,10 @@ module Api
             end
             
             def myfoods
-                user = User.find(id: params[:user_id])
-                foods = Food.where(user_id: user.id)
+                logger.debug("updateこんとろーららららら")
+                logger.debug(params[:user_id])
+                user = User.find_by(id: params[:user_id])
+                foods = Food.where(user_id: user.id).order(updated_at: "DESC");
 
                 render json: {
                     foods: foods
@@ -19,8 +21,8 @@ module Api
             end
 
             def searchIndex
-                user = User.find(id: params[:id])
-                foods = Food.where(user_id: user.id)
+                user = User.find(id: params[:user_id])
+                foods = Food.where(user_id: user.id).order(updated_at: "DESC");
 
                 render json: {
                     foods: foods

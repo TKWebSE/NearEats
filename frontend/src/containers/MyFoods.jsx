@@ -23,9 +23,9 @@ import {ButtonTheme} from "../style_constants";
 const FoodsWrapper = styled.div`
     display: inline-block
     float:left;
+    margin-top:5%;
     margin-right:10%;
     margin-left:10%;
-    margin-top:5%;
 `;
 
 const FoodsIndexTitle = styled.h2`
@@ -37,6 +37,9 @@ const FoodsIndexTitle = styled.h2`
     ${media.lessThan("medium")`
         font-size:130%;
     `}
+`;
+
+const FoodListWrapper = styled.div`
 `;
 
 const ContentsList = styled.div`
@@ -52,6 +55,10 @@ const ContentsList = styled.div`
     ${media.lessThan("small")`
         width:48%;
     `}
+`;
+
+const FoodCardWrapper = styled.div`
+    width:100%;
 `;
 
 const FoodCards = styled(FoodCard)`
@@ -178,13 +185,17 @@ export const MyFoods = () => {
                             </ThemeProvider>
                         </NoFoodsListWrapper>
                     :
+                    <FoodListWrapper>
+                    {
                     state.foodsList.map((food,i) => 
                         <ContentsList key={i}>
-                            <Fragment>
+                            <FoodCardWrapper>
                                 <FoodCard food={food}></FoodCard>
-                            </Fragment>
+                            </FoodCardWrapper>
                         </ContentsList>
                     )
+                    }
+                    </FoodListWrapper>
                 :
                 <ContentsList>
                     <Fragment>

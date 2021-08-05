@@ -8,21 +8,6 @@ const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 //HomeのURL
 export const homeURL = "/home" ;
 
-//foodのURL
-export const foodsIndexURL = `/foods`;
-export const myFoodsURL = `/myfoods`;
-export const foodCreateURL = `/foods/create`;
-export const foodShowURL = (foodId) => `/foods/${foodId}`;
-export const foodUpdateURL = (foodId) => `/foods/${foodId}/edit`;
-
-//foodのBackendURL
-export const foodsIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
-export const MyfoodsIndexBackendURL = `${BACKEND_DEFAULT_URL}/foods${myFoodsURL}`;
-export const foodCreateBackendURL = `${BACKEND_DEFAULT_URL}${foodCreateURL}`;
-export const foodShowBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodShowURL(foodId)}`;
-export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpdateURL()}`
-export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
-
 //userのURL
 export const userShowURL = (userId) => `/users/${userId}`;
 export const userCreateURL = `/users/create`;
@@ -35,7 +20,26 @@ export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditU
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
 export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
 
+//foodのURL
+export const foodsIndexURL = `/foods`;
+export const myFoodsURL = `/myfoods`;
+export const foodCreateURL = `/foods/create`;
+export const foodShowURL = (foodId) => `/foods/${foodId}`;
+export const foodEditURL = (foodId) => `/foods/${foodId}/edit`;
+export const foodUpdateURL = (foodId) => `/foods/${foodId}`;
+
+//foodのBackendURL
+export const foodsIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
+export const MyfoodsIndexBackendURL = (user_id) => `${BACKEND_DEFAULT_URL}/foods/${user_id}${myFoodsURL}`;
+export const foodCreateBackendURL = `${BACKEND_DEFAULT_URL}/foods`;
+export const foodShowBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodShowURL(foodId)}`;
+export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpdateURL(foodId)}`
+export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
+
 //orderのURL
+export const myTaskIndexURL = `/mytask/index`;
+export const myTaskShowURL = (orderId) => `/myTask/${orderId}`;
+export const ordersIndexURL = `/orders`;
 export const orderShowURL = (orderId) => `/orders/${orderId}`;
 export const orderEditURL = (orderId) => `/orders/${orderId}/edot`;
 

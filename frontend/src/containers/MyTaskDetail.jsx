@@ -157,6 +157,7 @@ export const MyTaskDetail = () => {
             <FoodsWrapper>
                 <FoodsIndexTitle>
                     {FOOD_HEADER_TITLE.MYFOOD}
+                    MYTASKDETAILS
                 </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.OK?

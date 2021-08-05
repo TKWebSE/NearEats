@@ -42,6 +42,7 @@ export const OrderIndex =() => {
         <Fragment>
             <OrderIndexHeader>
                 {ORDER_HEADER_TITLE.ORDER_INDEX}
+                ORDERINDEX
             </OrderIndexHeader>
             {
                 state.fetchState === REQUEST_STATE.OK?

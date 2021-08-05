@@ -24,6 +24,10 @@ const FoodName = styled.h1`
     margin-bottom:0px;
     text-decoration: none;
     font-size:180%;
+    width:100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     ${media.lessThan("large")`
         font-size:150%;
     `}
@@ -37,6 +41,9 @@ const FoodName = styled.h1`
 
 const FoodPrice = styled.div`
     font-size:150%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     ${media.lessThan("large")`
         font-size:120%;
     `}

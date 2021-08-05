@@ -1,4 +1,5 @@
 import React,{ Fragment } from "react";
+import media from "styled-media-query";
 import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";
 
@@ -15,14 +16,20 @@ const FoodImage = styled.img`
 const FoodName = styled.h1`
     margin-top:5%;
     margin-bottom:0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 const FoodPrice = styled.h2`
-
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 const FoodDesicription = styled.div`
     margin-bottom:5%;
+    overflow-wrap: break-word;
 `;
 
 const FoodCreatedTime = styled.div`

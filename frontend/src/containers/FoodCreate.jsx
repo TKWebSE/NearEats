@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useReducer} from "react";
+import React, {Fragment, useContext, useReducer} from "react";
 import styled from "styled-components";
 import {ThemeProvider } from '@material-ui/core/styles';
 import {SaveButton} from "../component/MaterialUISaveButton";
@@ -9,6 +9,7 @@ import { initializeState,
 import {createFoodApi} from "../apis/foodApis";
 import {useHistory} from "react-router-dom";
 import {foodShowURL} from "../urls/index";
+import {SessionState,SessionDispatch} from "../context/Context";
 import {FoodState,FoodDispatch} from "../context/Context";
 import {FoodCreateCard} from "../component/foodComponent/FoodCreateCard";
 
@@ -25,12 +26,12 @@ const FoodCreateHeader = styled.h1`
 
 export const FoodCreate = () => {
     const[state,dispatch] = useReducer(foodCreateReducer,initializeState);
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch);
     const history = useHistory();
 
     function SubmitHandle() {
-        //user認証機能実装次第改修
-        const user_id = 1
-        createFoodApi(state.food,user_id)
+        createFoodApi(state.food,SessionAuthState.currentUser.id)
         .then((data) => {
             history.push(foodShowURL(data.food.id))
         })

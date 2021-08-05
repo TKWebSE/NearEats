@@ -57,7 +57,7 @@ function App() {
           :
             <MaterialUIGuestHeader></MaterialUIGuestHeader>
         :
-        null
+        <div></div>
       }
       </ThemeProvider>
         <Switch>
@@ -147,7 +147,7 @@ function App() {
           //NyTask一覧画面
           <PrivateOnlyRoute
             exact
-            path="/MyTaskIndex"
+            path="/MyTask/Index"
             component={MyTaskIndex}>
           </PrivateOnlyRoute>
           //MyTask詳細画面

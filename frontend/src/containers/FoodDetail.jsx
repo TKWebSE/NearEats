@@ -11,7 +11,7 @@ import { initializeState,
          foodDetailReducer} from "../reducer/foodDetail";
 import {FoodDetailCard} from "../component/foodComponent/FoodDetailCard";
 import {useHistory} from "react-router-dom";
-import {foodUpdateURL} from "../urls/index";
+import {foodEditURL} from "../urls/index";
 
 const DetailWrapper = styled.div`
     margin-left:20%;
@@ -49,7 +49,7 @@ export const FoodDetail = ({match})=> {
     },[]);
 
     function onClickHandle() {
-        history.push(foodUpdateURL(state.food.id))
+        history.push(foodEditURL(state.food.id))
     }
 
     return (
