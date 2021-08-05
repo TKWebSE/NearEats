@@ -15,6 +15,8 @@ import Cookies from "js-cookie";
 import {REQUEST_STATE} from "../constants";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import {HTTP_STATUS_CODE,ERROR_MESSAGE} from "../constants";
+import {MaterialUIErrorSnackber} from "../component/MaterialUIErrorSnackber";
+import {MaterialUISuccessSnackber} from "../component/MaterialUISuccessSnackber";
 
 const SignImnHeader = styled.h1`
   margin-top:5%;
@@ -26,12 +28,12 @@ const MessageWrapper = styled.div`
   margin-right:5%;
 `;
 
-const MessageBlueWrapper = styled.h2`
+const MessageSuccessWrapper = styled.div`
   color:blue;
 `;
 
-const MessageRedWrapper = styled.h2`
-  color:red;
+const MessageErrorWrapper = styled.div`
+
 `;
 
 const SigninWrapper = styled.div`
@@ -40,6 +42,16 @@ const SigninWrapper = styled.div`
 `;
 
 const SubmitbuttomWrapper = styled.div`
+  padding-left:90%;
+  ${media.lessThan("large")`
+    padding-left:89%;
+  `}
+  ${media.lessThan("medium")`
+    padding-left:80%;
+  `}
+  ${media.lessThan("small")`
+    padding-left:70%;
+  `}
 `;
 
 export const SignIn= () =>{
@@ -62,6 +74,18 @@ export const SignIn= () =>{
   },[signInActionTypes])
 
   function submitSignIn () {
+    dispatch({
+      type:signInActionTypes.SETTINGERRORMESSAGE,
+      payload: {
+        errorMessage:""
+      },
+    })
+    dispatch({
+      type:signInActionTypes.SETTINGMESSAGE,
+      payload: {
+        message:""
+      },  
+    })
     signInApi(state.user)
     .then((data) => {
       dispatch({
@@ -100,13 +124,13 @@ export const SignIn= () =>{
             state.message === ""?
               null
             :
-            <MessageBlueWrapper>
-              {state.message}
-            </MessageBlueWrapper>
+            <MessageSuccessWrapper>
+              <MaterialUISuccessSnackber message={state.message}/>
+            </MessageSuccessWrapper>
           :
-          <MessageRedWrapper>
-            {state.errorMessage}
-          </MessageRedWrapper>
+          <MessageErrorWrapper>
+            <MaterialUIErrorSnackber message={state.errorMessage}/>
+          </MessageErrorWrapper>
         }
         
         </MessageWrapper>

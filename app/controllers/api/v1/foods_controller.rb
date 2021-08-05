@@ -9,8 +9,8 @@ module Api
                 }, status: :ok
             end
             
-            def fetchMyFoodsIndex
-                user = User.find(id: params[:id])
+            def myfoods
+                user = User.find(id: params[:user_id])
                 foods = Food.where(user_id: user.id)
 
                 render json: {

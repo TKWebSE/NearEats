@@ -8,6 +8,7 @@ import {DRAWER_TEXT} from "../constants";
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import StoreIcon from '@material-ui/icons/Store';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -15,13 +16,17 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import {foodCreateURL,myFoodsURL,userShowURL} from "../urls/index";
+import {foodsIndexURL,foodCreateURL,myFoodsURL,userShowURL} from "../urls/index";
 import {isLoginApi} from "../apis/sessionApis";
 import Cookies from "js-cookie";
 
 export const MaterialUIDrawerList = () => {
     const history = useHistory();
     const userId = Cookies.get("user_id");
+
+    function foodIndexLink () {
+        history.push(foodsIndexURL);
+    }
 
     function createFoodLink () {
         history.push(foodCreateURL);
@@ -55,8 +60,12 @@ export const MaterialUIDrawerList = () => {
     //   onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button onClick={() => createFoodLink()}>
+        <ListItem button onClick={() => foodIndexLink()}>
             <ListItemIcon><FastfoodIcon /></ListItemIcon>
+            <ListItemText primary={DRAWER_TEXT.FOOD_INDEX_TEXT} />
+        </ListItem>
+        <ListItem button onClick={() => createFoodLink()}>
+            <ListItemIcon><CloudUploadIcon /></ListItemIcon>
             <ListItemText primary={DRAWER_TEXT.FOOD_CREATE_TEXT} />
         </ListItem>
         <ListItem button onClick={() => myFoodLink()}>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users
       resources :foods do
           get 'searchIndex', to: 'foods#searchIndex'
-          get 'fetchMyFoodsIndex', to: 'foods#fetchMyFoodsIndex'
+          get 'myfoods', to: 'foods#myfoods'
       end
       resources :orders
 

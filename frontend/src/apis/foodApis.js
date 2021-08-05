@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useReducer } from "react";
 import { 
-    foodsIndexBackendURL ,
+    foodsIndexBackendURL,
+    MyfoodsIndexBackendURL,
     foodShowBackendURL,
     foodCreateBackendURL,
     foodUpdateBackendURL,
@@ -19,7 +20,7 @@ export const fetchFoodsIndexApi = () => {
 }
 //現在のアカウントが登録したfoodの一覧を取得する
 export const fetchMyFoodsIndex = (user_id) => {
-    return axios.get(foodsIndexBackendURL,{
+    return axios.get(MyfoodsIndexBackendURL,{
             params: {
                 user_id:user_id
             }

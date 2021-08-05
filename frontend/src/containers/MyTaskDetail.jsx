@@ -126,7 +126,7 @@ const GotoFoodCreateWrapper = styled.div`
     `}
 `;
 
-export const MyFoods = () => {
+export const MyTaskDetail = () => {
     const [state,dispatch] = useReducer(foodsListReducer,initializeState);
     const history = useHistory();
     const SessionAuthState = useContext(SessionState);

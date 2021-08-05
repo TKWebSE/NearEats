@@ -10,7 +10,7 @@ export const HTTP_STATUS_CODE = {
 }
 
 export const MESSAGE_TEXT = {
-    SUCCESS_SIGNUP_MESSAGE:"新規登録できました。ログインしてみましょう!",
+    SUCCESS_SIGNUP_MESSAGE:"新規登録できました。ログインしてみましょう！",
 }
 
 export const ERROR_MESSAGE = {
@@ -45,6 +45,7 @@ export const HOME_TEXT = {
 }
 
 export const DRAWER_TEXT = {
+    FOOD_INDEX_TEXT:"TOPページ",
     FOOD_CREATE_TEXT:"料理の作成",
     MY_FOOD_TEXT:"MyFoods",
     TASK_TEXT:"MyTask",
@@ -83,4 +84,10 @@ export const USER_LABEL = {
     USER_MAIL:"メールアドレス",
     USER_PASSWORD:"パスワード",
     USER_POINT:"ユーザーポイント",
+}
+
+export const MYFOODS_TEXT = {
+    NOT_UPLOAD_MYFOODS_TEXT:"まだ料理を投稿したことがありません",
+    LETS_UPLOAD_FOOD_TEXT:"最初の1品目を投稿してみましょう！",
+    GOTO_FOOD_CREATE_BUTTON_LABEL:"料理を出品する！",
 }

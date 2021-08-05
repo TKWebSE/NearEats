@@ -67,7 +67,7 @@ export const Foods = () => {
             dispatch({
                 type: foodsListActionTypes.FETCH_SUCCESS,
                 payload: {
-                    foods: data.foods
+                    foodsList: data.foods
                 },
             });
         })

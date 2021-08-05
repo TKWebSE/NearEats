@@ -32,6 +32,9 @@ import { headerTheme } from "./style_constants";
 
 import {SignIn} from "./containers/SignIn";
 import { Home } from "./containers/Home";
+import {MyTaskIndex} from "./containers/MyTaskIndex";
+import {MyTaskDetail} from "./containers/MyTaskDetail";
+
 import {sessionApis} from "./apis/sessionApis";
 import {initializeState,sessionActionTypes,sessionReducer} from "./reducer/sessionReducer";
 import {SessionDispatch,SessionState} from "./context/Context";
@@ -140,6 +143,18 @@ function App() {
             />
             }
           >
+          </PrivateOnlyRoute>
+          //NyTask一覧画面
+          <PrivateOnlyRoute
+            exact
+            path="/MyTaskIndex"
+            component={MyTaskIndex}>
+          </PrivateOnlyRoute>
+          //MyTask詳細画面
+          <PrivateOnlyRoute
+            exact
+            path="/MyTask/:orderId"
+            component={MyTaskDetail}>
           </PrivateOnlyRoute>
           //order一覧画面
           <PrivateOnlyRoute
