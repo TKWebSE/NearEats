@@ -1,12 +1,12 @@
-import React, {Fragment, useEffect, useReducer,useContext} from 'react';
+import React, {Fragment, useEffect, useReducer} from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
-import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import {SessionState,SessionDispatch} from "../context/Context";
-import { fetchMyFoodsIndex } from '../apis/foodApis';
+import { fetchFoodsIndexApi } from '../apis/foodApis';
 import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { 
     initializeState,
     foodsListActionTypes,
@@ -14,7 +14,7 @@ import {
 } from '../reducer/foodsListReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
 import Cookies from "js-cookie";
-import {MYFOODS_TEXT} from "../constants";
+import {NOTFOUND_FOOD_TEXT} from "../constants";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {foodCreateURL} from "../urls/index";
@@ -23,9 +23,9 @@ import {ButtonTheme} from "../style_constants";
 const FoodsWrapper = styled.div`
     display: inline-block
     float:left;
+    margin-top:5%;
     margin-right:10%;
     margin-left:10%;
-    margin-top:5%;
 `;
 
 const FoodsIndexTitle = styled.h2`
@@ -39,6 +39,9 @@ const FoodsIndexTitle = styled.h2`
     `}
 `;
 
+const FoodListWrapper = styled.div`
+`;
+
 const ContentsList = styled.div`
     display: flex;
     justify-content: space-around;
@@ -50,8 +53,12 @@ const ContentsList = styled.div`
         width:30%;
     `}
     ${media.lessThan("small")`
-        width:48%;
+        width:100%;
     `}
+`;
+
+const FoodCardWrapper = styled.div`
+    width:100%;
 `;
 
 const FoodCards = styled(FoodCard)`
@@ -72,7 +79,6 @@ const NoFoodsListWrapper = styled.div`
 `;
 
 const NotFoundCatWrapper = styled.div`
-
 `;
 
 const NotFoundCatImage = styled.img`
@@ -129,14 +135,10 @@ const GotoFoodCreateWrapper = styled.div`
 export const MyTaskDetail = () => {
     const [state,dispatch] = useReducer(foodsListReducer,initializeState);
     const history = useHistory();
-    const SessionAuthState = useContext(SessionState);
-    const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
         dispatch({type: foodsListActionTypes.FETCHING})
-        fetchMyFoodsIndex(
-            SessionAuthState.currentUser.id
-            )
+        fetchFoodsIndexApi()
         .then((data) => {
             dispatch({
                 type: foodsListActionTypes.FETCH_SUCCESS,
@@ -156,45 +158,48 @@ export const MyTaskDetail = () => {
         <Fragment>
             <FoodsWrapper>
                 <FoodsIndexTitle>
-                    {FOOD_HEADER_TITLE.MYFOOD}
-                    MYTASKDETAILS
+                    {FOOD_HEADER_TITLE.FOOD_INDEX}
                 </FoodsIndexTitle>
                 {
                 state.fetchState === REQUEST_STATE.OK?
                     state.foodsList === undefined || state.foodsList === []?
-                        <NoFoodsListWrapper>
-                            <NotFoundCatWrapper>
-                                <NotFoundCatImage src={NotFoundCat}/>
-                            </NotFoundCatWrapper>
-                            <NoUploadFoodsWrapper>
-                                {MYFOODS_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
-                            </NoUploadFoodsWrapper>
-                            <LetsUploadFoodsWrapper>
-                                {MYFOODS_TEXT.LETS_UPLOAD_FOOD_TEXT}
-                            </LetsUploadFoodsWrapper>
-                            <ThemeProvider theme={ButtonTheme}>
-                            <GotoFoodCreateWrapper>
-                                <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={MYFOODS_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
-                            </GotoFoodCreateWrapper>
-                            </ThemeProvider>
-                        </NoFoodsListWrapper>
+                    <NoFoodsListWrapper>
+                        <NotFoundCatWrapper>
+                            <NotFoundCatImage src={NotFoundCat}/>
+                        </NotFoundCatWrapper>
+                        <NoUploadFoodsWrapper>
+                            {NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
+                        </NoUploadFoodsWrapper>
+                        <LetsUploadFoodsWrapper>
+                            {NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
+                        </LetsUploadFoodsWrapper>
+                        <ThemeProvider theme={ButtonTheme}>
+                        <GotoFoodCreateWrapper>
+                            <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                        </GotoFoodCreateWrapper>
+                        </ThemeProvider>
+                    </NoFoodsListWrapper>
                     :
+                    <FoodListWrapper>
+                    {
                     state.foodsList.map((food,i) => 
                         <ContentsList key={i}>
-                            <Fragment>
+                            <FoodCardWrapper>
                                 <FoodCard food={food}></FoodCard>
-                            </Fragment>
+                            </FoodCardWrapper>
                         </ContentsList>
                     )
+                    }
+                    </FoodListWrapper>
                 :
-                <ContentsList>
-                    <Fragment>
-                        <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </Fragment>
-                </ContentsList>
-               }
+                    <ContentsList>
+                        <Fragment>
+                            <Skeleton variant="rect" width={450} height={300} />
+                            <Skeleton variant="rect" width={450} height={300} />
+                            <Skeleton variant="rect" width={450} height={300} />
+                        </Fragment>
+                    </ContentsList>
+                }
             </FoodsWrapper>
         </Fragment>
     )

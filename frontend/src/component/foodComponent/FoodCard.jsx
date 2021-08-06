@@ -4,6 +4,7 @@ import media from "styled-media-query";
 import { Link } from "react-router-dom";
 import foodImage from "../../images/food-image.jpg";
 import {foodShowURL} from "../../urls/index";
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const FoodCardWrapper = styled.div`
     text-align:center;
@@ -35,7 +36,7 @@ const FoodName = styled.h1`
         font-size:120%;
     `}
     ${media.lessThan("small")`
-        font-size:110%;
+        font-size:150%;
     `}
 `;
 
@@ -51,8 +52,13 @@ const FoodPrice = styled.div`
         font-size:100%;
     `}
     ${media.lessThan("small")`
-        font-size:90%;
+        font-size:120%;
     `}
+`;
+
+const OneSkeltonWrapper = styled.div`
+    width:100%;
+    height:60%;
 `;
 
 
@@ -63,6 +69,9 @@ export const FoodCard = ({food}) => {
         <FoodCardWrapper>
         <Link to={foodShowURL(food.id)} style={{ textDecoration: 'none' }}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
+            {/* <OneSkeltonWrapper>
+                        <Skeleton variant="rect"/>
+                    </OneSkeltonWrapper> */}
             <TextWrapper>
                 <FoodName>
                     {food.name}

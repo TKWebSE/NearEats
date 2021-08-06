@@ -13,8 +13,7 @@ import {
     foodsListReducer,
 } from '../reducer/foodsListReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
-import Cookies from "js-cookie";
-import {MYFOODS_TEXT} from "../constants";
+import {NOTFOUND_FOOD_TEXT} from "../constants";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {foodCreateURL} from "../urls/index";
@@ -53,7 +52,7 @@ const ContentsList = styled.div`
         width:30%;
     `}
     ${media.lessThan("small")`
-        width:48%;
+        width:100%;
     `}
 `;
 
@@ -79,7 +78,6 @@ const NoFoodsListWrapper = styled.div`
 `;
 
 const NotFoundCatWrapper = styled.div`
-
 `;
 
 const NotFoundCatImage = styled.img`
@@ -133,6 +131,30 @@ const GotoFoodCreateWrapper = styled.div`
     `}
 `;
 
+const SkeltonsWrapper = styled.div`
+    width:25%;
+    float: left;
+`;
+
+const SkeltonCardWrapper = styled.div`
+
+margin-left:1%;
+margin-right:1%;
+padding-bottom:5%;
+
+`;
+
+const SkeltonImageWrapper = styled.div`
+
+`;
+
+const SkeltonTitleWrapper = styled.div`
+    padding-top:6%;
+    display: flex;
+// justify-content: space-around;
+float:left;    
+`;
+
 export const MyFoods = () => {
     const [state,dispatch] = useReducer(foodsListReducer,initializeState);
     const history = useHistory();
@@ -141,18 +163,18 @@ export const MyFoods = () => {
 
     useEffect(() => {
         dispatch({type: foodsListActionTypes.FETCHING})
-        fetchMyFoodsIndex(
-            SessionAuthState.currentUser.id
-            )
-        .then((data) => {
-            dispatch({
-                type: foodsListActionTypes.FETCH_SUCCESS,
-                payload: {
-                    foodsList: data.foods
-                },
-            });
-        })
-        .catch((e) => console.log(e))
+        // fetchMyFoodsIndex(
+        //     SessionAuthState.currentUser.id
+        //     )
+        // .then((data) => {
+        //     dispatch({
+        //         type: foodsListActionTypes.FETCH_SUCCESS,
+        //         payload: {
+        //             foodsList: data.foods
+        //         },
+        //     });
+        // })
+        // .catch((e) => console.log(e))
     },[])
 
     function gotoFoodCreateHandle() {
@@ -173,14 +195,14 @@ export const MyFoods = () => {
                                 <NotFoundCatImage src={NotFoundCat}/>
                             </NotFoundCatWrapper>
                             <NoUploadFoodsWrapper>
-                                {MYFOODS_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
+                                {NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
                             </NoUploadFoodsWrapper>
                             <LetsUploadFoodsWrapper>
-                                {MYFOODS_TEXT.LETS_UPLOAD_FOOD_TEXT}
+                                {NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
                             </LetsUploadFoodsWrapper>
                             <ThemeProvider theme={ButtonTheme}>
                             <GotoFoodCreateWrapper>
-                                <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={MYFOODS_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                                <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
                             </GotoFoodCreateWrapper>
                             </ThemeProvider>
                         </NoFoodsListWrapper>
@@ -197,13 +219,38 @@ export const MyFoods = () => {
                     }
                     </FoodListWrapper>
                 :
-                <ContentsList>
-                    <Fragment>
+                <SkeltonsWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    {/* <SkeltonWrapper>
+                        <Skeleton variant="rect" width={450}  />
+                    </SkeltonWrapper>
+                    <SkeltonWrapper>
                         <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </Fragment>
-                </ContentsList>
+                    </SkeltonWrapper> */}
+                </SkeltonsWrapper>
                }
             </FoodsWrapper>
         </Fragment>

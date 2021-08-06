@@ -86,7 +86,7 @@ export const USER_LABEL = {
     USER_POINT:"ユーザーポイント",
 }
 
-export const MYFOODS_TEXT = {
+export const NOTFOUND_FOOD_TEXT = {
     NOT_UPLOAD_MYFOODS_TEXT:"まだ料理を投稿したことがありません",
     LETS_UPLOAD_FOOD_TEXT:"最初の1品目を投稿してみましょう！",
     GOTO_FOOD_CREATE_BUTTON_LABEL:"料理を出品する！",
