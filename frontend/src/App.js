@@ -147,7 +147,7 @@ function App() {
           //NyTask一覧画面
           <PrivateOnlyRoute
             exact
-            path="/MyTask/Index"
+            path="/mytask"
             component={MyTaskIndex}>
           </PrivateOnlyRoute>
           //MyTask詳細画面

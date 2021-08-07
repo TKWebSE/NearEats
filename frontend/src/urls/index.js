@@ -37,7 +37,7 @@ export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpd
 export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
 
 //orderのURL
-export const myTaskIndexURL = `/mytask/index`;
+export const myTaskIndexURL = `/mytask`;
 export const myTaskShowURL = (orderId) => `/myTask/${orderId}`;
 export const ordersIndexURL = `/orders`;
 export const orderShowURL = (orderId) => `/orders/${orderId}`;

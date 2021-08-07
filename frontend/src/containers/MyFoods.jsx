@@ -20,8 +20,8 @@ import {foodCreateURL} from "../urls/index";
 import {ButtonTheme} from "../style_constants";
 
 const FoodsWrapper = styled.div`
-    display: inline-block
-    float:left;
+    // display: inline-block
+    // float:left;
     margin-top:5%;
     margin-right:10%;
     margin-left:10%;
@@ -132,25 +132,27 @@ const GotoFoodCreateWrapper = styled.div`
 `;
 
 const SkeltonsWrapper = styled.div`
-    width:25%;
-    float: left;
+
 `;
 
 const SkeltonCardWrapper = styled.div`
-
 margin-left:1%;
+width:23%;
 margin-right:1%;
 padding-bottom:5%;
-
+float: left;
 `;
 
 const SkeltonImageWrapper = styled.div`
-
+height:180px;
 `;
 
 const SkeltonTitleWrapper = styled.div`
     padding-top:6%;
-    
+`;
+
+const SkeletonItem = styled(Skeleton)`
+// height:600%;
 `;
 
 export const MyFoods = () => {
@@ -160,7 +162,7 @@ export const MyFoods = () => {
     const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
-        dispatch({type: foodsListActionTypes.FETCHING})
+        // dispatch({type: foodsListActionTypes.FETCHING})
         // fetchMyFoodsIndex(
         //     SessionAuthState.currentUser.id
         //     )
@@ -220,6 +222,22 @@ export const MyFoods = () => {
                 <SkeltonsWrapper>
                     <SkeltonCardWrapper>
                         <SkeltonImageWrapper>
+                            <Skeleton variant="rect"  />
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
                             <Skeleton variant="rect" height={180}/>
                         </SkeltonImageWrapper>
                         <SkeltonTitleWrapper>
@@ -242,12 +260,62 @@ export const MyFoods = () => {
                             <Skeleton variant="rect" height={40}/>
                         </SkeltonTitleWrapper>
                     </SkeltonCardWrapper>
-                    {/* <SkeltonWrapper>
-                        <Skeleton variant="rect" width={450}  />
-                    </SkeltonWrapper>
-                    <SkeltonWrapper>
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </SkeltonWrapper> */}
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
+                    <SkeltonCardWrapper>
+                        <SkeltonImageWrapper>
+                            <Skeleton variant="rect" height={180}/>
+                        </SkeltonImageWrapper>
+                        <SkeltonTitleWrapper>
+                            <Skeleton variant="rect" height={40}/>
+                        </SkeltonTitleWrapper>
+                    </SkeltonCardWrapper>
                 </SkeltonsWrapper>
                }
             </FoodsWrapper>
