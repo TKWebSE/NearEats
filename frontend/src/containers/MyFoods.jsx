@@ -150,9 +150,7 @@ const SkeltonImageWrapper = styled.div`
 
 const SkeltonTitleWrapper = styled.div`
     padding-top:6%;
-    display: flex;
-// justify-content: space-around;
-float:left;    
+    
 `;
 
 export const MyFoods = () => {
