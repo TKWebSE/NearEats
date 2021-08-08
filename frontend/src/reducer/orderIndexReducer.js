@@ -4,7 +4,7 @@ import { useReducer } from "react";
 
 export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
-    orderList: []
+    ordersList: []
 }
 
 export const oredersActionTypes = {

@@ -69,9 +69,6 @@ export const FoodCard = ({food}) => {
         <FoodCardWrapper>
         <Link to={foodShowURL(food.id)} style={{ textDecoration: 'none' }}>
             <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
-            {/* <OneSkeltonWrapper>
-                        <Skeleton variant="rect"/>
-                    </OneSkeltonWrapper> */}
             <TextWrapper>
                 <FoodName>
                     {food.name}

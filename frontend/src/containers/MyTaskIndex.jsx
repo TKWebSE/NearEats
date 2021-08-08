@@ -4,64 +4,26 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {SessionState,SessionDispatch} from "../context/Context";
-import { fetchMyFoodsIndex } from '../apis/foodApis';
-import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
-import { 
-    initializeState,
-    foodsListActionTypes,
-    foodsListReducer,
-} from '../reducer/foodsListReducer';
-import {FoodCard} from '../component/foodComponent/FoodCard';
-import {NOTFOUND_FOOD_TEXT} from "../constants";
+import {initializeState,oredersActionTypes,orderIndexReducer} from "../reducer/orderIndexReducer";
+import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
+import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {foodCreateURL} from "../urls/index";
 import {ButtonTheme} from "../style_constants";
 
-const FoodsWrapper = styled.div`
-    margin-top:5%;
-    margin-right:10%;
-    margin-left:10%;
+const MyTaskWrapper = styled.div`
 `;
 
-const FoodsIndexTitle = styled.h2`
-    margin-top:0px;
-    font-size:180%;
-    ${media.lessThan("large")`
-        font-size:160%;
-    `}
-    ${media.lessThan("medium")`
-        font-size:130%;
-    `}
+const MyTaskIndexTitle = styled.div`
 `;
 
-const FoodListWrapper = styled.div`
+const NotExistTaskWrapper = styled.div`
 `;
 
-const ContentsList = styled.div`
-    display: flex;
-    justify-content: space-around;
-    float:left;
-    width:23%;
-    margin-left:1%;
-    margin-right:1%;
-    ${media.lessThan("medium")`
-        width:30%;
-    `}
-    ${media.lessThan("small")`
-        width:100%;
-    `}
+const ExistTaskWrapper = styled.div`
 `;
 
-const FoodCardWrapper = styled.div`
-    width:100%;
-`;
-
-const FoodCards = styled(FoodCard)`
-    display: inline-block
-    float:left;
-`;
 
 const NoFoodsListWrapper = styled.div`
     padding-top:5%;
@@ -84,7 +46,7 @@ const NotFoundCatImage = styled.img`
     `}
 `;
 
-const NoUploadFoodsWrapper = styled.h3`
+const NotExistTaskTextWrapper = styled.h3`
     position:absolute;
     top: 50%;
     left: 30%;
@@ -130,125 +92,91 @@ const GotoFoodCreateWrapper = styled.div`
 `;
 
 const SkeltonsWrapper = styled.div`
-    width:25%;
 `;
 
 const SkeltonCardWrapper = styled.div`
-// width:25%;
-float: left;
-margin-left:1%;
-margin-right:1%;
-padding-bottom:5%;
-
+    margin-left:1%;
+    width:23%;
+    margin-right:1%;
+    padding-bottom:5%;
+    float: left;
 `;
 
 const SkeltonImageWrapper = styled.div`
-
 `;
 
 const SkeltonTitleWrapper = styled.div`
     padding-top:6%;
-    
 `;
 
 export const MyTaskIndex = () => {
-    const [state,dispatch] = useReducer(foodsListReducer,initializeState);
+    const [state,dispatch] = useReducer(ordersReducer,initializeState);
     const history = useHistory();
-    const SessionAuthState = useContext(SessionState);
-    const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
-        dispatch({type: foodsListActionTypes.FETCHING})
-        // fetchMyFoodsIndex(
-        //     SessionAuthState.currentUser.id
-        //     )
-        // .then((data) => {
-        //     dispatch({
-        //         type: foodsListActionTypes.FETCH_SUCCESS,
-        //         payload: {
-        //             foodsList: data.foods
-        //         },
-        //     });
-        // })
-        // .catch((e) => console.log(e))
+        dispatch({type: oredersActionTypes.FETCHING})
+        fetchFoodsIndexApi()
+        .then((data) => {
+            dispatch({
+                type: oredersActionTypes.FETCH_SUCCESS,
+                payload: {
+                    ordersList: data.foods
+                },
+            });
+        })
+        .catch((e) => console.log(e))
     },[])
 
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
     }
 
-    return (
+    return(
         <Fragment>
-            <FoodsWrapper>
-                <FoodsIndexTitle>
-                    {FOOD_HEADER_TITLE.MYFOOD}
-                </FoodsIndexTitle>
-                {/* {
-                state.fetchState === REQUEST_STATE.OK?
-                    state.foodsList === undefined || state.foodsList === []?
-                        <NoFoodsListWrapper>
-                            <NotFoundCatWrapper>
-                                <NotFoundCatImage src={NotFoundCat}/>
-                            </NotFoundCatWrapper>
-                            <NoUploadFoodsWrapper>
-                                {NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
-                            </NoUploadFoodsWrapper>
-                            <LetsUploadFoodsWrapper>
-                                {NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
-                            </LetsUploadFoodsWrapper>
-                            <ThemeProvider theme={ButtonTheme}>
-                            <GotoFoodCreateWrapper>
-                                <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
-                            </GotoFoodCreateWrapper>
-                            </ThemeProvider>
-                        </NoFoodsListWrapper>
+            <MyTaskWrapper>
+                <MyTaskIndexTitle>
+                    {ORDER_HEADER_TITLE.MYTASK_INDEX_TITLE}
+                </MyTaskIndexTitle>
+                {
+                    state.fetchState === REQUEST_STATE.OK?
+                        isTask?
+                            <NotExistTaskWrapper>
+                                <NotFoundCatWrapper>
+                                   <NotFoundCatImage src={NotFoundCat}/>
+                                </NotFoundCatWrapper>
+                                <NotExistTaskTextWrapper>
+                                    {ORDER_HEADER_TITLE.NOT_EXIST_TASK_TEXT}
+                                </NotExistTaskTextWrapper>
+                                <LetsUploadFoodsWrapper>
+                                    {ORDER_HEADER_TITLE.LETS_CREATE_FOOD_TEXT}
+                                </LetsUploadFoodsWrapper>
+                                    <ThemeProvider theme={ButtonTheme}>
+                                        <GotoFoodCreateWrapper>
+                                            <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                                        </GotoFoodCreateWrapper>
+                                    </ThemeProvider>
+                            </NotExistTaskWrapper>
+                        :
+                        <OrderDispatch.Provider value={dispatch}>
+                            <OrderState.Provider value={state}>
+                                <ExistTaskWrapper>
+                                    <MyTaskIndexCard/>
+                                </ExistTaskWrapper>
+                            </OrderState.Provider>
+                        </OrderDispatch.Provider>
                     :
-                    <FoodListWrapper>
-                    {
-                    state.foodsList.map((food,i) => 
-                        <ContentsList key={i}>
-                            <FoodCardWrapper>
-                                <FoodCard food={food}></FoodCard>
-                            </FoodCardWrapper>
-                        </ContentsList>
-                    )
-                    }
-                    </FoodListWrapper>
-                : */}
-                {/* <SkeltonsWrapper> */}
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    {/* <SkeltonWrapper>
-                        <Skeleton variant="rect" width={450}  />
-                    </SkeltonWrapper>
-                    <SkeltonWrapper>
-                        <Skeleton variant="rect" width={450} height={300} />
-                    </SkeltonWrapper> */}
-                {/* </SkeltonsWrapper> */}
-               {/* } */}
-            </FoodsWrapper>
+                    <SkeltonsWrapper>
+                        <SkeltonCardWrapper>
+                            <SkeltonImageWrapper>
+                                <Skeleton variant="rect" height={180}/>
+                            </SkeltonImageWrapper>
+                            <SkeltonTitleWrapper>
+                                <Skeleton variant="rect" height={40}/>
+                            </SkeltonTitleWrapper>
+                        </SkeltonCardWrapper>
+                    </SkeltonsWrapper>
+                }
+            </MyTaskWrapper>
         </Fragment>
     )
 }

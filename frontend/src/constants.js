@@ -26,6 +26,16 @@ export const HEADER_TEXT = {
     SIGNOUT_TEXT:"ログアウト",
 }
 
+export const DRAWER_TEXT = {
+    FOOD_INDEX_TEXT:"TOPページ",
+    FOOD_CREATE_TEXT:"料理の作成",
+    MY_FOOD_TEXT:"MyFoods",
+    TASK_TEXT:"MyTask",
+    PROFILE_TEXT:"プロフィール",
+    ORDER_TEXT:"注文履歴",
+    SETTING_TEXT:"設定",
+}
+
 export const HOME_TEXT = {
     HOME_TITLE:"Near-Eats",
     SUB_TITLE:"地域の家庭料理をあなたの食卓に",
@@ -42,16 +52,6 @@ export const HOME_TEXT = {
     HOWTO_GETTASK_AND_COOK_TEXT:"料理が購入されたら、さっそく調理していきましょう。使い捨ての容器に盛り付けることをお勧めします。",
     HOWTO_DELIVER_FOOD_TITLE:"3.所定の場所までお届け！",
     HOWTO_DELIVER_FOOD_TEXT:"アプリの表示に沿って、完成した料理を配達しましょう。",
-}
-
-export const DRAWER_TEXT = {
-    FOOD_INDEX_TEXT:"TOPページ",
-    FOOD_CREATE_TEXT:"料理の作成",
-    MY_FOOD_TEXT:"MyFoods",
-    TASK_TEXT:"MyTask",
-    PROFILE_TEXT:"プロフィール",
-    ORDER_TEXT:"注文履歴",
-    SETTING_TEXT:"設定",
 }
 
 export const SESSION_HEADER_TITLE = {
@@ -74,8 +74,9 @@ export const USER_HEADER_TITLE = {
 }
 
 export const ORDER_HEADER_TITLE = {
-    ORDER_INDEX:"購入履歴",
-    ORDER_DETAIL:"購入履歴の詳細",
+    MYTASK_INDEX_TITLE:"Task一覧",
+    ORDER_INDEX_TITLE:"購入履歴",
+    ORDER_DETAIL_TITLE:"購入履歴の詳細",
 }
 
 export const USER_LABEL = {
@@ -89,5 +90,12 @@ export const USER_LABEL = {
 export const NOTFOUND_FOOD_TEXT = {
     NOT_UPLOAD_MYFOODS_TEXT:"まだ料理を投稿したことがありません",
     LETS_UPLOAD_FOOD_TEXT:"最初の1品目を投稿してみましょう！",
-    GOTO_FOOD_CREATE_BUTTON_LABEL:"料理を出品する！",
+    GOTO_FOOD_CREATE_BUTTON_LABEL:"料理を投稿する！",
+}
+
+export const TaskIndexText = {
+    TaskCreateText:"注文受付日時",
+    TasKUodateText:"配達完了日時",
+    NOT_EXIST_TASK_TEXT:"まだ注文されたことがありません",
+    LETS_CREATE_FOOD_TEXT:"料理を投稿してあなたの料理を届けましょう！",
 }

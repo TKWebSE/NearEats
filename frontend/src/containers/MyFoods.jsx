@@ -151,10 +151,6 @@ const SkeltonTitleWrapper = styled.div`
     padding-top:6%;
 `;
 
-const SkeletonItem = styled(Skeleton)`
-// height:600%;
-`;
-
 export const MyFoods = () => {
     const [state,dispatch] = useReducer(foodsListReducer,initializeState);
     const history = useHistory();
@@ -162,19 +158,19 @@ export const MyFoods = () => {
     const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
-        // dispatch({type: foodsListActionTypes.FETCHING})
-        // fetchMyFoodsIndex(
-        //     SessionAuthState.currentUser.id
-        //     )
-        // .then((data) => {
-        //     dispatch({
-        //         type: foodsListActionTypes.FETCH_SUCCESS,
-        //         payload: {
-        //             foodsList: data.foods
-        //         },
-        //     });
-        // })
-        // .catch((e) => console.log(e))
+        dispatch({type: foodsListActionTypes.FETCHING})
+        fetchMyFoodsIndex(
+            SessionAuthState.currentUser.id
+            )
+        .then((data) => {
+            dispatch({
+                type: foodsListActionTypes.FETCH_SUCCESS,
+                payload: {
+                    foodsList: data.foods
+                },
+            });
+        })
+        .catch((e) => console.log(e))
     },[])
 
     function gotoFoodCreateHandle() {
@@ -222,7 +218,7 @@ export const MyFoods = () => {
                 <SkeltonsWrapper>
                     <SkeltonCardWrapper>
                         <SkeltonImageWrapper>
-                            <Skeleton variant="rect"  />
+                            <Skeleton variant="rect" height={180}/>
                         </SkeltonImageWrapper>
                         <SkeltonTitleWrapper>
                             <Skeleton variant="rect" height={40}/>
