@@ -15,3 +15,7 @@ export const UserDispatch = createContext("");
 //order用context
 export const OrderState = createContext("");
 export const OrderDispatch = createContext("");
+
+//task用contest
+export const TaskState = createContext("");
+export const TaskDispatch = createContext("");

@@ -5,16 +5,20 @@ import { orderIndexBackendURL,
     orderDeleteBackendURL
 } from '../urls/index'
 
-//order一覧を取得する
-export const orederIndexApis = () => {
-    return axios.get(orderIndexBackendURL())
+//ユーザーのtask一覧を取得する
+export const fetchTaskIndexApis = (user_id) => {
+    return axios.get(orderIndexBackendURL(),{
+      params:{
+        user_id:user_id
+      }
+  })
     .then(res => {
         return res.data
     })
     .catch((e) => console.error(e))
 }
 
-//特定ののorderを1件取得する
+//特定ののtaskを1件取得する
 export const fetchOrderApis = (order) => {
     return axios.get(orderShowBackendURL(order.id),{
         params:{

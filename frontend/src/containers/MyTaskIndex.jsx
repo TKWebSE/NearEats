@@ -4,6 +4,7 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
+import {fetchTaskIndexApis} from "../apis/taskApis";
 import {initializeState,oredersActionTypes,orderIndexReducer} from "../reducer/orderIndexReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
 import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
@@ -115,7 +116,7 @@ export const MyTaskIndex = () => {
 
     useEffect(() => {
         dispatch({type: oredersActionTypes.FETCHING})
-        fetchFoodsIndexApi()
+        fetchTaskIndexApis()
         .then((data) => {
             dispatch({
                 type: oredersActionTypes.FETCH_SUCCESS,
@@ -157,13 +158,13 @@ export const MyTaskIndex = () => {
                                     </ThemeProvider>
                             </NotExistTaskWrapper>
                         :
-                        <OrderDispatch.Provider value={dispatch}>
-                            <OrderState.Provider value={state}>
+                        <TaslDispatch.Provider value={dispatch}>
+                            <TaskState.Provider value={state}>
                                 <ExistTaskWrapper>
                                     <MyTaskIndexCard/>
                                 </ExistTaskWrapper>
-                            </OrderState.Provider>
-                        </OrderDispatch.Provider>
+                            </TaskState.Provider>
+                        </TaslDispatch.Provider>
                     :
                     <SkeltonsWrapper>
                         <SkeltonCardWrapper>

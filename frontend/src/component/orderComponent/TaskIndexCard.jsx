@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
-
+import {TaskState,TaslDispatch} from "../../context/Context";
 import {TaskIndexText} from "../../constants";
 
 
@@ -33,26 +33,28 @@ const TaskCreateTimeWrapper = styled.div`
 `;
 
 export const MyTaskIndexCard = () => {
+  const state = useContext(TaskState);
+  const dispatch = useContext(TaslDispatch)
   
   return (
     <Fragment>
       <FoodNameWrapper>
-    
+        {state.name}
       </FoodNameWrapper>
       <FoodPriceWrapper>
-        
+        {state.price}
       </FoodPriceWrapper>
       <IsFinishedWrapper>
-
+        {state.finished}
       </IsFinishedWrapper>
       {
-        isFinished?
+        state.isFinished === 1?
           <FinishedWrapper>
             <TasKUodateTextWrapper>
               {TaskIndexText.TasKUodateText}
             </TasKUodateTextWrapper>
             <TaskUpdateTimeWrapper>
-
+              {state.updatetime}
             </TaskUpdateTimeWrapper>
           </FinishedWrapper>
         :
@@ -61,7 +63,7 @@ export const MyTaskIndexCard = () => {
               {TaskIndexText.TaskCreateText}
             </TaskCreateTextWrapper>
             <TaskCreateTimeWrapper>
-
+              {state.createtime}
             </TaskCreateTimeWrapper>
           </UnFinishedWrapper> 
       }
