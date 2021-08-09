@@ -6,7 +6,7 @@ import { orderIndexBackendURL,
 } from '../urls/index'
 
 //order一覧を取得する
-export const orederIndexApis = () => {
+export const orederIndexApi = () => {
     return axios.get(orderIndexBackendURL())
     .then(res => {
         return res.data
@@ -15,7 +15,7 @@ export const orederIndexApis = () => {
 }
 
 //特定ののorderを1件取得する
-export const fetchOrderApis = (order) => {
+export const fetchOrderApi = (order) => {
     return axios.get(orderShowBackendURL(order.id),{
         params:{
             order:order
@@ -28,7 +28,7 @@ export const fetchOrderApis = (order) => {
 }
 
 //特定ののorderを1件更新する
-export const updateOrderApis = (order) => {
+export const updateOrderApi = (order) => {
     return axios.put(orderUpdateBackendURL(order.id),{
         params:{
             order:order
@@ -41,7 +41,7 @@ export const updateOrderApis = (order) => {
 }
 
 //特定ののtaskを1件削除する
-export const deleteOrderApis = (order) => {
+export const deleteOrderApi = (order) => {
     return axios.delete(orderDeleteBackendURL(order.id),{
         params:{
             order:order

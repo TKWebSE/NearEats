@@ -31,9 +31,9 @@
  6.times do |m|
   food = Food.find(m+1) 
   order = food.orders.build(
-        order_user_id: food.id,
-        make_user_id: food.id,
+        order_user_id: m,
+        make_user_id: m+1,
         count: m,
-        order_status: 1,
+        order_status: 0,
       );
  end

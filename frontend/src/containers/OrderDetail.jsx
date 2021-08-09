@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
 import { initializeState,orderDetailActionTypes,orderDetailReducer} from "../reducer/orderDetailReducer";
-import {fetchOrderApis} from "../apis/orderApis";
+import {fetchOrderApi} from "../apis/orderApis";
 import {orderEditURL} from "../urls/index";
 import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
 import {OrderDispatch,OrderState} from "../context/Context";
@@ -27,7 +27,7 @@ export const OrderDetail = ({match}) => {
 
   useEffect(() =>  {
     dispatch({type:orderDetailActionTypes.FETCHING});
-    fetchOrderApis(match.params.orderId)
+    fetchOrderApi(match.params.orderId)
     .then((data)=> {
       dispatch({  
         type:orderDetailActionTypes.FETCH_SUCCESS,

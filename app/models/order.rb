@@ -5,4 +5,17 @@ class Order < ApplicationRecord
 
     def SetMakeUser 
     end
+
+    def changeOrderStatus
+
+        case changeStatus
+            when "Order" then
+            self.order_status = 0
+            when "Finish" then
+                self.order_status = 1
+            when "Cancel" then
+                self.order_status = 2
+        end
+        
+    end
 end

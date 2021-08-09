@@ -7,7 +7,7 @@ import { REQUEST_STATE,ORDER_HEADER_TITLE } from "../constants";
 import {OrderDispatch,OrderState} from "../context/Context";
 import { initializeState,oredersActionTypes,orderIndexReducer } from "../reducer/orderIndexReducer";
 import {orderShowURL} from "../urls/index";
-import {orederIndexApis} from "../apis/orderApis";
+import {orederIndexApi} from "../apis/orderApis";
 import {OrderIndexCard} from "../component/orderComponent/OrderIndexCard";
 
 const OrderIndexHeader = styled.h1`
@@ -22,7 +22,7 @@ export const OrderIndex =() => {
     const history = useHistory();
     useEffect(() => {
         dispatch({type:oredersActionTypes.FETCHING})
-        orederIndexApis()
+        orederIndexApi()
         .then((data) => {
             dispatch({
                 type:oredersActionTypes.FETCH_SUCCESS,

@@ -4,8 +4,9 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {fetchTaskIndexApis} from "../apis/taskApis";
-import {initializeState,oredersActionTypes,orderIndexReducer} from "../reducer/orderIndexReducer";
+import {fetchTaskIndexApi} from "../apis/taskApis";
+import {TaskState,TaskDispatch} from "../context/Context";
+import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
 import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
@@ -14,12 +15,17 @@ import {foodCreateURL} from "../urls/index";
 import {ButtonTheme} from "../style_constants";
 
 const MyTaskWrapper = styled.div`
+    margin-top:5%;
+    margin-right:10%;
+    margin-left:10%;
 `;
 
-const MyTaskIndexTitle = styled.div`
+const MyTaskIndexTitle = styled.h1`
 `;
 
 const NotExistTaskWrapper = styled.div`
+border: solid;
+border-color: #031de2;
 `;
 
 const ExistTaskWrapper = styled.div`
@@ -111,17 +117,17 @@ const SkeltonTitleWrapper = styled.div`
 `;
 
 export const MyTaskIndex = () => {
-    const [state,dispatch] = useReducer(ordersReducer,initializeState);
+    const [state,dispatch] = useReducer(taskListReducer,initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({type: oredersActionTypes.FETCHING})
-        fetchTaskIndexApis()
+        dispatch({type: tasksActionTypes.FETCHING})
+        fetchTaskIndexApi()
         .then((data) => {
             dispatch({
-                type: oredersActionTypes.FETCH_SUCCESS,
+                type: tasksActionTypes.FETCH_SUCCESS,
                 payload: {
-                    ordersList: data.foods
+                    tasksList: data.foods
                 },
             });
         })
@@ -131,7 +137,7 @@ export const MyTaskIndex = () => {
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
     }
-
+    console.log(state)
     return(
         <Fragment>
             <MyTaskWrapper>
@@ -140,7 +146,7 @@ export const MyTaskIndex = () => {
                 </MyTaskIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK?
-                        isTask?
+                        state.tasksList === []?
                             <NotExistTaskWrapper>
                                 <NotFoundCatWrapper>
                                    <NotFoundCatImage src={NotFoundCat}/>
@@ -158,13 +164,13 @@ export const MyTaskIndex = () => {
                                     </ThemeProvider>
                             </NotExistTaskWrapper>
                         :
-                        <TaslDispatch.Provider value={dispatch}>
+                        <TaskDispatch.Provider value={dispatch}>
                             <TaskState.Provider value={state}>
                                 <ExistTaskWrapper>
                                     <MyTaskIndexCard/>
                                 </ExistTaskWrapper>
                             </TaskState.Provider>
-                        </TaslDispatch.Provider>
+                        </TaskDispatch.Provider>
                     :
                     <SkeltonsWrapper>
                         <SkeltonCardWrapper>

@@ -7,10 +7,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :foods do
-          get 'searchIndex', to: 'foods#searchIndex'
-          get 'myfoods', to: 'foods#myfoods'
+        get 'searchIndex', to: 'foods#searchIndex'
+        get 'myfoods', to: 'foods#myfoods'
       end
-      resources :orders
+
+      resources :orders do
+        get 'taskIndex', to: 'orders#taskIndex'
+        get 'taskShow', to: 'orders#taskShow'
+        put 'taskUpdate', to: 'orders#taskUpdate'
+      end
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
           registrations: 'api/v1/auth/registrations'

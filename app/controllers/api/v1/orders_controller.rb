@@ -1,6 +1,35 @@
 module Api
     module V1 
         class OrdersController < ApplicationController
+
+            def taskIndex
+                orders = Order.where(make_user: params[:userId])
+                orders = Order.where(make_user: 1)
+                logger.debug("updateこんとろーららららら")
+                logger.debug(orders)
+
+                render json: {
+                    orders: orders
+                }, status: :ok
+            end
+
+            def taskShow
+                logger.debug("updateこんとろーららららら")
+
+                render json: {
+                    order: order
+                }, status: :ok
+            end
+
+            def taskUpdate
+                logger.debug("updateこんとろーららららら")
+
+                render json: {
+                    orders: orders
+                }, status: :ok
+            end
+
+
             def index
                orders = Order.all
 
@@ -10,12 +39,8 @@ module Api
             end
         
             def show
-                logger.debug("コメント")
-                logger.debug(params)
-                logger.debug(params[:userId])
-                logger.debug("コメント")
                 order = Order.find_by(id: params[:userId])
-                logger.debug(user)
+
                 render json: {
                     order: order
                 },status: :ok
@@ -23,6 +48,7 @@ module Api
 
             def create
                 order = Order.new(name: params[:name])
+
                 if user.save
                     render json: {
                         order: order
@@ -33,7 +59,6 @@ module Api
             end
             
             def update
-                logger.debug("updateこんとろーららららら")
                 order = Order.find(params[:id])
 
                 if order.update!(order_params)
