@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-3.times do |n|
+8.times do |n|
     user = User.new(
       name: "testユーザー_#{n}",
       email: "email#{n}@yahoo.co.jp",
@@ -24,16 +24,22 @@
       );
 
     end
- 
     user.save!
- end
+end
 
- 6.times do |m|
-  food = Food.find(m+1) 
-  order = food.orders.build(
-        order_user_id: m,
-        make_user_id: m+1,
-        count: m,
-        order_status: 0,
-      );
- end
+3.upto(7){|x|
+  user = User.find(x)
+  maker = User.find(x+1)
+  food = Food.find(x)   
+
+  6.times do |m|
+    order = food.orders.build(
+          order_user_id: user.id,
+          make_user_id: maker.id,
+          count: m,
+          order_status: 0,
+        );
+  end
+  food.save!
+}
+

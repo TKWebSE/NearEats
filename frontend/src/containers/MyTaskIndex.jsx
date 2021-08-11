@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
 import {fetchTaskIndexApi} from "../apis/taskApis";
-import {TaskState,TaskDispatch} from "../context/Context";
+import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Context";
 import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
 import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
@@ -117,12 +117,14 @@ const SkeltonTitleWrapper = styled.div`
 `;
 
 export const MyTaskIndex = () => {
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch)
     const [state,dispatch] = useReducer(taskListReducer,initializeState);
     const history = useHistory();
 
     useEffect(() => {
         dispatch({type: tasksActionTypes.FETCHING})
-        fetchTaskIndexApi()
+        fetchTaskIndexApi(SessionAuthState.user.id)
         .then((data) => {
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
