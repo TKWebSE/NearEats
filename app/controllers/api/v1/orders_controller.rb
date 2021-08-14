@@ -3,21 +3,30 @@ module Api
         class OrdersController < ApplicationController
 
             def taskIndex
-                orders = Order.where(make_user: params[:userId])
-                orders = Order.where(make_user: 1)
+                current_user = User.find(params[:user_id])
+
+                tasks = Order.where(make_user_id: current_user)
+
+                foods = []
+                tasks.each do |task|
+                    food = task.food
+                    foods.push food
+                end
+
                 logger.debug("updateこんとろーららららら")
-                logger.debug(orders)
+                logger.debug(tasks)
 
                 render json: {
-                    orders: orders
+                    tasks: tasks,
+                    foods: foods
                 }, status: :ok
             end
 
             def taskShow
-                logger.debug("updateこんとろーららららら")
+                task = Order.find(params[:id])
 
                 render json: {
-                    order: order
+                    task: task
                 }, status: :ok
             end
 

@@ -1,7 +1,7 @@
-import React,{ Fragment } from "react";
+import React,{ Fragment,useContext } from "react";
 import media from "styled-media-query";
 import styled from "styled-components";
-import foodImage from "../../images/food-image.jpg";
+import {TaskState,TaskDispatch} from "../../context/Context";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -37,21 +37,24 @@ const FoodCreatedTime = styled.div`
 `;
 
 export const TaskDetailCard = () => {
+  const state = useContext(TaskState);
+  const dispatch = useContext(TaskDispatch)
+
     return (
         <Fragment>
             <FoodCardWrapper>
-                <FoodImage src={foodImage} alt="foodImage"></FoodImage>
+                {/* <FoodImage src={foodImage} alt="foodImage"></FoodImage> */}
                 <FoodName>
-                    {food.name}
+                    {state.foodName}
                 </FoodName>
                 <FoodPrice>
-                    ￥{food.price}
+                    ￥{state.price}
                 </FoodPrice>
                 <FoodDesicription>
-                    {food.description}
+                    {state.description}
                 </FoodDesicription>
                 <FoodCreatedTime>
-                    {food.created_at}
+                    {state.created_at}
                 </FoodCreatedTime>
             </FoodCardWrapper>
         </Fragment>

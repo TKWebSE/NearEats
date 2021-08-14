@@ -24,8 +24,6 @@ const MyTaskIndexTitle = styled.h1`
 `;
 
 const NotExistTaskWrapper = styled.div`
-border: solid;
-border-color: #031de2;
 `;
 
 const ExistTaskWrapper = styled.div`
@@ -124,7 +122,7 @@ export const MyTaskIndex = () => {
 
     useEffect(() => {
         dispatch({type: tasksActionTypes.FETCHING})
-        fetchTaskIndexApi(SessionAuthState.user.id)
+        fetchTaskIndexApi(SessionAuthState.user)
         .then((data) => {
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
