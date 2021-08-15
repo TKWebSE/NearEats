@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { orderIndexBackendURL,
+import { 
+    myTaskIndexBackendURL,
+    orderIndexBackendURL,
     orderShowBackendURL,
     orderUpdateBackendURL,
     orderDeleteBackendURL
@@ -7,12 +9,14 @@ import { orderIndexBackendURL,
 
 //ユーザーのtask一覧を取得する
 export const fetchTaskIndexApi = (user_id) => {
-    return axios.get(orderIndexBackendURL(),{
+    console.log(user_id)
+    return axios.get(myTaskIndexBackendURL(user_id),{
       params:{
         user_id:user_id
       }
   })
     .then(res => {
+        console.log(res)
         return res.data
     })
     .catch((e) => console.error(e))

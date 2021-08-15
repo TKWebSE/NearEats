@@ -122,12 +122,13 @@ export const MyTaskIndex = () => {
 
     useEffect(() => {
         dispatch({type: tasksActionTypes.FETCHING})
-        fetchTaskIndexApi(SessionAuthState.user)
+        fetchTaskIndexApi(5)
         .then((data) => {
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
                 payload: {
-                    tasksList: data.foods
+                    tasksList: data.tasks,
+                    foods:data.foods,
                 },
             });
         })
@@ -164,13 +165,15 @@ export const MyTaskIndex = () => {
                                     </ThemeProvider>
                             </NotExistTaskWrapper>
                         :
+                        state.taskList.map((task,i) => 
                         <TaskDispatch.Provider value={dispatch}>
                             <TaskState.Provider value={state}>
-                                <ExistTaskWrapper>
+                                <ExistTaskWrapper key={i}>
                                     <MyTaskIndexCard/>
                                 </ExistTaskWrapper>
                             </TaskState.Provider>
                         </TaskDispatch.Provider>
+                        )
                     :
                     <SkeltonsWrapper>
                         <SkeltonCardWrapper>

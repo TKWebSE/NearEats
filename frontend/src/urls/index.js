@@ -37,13 +37,14 @@ export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpd
 export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
 
 //orderのURL
-export const myTaskIndexURL = `/mytask`;
+export const myTaskIndexURL = `/taskIndex`;
 export const myTaskShowURL = (orderId) => `/myTask/${orderId}`;
 export const ordersIndexURL = `/orders`;
 export const orderShowURL = (orderId) => `/orders/${orderId}`;
 export const orderEditURL = (orderId) => `/orders/${orderId}/edot`;
 
 //orderのBackendURL
+export const myTaskIndexBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/orders/${userId}${myTaskIndexURL}`;
 export const orderIndexBackendURL = () => `${BACKEND_DEFAULT_URL}/orders`;
 export const orderShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}`;
 export const orderCreateBackendURL =() =>  `${BACKEND_DEFAULT_URL}/orders/create`;

@@ -46,7 +46,7 @@ export const MyTaskIndexCard = () => {
     <Fragment>
       <TaskIndexCardWrapper>
         <FoodNameWrapper>
-          {state.name}
+          {state.food.name}
         </FoodNameWrapper>
         <FoodPriceWrapper>
           {state.price}
