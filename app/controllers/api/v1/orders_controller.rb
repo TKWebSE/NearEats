@@ -5,38 +5,46 @@ module Api
             def taskIndex
                 user = User.find_by(id: params[:user_id])
                 logger.debug(user.name)
-                tasks = Order.where(make_user_id: user.id)
-                # logger.debug(tasks.first)
+                # tasks = Order.where(make_user_id: user.id)
+                tasks = Order.joins(:food).where(make_user_id: 5..7).select("foods.*,orders.*").order(updated_at: "DESC")
 
-                logger.debug("aaaa")
-                # food = tasks.first
-                logger.debug(tasks)
-                logger.debug("hgayop")
-                foods = []
+                taskList = []
+                
+                # tasks.find_each do |task|
+                #     food = task.food
+                #     # food.push task
+                #     logger.debug(task.id)
+                #     logger.debug(food)
+                #     logger.debug("ktkktr")
+                #     taskscontainer.push task,food
+                #     # taskscontainer.push food
+                #     taskList + taskscontainer
+                # end
 
                 tasks.each do |task|
-                    food = task.food
-                    logger.debug(task)
-                    logger.debug("ktkktr")
-                    logger.debug(task)
-                    foods.push food
+                    food = task.attributes
+                    # logger.debug(food)
+                    # logger.debug("ktkktr")
+                    # logger.debug(task)
+                    taskList.push food
                 end
 
-                logger.debug("updateこんとろーららららら")
-                logger.debug(foods)
-                logger.debug(tasks)
+                logger.debug(taskList)
 
                 render json: {
-                    tasks: tasks,
-                    foods: foods
+                    taskList: taskList,
                 }, status: :ok
             end
 
             def taskShow
-                task = Order.find(params[:id])
+                user = User.find_by(id: params[:user_id])
+                task = Order.find(make_user_id: user.id)
+
+                food = task.food
 
                 render json: {
-                    task: task
+                    task: task,
+                    food: food
                 }, status: :ok
             end
 

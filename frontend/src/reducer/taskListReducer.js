@@ -4,8 +4,7 @@ import { REQUEST_STATE } from '../constants';
 
 export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
-    tasksList: [],
-    foods:[],
+    taskList: [],
 }
 
 export const tasksActionTypes = {
@@ -23,8 +22,7 @@ export const taskListReducer = (state,action) => {
         case tasksActionTypes.FETCH_SUCCESS:
             return {
                 fetchState: REQUEST_STATE.OK,
-                tasksList:action.payload.tasks,
-                foods:action.payload.foods,
+                taskList:action.payload.taskList,
             };  
         default:
             throw new Error();    

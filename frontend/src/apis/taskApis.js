@@ -9,7 +9,6 @@ import {
 
 //ユーザーのtask一覧を取得する
 export const fetchTaskIndexApi = (user_id) => {
-    console.log(user_id)
     return axios.get(myTaskIndexBackendURL(user_id),{
       params:{
         user_id:user_id

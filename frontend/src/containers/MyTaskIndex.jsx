@@ -124,11 +124,11 @@ export const MyTaskIndex = () => {
         dispatch({type: tasksActionTypes.FETCHING})
         fetchTaskIndexApi(5)
         .then((data) => {
+            console.log(data)
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
                 payload: {
-                    tasksList: data.tasks,
-                    foods:data.foods,
+                    taskList: data.taskList,
                 },
             });
         })
@@ -169,7 +169,7 @@ export const MyTaskIndex = () => {
                         <TaskDispatch.Provider value={dispatch}>
                             <TaskState.Provider value={state}>
                                 <ExistTaskWrapper key={i}>
-                                    <MyTaskIndexCard/>
+                                    <MyTaskIndexCard task={task}/>
                                 </ExistTaskWrapper>
                             </TaskState.Provider>
                         </TaskDispatch.Provider>

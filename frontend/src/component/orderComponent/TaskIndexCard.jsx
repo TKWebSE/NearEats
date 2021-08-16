@@ -16,9 +16,6 @@ const FoodNameWrapper = styled.div`
 const FoodPriceWrapper = styled.div`
 `;
 
-const IsFinishedWrapper = styled.div`
-`;
-
 const FinishedWrapper = styled.div`
 `;
 
@@ -38,30 +35,27 @@ const TaskCreateTextWrapper = styled.div`
 const TaskCreateTimeWrapper = styled.div`
 `;
 
-export const MyTaskIndexCard = () => {
+export const MyTaskIndexCard = (task) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-
+  console.log(task)
   return (
     <Fragment>
       <TaskIndexCardWrapper>
         <FoodNameWrapper>
-          {state.food.name}
+          {task.name}
         </FoodNameWrapper>
         <FoodPriceWrapper>
-          {state.price}
+          {task.price}
         </FoodPriceWrapper>
-        <IsFinishedWrapper>
-          {state.finished}
-        </IsFinishedWrapper>
         {
-          state.order_status === 1?
+          task.order_status === 1?
             <FinishedWrapper>
               <TasKUodateTextWrapper>
-                {TaskIndexText.TasKUodateText}
+                {TaskIndexText.TasKUpdateText}
               </TasKUodateTextWrapper>
               <TaskUpdateTimeWrapper>
-                {state.updatetime}
+                {task.updated_at}
               </TaskUpdateTimeWrapper>
             </FinishedWrapper>
           :
@@ -70,7 +64,7 @@ export const MyTaskIndexCard = () => {
                 {TaskIndexText.TaskCreateText}
               </TaskCreateTextWrapper>
               <TaskCreateTimeWrapper>
-                {state.createtime}
+                {task.created_at}
               </TaskCreateTimeWrapper>
             </UnFinishedWrapper> 
         }
