@@ -93,9 +93,9 @@ export const NOTFOUND_FOOD_TEXT = {
     GOTO_FOOD_CREATE_BUTTON_LABEL:"料理を投稿する！",
 }
 
-export const TaskIndexText = {
-    TaskCreateText:"注文受付日時:",
-    TasKUpdateText:"配達完了日時:",
+export const TASK_INDEX_TEXT = {
+    TaskCreateText:"注文受付日時：",
+    TasKUpdateText:"配達完了日時：",
     NOT_EXIST_TASK_TEXT:"まだ注文されたことがありません",
     LETS_CREATE_FOOD_TEXT:"料理を投稿してあなたの料理を届けましょう！",
 }

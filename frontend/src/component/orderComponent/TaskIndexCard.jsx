@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
-import {TaskIndexText} from "../../constants";
+import {TASK_INDEX_TEXT} from "../../constants";
 
 
 const TaskIndexCardWrapper = styled.div`
@@ -10,49 +10,81 @@ border-color: #F0F0F0 ;
 `;
 
 
-const FoodNameWrapper = styled.div`
+const FoodNameWrapper = styled.h3`
+  margin:0;
+  width:60%;
+  float:left;
+`;
+
+const TaskStatusWrapper = styled.div`
+text-align:right;
+margin-bottom:1%;
 `;
 
 const FoodPriceWrapper = styled.div`
+width:60%;
+float:left;
+`;
+
+const TimeWrapper = styled.div`
 `;
 
 const FinishedWrapper = styled.div`
+display: flex;
 `;
 
 const TasKUodateTextWrapper = styled.div`
+
 `;
 
 const TaskUpdateTimeWrapper = styled.div`
+
 `;
 
 
 const UnFinishedWrapper = styled.div`
+display: flex;
+
 `;
 
 const TaskCreateTextWrapper = styled.div`
+
+
 `;
 
 const TaskCreateTimeWrapper = styled.div`
+
 `;
 
-export const MyTaskIndexCard = (task) => {
+
+
+export const MyTaskIndexCard = ({task}) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-  console.log(task)
+  // const [yyyyMMddhhmm,setyyyyMMddhhmm] = useState("yyyyMMddhhmm")
+  
+  // useEffect(() => {
+  //   setyyyyMMddhhmm()
+  // },[])
+
   return (
     <Fragment>
       <TaskIndexCardWrapper>
         <FoodNameWrapper>
           {task.name}
         </FoodNameWrapper>
+        <TaskStatusWrapper>
+          a
+        </TaskStatusWrapper>
         <FoodPriceWrapper>
-          {task.price}
+          ￥{task.price}
         </FoodPriceWrapper>
+        <TimeWrapper>
         {
           task.order_status === 1?
             <FinishedWrapper>
               <TasKUodateTextWrapper>
-                {TaskIndexText.TasKUpdateText}
+                {TASK_INDEX_TEXT.TasKUpdateText}
               </TasKUodateTextWrapper>
               <TaskUpdateTimeWrapper>
                 {task.updated_at}
@@ -61,13 +93,14 @@ export const MyTaskIndexCard = (task) => {
           :
             <UnFinishedWrapper>
               <TaskCreateTextWrapper>
-                {TaskIndexText.TaskCreateText}
+                {TASK_INDEX_TEXT.TaskCreateText}
               </TaskCreateTextWrapper>
               <TaskCreateTimeWrapper>
                 {task.created_at}
               </TaskCreateTimeWrapper>
             </UnFinishedWrapper> 
         }
+        </TimeWrapper>
       </TaskIndexCardWrapper>
     </Fragment>
   )
