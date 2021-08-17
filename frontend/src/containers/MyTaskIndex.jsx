@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
+import { Link } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
@@ -11,7 +12,7 @@ import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants"
 import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
-import {foodCreateURL} from "../urls/index";
+import {foodCreateURL,myTaskShowURL} from "../urls/index";
 import {ButtonTheme} from "../style_constants";
 
 const MyTaskWrapper = styled.div`
@@ -27,6 +28,7 @@ const NotExistTaskWrapper = styled.div`
 `;
 
 const ExistTaskWrapper = styled.div`
+padding-bottom:1%;
 `;
 
 
@@ -166,13 +168,15 @@ export const MyTaskIndex = () => {
                             </NotExistTaskWrapper>
                         :
                         state.taskList.map((task,i) => 
-                        <TaskDispatch.Provider value={dispatch}>
-                            <TaskState.Provider value={state}>
-                                <ExistTaskWrapper key={i}>
-                                    <MyTaskIndexCard task={task}/>
-                                </ExistTaskWrapper>
-                            </TaskState.Provider>
-                        </TaskDispatch.Provider>
+                        <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
+                            <TaskDispatch.Provider value={dispatch}>
+                                <TaskState.Provider value={state}>
+                                    <ExistTaskWrapper key={i}>
+                                        <MyTaskIndexCard task={task}/>
+                                    </ExistTaskWrapper>
+                                </TaskState.Provider>
+                            </TaskDispatch.Provider>
+                        </Link>
                         )
                     :
                     <SkeltonsWrapper>

@@ -7,6 +7,8 @@ import {TASK_INDEX_TEXT} from "../../constants";
 const TaskIndexCardWrapper = styled.div`
 border: solid;
 border-color: #F0F0F0 ;
+color:black;
+border-width:2px;
 `;
 
 
@@ -19,6 +21,18 @@ const FoodNameWrapper = styled.h3`
 const TaskStatusWrapper = styled.div`
 text-align:right;
 margin-bottom:1%;
+`;
+
+const TaskStatusUnFinishedWrapper = styled.div`
+`;
+
+const TaskStatusFinishedWrapper = styled.div`
+`;
+
+const TaskStatusOrderCancelWrapper = styled.div`
+`;
+
+const TaskStatusTaskCancelWrapper = styled.div`
 `;
 
 const FoodPriceWrapper = styled.div`
@@ -34,11 +48,9 @@ display: flex;
 `;
 
 const TasKUodateTextWrapper = styled.div`
-
 `;
 
 const TaskUpdateTimeWrapper = styled.div`
-
 `;
 
 
@@ -74,7 +86,29 @@ export const MyTaskIndexCard = ({task}) => {
           {task.name}
         </FoodNameWrapper>
         <TaskStatusWrapper>
-          a
+          {
+            task.order_status === "0"?
+              <TaskStatusUnFinishedWrapper>
+                {TASK_INDEX_TEXT.TASK_STATUS_UNFINISHED_TEXT}
+              </TaskStatusUnFinishedWrapper>
+            :
+            task.order_status === "1"?
+              <TaskStatusFinishedWrapper>
+                {TASK_INDEX_TEXT.TASK_STATUS_FINISHED_TEXT}
+              </TaskStatusFinishedWrapper>
+            :
+            task.order_status === "2"?
+              <TaskStatusOrderCancelWrapper>
+                {TASK_INDEX_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
+              </TaskStatusOrderCancelWrapper>
+            :
+            task.order_status === "3"?
+              <TaskStatusTaskCancelWrapper>
+              {TASK_INDEX_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
+              </TaskStatusTaskCancelWrapper>
+            :
+            null
+          }
         </TaskStatusWrapper>
         <FoodPriceWrapper>
           ￥{task.price}
@@ -84,7 +118,7 @@ export const MyTaskIndexCard = ({task}) => {
           task.order_status === 1?
             <FinishedWrapper>
               <TasKUodateTextWrapper>
-                {TASK_INDEX_TEXT.TasKUpdateText}
+                {TASK_INDEX_TEXT.TASK_UPDATE_TEXT}
               </TasKUodateTextWrapper>
               <TaskUpdateTimeWrapper>
                 {task.updated_at}
@@ -93,7 +127,7 @@ export const MyTaskIndexCard = ({task}) => {
           :
             <UnFinishedWrapper>
               <TaskCreateTextWrapper>
-                {TASK_INDEX_TEXT.TaskCreateText}
+                {TASK_INDEX_TEXT.TASK_CREATE_TEXT}
               </TaskCreateTextWrapper>
               <TaskCreateTimeWrapper>
                 {task.created_at}

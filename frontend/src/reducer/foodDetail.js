@@ -1,4 +1,3 @@
-import React, {Reducer}from "react";
 import { REQUEST_STATE } from "../constants";
 
 export const initializeState = {

@@ -5,27 +5,13 @@ module Api
             def taskIndex
                 user = User.find_by(id: params[:user_id])
                 logger.debug(user.name)
-                # tasks = Order.where(make_user_id: user.id)
+
                 tasks = Order.joins(:food).where(make_user_id: 5..7).select("foods.*,orders.*").order(updated_at: "DESC")
 
                 taskList = []
-                
-                # tasks.find_each do |task|
-                #     food = task.food
-                #     # food.push task
-                #     logger.debug(task.id)
-                #     logger.debug(food)
-                #     logger.debug("ktkktr")
-                #     taskscontainer.push task,food
-                #     # taskscontainer.push food
-                #     taskList + taskscontainer
-                # end
 
                 tasks.each do |task|
                     food = task.attributes
-                    # logger.debug(food)
-                    # logger.debug("ktkktr")
-                    # logger.debug(task)
                     taskList.push food
                 end
 

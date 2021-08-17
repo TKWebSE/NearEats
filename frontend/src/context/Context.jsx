@@ -1,4 +1,4 @@
-import React, {createContext} from "react";
+import {createContext} from "react";
 
 //session用のcontext
 export const SessionState = createContext("");

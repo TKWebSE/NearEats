@@ -1,6 +1,4 @@
 import { REQUEST_STATE } from '../constants';
-// import { useReducer } from "react";
-
 
 export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
