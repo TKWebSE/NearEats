@@ -60,11 +60,6 @@ const FoodCardWrapper = styled.div`
     width:100%;
 `;
 
-const FoodCards = styled(FoodCard)`
-    display: inline-block
-    float:left;
-`;
-
 const NoFoodsListWrapper = styled.div`
     padding-top:5%;
     padding-left:26%;

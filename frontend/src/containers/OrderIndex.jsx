@@ -34,10 +34,6 @@ export const OrderIndex =() => {
         .catch((e) => console.log(e))
     },[])
 
-    function onClickHandle() {
-        history.push(orderShowURL())
-    }
-
     return(
         <Fragment>
             <OrderIndexHeader>
@@ -46,7 +42,6 @@ export const OrderIndex =() => {
             </OrderIndexHeader>
             {
                 state.fetchState === REQUEST_STATE.OK?
-                // <OrderDispatch.Provide value={dispatch}>
                     state.orderList.map((order,index) => 
                     <Link to={`/orders/${order.id}`}  key={index} style={{ textDecoration: 'none' }}>
                         <OrderState.Provider value={order}>
@@ -56,7 +51,6 @@ export const OrderIndex =() => {
                     
                     </Link>
                     )
-                // </OrderDispatch.Provide>
                 :
                 <ContentsList>
                         <Fragment>

@@ -11,9 +11,6 @@ import {foodsIndexURL,signInURL} from "../urls/index";
 import {MaterialUILoginButton} from "../component/sessionComponent/MaterialUILoginButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
-import Cookies from "js-cookie";
-import {REQUEST_STATE} from "../constants";
-import {sessionActionTypes} from "../reducer/sessionReducer";
 import {HTTP_STATUS_CODE,ERROR_MESSAGE} from "../constants";
 import {MaterialUIErrorSnackber} from "../component/MaterialUIErrorSnackber";
 import {MaterialUISuccessSnackber} from "../component/MaterialUISuccessSnackber";
@@ -57,7 +54,6 @@ const SubmitbuttomWrapper = styled.div`
 export const SignIn= () =>{
   const [state,dispatch] = useReducer(signInReducer,initializeState);
   const SessionAuthState = useContext(SessionState);
-  const SessionAuthDispatch = useContext(SessionDispatch);
   const history = useHistory();
 
   useEffect(() => {

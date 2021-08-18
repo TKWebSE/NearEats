@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useReducer} from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fetchFoodsIndexApi } from '../apis/foodApis';
 import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
@@ -13,7 +12,6 @@ import {
     foodsListReducer,
 } from '../reducer/foodsListReducer';
 import {FoodCard} from '../component/foodComponent/FoodCard';
-import Cookies from "js-cookie";
 import {NOTFOUND_FOOD_TEXT} from "../constants";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";

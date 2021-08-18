@@ -1,4 +1,4 @@
-import React,{Fragment,useEffect, useReducer,Link} from "react";
+import React,{Fragment} from "react";
 import styled from "styled-components";
 import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -116,9 +116,6 @@ const BuyerTextWrapper = styled.div`
 `;
 
 const SellerWrapper = styled.div`
-`;
-
-const SellerImageWrapper = styled.img`
 `;
 
 const SellerTitleWrapper = styled.h1`

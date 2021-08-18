@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
 import {TASK_INDEX_TEXT} from "../../constants";
-
+import {changeJSTDate} from "../../AppFunction";
 
 const TaskIndexCardWrapper = styled.div`
 border: solid;
@@ -14,16 +14,18 @@ border-width:2px;
 
 const FoodNameWrapper = styled.h3`
   margin:0;
-  width:60%;
   float:left;
 `;
 
 const TaskStatusWrapper = styled.div`
 text-align:right;
 margin-bottom:1%;
+background-color:red;
+float:clear;
 `;
 
 const TaskStatusUnFinishedWrapper = styled.div`
+
 `;
 
 const TaskStatusFinishedWrapper = styled.div`
@@ -73,11 +75,6 @@ const TaskCreateTimeWrapper = styled.div`
 export const MyTaskIndexCard = ({task}) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-  // const [yyyyMMddhhmm,setyyyyMMddhhmm] = useState("yyyyMMddhhmm")
-  
-  // useEffect(() => {
-  //   setyyyyMMddhhmm()
-  // },[])
 
   return (
     <Fragment>
@@ -121,7 +118,7 @@ export const MyTaskIndexCard = ({task}) => {
                 {TASK_INDEX_TEXT.TASK_UPDATE_TEXT}
               </TasKUodateTextWrapper>
               <TaskUpdateTimeWrapper>
-                {task.updated_at}
+                {changeJSTDate(task.updated_at)}
               </TaskUpdateTimeWrapper>
             </FinishedWrapper>
           :
@@ -130,7 +127,7 @@ export const MyTaskIndexCard = ({task}) => {
                 {TASK_INDEX_TEXT.TASK_CREATE_TEXT}
               </TaskCreateTextWrapper>
               <TaskCreateTimeWrapper>
-                {task.created_at}
+                {changeJSTDate(task.created_at)}
               </TaskCreateTimeWrapper>
             </UnFinishedWrapper> 
         }

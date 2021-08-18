@@ -5,18 +5,15 @@ import styled from "styled-components";
 import { USER_HEADER_TITLE } from "../constants";
 import {userCreateApi} from "../apis/userApis";
 import { initializeState,userReducer,userActionTypes} from "../reducer/userReducer";
-import {SessionState,SessionDispatch} from "../context/Context";
+import {SessionDispatch} from "../context/Context";
 import {UserDispatch,UserState} from "../context/Context";
 import {UserCreateCard} from "../component/userComponent/UserCreateCard";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {ButtonTheme} from "../style_constants";
-import { sessionIsLogin } from "../urls";
-import {signInApi,isLoginApi} from "../apis/sessionApis";
 import {signInURL,userCreateURL} from "../urls/index";
 import {sessionActionTypes} from "../reducer/sessionReducer";
 import { HTTP_STATUS_CODE,MESSAGE_TEXT,ERROR_MESSAGE } from "../constants";
-import Snackbar from '@material-ui/core/Snackbar';
 import {MaterialUIErrorSnackber} from "../component/MaterialUIErrorSnackber";
 
 const UserCreateWrapper = styled.div`
@@ -46,7 +43,6 @@ const UserCreateSubmitWrapper = styled.div`
 
 export const UserCreate = () => {
     const [state,dispatch] = useReducer(userReducer,initializeState);
-    const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch);
     const history = useHistory();
 
