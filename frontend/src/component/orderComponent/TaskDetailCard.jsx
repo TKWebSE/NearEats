@@ -2,6 +2,7 @@ import React,{ Fragment,useContext } from "react";
 import media from "styled-media-query";
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
+import foodImage from "../../images/food-image.jpg";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -43,7 +44,7 @@ export const TaskDetailCard = () => {
     return (
         <Fragment>
             <FoodCardWrapper>
-                {/* <FoodImage src={foodImage} alt="foodImage"></FoodImage> */}
+                <FoodImage src={foodImage} alt="foodImage"></FoodImage>
                 <FoodName>
                     {state.foodName}
                 </FoodName>

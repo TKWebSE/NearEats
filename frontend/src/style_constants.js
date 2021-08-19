@@ -5,6 +5,7 @@ export const COLORS = {
     BORDER: '#e2e2e2',
     SUB_TEXT: '#545454',
     SUB_BUTTON: '#eeeeee',
+    STATUS_COLOR:`#8B008B`,
   }
   
   export const FONT_SIZE = {

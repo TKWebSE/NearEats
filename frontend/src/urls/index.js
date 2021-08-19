@@ -45,6 +45,7 @@ export const orderEditURL = (orderId) => `/orders/${orderId}/edot`;
 
 //orderのBackendURL
 export const myTaskIndexBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/orders/${userId}${myTaskIndexURL}`;
+export const myTaskShowBackendURL= (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}`;
 export const orderIndexBackendURL = () => `${BACKEND_DEFAULT_URL}/orders`;
 export const orderShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}`;
 export const orderCreateBackendURL =() =>  `${BACKEND_DEFAULT_URL}/orders/create`;

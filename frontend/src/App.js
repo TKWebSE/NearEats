@@ -64,6 +64,12 @@ function App() {
         //HOME画面
           <GuestOnlyRoute 
             exact
+            path="/"
+            component={Home}>
+          </GuestOnlyRoute>  
+        //HOME画面
+          <GuestOnlyRoute 
+            exact
             path="/home"
             component={Home}>
           </GuestOnlyRoute>

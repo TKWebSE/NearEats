@@ -3,25 +3,49 @@ import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
 import {TASK_INDEX_TEXT} from "../../constants";
 import {changeJSTDate} from "../../AppFunction";
+import foodImage from "../../images/food-image.jpg";
+import {COLORS} from "../../style_constants";
 
 const TaskIndexCardWrapper = styled.div`
-border: solid;
-border-color: #F0F0F0 ;
-color:black;
-border-width:2px;
+  border: solid;
+  border-color: #F0F0F0 ;
+  color:black;
+  border-width:2px;
+  display: flex;
+  justify-content:space-between;
+  height:30%;
+  width:100%;
 `;
 
+const FoodImageWrapper = styled.div`
+  width:25%;
+`;
 
-const FoodNameWrapper = styled.h3`
-  margin:0;
-  float:left;
+const FoodImage = styled.img`
+  width:100%;
+  height:100%;
+`;
+
+const TaskIndexCardTextWrapper = styled.div`
+  width:75%;
+`;
+
+const TaskIndexCardUpsideWrapper = styled.div`
+  display: flex;
+  align-items:center;
+`;
+
+const FoodNameWrapper = styled.h2`
+  width:85%;
 `;
 
 const TaskStatusWrapper = styled.div`
-text-align:right;
-margin-bottom:1%;
-background-color:red;
-float:clear;
+  width:15%;
+  margin-bottom:1%;
+  background-color:${COLORS.STATUS_COLOR};
+  border-radius:45%;
+  text-align:center;
+  color:white;
 `;
 
 const TaskStatusUnFinishedWrapper = styled.div`
@@ -37,37 +61,43 @@ const TaskStatusOrderCancelWrapper = styled.div`
 const TaskStatusTaskCancelWrapper = styled.div`
 `;
 
-const FoodPriceWrapper = styled.div`
-width:60%;
-float:left;
+const TaskIndexCardDownsideWrapper = styled.div`
+  display: flex;
+  width:100%;
+  align-items:center;
+`;
+
+const FoodPriceWrapper = styled.h2`
+  width:55%;
 `;
 
 const TimeWrapper = styled.div`
+  width:45%;
 `;
 
 const FinishedWrapper = styled.div`
-display: flex;
+  display: flex;
 `;
 
 const TasKUodateTextWrapper = styled.div`
+  width:75%;
 `;
 
 const TaskUpdateTimeWrapper = styled.div`
+
 `;
 
 
 const UnFinishedWrapper = styled.div`
-display: flex;
-
+  display: flex;
 `;
 
 const TaskCreateTextWrapper = styled.div`
-
-
+  width:45%;
 `;
 
 const TaskCreateTimeWrapper = styled.div`
-
+  width:55%;
 `;
 
 
@@ -79,59 +109,68 @@ export const MyTaskIndexCard = ({task}) => {
   return (
     <Fragment>
       <TaskIndexCardWrapper>
-        <FoodNameWrapper>
-          {task.name}
-        </FoodNameWrapper>
-        <TaskStatusWrapper>
-          {
-            task.order_status === "0"?
-              <TaskStatusUnFinishedWrapper>
-                {TASK_INDEX_TEXT.TASK_STATUS_UNFINISHED_TEXT}
-              </TaskStatusUnFinishedWrapper>
-            :
-            task.order_status === "1"?
-              <TaskStatusFinishedWrapper>
-                {TASK_INDEX_TEXT.TASK_STATUS_FINISHED_TEXT}
-              </TaskStatusFinishedWrapper>
-            :
-            task.order_status === "2"?
-              <TaskStatusOrderCancelWrapper>
-                {TASK_INDEX_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
-              </TaskStatusOrderCancelWrapper>
-            :
-            task.order_status === "3"?
-              <TaskStatusTaskCancelWrapper>
-              {TASK_INDEX_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
-              </TaskStatusTaskCancelWrapper>
-            :
-            null
-          }
-        </TaskStatusWrapper>
-        <FoodPriceWrapper>
-          ￥{task.price}
-        </FoodPriceWrapper>
-        <TimeWrapper>
-        {
-          task.order_status === 1?
-            <FinishedWrapper>
-              <TasKUodateTextWrapper>
-                {TASK_INDEX_TEXT.TASK_UPDATE_TEXT}
-              </TasKUodateTextWrapper>
-              <TaskUpdateTimeWrapper>
-                {changeJSTDate(task.updated_at)}
-              </TaskUpdateTimeWrapper>
-            </FinishedWrapper>
-          :
-            <UnFinishedWrapper>
-              <TaskCreateTextWrapper>
-                {TASK_INDEX_TEXT.TASK_CREATE_TEXT}
-              </TaskCreateTextWrapper>
-              <TaskCreateTimeWrapper>
-                {changeJSTDate(task.created_at)}
-              </TaskCreateTimeWrapper>
-            </UnFinishedWrapper> 
-        }
-        </TimeWrapper>
+        <FoodImageWrapper>
+          <FoodImage src={foodImage} alt="foodImage"></FoodImage>
+        </FoodImageWrapper>
+        <TaskIndexCardTextWrapper>
+          <TaskIndexCardUpsideWrapper>
+            <FoodNameWrapper>
+              {task.name}
+            </FoodNameWrapper>
+            <TaskStatusWrapper>
+              {
+                task.order_status === "0"?
+                  <TaskStatusUnFinishedWrapper>
+                    {TASK_INDEX_TEXT.TASK_STATUS_UNFINISHED_TEXT}
+                  </TaskStatusUnFinishedWrapper>
+                :
+                task.order_status === "1"?
+                  <TaskStatusFinishedWrapper>
+                    {TASK_INDEX_TEXT.TASK_STATUS_FINISHED_TEXT}
+                  </TaskStatusFinishedWrapper>
+                :
+                task.order_status === "2"?
+                  <TaskStatusOrderCancelWrapper>
+                    {TASK_INDEX_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
+                  </TaskStatusOrderCancelWrapper>
+                :
+                task.order_status === "3"?
+                  <TaskStatusTaskCancelWrapper>
+                  {TASK_INDEX_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
+                  </TaskStatusTaskCancelWrapper>
+                :
+                null
+              }
+            </TaskStatusWrapper>
+          </TaskIndexCardUpsideWrapper>
+          <TaskIndexCardDownsideWrapper>
+            <FoodPriceWrapper>
+              ￥{task.price}
+            </FoodPriceWrapper>
+            <TimeWrapper>
+            {
+              task.order_status === 1?
+                <FinishedWrapper>
+                  <TasKUodateTextWrapper>
+                    {TASK_INDEX_TEXT.TASK_UPDATE_TEXT}
+                  </TasKUodateTextWrapper>
+                  <TaskUpdateTimeWrapper>
+                    {changeJSTDate(task.updated_at)}
+                  </TaskUpdateTimeWrapper>
+                </FinishedWrapper>
+              :
+                <UnFinishedWrapper>
+                  <TaskCreateTextWrapper>
+                    {TASK_INDEX_TEXT.TASK_CREATE_TEXT}
+                  </TaskCreateTextWrapper>
+                  <TaskCreateTimeWrapper>
+                    {changeJSTDate(task.created_at)}
+                  </TaskCreateTimeWrapper>
+                </UnFinishedWrapper> 
+            }
+            </TimeWrapper>
+          </TaskIndexCardDownsideWrapper>
+        </TaskIndexCardTextWrapper>
       </TaskIndexCardWrapper>
     </Fragment>
   )

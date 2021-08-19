@@ -39,7 +39,7 @@ const SkeltonTitleWrapper = styled.div`
 `;
 
 
-export const MyTaskDetail = () => {
+export const MyTaskDetail = ({match}) => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
     const [state,dispatch] = useReducer(taskListReducer,initializeState);

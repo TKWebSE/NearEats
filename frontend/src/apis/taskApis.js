@@ -20,8 +20,20 @@ export const fetchTaskIndexApi = (user_id) => {
     })
     .catch((e) => console.error(e))
 }
-
 //特定ののtaskを1件取得する
+export const fetchTaskApi = (order_id) => {
+    return axios.get(orderShowBackendURL(order_id),{
+        params:{
+            order_id:order_id
+        }
+    })
+    .then(res => {
+        return res.data
+    })
+    .catch(e => console.log(e))
+}
+
+//特定ののorderを1件取得する
 export const fetchOrderApi = (order) => {
     return axios.get(orderShowBackendURL(order.id),{
         params:{
