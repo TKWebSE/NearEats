@@ -9,10 +9,8 @@ import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Co
 import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
 import {TaskDetailCard} from "../component/orderComponent/TaskDetailCard";
-import NotFoundCat from "../images/NotFoundCat.jpeg";
-import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
-import {foodCreateURL} from "../urls/index";
-import {ButtonTheme} from "../style_constants";
+import {myTaskShowBackendURL} from "../urls/index";
+
 
 const taskDetailWrapper = styled.div`
 `;
@@ -47,7 +45,7 @@ export const MyTaskDetail = ({match}) => {
 
     useEffect(() => {
         dispatch({type: tasksActionTypes.FETCHING})
-        fetchTaskIndexApi(SessionAuthState.user.id)
+        myTaskShowBackendURL(match.params.orderId)
         .then((data) => {
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
@@ -59,8 +57,12 @@ export const MyTaskDetail = ({match}) => {
         .catch((e) => console.log(e))
     },[])
 
-    function gotoFoodCreateHandle() {
-        history.push(foodCreateURL);
+    function submitTaskFinishedHandle(){
+
+    }
+
+    function submitTaskCancelHandle(){
+
     }
 
     return (
@@ -87,7 +89,6 @@ export const MyTaskDetail = ({match}) => {
                     </SkeltonCardWrapper>
                 </SkeltonsWrapper>
                 }
-
             </taskDetailWrapper>
        </Fragment>
     )
