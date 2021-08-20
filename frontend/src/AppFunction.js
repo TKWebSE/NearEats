@@ -9,8 +9,7 @@ export function changeJSTDate(date) {
   const year = newDate.getFullYear()
   const month = newDate.getMonth() + 1
   const day = newDate.getDate()
-  const fd =  newDate.getDay()
-console.log(fd)
+
   const dayOfWeek = '日月火水木金土'.charAt(newDate.getDay());
 
   const hour = (`0` + (newDate.getHours())).slice(-2)

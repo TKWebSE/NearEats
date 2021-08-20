@@ -75,6 +75,7 @@ export const USER_HEADER_TITLE = {
 
 export const ORDER_HEADER_TITLE = {
     MYTASK_INDEX_TITLE:"Task一覧",
+    TASK_DETAIL:"Taskの詳細",
     ORDER_INDEX_TITLE:"購入履歴",
     ORDER_DETAIL_TITLE:"購入履歴の詳細",
 }

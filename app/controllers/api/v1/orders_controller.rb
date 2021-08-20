@@ -4,33 +4,23 @@ module Api
 
             def taskIndex
                 user = User.find_by(id: params[:user_id])
-                logger.debug(user.name)
 
-                tasks = Order.joins(:food).where(make_user_id: 5..7).select("foods.*,orders.*").order(updated_at: "DESC")
-
-                taskList = []
-
-                tasks.each do |task|
-                    food = task.attributes
-                    taskList.push food
-                end
-
-                logger.debug(taskList)
+                tasks = Food.joins(:orders).merge(
+                    Order.where(make_user_id: user.id)
+                ).select("foods.*,orders.*").order(updated_at: "DESC")
 
                 render json: {
-                    taskList: taskList,
+                    tasks: tasks,
                 }, status: :ok
             end
 
             def taskShow
-                user = User.find_by(id: params[:user_id])
-                task = Order.find(make_user_id: user.id)
-
-                food = task.food
+                task = Food.joins(:orders).merge(
+                    Order.where(id: params[:order_id])
+                ).select("foods.*,orders.*")
 
                 render json: {
                     task: task,
-                    food: food
                 }, status: :ok
             end
 

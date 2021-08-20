@@ -4,18 +4,26 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {fetchTaskIndexApi} from "../apis/taskApis";
+import {fetchTaskApi} from "../apis/taskApis";
 import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Context";
-import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
-import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
+import {initializeState,taskActionTypes,taskReducer} from "../reducer/taskReducer";
+import {REQUEST_STATE,ORDER_HEADER_TITLE} from "../constants";
 import {TaskDetailCard} from "../component/orderComponent/TaskDetailCard";
 import {myTaskShowBackendURL} from "../urls/index";
 
 
-const taskDetailWrapper = styled.div`
+const TaskDetailWrapper = styled.div`
+    margin-left:20%;
+    margin-right:20%;
+`;
+
+const TaskDetailHeader = styled.h1`
+    margin-top:3%;
+    margin-bottom:3%;
 `;
 
 const TaskDetailCardWrapper = styled.div`
+margin-bottom:5%;
 `;
 
 const SkeltonsWrapper = styled.div`
@@ -40,17 +48,17 @@ const SkeltonTitleWrapper = styled.div`
 export const MyTaskDetail = ({match}) => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
-    const [state,dispatch] = useReducer(taskListReducer,initializeState);
+    const [state,dispatch] = useReducer(taskReducer,initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({type: tasksActionTypes.FETCHING})
-        myTaskShowBackendURL(match.params.orderId)
+        dispatch({type: taskActionTypes.FETCHING})
+        fetchTaskApi(match.params.orderId)
         .then((data) => {
             dispatch({
-                type: tasksActionTypes.FETCH_SUCCESS,
+                type: taskActionTypes.FETCH_SUCCESS,
                 payload: {
-                    tasksList: data.foods
+                    task: data.task[0]
                 },
             });
         })
@@ -64,10 +72,13 @@ export const MyTaskDetail = ({match}) => {
     function submitTaskCancelHandle(){
 
     }
-
+    console.log(state)
     return (
         <Fragment>
-            <taskDetailWrapper>
+            <TaskDetailWrapper>
+                <TaskDetailHeader>
+                    {ORDER_HEADER_TITLE.TASK_DETAIL}
+                </TaskDetailHeader>
                 {
                 state.fetchState === REQUEST_STATE.OK?
                 <TaskDispatch.Provider value={dispatch}>
@@ -89,7 +100,7 @@ export const MyTaskDetail = ({match}) => {
                     </SkeltonCardWrapper>
                 </SkeltonsWrapper>
                 }
-            </taskDetailWrapper>
+            </TaskDetailWrapper>
        </Fragment>
     )
 }

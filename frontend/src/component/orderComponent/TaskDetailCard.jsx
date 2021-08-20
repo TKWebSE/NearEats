@@ -3,6 +3,7 @@ import media from "styled-media-query";
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
+import {changeJSTDate} from "../../AppFunction";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -40,22 +41,22 @@ const FoodCreatedTime = styled.div`
 export const TaskDetailCard = () => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-
+    console.log(state)
     return (
         <Fragment>
             <FoodCardWrapper>
                 <FoodImage src={foodImage} alt="foodImage"></FoodImage>
                 <FoodName>
-                    {state.foodName}
+                    {state.task.name}
                 </FoodName>
                 <FoodPrice>
-                    ￥{state.price}
+                    ￥{state.task.price}
                 </FoodPrice>
                 <FoodDesicription>
-                    {state.description}
+                    {state.task.description}
                 </FoodDesicription>
                 <FoodCreatedTime>
-                    {state.created_at}
+                    {changeJSTDate(state.task.updated_at)}
                 </FoodCreatedTime>
             </FoodCardWrapper>
         </Fragment>

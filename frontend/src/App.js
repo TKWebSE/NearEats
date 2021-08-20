@@ -160,7 +160,12 @@ function App() {
           <PrivateOnlyRoute
             exact
             path="/MyTask/:orderId"
-            component={MyTaskDetail}>
+            render ={({match}) => 
+              <MyTaskDetail 
+                match={match}
+              />
+            }
+          >
           </PrivateOnlyRoute>
           //order一覧画面
           <PrivateOnlyRoute

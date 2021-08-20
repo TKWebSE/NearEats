@@ -124,13 +124,14 @@ export const MyTaskIndex = () => {
 
     useEffect(() => {
         dispatch({type: tasksActionTypes.FETCHING})
-        fetchTaskIndexApi(5)
+        console.log(SessionAuthState)
+        fetchTaskIndexApi(SessionAuthState.currentUser.id)
         .then((data) => {
             console.log(data)
             dispatch({
                 type: tasksActionTypes.FETCH_SUCCESS,
                 payload: {
-                    taskList: data.taskList,
+                    tasks: data.tasks,
                 },
             });
         })
@@ -149,7 +150,7 @@ export const MyTaskIndex = () => {
                 </MyTaskIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK?
-                        state.tasksList === []?
+                        state.tasks === []?
                             <NotExistTaskWrapper>
                                 <NotFoundCatWrapper>
                                    <NotFoundCatImage src={NotFoundCat}/>
@@ -167,7 +168,7 @@ export const MyTaskIndex = () => {
                                     </ThemeProvider>
                             </NotExistTaskWrapper>
                         :
-                        state.taskList.map((task,i) => 
+                        state.tasks.map((task,i) => 
                         <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
                             <TaskDispatch.Provider value={dispatch}>
                                 <TaskState.Provider value={state}>

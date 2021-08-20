@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { 
     myTaskIndexBackendURL,
-    orderIndexBackendURL,
+    myTaskShowBackendURL,
+    myTaskUpdateBackendURL,
     orderShowBackendURL,
     orderUpdateBackendURL,
     orderDeleteBackendURL
@@ -15,19 +16,19 @@ export const fetchTaskIndexApi = (user_id) => {
       }
   })
     .then(res => {
-        console.log(res)
         return res.data
     })
     .catch((e) => console.error(e))
 }
-//特定ののtaskを1件取得する
+//特定のtaskを1件取得する
 export const fetchTaskApi = (order_id) => {
-    return axios.get(orderShowBackendURL(order_id),{
+    return axios.get(myTaskShowBackendURL(order_id),{
         params:{
             order_id:order_id
         }
     })
     .then(res => {
+        console.log(res)
         return res.data
     })
     .catch(e => console.log(e))
