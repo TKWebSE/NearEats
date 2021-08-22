@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useReducer,useContext} from 'react';
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
-import {TASK_INDEX_TEXT} from "../../constants";
+import {TASK_TEXT} from "../../constants";
 import {changeJSTDate} from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import {COLORS} from "../../style_constants";
@@ -121,22 +121,22 @@ export const MyTaskIndexCard = ({task}) => {
               {
                 task.order_status === "0"?
                   <TaskStatusUnFinishedWrapper>
-                    {TASK_INDEX_TEXT.TASK_STATUS_UNFINISHED_TEXT}
+                    {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
                   </TaskStatusUnFinishedWrapper>
                 :
                 task.order_status === "1"?
                   <TaskStatusFinishedWrapper>
-                    {TASK_INDEX_TEXT.TASK_STATUS_FINISHED_TEXT}
+                    {TASK_TEXT.TASK_STATUS_FINISHED_TEXT}
                   </TaskStatusFinishedWrapper>
                 :
                 task.order_status === "2"?
                   <TaskStatusOrderCancelWrapper>
-                    {TASK_INDEX_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
+                    {TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
                   </TaskStatusOrderCancelWrapper>
                 :
                 task.order_status === "3"?
                   <TaskStatusTaskCancelWrapper>
-                  {TASK_INDEX_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
+                  {TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
                   </TaskStatusTaskCancelWrapper>
                 :
                 null
@@ -152,7 +152,7 @@ export const MyTaskIndexCard = ({task}) => {
               task.order_status === 1?
                 <FinishedWrapper>
                   <TasKUodateTextWrapper>
-                    {TASK_INDEX_TEXT.TASK_UPDATE_TEXT}
+                    {TASK_TEXT.TASK_UPDATE_TEXT}
                   </TasKUodateTextWrapper>
                   <TaskUpdateTimeWrapper>
                     {changeJSTDate(task.updated_at)}
@@ -161,7 +161,7 @@ export const MyTaskIndexCard = ({task}) => {
               :
                 <UnFinishedWrapper>
                   <TaskCreateTextWrapper>
-                    {TASK_INDEX_TEXT.TASK_CREATE_TEXT}
+                    {TASK_TEXT.TASK_CREATE_TEXT}
                   </TaskCreateTextWrapper>
                   <TaskCreateTimeWrapper>
                     {changeJSTDate(task.created_at)}

@@ -34,12 +34,14 @@ end
 
   6.times do |m|
     order = food.orders.build(
+          # orders.food_id:food.id,
           order_user_id: user.id,
           make_user_id: maker.id,
           count: m,
-          order_status: 0,
-        );
-  end
+          order_status: M,
+    );
+   end
+
   food.save!
 }
 
