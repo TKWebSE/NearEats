@@ -32,16 +32,24 @@ end
   maker = User.find(x+1)
   food = Food.find(x)   
 
-  6.times do |m|
-    order = food.orders.build(
-          # orders.food_id:food.id,
-          order_user_id: user.id,
-          make_user_id: maker.id,
-          count: m,
-          order_status: M,
-    );
+  4.times do |m|
+    order = Order.new(
+      food_id:food.id,
+      order_user_id: user.id,
+      make_user_id: maker.id,
+      count: m,
+      order_status: m,
+    )
+    order.save!
+    # order = food.orders.build(
+    #       orders.food_id,
+    #       order_user_id: user.id,
+    #       make_user_id: maker.id,
+    #       count: m,
+    #       order_status: m,
+    # );
    end
 
-  food.save!
+  # food.save!
 }
 

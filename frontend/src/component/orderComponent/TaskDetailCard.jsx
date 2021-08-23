@@ -94,6 +94,8 @@ export const TaskDetailCard = (task) => {
                 </FoodDesicription>
                 <TaskStatusWrapper>
                 {
+                <TaskStatusTextWrapper>
+                 //ORDERSTATUSごとに判定処理し、テキストを表示
                   task.order_status === "0"?
                     <TaskStatusUnFinishedWrapper>
                       {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
@@ -115,8 +117,10 @@ export const TaskDetailCard = (task) => {
                     </TaskStatusTaskCancelWrapper>
                   :
                   null
-                }
-                state.task.order_status === 0?
+                </TaskStatusTextWrapper>
+                //配達済みかそれ以外で判定処理
+                <TaskStatusTImeWrapper>
+                task.order_status === 0?
                 <UnFinishedWrapper>
                     <TaskCreateTextWrapper>
                         {TASK_TEXT.TASK_CREATE_TEXT}
@@ -134,6 +138,7 @@ export const TaskDetailCard = (task) => {
                     {changeJSTDate(state.task.updated_at)}
                   </TaskUpdateTimeWrapper>
                 </FinishedWrapper>
+                </TaskStatusTImeWrapper>
                 }
                 </TaskStatusWrapper>
             </FoodCardWrapper>
