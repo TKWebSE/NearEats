@@ -1,4 +1,4 @@
-import React,{ Fragment,useContext } from "react";
+import React,{ Fragment,useContext, useState } from "react";
 import media from "styled-media-query";
 import styled from "styled-components";
 import {TaskState,TaskDispatch} from "../../context/Context";
@@ -6,7 +6,7 @@ import foodImage from "../../images/food-image.jpg";
 import {changeJSTDate} from "../../AppFunction";
 import {TASK_TEXT} from "../../constants";
 
-const FoodCardWrapper = styled.div`
+const TaskDetailCardWrapper = styled.div`
     text-align:left;
 `;
 
@@ -38,7 +38,11 @@ const FoodDesicription = styled.div`
 const TaskStatusWrapper = styled.div`
 `;
 
+const TaskStatusTextWrapper = styled.div`
+`;
+
 const TaskStatusUnFinishedWrapper = styled.div`
+color:red;
 `;
 
 const TaskStatusFinishedWrapper = styled.div`
@@ -50,8 +54,11 @@ const TaskStatusOrderCancelWrapper = styled.div`
 const TaskStatusTaskCancelWrapper = styled.div`
 `;
 
+const TaskStatusTImeWrapper = styled.div`
+`;
+
 const UnFinishedWrapper = styled.div`
-display: flex;
+    display: flex;
 `;
 
 const TaskCreateTextWrapper = styled.div`
@@ -63,7 +70,7 @@ const TaskCreateTimeWrapper = styled.div`
 `;
 
 const FinishedWrapper = styled.div`
-display: flex;
+    display: flex;
 `;
 
 const TasKUodateTextWrapper = styled.div`
@@ -74,14 +81,39 @@ const TaskUpdateTimeWrapper = styled.div`
     margin-bottom:5%;
 `;
 
+export const taskStatusText = (order_status) => {
+    console.log(order_status)
+    const STATUS_TEXT = []
+    
+    switch (order_status){
+        case 1:
+            return{
+                STATUS_TEXT:TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT,
+            }
+        case 2:
+            return{
+                STATUS_TEXT:TASK_TEXT.TASK_STATUS_FINISHED_TEXT,
+            }
+        case "3":
+            return {
+                STATUS_TEXT:TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT,
+            }
+        case 4:
+            return {
+                STATUS_TEXT:TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT,
+            }
+    }
+}
+
 
 export const TaskDetailCard = (task) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-    console.log(state)
+  const [statusValue,setState] = useState(taskStatusText(state.task.order_status))
+    console.log(statusValue)
     return (
         <Fragment>
-            <FoodCardWrapper>
+            <TaskDetailCardWrapper>
                 <FoodImage src={foodImage} alt="foodImage"></FoodImage>
                 <FoodName>
                     {state.task.name}
@@ -93,55 +125,60 @@ export const TaskDetailCard = (task) => {
                     {state.task.description}
                 </FoodDesicription>
                 <TaskStatusWrapper>
-                {
-                <TaskStatusTextWrapper>
-                 //ORDERSTATUSごとに判定処理し、テキストを表示
-                  task.order_status === "0"?
-                    <TaskStatusUnFinishedWrapper>
-                      {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
+                    <TaskStatusTextWrapper>
+                    {/* { */}
+                     <TaskStatusUnFinishedWrapper>
+                         "s"
+                         {statusValue}
+                        {/* {taskStatusText(state.task.order_status)} */}
                     </TaskStatusUnFinishedWrapper>
-                  :
-                  task.order_status === "1"?
-                    <TaskStatusFinishedWrapper>
-                      {TASK_TEXT.TASK_STATUS_FINISHED_TEXT}
-                    </TaskStatusFinishedWrapper>
-                  :
-                  task.order_status === "2"?
-                    <TaskStatusOrderCancelWrapper>
-                      {TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
-                    </TaskStatusOrderCancelWrapper>
-                  :
-                  task.order_status === "3"?
-                    <TaskStatusTaskCancelWrapper>
-                    {TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
-                    </TaskStatusTaskCancelWrapper>
-                  :
-                  null
+                        {/* // task.order_status === "0"?
+                            // <TaskStatusUnFinishedWrapper>
+                            //     {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
+                            // </TaskStatusUnFinishedWrapper>
+                        // :
+                        // task.order_status === "1"?
+                        //     <TaskStatusFinishedWrapper>
+                        //         {TASK_TEXT.TASK_STATUS_FINISHED_TEXT}
+                        //     </TaskStatusFinishedWrapper>
+                        // :
+                        // task.order_status === "2"?
+                        //     <TaskStatusOrderCancelWrapper>
+                        //         {TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
+                        //     </TaskStatusOrderCancelWrapper>
+                        // :
+                        // task.order_status === "3"?
+                        //     <TaskStatusTaskCancelWrapper>
+                        //         {TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
+                        //     </TaskStatusTaskCancelWrapper>
+                        // :
+                        // null */}
+                    {/* } */}
                 </TaskStatusTextWrapper>
-                //配達済みかそれ以外で判定処理
                 <TaskStatusTImeWrapper>
-                task.order_status === 0?
-                <UnFinishedWrapper>
-                    <TaskCreateTextWrapper>
-                        {TASK_TEXT.TASK_CREATE_TEXT}
-                    </TaskCreateTextWrapper>
-                    <TaskCreateTimeWrapper>
-                        {changeJSTDate(state.task.created_at)}
-                    </TaskCreateTimeWrapper>
-                </UnFinishedWrapper> 
+                    {
+                    task.order_status === 0?
+                    <UnFinishedWrapper>
+                        <TaskCreateTextWrapper>
+                            {TASK_TEXT.TASK_CREATE_TEXT}
+                        </TaskCreateTextWrapper>
+                        <TaskCreateTimeWrapper>
+                            {changeJSTDate(state.task.created_at)}
+                        </TaskCreateTimeWrapper>
+                    </UnFinishedWrapper> 
                 :
-                <FinishedWrapper>
-                  <TasKUodateTextWrapper>
-                    {TASK_TEXT.TASK_UPDATE_TEXT}
-                  </TasKUodateTextWrapper>
-                  <TaskUpdateTimeWrapper>
-                    {changeJSTDate(state.task.updated_at)}
-                  </TaskUpdateTimeWrapper>
-                </FinishedWrapper>
-                </TaskStatusTImeWrapper>
+                    <FinishedWrapper>
+                        <TasKUodateTextWrapper>
+                            {TASK_TEXT.TASK_UPDATE_TEXT}
+                        </TasKUodateTextWrapper>
+                        <TaskUpdateTimeWrapper>
+                            {changeJSTDate(state.task.updated_at)}
+                        </TaskUpdateTimeWrapper>
+                    </FinishedWrapper>
                 }
+                </TaskStatusTImeWrapper>
                 </TaskStatusWrapper>
-            </FoodCardWrapper>
+            </TaskDetailCardWrapper>
         </Fragment>
     )
 }
