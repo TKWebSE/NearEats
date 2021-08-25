@@ -4,6 +4,7 @@ export const COLORS = {
     MAIN_COLOR: '#00695f',
     BORDER: '#e2e2e2',
     SUB_TEXT: '#545454',
+    DELETE_WARN_BUTTON_COLOR:"#e91e63",
     SUB_BUTTON: '#eeeeee',
     STATUS_COLOR:`#8B008B`,
   }
@@ -23,11 +24,20 @@ export const headerTheme = createMuiTheme({
   },
 });
   
-//buttonの色を設定
+//デフォルトbuttonの色を設定
 export const ButtonTheme = createMuiTheme({
   palette: {
     primary: {
       main: COLORS.MAIN_COLOR
+    },
+  },
+});
+
+//削除ボタンの色を設定
+export const RedButtonTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: COLORS.DELETE_WARN_BUTTON_COLOR
     },
   },
 });

@@ -1,10 +1,15 @@
 import React,{ Fragment,useContext, useState } from "react";
 import media from "styled-media-query";
 import styled from "styled-components";
+import { ThemeProvider } from '@material-ui/core/styles';
+import {ButtonTheme,RedButtonTheme} from "../../style_constants";
 import {TaskState,TaskDispatch} from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
 import {changeJSTDate} from "../../AppFunction";
 import {TASK_TEXT} from "../../constants";
+import {taskStatusText} from "../orderComponent/fetchTaskStatusComponet";
+import {MaterialUICommonButton} from "../MaterialUICommonButton";
+
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -39,10 +44,7 @@ const TaskStatusWrapper = styled.div`
 `;
 
 const TaskStatusTextWrapper = styled.div`
-`;
-
-const TaskStatusUnFinishedWrapper = styled.div`
-color:red;
+    float:left;
 `;
 
 const TaskStatusFinishedWrapper = styled.div`
@@ -81,29 +83,18 @@ const TaskUpdateTimeWrapper = styled.div`
     margin-bottom:5%;
 `;
 
-export const taskStatusText = (order_status) => {
-    console.log(order_status)
-    const STATUS_TEXT = []
-    
-    switch (order_status){
-        case 1:
-            return{
-                STATUS_TEXT:TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT,
-            }
-        case 2:
-            return{
-                STATUS_TEXT:TASK_TEXT.TASK_STATUS_FINISHED_TEXT,
-            }
-        case "3":
-            return {
-                STATUS_TEXT:TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT,
-            }
-        case 4:
-            return {
-                STATUS_TEXT:TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT,
-            }
-    }
-}
+const TaskDetailCardButtom = styled.div`
+    display: flex;
+
+`;
+
+const TaskDetailFinisheButtomWrapper = styled.div`
+margin:0 0 0 auto;
+`;
+
+const TaskDetailCancelButtomWrapper = styled.div`
+`;
+
 
 
 export const TaskDetailCard = (task) => {
@@ -111,6 +102,16 @@ export const TaskDetailCard = (task) => {
   const dispatch = useContext(TaskDispatch)
   const [statusValue,setState] = useState(taskStatusText(state.task.order_status))
     console.log(statusValue)
+
+    function TaskCancelHandle() {
+
+    }
+
+    function TaskFinisiheHandle() {
+
+    }
+    console.log(RedButtonTheme)
+
     return (
         <Fragment>
             <TaskDetailCardWrapper>
@@ -126,58 +127,37 @@ export const TaskDetailCard = (task) => {
                 </FoodDesicription>
                 <TaskStatusWrapper>
                     <TaskStatusTextWrapper>
-                    {/* { */}
-                     <TaskStatusUnFinishedWrapper>
-                         "s"
-                         {statusValue}
-                        {/* {taskStatusText(state.task.order_status)} */}
-                    </TaskStatusUnFinishedWrapper>
-                        {/* // task.order_status === "0"?
-                            // <TaskStatusUnFinishedWrapper>
-                            //     {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
-                            // </TaskStatusUnFinishedWrapper>
-                        // :
-                        // task.order_status === "1"?
-                        //     <TaskStatusFinishedWrapper>
-                        //         {TASK_TEXT.TASK_STATUS_FINISHED_TEXT}
-                        //     </TaskStatusFinishedWrapper>
-                        // :
-                        // task.order_status === "2"?
-                        //     <TaskStatusOrderCancelWrapper>
-                        //         {TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
-                        //     </TaskStatusOrderCancelWrapper>
-                        // :
-                        // task.order_status === "3"?
-                        //     <TaskStatusTaskCancelWrapper>
-                        //         {TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
-                        //     </TaskStatusTaskCancelWrapper>
-                        // :
-                        // null */}
-                    {/* } */}
-                </TaskStatusTextWrapper>
-                <TaskStatusTImeWrapper>
+                         {statusValue.STATUS_TEXT}
+                    </TaskStatusTextWrapper>
+                    <TaskStatusTImeWrapper>
                     {
-                    task.order_status === 0?
-                    <UnFinishedWrapper>
-                        <TaskCreateTextWrapper>
-                            {TASK_TEXT.TASK_CREATE_TEXT}
-                        </TaskCreateTextWrapper>
-                        <TaskCreateTimeWrapper>
-                            {changeJSTDate(state.task.created_at)}
-                        </TaskCreateTimeWrapper>
-                    </UnFinishedWrapper> 
-                :
-                    <FinishedWrapper>
-                        <TasKUodateTextWrapper>
-                            {TASK_TEXT.TASK_UPDATE_TEXT}
-                        </TasKUodateTextWrapper>
-                        <TaskUpdateTimeWrapper>
-                            {changeJSTDate(state.task.updated_at)}
-                        </TaskUpdateTimeWrapper>
-                    </FinishedWrapper>
-                }
-                </TaskStatusTImeWrapper>
+                        task.order_status === 0?
+                        <UnFinishedWrapper>
+                            <TaskCreateTimeWrapper>
+                                {changeJSTDate(state.task.created_at)}
+                            </TaskCreateTimeWrapper>
+                        </UnFinishedWrapper> 
+                    :
+                        <FinishedWrapper>
+                            <TaskUpdateTimeWrapper>
+                                {changeJSTDate(state.task.updated_at)}
+                            </TaskUpdateTimeWrapper>
+                        </FinishedWrapper>
+                    }
+                    </TaskStatusTImeWrapper>
                 </TaskStatusWrapper>
+                <TaskDetailCardButtom>
+                    <ThemeProvider theme={ButtonTheme}>
+                        <TaskDetailFinisheButtomWrapper>
+                            <MaterialUICommonButton onClick={() => TaskFinisiheHandle()} btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}></MaterialUICommonButton>
+                        </TaskDetailFinisheButtomWrapper>
+                    </ThemeProvider>
+                    <ThemeProvider theme={RedButtonTheme}>                        
+                        <TaskDetailCancelButtomWrapper>
+                            <MaterialUICommonButton onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUICommonButton>
+                        </TaskDetailCancelButtomWrapper> 
+                    </ThemeProvider>
+                </TaskDetailCardButtom>
             </TaskDetailCardWrapper>
         </Fragment>
     )
