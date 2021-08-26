@@ -35,7 +35,7 @@ export const fetchTaskApi = (order_id) => {
 }
 
 //特定ののorderを1件取得する
-export const fetchOrderApi = (order) => {
+export const createTaskApi = (order) => {
     return axios.get(orderShowBackendURL(order.id),{
         params:{
             order:order
@@ -48,10 +48,11 @@ export const fetchOrderApi = (order) => {
 }
 
 //特定ののorderを1件更新する
-export const updateOrderApi = (order) => {
-    return axios.put(orderUpdateBackendURL(order.id),{
+export const updateTaskApi = (task) => {
+    return axios.put(myTaskUpdateBackendURL(task.id),{
         params:{
-            order:order
+            id:task.id,
+            order_status:task.order_status,
         }
     })
     .then(res => {

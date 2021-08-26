@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUICommonButton({onClick , btnLabel})   {
+export function MaterialUICommonButton({onClick , btnLabel,color})   {
     const classes = useStyles();
 
     return (

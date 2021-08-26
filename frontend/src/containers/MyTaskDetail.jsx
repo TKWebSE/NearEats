@@ -4,7 +4,7 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {fetchTaskApi} from "../apis/taskApis";
+import {fetchTaskApi,updateTaskApi} from "../apis/taskApis";
 import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Context";
 import {initializeState,taskActionTypes,taskReducer} from "../reducer/taskReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE} from "../constants";
@@ -66,12 +66,21 @@ export const MyTaskDetail = ({match}) => {
     },[])
 
     function submitTaskFinishedHandle(){
-
+        updateTaskApi(2)
+        .then((data) => {
+            
+        })
+        .catch(e => console.log(e))
     }
 
     function submitTaskCancelHandle(){
-
+        updateTaskApi(3)
+        .then((data) => {
+            
+        })
+        .catch(e => console.log(e))
     }
+
     console.log(state)
     return (
         <Fragment>

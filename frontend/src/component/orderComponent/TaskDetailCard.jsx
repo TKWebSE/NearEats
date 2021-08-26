@@ -9,7 +9,7 @@ import {changeJSTDate} from "../../AppFunction";
 import {TASK_TEXT} from "../../constants";
 import {taskStatusText} from "../orderComponent/fetchTaskStatusComponet";
 import {MaterialUICommonButton} from "../MaterialUICommonButton";
-
+import MaterialUISimpleModal from "../MaterialUISimpleModal";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -152,12 +152,13 @@ export const TaskDetailCard = (task) => {
                             <MaterialUICommonButton onClick={() => TaskFinisiheHandle()} btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}></MaterialUICommonButton>
                         </TaskDetailFinisheButtomWrapper>
                     </ThemeProvider>
-                    <ThemeProvider theme={RedButtonTheme}>                        
+                    <ThemeProvider theme={RedButtonTheme}>       
                         <TaskDetailCancelButtomWrapper>
-                            <MaterialUICommonButton onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUICommonButton>
+                            <MaterialUICommonButton onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL} ></MaterialUICommonButton>
                         </TaskDetailCancelButtomWrapper> 
                     </ThemeProvider>
                 </TaskDetailCardButtom>
+                <MaterialUISimpleModal text={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUISimpleModal>
             </TaskDetailCardWrapper>
         </Fragment>
     )

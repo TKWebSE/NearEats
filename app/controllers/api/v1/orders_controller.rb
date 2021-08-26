@@ -26,9 +26,12 @@ module Api
 
             def taskUpdate
                 logger.debug("updateこんとろーららららら")
+                task = Order.find_by(id: params[:id])
+                task.order_status = params[:order_status]
+                task.save
 
                 render json: {
-                    orders: orders
+                    task: task
                 }, status: :ok
             end
 

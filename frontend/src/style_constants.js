@@ -31,6 +31,9 @@ export const ButtonTheme = createMuiTheme({
       main: COLORS.MAIN_COLOR
     },
   },
+  secondary: {
+    main: COLORS.DELETE_WARN_BUTTON_COLOR
+  },
 });
 
 //削除ボタンの色を設定
