@@ -110,3 +110,10 @@ export const TASK_TEXT = {
     TASK_CANCEL_BUTTOM_LABEL:"キャンセル",
     TASK_FINISH_BUTTOM_LABEL:"配達完了！!",
 }
+
+export const ORDER_TASK_STATUS_NUMBERS = {
+    TASK_UNFINISHED:"0",//未配歌
+    TASKFINISH:"1",//配達済み
+    ORDER_CANCEL:"2",//オーダーをキャンセル
+    TASKCANCEL:"3",//タスクをキャンセル
+}

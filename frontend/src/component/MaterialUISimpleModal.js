@@ -29,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUISimpleModal(text) {
+export default function MaterialUISimpleModal({btnLabel},{onClick}) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-
+console.log(btnLabel)
   const handleOpen = () => {
     setOpen(true);
   };
@@ -55,9 +55,7 @@ export default function MaterialUISimpleModal(text) {
 
   return (
     <div>
-      <MaterialUICommonButton type="button" onClick={handleOpen}>
-        {text.text}
-      </MaterialUICommonButton>
+      <MaterialUICommonButton onClick={() => onClick()} btnLabe={btnLabel}></MaterialUICommonButton>
       <Modal
         open={open}
         onClose={handleClose}

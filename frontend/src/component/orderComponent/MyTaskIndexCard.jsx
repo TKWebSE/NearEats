@@ -5,6 +5,7 @@ import {TASK_TEXT} from "../../constants";
 import {changeJSTDate} from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import {COLORS} from "../../style_constants";
+import {taskStatusText} from "./fetchTaskStatusComponent";
 
 const TaskIndexCardWrapper = styled.div`
   border: solid;
@@ -43,9 +44,10 @@ const TaskStatusWrapper = styled.div`
   width:15%;
   margin-bottom:1%;
   background-color:${COLORS.STATUS_COLOR};
-  border-radius:45%;
+  border-radius:100%;
   text-align:center;
   color:white;
+  padding:2%;
 `;
 
 const TaskStatusUnFinishedWrapper = styled.div`
@@ -106,6 +108,8 @@ export const MyTaskIndexCard = ({task}) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
 
+  console.log(taskStatusText(task.order_status).STATUS_TEXT)
+
   return (
     <Fragment>
       <TaskIndexCardWrapper>
@@ -118,29 +122,7 @@ export const MyTaskIndexCard = ({task}) => {
               {task.name}
             </FoodNameWrapper>
             <TaskStatusWrapper>
-              {
-                task.order_status === "0"?
-                  <TaskStatusUnFinishedWrapper>
-                    {TASK_TEXT.TASK_STATUS_UNFINISHED_TEXT}
-                  </TaskStatusUnFinishedWrapper>
-                :
-                task.order_status === "1"?
-                  <TaskStatusFinishedWrapper>
-                    {TASK_TEXT.TASK_STATUS_FINISHED_TEXT}
-                  </TaskStatusFinishedWrapper>
-                :
-                task.order_status === "2"?
-                  <TaskStatusOrderCancelWrapper>
-                    {TASK_TEXT.TASK_STATUS_ORDER_CANCEL_TEXT}
-                  </TaskStatusOrderCancelWrapper>
-                :
-                task.order_status === "3"?
-                  <TaskStatusTaskCancelWrapper>
-                  {TASK_TEXT.TASK_STATUS_TASK_CANCEL_TEXT}
-                  </TaskStatusTaskCancelWrapper>
-                :
-                null
-              }
+                {taskStatusText(task.order_status).STATUS_TEXT}
             </TaskStatusWrapper>
           </TaskIndexCardUpsideWrapper>
           <TaskIndexCardDownsideWrapper>

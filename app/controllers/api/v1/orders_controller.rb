@@ -25,14 +25,15 @@ module Api
             end
 
             def taskUpdate
-                logger.debug("updateこんとろーららららら")
-                task = Order.find_by(id: params[:id])
-                task.order_status = params[:order_status]
-                task.save
+                task = Order.find(params[:id])
 
-                render json: {
-                    task: task
-                }, status: :ok
+                if order.update!(task_status_params)
+                    render json: {
+                        task: task
+                    }, status: :ok
+                else
+                    render json: {}
+                end
             end
 
 
@@ -86,6 +87,10 @@ module Api
 
                 def order_params
                     params.require(:order).permit(:name,:point,:address,:email, :password)
+                end
+
+                def task_status_params
+                    params.require(:order).permit(:order_status)
                 end
         end
     end

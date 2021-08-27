@@ -9,7 +9,7 @@ import {fetchTaskIndexApi} from "../apis/taskApis";
 import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Context";
 import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
 import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
-import {MyTaskIndexCard} from "../component/orderComponent/TaskIndexCard";
+import {MyTaskIndexCard} from "../component/orderComponent/MyTaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
 import {foodCreateURL,myTaskShowURL} from "../urls/index";

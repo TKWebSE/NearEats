@@ -6,10 +6,11 @@ import {ButtonTheme,RedButtonTheme} from "../../style_constants";
 import {TaskState,TaskDispatch} from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
 import {changeJSTDate} from "../../AppFunction";
-import {TASK_TEXT} from "../../constants";
-import {taskStatusText} from "../orderComponent/fetchTaskStatusComponet";
+import {TASK_TEXT,ORDER_TASK_STATUS_NUMBERS} from "../../constants";
+import {taskStatusText} from "../orderComponent/fetchTaskStatusComponent";
 import {MaterialUICommonButton} from "../MaterialUICommonButton";
 import MaterialUISimpleModal from "../MaterialUISimpleModal";
+import {updateTaskApi} from "../../apis/taskApis";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -97,20 +98,24 @@ const TaskDetailCancelButtomWrapper = styled.div`
 
 
 
-export const TaskDetailCard = (task) => {
+export const TaskDetailCard = () => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
-  const [statusValue,setState] = useState(taskStatusText(state.task.order_status))
-    console.log(statusValue)
 
     function TaskCancelHandle() {
-
+        console.log(state)
+        updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
+        .then((data) => {
+            console.log(data)
+        })
     }
 
     function TaskFinisiheHandle() {
-
+        updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
+        .then((data) => {
+            console.log(data)
+        })
     }
-    console.log(RedButtonTheme)
 
     return (
         <Fragment>
@@ -127,11 +132,11 @@ export const TaskDetailCard = (task) => {
                 </FoodDesicription>
                 <TaskStatusWrapper>
                     <TaskStatusTextWrapper>
-                         {statusValue.STATUS_TEXT}
+                         {taskStatusText(state.task.order_status).STATUS_TEXT}
                     </TaskStatusTextWrapper>
                     <TaskStatusTImeWrapper>
                     {
-                        task.order_status === 0?
+                        state.task.order_status === 0?
                         <UnFinishedWrapper>
                             <TaskCreateTimeWrapper>
                                 {changeJSTDate(state.task.created_at)}
@@ -158,7 +163,7 @@ export const TaskDetailCard = (task) => {
                         </TaskDetailCancelButtomWrapper> 
                     </ThemeProvider>
                 </TaskDetailCardButtom>
-                <MaterialUISimpleModal text={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUISimpleModal>
+                <MaterialUISimpleModal onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUISimpleModal>
             </TaskDetailCardWrapper>
         </Fragment>
     )

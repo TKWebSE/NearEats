@@ -48,12 +48,12 @@ export const createTaskApi = (order) => {
 }
 
 //特定ののorderを1件更新する
-export const updateTaskApi = (task) => {
+export const updateTaskApi = (task,order_status) => {
+    console.log(task)
+    console.log(order_status)
     return axios.put(myTaskUpdateBackendURL(task.id),{
-        params:{
-            id:task.id,
-            order_status:task.order_status,
-        }
+        id:task.id,
+        order_status:order_status,
     })
     .then(res => {
         return res.data
