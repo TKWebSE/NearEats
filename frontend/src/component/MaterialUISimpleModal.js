@@ -29,12 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUISimpleModal({btnLabel},{onClick}) {
+export default function MaterialUISimpleModal({btnLabel,onClick,modalTilte,modalText}) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-console.log(btnLabel)
+console.log(modalTilte)
+console.log(modalText)
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -49,13 +51,15 @@ console.log(btnLabel)
       <p id="simple-modal-description">
         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
       </p>
-      <MaterialUISimpleModal />
+      <MaterialUICommonButton onClick={() => onClick()} btnLabel={btnLabel}></MaterialUICommonButton>
+      <MaterialUICommonButton onClick={() => onClick()} btnLabel={}></MaterialUICommonButton>
+      {/* <MaterialUISimpleModal /> */}
     </div>
   );
 
   return (
     <div>
-      <MaterialUICommonButton onClick={() => onClick()} btnLabe={btnLabel}></MaterialUICommonButton>
+      <MaterialUICommonButton onClick={() => handleOpen()} btnLabel={btnLabel}></MaterialUICommonButton>
       <Modal
         open={open}
         onClose={handleClose}

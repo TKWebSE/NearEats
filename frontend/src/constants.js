@@ -107,7 +107,7 @@ export const TASK_TEXT = {
     TASK_STATUS_FINISHED_TIME_TEXT:"配達完了日時",
     TASK_STATUS_ORDER_CANCEL_TIME_TEXT:"キャンセルされた日時：",
     TASK_STATUS_TASK_CANCEL_TIME_TEXT:"キャンセルした日時：",
-    TASK_CANCEL_BUTTOM_LABEL:"キャンセル",
+    TASK_CANCEL_BUTTOM_LABEL:"キャンセルする",
     TASK_FINISH_BUTTOM_LABEL:"配達完了！!",
 }
 

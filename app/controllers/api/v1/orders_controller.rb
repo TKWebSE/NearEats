@@ -27,7 +27,7 @@ module Api
             def taskUpdate
                 task = Order.find(params[:id])
 
-                if order.update!(task_status_params)
+                if task.update!(task_status_params)
                     render json: {
                         task: task
                     }, status: :ok

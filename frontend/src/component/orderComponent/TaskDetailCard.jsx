@@ -102,7 +102,7 @@ export const TaskDetailCard = () => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
 
-    function TaskCancelHandle() {
+    function taskCancelHandle() {
         console.log(state)
         updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
         .then((data) => {
@@ -110,7 +110,7 @@ export const TaskDetailCard = () => {
         })
     }
 
-    function TaskFinisiheHandle() {
+    function taskFinisiheHandle() {
         updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
         .then((data) => {
             console.log(data)
@@ -154,16 +154,23 @@ export const TaskDetailCard = () => {
                 <TaskDetailCardButtom>
                     <ThemeProvider theme={ButtonTheme}>
                         <TaskDetailFinisheButtomWrapper>
-                            <MaterialUICommonButton onClick={() => TaskFinisiheHandle()} btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}></MaterialUICommonButton>
+                            <MaterialUISimpleModal 
+                                onClick={() => taskCancelHandle()} 
+                                btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}
+                                modalTilte={TASK_TEXT.TASK_FINISH_MODALTITLE}
+                                modalText={TASK_TEXT.TASK_FINISH_MODAL_TEXT}
+                            />
                         </TaskDetailFinisheButtomWrapper>
                     </ThemeProvider>
                     <ThemeProvider theme={RedButtonTheme}>       
                         <TaskDetailCancelButtomWrapper>
-                            <MaterialUICommonButton onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL} ></MaterialUICommonButton>
+                            <MaterialUISimpleModal 
+                                onClick={() => taskCancelHandle()} 
+                                btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}
+                            />
                         </TaskDetailCancelButtomWrapper> 
                     </ThemeProvider>
                 </TaskDetailCardButtom>
-                <MaterialUISimpleModal onClick={() => TaskCancelHandle()} btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}></MaterialUISimpleModal>
             </TaskDetailCardWrapper>
         </Fragment>
     )
