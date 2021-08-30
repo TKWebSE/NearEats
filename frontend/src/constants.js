@@ -103,12 +103,16 @@ export const TASK_TEXT = {
     TASK_STATUS_FINISHED_TEXT:"配達済み",
     TASK_STATUS_ORDER_CANCEL_TEXT:"キャンセルされました",
     TASK_STATUS_TASK_CANCEL_TEXT:"キャンセルしました",
-    TASK_STATUS_UNFINISHED_TIME_TEXT:"注文受付日時",
-    TASK_STATUS_FINISHED_TIME_TEXT:"配達完了日時",
+    TASK_STATUS_UNFINISHED_TIME_TEXT:"注文受付日時：",
+    TASK_STATUS_FINISHED_TIME_TEXT:"配達完了日時：",
     TASK_STATUS_ORDER_CANCEL_TIME_TEXT:"キャンセルされた日時：",
     TASK_STATUS_TASK_CANCEL_TIME_TEXT:"キャンセルした日時：",
-    TASK_CANCEL_BUTTOM_LABEL:"キャンセルする",
     TASK_FINISH_BUTTOM_LABEL:"配達完了！!",
+    TASK_CANCEL_BUTTOM_LABEL:"キャンセルする",
+    TASK_FINISH_MODALTITLE:"配達完了しましたか？",
+    TASK_FINISH_MODAL_TEXT:"この料理のステータスを配達完了にします",
+    TASK_CANCEL_MODAL_TITLE:"提供をキャンセルしますか？",
+    TASK_CANCEL_MODAL_TEXT:"この料理の取引をキャンセルします",
 }
 
 export const ORDER_TASK_STATUS_NUMBERS = {
@@ -116,4 +120,9 @@ export const ORDER_TASK_STATUS_NUMBERS = {
     TASKFINISH:"1",//配達済み
     ORDER_CANCEL:"2",//オーダーをキャンセル
     TASKCANCEL:"3",//タスクをキャンセル
+}
+
+export const modalButtomLabel = {
+    MODAL_OK:"OK",
+    MODAL_NG:"キャンセル",
 }

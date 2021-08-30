@@ -1,7 +1,16 @@
 import React,{useEffect,useState} from 'react';
+import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
+import {modalButtomLabel} from "../constants"; 
+
+const OKButtomWrapper = styled.div`
+margin-left:50%;
+float:left;
+`;
+
+const NGButtomWrapper = styled.div``;
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -45,15 +54,23 @@ console.log(modalText)
     setOpen(false);
   };
 
+  const handleOK = () => {
+    onClick()
+    handleClose()
+  }
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
+      <h2 id="simple-modal-title">{modalTilte}</h2>
       <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        {modalText}
       </p>
-      <MaterialUICommonButton onClick={() => onClick()} btnLabel={btnLabel}></MaterialUICommonButton>
-      <MaterialUICommonButton onClick={() => onClick()} btnLabel={}></MaterialUICommonButton>
-      {/* <MaterialUISimpleModal /> */}
+      <OKButtomWrapper>
+      <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
+        </OKButtomWrapper>
+      <NGButtomWrapper>
+        <MaterialUICommonButton onClick={() => handleClose()} btnLabel={modalButtomLabel.MODAL_NG}></MaterialUICommonButton>
+      </NGButtomWrapper>
     </div>
   );
 

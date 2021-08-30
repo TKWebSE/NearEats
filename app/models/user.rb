@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   # def send_confirmation_email
   #   self.send_confirmation_instructions
   # end
+
+  scope :get_make_user,->(make_user_id) { 
+    where(id: make_user_id)
+  }
 end

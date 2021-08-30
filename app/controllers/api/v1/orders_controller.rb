@@ -15,12 +15,20 @@ module Api
             end
 
             def taskShow
-                task = Food.joins(:orders).merge(
-                    Order.where(id: params[:order_id])
-                ).select("foods.*,orders.*")
+                # task = Food.joins(:orders).merge(
+                #     Order.where(id: params[:order_id])
+                # ).select("foods.*,orders.*")
+
+                task = Food.get_task(params[:order_id])
+
+                make_user = User.get_make_user(task.first.make_user_id)
+
+                logger.debug(tasks = task.merge(make_user))
+                logger.debug(make_user)
 
                 render json: {
                     task: task,
+                    make_user:make_user,
                 }, status: :ok
             end
 

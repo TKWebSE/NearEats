@@ -11,6 +11,8 @@ import {taskStatusText} from "../orderComponent/fetchTaskStatusComponent";
 import {MaterialUICommonButton} from "../MaterialUICommonButton";
 import MaterialUISimpleModal from "../MaterialUISimpleModal";
 import {updateTaskApi} from "../../apis/taskApis";
+import { useHistory } from "react-router-dom";
+import {myTaskIndexURL} from "../../urls/index";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -34,6 +36,9 @@ const FoodPrice = styled.h2`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+`;
+
+const FoodAddress = styled.h2`
 `;
 
 const FoodDesicription = styled.div`
@@ -101,12 +106,14 @@ const TaskDetailCancelButtomWrapper = styled.div`
 export const TaskDetailCard = () => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
+  const history = useHistory();
 
     function taskCancelHandle() {
         console.log(state)
         updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
         .then((data) => {
             console.log(data)
+            history.push(myTaskIndexURL);
         })
     }
 
@@ -114,6 +121,7 @@ export const TaskDetailCard = () => {
         updateTaskApi(state.task,ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
         .then((data) => {
             console.log(data)
+            history.push(myTaskIndexURL);
         })
     }
 
@@ -127,6 +135,9 @@ export const TaskDetailCard = () => {
                 <FoodPrice>
                     ￥{state.task.price}
                 </FoodPrice>
+                <FoodAddress>
+                    ￥{state.task.price}
+                </FoodAddress>
                 <FoodDesicription>
                     {state.task.description}
                 </FoodDesicription>
@@ -161,12 +172,12 @@ export const TaskDetailCard = () => {
                                 modalText={TASK_TEXT.TASK_FINISH_MODAL_TEXT}
                             />
                         </TaskDetailFinisheButtomWrapper>
-                    </ThemeProvider>
-                    <ThemeProvider theme={RedButtonTheme}>       
                         <TaskDetailCancelButtomWrapper>
                             <MaterialUISimpleModal 
                                 onClick={() => taskCancelHandle()} 
                                 btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}
+                                modalTilte={TASK_TEXT.TASK_CANCEL_MODAL_TITLE}
+                                modalText={TASK_TEXT.TASK_CANCEL_MODAL_TEXT}
                             />
                         </TaskDetailCancelButtomWrapper> 
                     </ThemeProvider>
