@@ -20,11 +20,17 @@ module Api
                 # ).select("foods.*,orders.*")
 
                 task = Food.get_task(params[:order_id])
+                make_user = []
 
-                make_user = User.get_make_user(task.first.make_user_id)
+                task.each do |t| 
+                    logger.debug(t.make_user_id)
+                    make_user = User.get_make_user(t.make_user_id)
+                    # task = f.merge(make_user)
+                end
 
-                logger.debug(tasks = task.merge(make_user))
-                logger.debug(make_user)
+                # make_user = User.get_make_user(food.each  |f| f.make_user_id end)
+
+
 
                 render json: {
                     task: task,

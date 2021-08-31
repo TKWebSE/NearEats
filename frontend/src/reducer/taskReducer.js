@@ -3,6 +3,7 @@ import { REQUEST_STATE } from "../constants";
 export const initializeState = {
     fetchState:"INITIAL",
     task:null,
+    make_user:null,
 }
 
 export const taskActionTypes = {
