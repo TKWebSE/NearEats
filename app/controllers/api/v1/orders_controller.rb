@@ -20,12 +20,10 @@ module Api
                 # ).select("foods.*,orders.*")
 
                 task = Food.get_task(params[:order_id])
-                make_user = []
+                order_user = []
 
                 task.each do |t| 
-                    logger.debug(t.make_user_id)
-                    make_user = User.get_make_user(t.make_user_id)
-                    # task = f.merge(make_user)
+                    order_user = User.get_order_user(t.order_user_id)
                 end
 
                 # make_user = User.get_make_user(food.each  |f| f.make_user_id end)
@@ -34,7 +32,7 @@ module Api
 
                 render json: {
                     task: task,
-                    make_user:make_user,
+                    order_user:order_user,
                 }, status: :ok
             end
 

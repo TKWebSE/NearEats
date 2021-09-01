@@ -56,10 +56,19 @@ export const MyTaskDetail = ({match}) => {
         fetchTaskApi(match.params.orderId)
         .then((data) => {
             dispatch({
-                type: taskActionTypes.FETCH_SUCCESS,
+                type: taskActionTypes.FETCH_TASK,
                 payload: {
                     task: data.task[0]
                 },
+            });
+            dispatch({
+                type: taskActionTypes.FETCH_ORDER_USER,
+                payload: {
+                    order_user: data.order_user[0]
+                },
+            });
+            dispatch({
+                type: taskActionTypes.FETCH_SUCCESS,
             });
         })
         .catch((e) => console.log(e))
