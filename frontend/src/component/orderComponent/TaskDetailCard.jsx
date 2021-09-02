@@ -7,15 +7,19 @@ import {TaskState,TaskDispatch} from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
 import {changeJSTDate} from "../../AppFunction";
 import {TASK_TEXT,ORDER_TASK_STATUS_NUMBERS} from "../../constants";
-import {taskStatusText} from "../orderComponent/fetchTaskStatusComponent";
+import {taskStatusTimeText} from "./taskStatusTimeText";
 import {MaterialUICommonButton} from "../MaterialUICommonButton";
 import MaterialUISimpleModal from "../MaterialUISimpleModal";
 import {updateTaskApi} from "../../apis/taskApis";
 import { useHistory } from "react-router-dom";
 import {myTaskIndexURL} from "../../urls/index";
+import {COLORS} from "../../style_constants";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
+`;
+
+const TaskStatusWrapper = styled.div`
 `;
 
 const FoodImage = styled.img`
@@ -38,28 +42,38 @@ const FoodPrice = styled.h2`
     text-overflow: ellipsis;
 `;
 
-const FoodAddress = styled.h2`
+const FoodDescription = styled.h2`
 `;
 
-const FoodDesicription = styled.div`
-    margin-bottom:5%;
-    overflow-wrap: break-word;
+const OrderUserInfoWrapper = styled.div`
+    border: solid;
+    border-color: #F0F0F0 ;
+    border-radius:5%;
+    padding-top:1%;
+    padding-left:1%;
+    padding-right:1%;
+    padding-bottom:1%;
 `;
 
-const TaskStatusWrapper = styled.div`
+const OrderUserInfoText = styled.h2`
+color:${COLORS.STATUS_COLOR};
+margin-bottom:0;
+`;
+
+const OrderUserName = styled.h3`
+    margin-top:1%;
+
+`;
+
+const OrderUserAddress = styled.div`
+    margin-top:1%;
+`;
+
+const TaskStatusTimeWrapper = styled.div`
 `;
 
 const TaskStatusTextWrapper = styled.div`
     float:left;
-`;
-
-const TaskStatusFinishedWrapper = styled.div`
-`;
-
-const TaskStatusOrderCancelWrapper = styled.div`
-`;
-
-const TaskStatusTaskCancelWrapper = styled.div`
 `;
 
 const TaskStatusTImeWrapper = styled.div`
@@ -67,10 +81,6 @@ const TaskStatusTImeWrapper = styled.div`
 
 const UnFinishedWrapper = styled.div`
     display: flex;
-`;
-
-const TaskCreateTextWrapper = styled.div`
-    margin-bottom:5%;
 `;
 
 const TaskCreateTimeWrapper = styled.div`
@@ -81,17 +91,13 @@ const FinishedWrapper = styled.div`
     display: flex;
 `;
 
-const TasKUodateTextWrapper = styled.div`
-    margin-bottom:5%;
-`;
-
 const TaskUpdateTimeWrapper = styled.div`
     margin-bottom:5%;
 `;
 
 const TaskDetailCardButtom = styled.div`
     display: flex;
-
+    margin-top:2%;
 `;
 
 const TaskDetailFinisheButtomWrapper = styled.div`
@@ -135,15 +141,12 @@ export const TaskDetailCard = () => {
                 <FoodPrice>
                     ￥{state.task.price}
                 </FoodPrice>
-                <FoodAddress>
-                    ￥{state.task.price}
-                </FoodAddress>
-                <FoodDesicription>
+                <FoodDescription>
                     {state.task.description}
-                </FoodDesicription>
-                <TaskStatusWrapper>
+                </FoodDescription>
+                <TaskStatusTimeWrapper>
                     <TaskStatusTextWrapper>
-                         {taskStatusText(state.task.order_status).STATUS_TEXT}
+                        {taskStatusTimeText(state.task.order_status).STATUS_TEXT}
                     </TaskStatusTextWrapper>
                     <TaskStatusTImeWrapper>
                     {
@@ -160,13 +163,25 @@ export const TaskDetailCard = () => {
                             </TaskUpdateTimeWrapper>
                         </FinishedWrapper>
                     }
+                    
                     </TaskStatusTImeWrapper>
-                </TaskStatusWrapper>
+                </TaskStatusTimeWrapper>
+                <OrderUserInfoText>
+                    {TASK_TEXT.ORDER_INFO_TEXT}
+                </OrderUserInfoText>
+                <OrderUserInfoWrapper>
+                    <OrderUserName>
+                        {state.order_user.name}
+                    </OrderUserName>
+                    <OrderUserAddress>
+                        {state.order_user.address}
+                    </OrderUserAddress>
+                </OrderUserInfoWrapper>
                 <TaskDetailCardButtom>
                     <ThemeProvider theme={ButtonTheme}>
                         <TaskDetailFinisheButtomWrapper>
                             <MaterialUISimpleModal 
-                                onClick={() => taskCancelHandle()} 
+                                onClick={() => taskFinisiheHandle()} 
                                 btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}
                                 modalTilte={TASK_TEXT.TASK_FINISH_MODALTITLE}
                                 modalText={TASK_TEXT.TASK_FINISH_MODAL_TEXT}

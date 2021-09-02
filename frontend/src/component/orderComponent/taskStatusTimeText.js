@@ -1,8 +1,6 @@
 import {TASK_TEXT} from "../../constants";
 
-export const taskStatusText = (order_status) => {
-  console.log(order_status)
-  const STATUS_TEXT = []
+export const taskStatusTimeText = (order_status) => {
   
   switch (order_status){
       case "0":

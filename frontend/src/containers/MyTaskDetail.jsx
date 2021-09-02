@@ -10,7 +10,7 @@ import {initializeState,taskActionTypes,taskReducer} from "../reducer/taskReduce
 import {REQUEST_STATE,ORDER_HEADER_TITLE} from "../constants";
 import {TaskDetailCard} from "../component/orderComponent/TaskDetailCard";
 import {myTaskShowBackendURL} from "../urls/index";
-
+import {taskStatusText} from "../component/orderComponent/taskStatusText";
 
 const TaskDetailWrapper = styled.div`
     margin-left:20%;
@@ -21,6 +21,10 @@ const TaskDetailHeader = styled.h1`
     margin-top:3%;
     margin-bottom:3%;
 `;
+
+const TaskStateWrapper = styled.div``;
+
+const TaskStatusWrapper = styled.div``;
 
 const TaskDetailCardWrapper = styled.div`
 margin-bottom:5%;
@@ -74,22 +78,6 @@ export const MyTaskDetail = ({match}) => {
         .catch((e) => console.log(e))
     },[])
 
-    function submitTaskFinishedHandle(){
-        updateTaskApi(2)
-        .then((data) => {
-            
-        })
-        .catch(e => console.log(e))
-    }
-
-    function submitTaskCancelHandle(){
-        updateTaskApi(3)
-        .then((data) => {
-            
-        })
-        .catch(e => console.log(e))
-    }
-
     console.log(state)
     return (
         <Fragment>
@@ -99,13 +87,18 @@ export const MyTaskDetail = ({match}) => {
                 </TaskDetailHeader>
                 {
                 state.fetchState === REQUEST_STATE.OK?
-                <TaskDispatch.Provider value={dispatch}>
-                    <TaskState.Provider value={state}>
-                        <TaskDetailCardWrapper>
-                            <TaskDetailCard/>
-                        </TaskDetailCardWrapper>
-                    </TaskState.Provider>
-                </TaskDispatch.Provider>
+                <TaskStateWrapper>
+                    <TaskStatusWrapper>
+                        {taskStatusText(state.task.order_status).STATUS_TEXT}
+                    </TaskStatusWrapper>
+                    <TaskDispatch.Provider value={dispatch}>
+                        <TaskState.Provider value={state}>
+                            <TaskDetailCardWrapper>
+                                <TaskDetailCard/>
+                            </TaskDetailCardWrapper>
+                        </TaskState.Provider>
+                    </TaskDispatch.Provider>
+                </TaskStateWrapper>
                 :
                 <SkeltonsWrapper>
                     <SkeltonCardWrapper>

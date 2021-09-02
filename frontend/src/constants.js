@@ -100,7 +100,7 @@ export const TASK_TEXT = {
     NOT_EXIST_TASK_TEXT:"まだ注文されたことがありません",
     LETS_CREATE_FOOD_TEXT:"料理を投稿してあなたの料理を届けましょう！",
     TASK_STATUS_UNFINISHED_TEXT:"未配達",
-    TASK_STATUS_FINISHED_TEXT:"配達済み",
+    TASK_STATUS_FINISHED_TEXT:"配達完了",
     TASK_STATUS_ORDER_CANCEL_TEXT:"キャンセルされました",
     TASK_STATUS_TASK_CANCEL_TEXT:"キャンセルしました",
     TASK_STATUS_UNFINISHED_TIME_TEXT:"注文受付日時：",
@@ -113,6 +113,7 @@ export const TASK_TEXT = {
     TASK_FINISH_MODAL_TEXT:"この料理のステータスを配達完了にします",
     TASK_CANCEL_MODAL_TITLE:"提供をキャンセルしますか？",
     TASK_CANCEL_MODAL_TEXT:"この料理の取引をキャンセルします",
+    ORDER_INFO_TEXT:"届け先",
 }
 
 export const ORDER_TASK_STATUS_NUMBERS = {
