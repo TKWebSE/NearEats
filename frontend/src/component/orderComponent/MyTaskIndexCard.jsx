@@ -40,6 +40,9 @@ const TaskIndexCardUpsideWrapper = styled.div`
 
 const FoodNameWrapper = styled.h2`
   width:85%;
+  ${media.lessThan("huge")`
+  font-size:30px;
+`}
 `;
 
 const TaskStatusWrapper = styled.div`
@@ -52,19 +55,6 @@ const TaskStatusWrapper = styled.div`
   padding:2%;
 `;
 
-const TaskStatusUnFinishedWrapper = styled.div`
-
-`;
-
-const TaskStatusFinishedWrapper = styled.div`
-`;
-
-const TaskStatusOrderCancelWrapper = styled.div`
-`;
-
-const TaskStatusTaskCancelWrapper = styled.div`
-`;
-
 const TaskIndexCardDownsideWrapper = styled.div`
   display: flex;
   width:100%;
@@ -73,6 +63,9 @@ const TaskIndexCardDownsideWrapper = styled.div`
 
 const FoodPriceWrapper = styled.h2`
   width:55%;
+  ${media.lessThan("huge")`
+    font-size:30px;
+`}
 `;
 
 const TimeWrapper = styled.div`
@@ -94,6 +87,9 @@ const TaskUpdateTimeWrapper = styled.div`
 
 const UnFinishedWrapper = styled.div`
   display: flex;
+  ${media.lessThan("huge")`
+    font-size:20px;
+`}
 `;
 
 const TaskCreateTextWrapper = styled.div`
