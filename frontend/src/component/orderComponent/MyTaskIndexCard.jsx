@@ -1,12 +1,13 @@
-import React, {Fragment, useEffect, useReducer,useContext} from 'react';
+import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
-import {TaskState,TaskDispatch} from "../../context/Context";
-import {TASK_TEXT} from "../../constants";
-import {changeJSTDate} from "../../AppFunction";
+import media from "styled-media-query";
+import { TaskState, TaskDispatch } from "../../context/Context";
+import { TASK_TEXT } from "../../constants";
+import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
-import {COLORS} from "../../style_constants";
-import {taskStatusText} from "./taskStatusText";
-import {taskStatusTimeText} from "./taskStatusTimeText";
+import { COLORS } from "../../style_constants";
+import { taskStatusText } from "./taskStatusText";
+import { taskStatusTimeText } from "./taskStatusTimeText";
 
 const TaskIndexCardWrapper = styled.div`
   border: solid;
@@ -105,7 +106,7 @@ const TaskCreateTimeWrapper = styled.div`
 
 
 
-export const MyTaskIndexCard = ({task}) => {
+export const MyTaskIndexCard = ({ task }) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
 
@@ -123,7 +124,7 @@ export const MyTaskIndexCard = ({task}) => {
               {task.name}
             </FoodNameWrapper>
             <TaskStatusWrapper>
-                {taskStatusText(task.order_status).STATUS_TEXT}
+              {taskStatusText(task.order_status).STATUS_TEXT}
             </TaskStatusWrapper>
           </TaskIndexCardUpsideWrapper>
           <TaskIndexCardDownsideWrapper>
@@ -131,26 +132,26 @@ export const MyTaskIndexCard = ({task}) => {
               ￥{task.price}
             </FoodPriceWrapper>
             <TimeWrapper>
-            {
-              task.order_status === 1?
-                <FinishedWrapper>
-                  <TasKUodateTextWrapper>
-                    {taskStatusTimeText(task.order_status).STATUS_TEXT}
-                  </TasKUodateTextWrapper>
-                  <TaskUpdateTimeWrapper>
-                    {changeJSTDate(task.updated_at)}
-                  </TaskUpdateTimeWrapper>
-                </FinishedWrapper>
-              :
-                <UnFinishedWrapper>
-                  <TaskCreateTextWrapper>
-                    {taskStatusTimeText(task.order_status).STATUS_TEXT}
-                  </TaskCreateTextWrapper>
-                  <TaskCreateTimeWrapper>
-                    {changeJSTDate(task.created_at)}
-                  </TaskCreateTimeWrapper>
-                </UnFinishedWrapper> 
-            }
+              {
+                task.order_status === 1 ?
+                  <FinishedWrapper>
+                    <TasKUodateTextWrapper>
+                      {taskStatusTimeText(task.order_status).STATUS_TEXT}
+                    </TasKUodateTextWrapper>
+                    <TaskUpdateTimeWrapper>
+                      {changeJSTDate(task.updated_at)}
+                    </TaskUpdateTimeWrapper>
+                  </FinishedWrapper>
+                  :
+                  <UnFinishedWrapper>
+                    <TaskCreateTextWrapper>
+                      {taskStatusTimeText(task.order_status).STATUS_TEXT}
+                    </TaskCreateTextWrapper>
+                    <TaskCreateTimeWrapper>
+                      {changeJSTDate(task.created_at)}
+                    </TaskCreateTimeWrapper>
+                  </UnFinishedWrapper>
+              }
             </TimeWrapper>
           </TaskIndexCardDownsideWrapper>
         </TaskIndexCardTextWrapper>

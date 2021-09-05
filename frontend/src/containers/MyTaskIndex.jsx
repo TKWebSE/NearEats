@@ -1,19 +1,19 @@
-import React, {Fragment, useEffect, useReducer,useContext} from 'react';
+import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {fetchTaskIndexApi} from "../apis/taskApis";
-import {SessionState,SessionDispatch,TaskState,TaskDispatch} from "../context/Context";
-import {initializeState,tasksActionTypes,taskListReducer} from "../reducer/taskListReducer";
-import {REQUEST_STATE,ORDER_HEADER_TITLE,NOTFOUND_FOOD_TEXT} from "../constants";
-import {MyTaskIndexCard} from "../component/orderComponent/MyTaskIndexCard";
+import { fetchTaskIndexApi } from "../apis/taskApis";
+import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
+import { initializeState, tasksActionTypes, taskListReducer } from "../reducer/taskListReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_FOOD_TEXT } from "../constants";
+import { MyTaskIndexCard } from "../component/orderComponent/MyTaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
-import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
-import {foodCreateURL,myTaskShowURL} from "../urls/index";
-import {ButtonTheme} from "../style_constants";
+import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
+import { foodCreateURL, myTaskShowURL } from "../urls/index";
+import { ButtonTheme } from "../style_constants";
 
 const MyTaskWrapper = styled.div`
     margin-top:5%;
@@ -28,7 +28,7 @@ const NotExistTaskWrapper = styled.div`
 `;
 
 const ExistTaskWrapper = styled.div`
-padding-bottom:1%;
+    padding-bottom:1%;
 `;
 
 
@@ -119,41 +119,41 @@ const SkeltonTitleWrapper = styled.div`
 export const MyTaskIndex = () => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
-    const [state,dispatch] = useReducer(taskListReducer,initializeState);
+    const [state, dispatch] = useReducer(taskListReducer, initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({type: tasksActionTypes.FETCHING})
+        dispatch({ type: tasksActionTypes.FETCHING })
         console.log(SessionAuthState)
         fetchTaskIndexApi(SessionAuthState.currentUser.id)
-        .then((data) => {
-            console.log(data)
-            dispatch({
-                type: tasksActionTypes.FETCH_SUCCESS,
-                payload: {
-                    tasks: data.tasks,
-                },
-            });
-        })
-        .catch((e) => console.log(e))
-    },[])
+            .then((data) => {
+                console.log(data)
+                dispatch({
+                    type: tasksActionTypes.FETCH_SUCCESS,
+                    payload: {
+                        tasks: data.tasks,
+                    },
+                });
+            })
+            .catch((e) => console.log(e))
+    }, [])
 
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
     }
     console.log(state)
-    return(
+    return (
         <Fragment>
             <MyTaskWrapper>
                 <MyTaskIndexTitle>
                     {ORDER_HEADER_TITLE.MYTASK_INDEX_TITLE}
                 </MyTaskIndexTitle>
                 {
-                    state.fetchState === REQUEST_STATE.OK?
-                        state.tasks === []?
+                    state.fetchState === REQUEST_STATE.OK ?
+                        state.tasks === [] ?
                             <NotExistTaskWrapper>
                                 <NotFoundCatWrapper>
-                                   <NotFoundCatImage src={NotFoundCat}/>
+                                    <NotFoundCatImage src={NotFoundCat} />
                                 </NotFoundCatWrapper>
                                 <NotExistTaskTextWrapper>
                                     {ORDER_HEADER_TITLE.NOT_EXIST_TASK_TEXT}
@@ -161,35 +161,35 @@ export const MyTaskIndex = () => {
                                 <LetsUploadFoodsWrapper>
                                     {ORDER_HEADER_TITLE.LETS_CREATE_FOOD_TEXT}
                                 </LetsUploadFoodsWrapper>
-                                    <ThemeProvider theme={ButtonTheme}>
-                                        <GotoFoodCreateWrapper>
-                                            <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
-                                        </GotoFoodCreateWrapper>
-                                    </ThemeProvider>
+                                <ThemeProvider theme={ButtonTheme}>
+                                    <GotoFoodCreateWrapper>
+                                        <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                                    </GotoFoodCreateWrapper>
+                                </ThemeProvider>
                             </NotExistTaskWrapper>
+                            :
+                            state.tasks.map((task, i) =>
+                                <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
+                                    <TaskDispatch.Provider value={dispatch}>
+                                        <TaskState.Provider value={state}>
+                                            <ExistTaskWrapper key={i}>
+                                                <MyTaskIndexCard task={task} />
+                                            </ExistTaskWrapper>
+                                        </TaskState.Provider>
+                                    </TaskDispatch.Provider>
+                                </Link>
+                            )
                         :
-                        state.tasks.map((task,i) => 
-                        <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
-                            <TaskDispatch.Provider value={dispatch}>
-                                <TaskState.Provider value={state}>
-                                    <ExistTaskWrapper key={i}>
-                                        <MyTaskIndexCard task={task}/>
-                                    </ExistTaskWrapper>
-                                </TaskState.Provider>
-                            </TaskDispatch.Provider>
-                        </Link>
-                        )
-                    :
-                    <SkeltonsWrapper>
-                        <SkeltonCardWrapper>
-                            <SkeltonImageWrapper>
-                                <Skeleton variant="rect" height={180}/>
-                            </SkeltonImageWrapper>
-                            <SkeltonTitleWrapper>
-                                <Skeleton variant="rect" height={40}/>
-                            </SkeltonTitleWrapper>
-                        </SkeltonCardWrapper>
-                    </SkeltonsWrapper>
+                        <SkeltonsWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                        </SkeltonsWrapper>
                 }
             </MyTaskWrapper>
         </Fragment>
