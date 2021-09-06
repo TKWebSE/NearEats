@@ -40,19 +40,35 @@ const TaskIndexCardUpsideWrapper = styled.div`
 
 const FoodNameWrapper = styled.h2`
   width:85%;
-  ${media.lessThan("huge")`
   font-size:30px;
-`}
+  ${media.lessThan("large")`
+    font-size:25px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:16px;
+  `}
+  ${media.lessThan("small")`
+    font-size:11px;
+  `}
 `;
 
 const TaskStatusWrapper = styled.div`
-  width:15%;
+  width:21%;
   margin-bottom:1%;
   background-color:${COLORS.STATUS_COLOR};
   border-radius:100%;
   text-align:center;
   color:white;
   padding:2%;
+  ${media.lessThan("large")`
+    font-size:15px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:11px;
+  `}
+  ${media.lessThan("small")`
+    font-size:1px;
+  `}
 `;
 
 const TaskIndexCardDownsideWrapper = styled.div`
@@ -62,42 +78,59 @@ const TaskIndexCardDownsideWrapper = styled.div`
 `;
 
 const FoodPriceWrapper = styled.h2`
-  width:55%;
-  ${media.lessThan("huge")`
-    font-size:30px;
-`}
+  width:45%;
+  font-size:30px;
+  ${media.lessThan("large")`
+    font-size:25px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:15px;
+  `}
+  ${media.lessThan("small")`
+    font-size:11px;
+    width:10%;
+  `}
 `;
 
 const TimeWrapper = styled.div`
-  width:45%;
+  width:55%;
+  text-align:right;
+  font-size:20px;
+  ${media.lessThan("large")`
+    font-size:16px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:11px;
+  `}
+  ${media.lessThan("small")`
+    font-size:5px;
+    width:100%;
+  `}
 `;
 
 const FinishedWrapper = styled.div`
   display: flex;
 `;
 
-const TasKUodateTextWrapper = styled.div`
+const TasKUpdateTextWrapper = styled.div`
   width:75%;
+  text-align:right;
 `;
 
 const TaskUpdateTimeWrapper = styled.div`
-
 `;
 
 
 const UnFinishedWrapper = styled.div`
   display: flex;
-  ${media.lessThan("huge")`
-    font-size:20px;
-`}
 `;
 
 const TaskCreateTextWrapper = styled.div`
-  width:45%;
+  width:100%;
 `;
 
 const TaskCreateTimeWrapper = styled.div`
-  width:55%;
+  width:60%;
 `;
 
 
@@ -106,7 +139,7 @@ export const MyTaskIndexCard = ({ task }) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
 
-  console.log(taskStatusText(task.order_status).STATUS_TEXT)
+  console.log(task)
 
   return (
     <Fragment>
@@ -131,9 +164,9 @@ export const MyTaskIndexCard = ({ task }) => {
               {
                 task.order_status === 1 ?
                   <FinishedWrapper>
-                    <TasKUodateTextWrapper>
+                    <TasKUpdateTextWrapper>
                       {taskStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TasKUodateTextWrapper>
+                    </TasKUpdateTextWrapper>
                     <TaskUpdateTimeWrapper>
                       {changeJSTDate(task.updated_at)}
                     </TaskUpdateTimeWrapper>
