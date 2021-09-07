@@ -22,6 +22,16 @@ const MyTaskWrapper = styled.div`
 `;
 
 const MyTaskIndexTitle = styled.h1`
+    font-size:300%;
+    ${media.lessThan("large")`
+        font-size:230%;
+    `}
+    ${media.lessThan("medium")`
+        font-size:150%;
+    `}
+    ${media.lessThan("small")`
+       font-size:100%;
+    `}
 `;
 
 const NotExistTaskWrapper = styled.div`
@@ -146,7 +156,7 @@ export const OrderIndex = () => {
         <Fragment>
             <MyTaskWrapper>
                 <MyTaskIndexTitle>
-                    {ORDER_HEADER_TITLE.ORDER_INDEX_TITLE}
+                    {ORDER_HEADER_TITLE.MYTASK_INDEX_TITLE}
                 </MyTaskIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?

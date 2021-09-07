@@ -22,6 +22,16 @@ const MyTaskWrapper = styled.div`
 `;
 
 const MyTaskIndexTitle = styled.h1`
+    font-size:300%;
+    ${media.lessThan("large")`
+        font-size:230%;
+    `}
+    ${media.lessThan("medium")`
+        font-size:150%;
+    `}
+    ${media.lessThan("small")`
+       font-size:100%;
+    `}
 `;
 
 const NotExistTaskWrapper = styled.div`
