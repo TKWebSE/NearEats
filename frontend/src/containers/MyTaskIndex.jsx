@@ -22,7 +22,7 @@ const MyTaskWrapper = styled.div`
 `;
 
 const MyTaskIndexTitle = styled.h1`
-    font-size:300%;
+    font-size:250%;
     ${media.lessThan("large")`
         font-size:230%;
     `}

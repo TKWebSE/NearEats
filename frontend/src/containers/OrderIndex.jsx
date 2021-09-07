@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useReducer, useContext } from 'react';
+import React, { Fragment, useEffect, useReducer, useContext } from "react";
 import styled from "styled-components";
 import media from "styled-media-query";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { fetchTaskIndexApi } from "../apis/taskApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
 import { initializeState, tasksActionTypes, taskListReducer } from "../reducer/taskListReducer";
 import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_FOOD_TEXT } from "../constants";
-import { MyTaskIndexCard } from "../component/orderComponent/MyTaskIndexCard";
+import { OrderIndexCard } from "../component/orderComponent/OrderIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { foodCreateURL, myTaskShowURL } from "../urls/index";
@@ -22,7 +22,7 @@ const MyTaskWrapper = styled.div`
 `;
 
 const MyTaskIndexTitle = styled.h1`
-    font-size:300%;
+    font-size:250%;
     ${media.lessThan("large")`
         font-size:230%;
     `}
@@ -156,7 +156,7 @@ export const OrderIndex = () => {
         <Fragment>
             <MyTaskWrapper>
                 <MyTaskIndexTitle>
-                    {ORDER_HEADER_TITLE.MYTASK_INDEX_TITLE}
+                    {ORDER_HEADER_TITLE.ORDER_INDEX_TITLE}
                 </MyTaskIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
@@ -183,7 +183,7 @@ export const OrderIndex = () => {
                                     <TaskDispatch.Provider value={dispatch}>
                                         <TaskState.Provider value={state}>
                                             <ExistTaskWrapper key={i}>
-                                                <MyTaskIndexCard task={task} />
+                                                <OrderIndexCard task={task} />
                                             </ExistTaskWrapper>
                                         </TaskState.Provider>
                                     </TaskDispatch.Provider>

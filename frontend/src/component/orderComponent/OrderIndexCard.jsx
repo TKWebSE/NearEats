@@ -1,63 +1,190 @@
-import React ,{ Fragment,useContext } from 'react';
+import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import {OrderState,OrderDispatch} from "../../context/Context";
-
+import media from "styled-media-query";
+import { TaskState, TaskDispatch } from "../../context/Context";
+import { TASK_TEXT } from "../../constants";
+import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
+import { COLORS } from "../../style_constants";
+import { orderStatusText } from "./orderStatusText";
+import { orderStatusTimeText } from "./orderStatusTimeText";
 
-const FoodCardWrapper = styled.div`
-    text-align:center;
+const TaskIndexCardWrapper = styled.div`
+  border: solid;
+  border-color: #F0F0F0 ;
+  color:black;
+  border-width:2px;
+  display: flex;
+  justify-content:space-between;
+  height:30%;
+  width:100%;
 `;
 
-const MainfoodImage = styled.img`
+const FoodImageWrapper = styled.div`
+  width:25%;
+`;
+
+const FoodImage = styled.img`
+  width:100%;
+  height:100%;
+`;
+
+const TaskIndexCardTextWrapper = styled.div`
+  width:75%;
+`;
+
+const TaskIndexCardUpsideWrapper = styled.div`
+  display: flex;
+  align-items:center;
+`;
+
+const FoodNameWrapper = styled.h2`
+  width:85%;
+  font-size:30px;
+  ${media.lessThan("large")`
+    font-size:25px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:16px;
+  `}
+  ${media.lessThan("small")`
+    font-size:11px;
+  `}
+`;
+
+const TaskStatusWrapper = styled.div`
+  width:21%;
+  margin-bottom:1%;
+  background-color:${COLORS.STATUS_COLOR};
+  border-radius:100%;
+  text-align:center;
+  color:white;
+  padding:2%;
+  ${media.lessThan("large")`
+    font-size:15px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:11px;
+  `}
+  ${media.lessThan("small")`
+    font-size:1px;
+  `}
+`;
+
+const TaskIndexCardDownsideWrapper = styled.div`
+  display: flex;
+  width:100%;
+  align-items:center;
+`;
+
+const FoodPriceWrapper = styled.h2`
+  width:45%;
+  font-size:30px;
+  ${media.lessThan("large")`
+    font-size:25px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:15px;
+  `}
+  ${media.lessThan("small")`
+    font-size:11px;
+    width:10%;
+  `}
+`;
+
+const TimeWrapper = styled.div`
+  width:55%;
+  text-align:right;
+  font-size:20px;
+  ${media.lessThan("large")`
+    font-size:16px;
+  `}
+  ${media.lessThan("medium")`
+    font-size:11px;
+  `}
+  ${media.lessThan("small")`
+    font-size:5px;
     width:100%;
-    height:60%;
+  `}
 `;
 
-const TextWrapper = styled.div`
-    margin-bottom:5%;
-    text-align:left;
+const FinishedWrapper = styled.div`
+  display: flex;
 `;
 
-const FoodName = styled.h1`
-    margin-top:5%;
-    margin-bottom:0px;
-    text-decoration: none;
+const TasKUpdateTextWrapper = styled.div`
+  width:75%;
+  text-align:right;
 `;
 
-const FoodPrice = styled.div`
-    margin-left:5%;
+const TaskUpdateTimeWrapper = styled.div`
 `;
 
 
-//foodを表示するカードコンポーネント
-export const OrderIndexCard = () => {
-    const orderState = useContext(OrderState);
-    console.log(orderState)
-    return(
-    <Fragment>
-        {
-            /* <FoodCardWrapper>
-            <Link to={`orders/${orderState.order.id}`} style={{ textDecoration: 'none' }}>
-                <MainfoodImage src={orderImage} alt="orderImage"></MainfoodImage>
-                <TextWrapper>
-                    <FoodName>
-                        {food.name}
-                    </FoodName>
-                    <FoodPrice>
-                        ￥{food.price}
-                    </FoodPrice>
-                </TextWrapper>
-            </Link>
-            </FoodCardWrapper> */
-            // console.log(orderState)
-            // <Fragment>
-            // <h1>"neko"</h1>
-            <div>
-            {orderState.id}
-            </div>
-            // </Fragment>
-        }
-    </Fragment>
+const UnFinishedWrapper = styled.div`
+  display: flex;
+`;
+
+const TaskCreateTextWrapper = styled.div`
+  width:100%;
+`;
+
+const TaskCreateTimeWrapper = styled.div`
+  width:60%;
+`;
+
+
+
+export const OrderIndexCard = ({ task }) => {
+    const state = useContext(TaskState);
+    const dispatch = useContext(TaskDispatch)
+
+    console.log(task)
+
+    return (
+        <Fragment>
+            <TaskIndexCardWrapper>
+                <FoodImageWrapper>
+                    <FoodImage src={foodImage} alt="foodImage"></FoodImage>
+                </FoodImageWrapper>
+                <TaskIndexCardTextWrapper>
+                    <TaskIndexCardUpsideWrapper>
+                        <FoodNameWrapper>
+                            {task.name}
+                        </FoodNameWrapper>
+                        <TaskStatusWrapper>
+                            {orderStatusText(task.order_status).STATUS_TEXT}
+                        </TaskStatusWrapper>
+                    </TaskIndexCardUpsideWrapper>
+                    <TaskIndexCardDownsideWrapper>
+                        <FoodPriceWrapper>
+                            ￥{task.price}
+                        </FoodPriceWrapper>
+                        <TimeWrapper>
+                            {
+                                task.order_status === 1 ?
+                                    <FinishedWrapper>
+                                        <TasKUpdateTextWrapper>
+                                            {orderStatusTimeText(task.order_status).STATUS_TEXT}
+                                        </TasKUpdateTextWrapper>
+                                        <TaskUpdateTimeWrapper>
+                                            {changeJSTDate(task.updated_at)}
+                                        </TaskUpdateTimeWrapper>
+                                    </FinishedWrapper>
+                                    :
+                                    <UnFinishedWrapper>
+                                        <TaskCreateTextWrapper>
+                                            {orderStatusTimeText(task.order_status).STATUS_TEXT}
+                                        </TaskCreateTextWrapper>
+                                        <TaskCreateTimeWrapper>
+                                            {changeJSTDate(task.created_at)}
+                                        </TaskCreateTimeWrapper>
+                                    </UnFinishedWrapper>
+                            }
+                        </TimeWrapper>
+                    </TaskIndexCardDownsideWrapper>
+                </TaskIndexCardTextWrapper>
+            </TaskIndexCardWrapper>
+        </Fragment>
     )
 }
