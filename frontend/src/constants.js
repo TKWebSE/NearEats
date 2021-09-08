@@ -101,6 +101,7 @@ export const TASK_TEXT = {
     LETS_CREATE_FOOD_TEXT: "料理を投稿してあなたの料理を届けましょう！",
     TASK_STATUS_UNFINISHED_TEXT: "未配達",
     TASK_STATUS_FINISHED_TEXT: "配達完了",
+    TASK_STATUS_PENDINGEVALUATION_TEXT: "評価待ち",
     TASK_STATUS_ORDER_CANCEL_TEXT: "キャンセルされました",
     TASK_STATUS_TASK_CANCEL_TEXT: "キャンセルしました",
     TASK_STATUS_UNFINISHED_TIME_TEXT: "注文受付日時：",
@@ -117,21 +118,16 @@ export const TASK_TEXT = {
 }
 
 export const ORDER_TASK_STATUS_NUMBERS = {
-    TASK_UNFINISHED: "0",//未配歌
-    TASKFINISH: "1",//配達済み
-    ORDER_CANCEL: "2",//オーダーをキャンセル
-    TASKCANCEL: "3",//タスクをキャンセル
+    TASK_UNFINISHED: "0",//未配達
+    ORDER_WATINGE_VALUATION: "1",//評価待ち
+    TASKFINISH: "2",//配達済み
+    ORDER_CANCEL: "3",//オーダーをキャンセル
+    TASK_CANCEL: "4",//タスクをキャンセル
 }
 
 export const ORDER_TEXT = {
-    ORDER_STATUS_UNFINISHED_TEXT: "注文中：",
-    ORDER_STATUS_FINISHED_TEXT: "配達完了",
-    ORDER_STATUS_CANCEL_TEXT: "",
-    TASK_STATUS_CANCEL_TEXT: "",
-    ORDER_STATUS_UNFINISHED_TIME_TEXT: "注文受付日時：",
-    ORDER_STATUS_FINISHED_TIME_TEXT: "配達完了",
-    ORDER_STATUS_CANCEL_TIME_TEXT: "キャンセルした日時",
-    TASK_STATUS_CANCEL_TIME_TEXT: "キャンセルされた日時",
+
+
 }
 
 export const modalButtomLabel = {

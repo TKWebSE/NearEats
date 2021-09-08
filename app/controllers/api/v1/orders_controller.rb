@@ -28,8 +28,6 @@ module Api
 
                 # make_user = User.get_make_user(food.each  |f| f.make_user_id end)
 
-
-
                 render json: {
                     task: task,
                     order_user:order_user,
@@ -50,19 +48,29 @@ module Api
 
 
             def index
-               orders = Order.all
+                user = User.find_by(id: params[:user_id])
 
-               render json: {
-                   orders: orders
-               }, status: :ok
+                orders = Food.joins(:orders).merge(
+                    Order.where(order_user_id: user.id)
+                ).select("foods.*,orders.*").order(updated_at: "DESC")
+
+                render json: {
+                    orders: orders,
+                }, status: :ok
             end
         
             def show
-                order = Order.find_by(id: params[:userId])
+                order = Food.get_order(params[:order_id])
+                make_user = []
+
+                order.each do |o| 
+                    make_user = User.get_maker_user(o.make_user_id)
+                end
 
                 render json: {
-                    order: order
-                },status: :ok
+                    order: order,
+                    make_user:make_user,
+                }, status: :ok
             end
 
             def create

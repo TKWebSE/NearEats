@@ -7,4 +7,9 @@ class Food < ApplicationRecord
         ).select("foods.*,orders.*")
     }
 
+    scope :get_order,->(order_id) { joins(:orders).merge(
+        Order.where(id: order_id)
+    ).select("foods.*,orders.*")
+}
+
 end

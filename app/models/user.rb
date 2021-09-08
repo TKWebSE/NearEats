@@ -19,4 +19,7 @@ class User < ActiveRecord::Base
   scope :get_order_user,->(order_user_id) { 
     where(id: order_user_id)
   }
+  scope :get_maker_user,->(make_user_id) { 
+    where(id: make_user_id)
+  }
 end
