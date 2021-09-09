@@ -6,7 +6,7 @@ import { TASK_TEXT } from "../../constants";
 import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
-import { taskStatusText } from "./taskStatusText";
+import { gettaskStatusText } from "./gettaskStatusText";
 import { taskStatusTimeText } from "./taskStatusTimeText";
 
 const TaskIndexCardWrapper = styled.div`
@@ -153,7 +153,7 @@ export const MyTaskIndexCard = ({ task }) => {
               {task.name}
             </FoodNameWrapper>
             <TaskStatusWrapper>
-              {taskStatusText(task.order_status).STATUS_TEXT}
+              {gettaskStatusText(task.order_status).STATUS_TEXT}
             </TaskStatusWrapper>
           </TaskIndexCardUpsideWrapper>
           <TaskIndexCardDownsideWrapper>

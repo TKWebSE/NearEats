@@ -139,7 +139,7 @@ export const OrderIndexCard = ({ task }) => {
   const state = useContext(TaskState);
   const dispatch = useContext(TaskDispatch)
 
-  console.log(task)
+  console.log(getOrderStatusTimeText(task.order_status).STATUS_TEXT)
 
   return (
     <Fragment>

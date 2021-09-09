@@ -1,4 +1,4 @@
-import { ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
+import { ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 
 export const orderStatusTimeText = {
   ORDER_STATUS_UNFINISHED_TIME_TEXT: "注文受付日時：",
@@ -15,13 +15,17 @@ export const getOrderStatusTimeText = (order_status) => {
       return {
         STATUS_TEXT: orderStatusTimeText.ORDER_STATUS_UNFINISHED_TIME_TEXT,
       }
-    case ORDER_TASK_STATUS_NUMBERS.TASKFINISH:
+    case ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION:
       return {
         STATUS_TEXT: orderStatusTimeText.ORDER_STATUS_FINISHED_TIME_TEXT,
       }
+    case ORDER_TASK_STATUS_NUMBERS.TASKFINISH:
+      return {
+        STATUS_TEXT: orderStatusTimeText.ORDER_STATUS_DONE_TIME_TEXT,
+      }
     case ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL:
       return {
-        STATUS_TEXT: orderStatusTimeText.TASK_STATUS_CANCEL_TIME_TEXT,
+        STATUS_TEXT: orderStatusTimeText.ORDER_STATUS_CANCEL_TIME_TEXT,
       }
     case ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL:
       return {
