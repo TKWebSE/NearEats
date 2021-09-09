@@ -6,8 +6,8 @@ import { TASK_TEXT } from "../../constants";
 import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
-import { gettaskStatusText } from "./gettaskStatusText";
-import { taskStatusTimeText } from "./taskStatusTimeText";
+import { getTaskStatusText } from "./getTaskStatusText";
+import { getTaskStatusTimeText } from "./getTaskStatusTimeText";
 
 const TaskIndexCardWrapper = styled.div`
   border: solid;
@@ -153,7 +153,7 @@ export const MyTaskIndexCard = ({ task }) => {
               {task.name}
             </FoodNameWrapper>
             <TaskStatusWrapper>
-              {gettaskStatusText(task.order_status).STATUS_TEXT}
+              {getTaskStatusText(task.order_status).STATUS_TEXT}
             </TaskStatusWrapper>
           </TaskIndexCardUpsideWrapper>
           <TaskIndexCardDownsideWrapper>
@@ -165,7 +165,7 @@ export const MyTaskIndexCard = ({ task }) => {
                 task.order_status === 1 ?
                   <FinishedWrapper>
                     <TasKUpdateTextWrapper>
-                      {taskStatusTimeText(task.order_status).STATUS_TEXT}
+                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
                     </TasKUpdateTextWrapper>
                     <TaskUpdateTimeWrapper>
                       {changeJSTDate(task.updated_at)}
@@ -174,7 +174,7 @@ export const MyTaskIndexCard = ({ task }) => {
                   :
                   <UnFinishedWrapper>
                     <TaskCreateTextWrapper>
-                      {taskStatusTimeText(task.order_status).STATUS_TEXT}
+                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
                     </TaskCreateTextWrapper>
                     <TaskCreateTimeWrapper>
                       {changeJSTDate(task.created_at)}

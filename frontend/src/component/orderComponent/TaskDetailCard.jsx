@@ -7,14 +7,14 @@ import { TaskState, TaskDispatch } from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
 import { changeJSTDate } from "../../AppFunction";
 import { TASK_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
-import { taskStatusTimeText } from "./taskStatusTimeText";
+import { getTaskStatusTimeText } from "./getTaskStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
 import MaterialUISimpleModal from "../MaterialUISimpleModal";
 import { updateTaskApi } from "../../apis/taskApis";
 import { useHistory } from "react-router-dom";
 import { myTaskIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
-import { taskStatusText } from "./taskStatusText";
+import { getTaskStatusText } from "./getTaskStatusText";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -136,7 +136,6 @@ export const TaskDetailCard = () => {
         console.log(state)
         updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
             .then((data) => {
-                console.log(data)
                 history.push(myTaskIndexURL);
             })
     }
@@ -144,7 +143,6 @@ export const TaskDetailCard = () => {
     function taskFinisiheHandle() {
         updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
             .then((data) => {
-                console.log(data)
                 history.push(myTaskIndexURL);
             })
     }
@@ -155,7 +153,7 @@ export const TaskDetailCard = () => {
                 <ImageStatusWrapper>
                     <FoodImage src={foodImage} alt="foodImage"></FoodImage>
                     <TaskStatus>
-                        {taskStatusText(state.task.order_status).STATUS_TEXT}
+                        {getTaskStatusText(state.task.order_status).STATUS_TEXT}
                     </TaskStatus>
                 </ImageStatusWrapper>
                 <FoodName>
@@ -169,7 +167,7 @@ export const TaskDetailCard = () => {
                 </FoodDescription>
                 <TaskStatusWrapper>
                     <TaskStatusTextWrapper>
-                        {taskStatusTimeText(state.task.order_status).STATUS_TEXT}
+                        {getTaskStatusTimeText(state.task.order_status).STATUS_TEXT}
                     </TaskStatusTextWrapper>
                     <TaskStatusTImeWrapper>
                         {
