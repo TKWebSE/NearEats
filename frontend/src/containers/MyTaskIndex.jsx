@@ -119,11 +119,12 @@ const SkeltonCardWrapper = styled.div`
     float: left;
 `;
 
-const SkeltonImageWrapper = styled.div`
-`;
-
-const SkeltonTitleWrapper = styled.div`
-    padding-top:6%;
+const SkeltonTaskWrapper = styled.div`
+    width:430%;
+    padding-bottom:10%;
+    ${media.lessThan("small")`
+        padding-bottom:20%;
+    `}
 `;
 
 export const MyTaskIndex = () => {
@@ -192,12 +193,18 @@ export const MyTaskIndex = () => {
                         :
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>
-                                <SkeltonImageWrapper>
-                                    <Skeleton variant="rect" height={180} />
-                                </SkeltonImageWrapper>
-                                <SkeltonTitleWrapper>
-                                    <Skeleton variant="rect" height={40} />
-                                </SkeltonTitleWrapper>
+                                <SkeltonTaskWrapper>
+                                    <Skeleton variant="rect" height={100} />
+                                </SkeltonTaskWrapper>
+                                <SkeltonTaskWrapper>
+                                    <Skeleton variant="rect" height={100} />
+                                </SkeltonTaskWrapper>
+                                <SkeltonTaskWrapper>
+                                    <Skeleton variant="rect" height={100} />
+                                </SkeltonTaskWrapper>
+                                <SkeltonTaskWrapper>
+                                    <Skeleton variant="rect" height={100} />
+                                </SkeltonTaskWrapper>
                             </SkeltonCardWrapper>
                         </SkeltonsWrapper>
                 }

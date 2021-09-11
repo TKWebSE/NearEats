@@ -131,8 +131,11 @@ const SkeltonCardWrapper = styled.div`
 `;
 
 const SkeltonOrderWrapper = styled.div`
-    width:450%;
+    width:430%;
     padding-bottom:10%;
+    ${media.lessThan("small")`
+        padding-bottom:20%;
+    `}
 `;
 
 export const OrderIndex = () => {
@@ -198,16 +201,16 @@ export const OrderIndex = () => {
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>
                                 <SkeltonOrderWrapper>
-                                    <Skeleton variant="rect" height={180} />
+                                    <Skeleton variant="rect" height={100} />
                                 </SkeltonOrderWrapper>
                                 <SkeltonOrderWrapper>
-                                    <Skeleton variant="rect" height={180} />
+                                    <Skeleton variant="rect" height={100} />
                                 </SkeltonOrderWrapper>
                                 <SkeltonOrderWrapper>
-                                    <Skeleton variant="rect" height={180} />
+                                    <Skeleton variant="rect" height={100} />
                                 </SkeltonOrderWrapper>
                                 <SkeltonOrderWrapper>
-                                    <Skeleton variant="rect" height={180} />
+                                    <Skeleton variant="rect" height={100} />
                                 </SkeltonOrderWrapper>
                             </SkeltonCardWrapper>
                         </SkeltonsWrapper>
