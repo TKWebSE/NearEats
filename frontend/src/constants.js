@@ -117,8 +117,14 @@ export const ORDER_TASK_STATUS_NUMBERS = {
 }
 
 export const ORDER_TEXT = {
+    NOT_EXIST_TASK_TEXT: "注文した商品はありません",
+    LETS_CREATE_FOOD_TEXT: "どんな商品を見てみましょう！！",
+}
 
-
+export const NOTFOUND_ORDER_TEXT = {
+    NOT_EXIST_ORDER_TEXT: "注文した料理はありません",
+    LETS_ORDER_TEXT: "料理を見てみましょう！！",
+    GOTO_FOOD_INDEX_BUTTON_LABEL: "料理を探す！",
 }
 
 export const modalButtomLabel = {

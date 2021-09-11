@@ -5,23 +5,23 @@ import { Link } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import { fetchTaskIndexApi } from "../apis/taskApis";
+import { fetchOrederIndexApi } from "../apis/orderApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
-import { initializeState, tasksActionTypes, taskListReducer } from "../reducer/taskListReducer";
-import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_FOOD_TEXT } from "../constants";
+import { initializeState, oredersActionTypes, orderIndexReducer } from "../reducer/orderIndexReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_ORDER_TEXT } from "../constants";
 import { OrderIndexCard } from "../component/orderComponent/OrderIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
-import { foodCreateURL, myTaskShowURL } from "../urls/index";
+import { foodsIndexURL, orderShowURL } from "../urls/index";
 import { ButtonTheme } from "../style_constants";
 
-const MyTaskWrapper = styled.div`
+const OrderWrapper = styled.div`
     margin-top:5%;
     margin-right:10%;
     margin-left:10%;
 `;
 
-const MyTaskIndexTitle = styled.h1`
+const OrderIndexTitle = styled.h1`
     font-size:250%;
     ${media.lessThan("large")`
         font-size:230%;
@@ -34,10 +34,19 @@ const MyTaskIndexTitle = styled.h1`
     `}
 `;
 
-const NotExistTaskWrapper = styled.div`
+const NotExistOrderWrapper = styled.div`
+    padding-top:5%;
+    padding-left:26%;
+    position:relative;
+    ${media.lessThan("medium")`
+        padding-left:14%;
+    `}
+    ${media.lessThan("small")`
+        padding-left:0%;
+    `}
 `;
 
-const ExistTaskWrapper = styled.div`
+const ExistOrderWrapper = styled.div`
     padding-bottom:1%;
 `;
 
@@ -63,10 +72,11 @@ const NotFoundCatImage = styled.img`
     `}
 `;
 
-const NotExistTaskTextWrapper = styled.h3`
+const NotExistOrderTextWrapper = styled.h3`
     position:absolute;
     top: 50%;
     left: 30%;
+    font-size:150%;
     ${media.lessThan("large")`
         left:32%;
     `}
@@ -82,6 +92,7 @@ const LetsUploadFoodsWrapper = styled.h3`
     position:absolute;
     top: 60%;
     left: 30%;
+    font-size:150%;
     ${media.lessThan("large")`
         left:32%;
     `}
@@ -119,89 +130,89 @@ const SkeltonCardWrapper = styled.div`
     float: left;
 `;
 
-const SkeltonImageWrapper = styled.div`
-`;
-
-const SkeltonTitleWrapper = styled.div`
-    padding-top:6%;
+const SkeltonOrderWrapper = styled.div`
+    width:450%;
+    padding-bottom:10%;
 `;
 
 export const OrderIndex = () => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
-    const [state, dispatch] = useReducer(taskListReducer, initializeState);
+    const [state, dispatch] = useReducer(orderIndexReducer, initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: tasksActionTypes.FETCHING })
+        dispatch({ type: oredersActionTypes.FETCHING })
         console.log(SessionAuthState)
-        fetchTaskIndexApi(SessionAuthState.currentUser.id)
+        fetchOrederIndexApi(SessionAuthState.currentUser.id)
             .then((data) => {
                 console.log(data)
                 dispatch({
-                    type: tasksActionTypes.FETCH_SUCCESS,
+                    type: oredersActionTypes.FETCH_SUCCESS,
                     payload: {
-                        tasks: data.tasks,
+                        orders: data.orders,
                     },
                 });
             })
             .catch((e) => console.log(e))
     }, [])
 
-    function gotoFoodCreateHandle() {
-        history.push(foodCreateURL);
+    function gotoFoodIndexHandle() {
+        history.push(foodsIndexURL);
     }
     console.log(state)
     return (
         <Fragment>
-            <MyTaskWrapper>
-                <MyTaskIndexTitle>
+            <OrderWrapper>
+                <OrderIndexTitle>
                     {ORDER_HEADER_TITLE.ORDER_INDEX_TITLE}
-                </MyTaskIndexTitle>
+                </OrderIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
-                        state.tasks === [] ?
-                            <NotExistTaskWrapper>
+                        state.orders === [] ?
+                            <NotExistOrderWrapper>
                                 <NotFoundCatWrapper>
                                     <NotFoundCatImage src={NotFoundCat} />
                                 </NotFoundCatWrapper>
-                                <NotExistTaskTextWrapper>
-                                    {ORDER_HEADER_TITLE.NOT_EXIST_TASK_TEXT}
-                                </NotExistTaskTextWrapper>
+                                <NotExistOrderTextWrapper>
+                                    {NOTFOUND_ORDER_TEXT.NOT_EXIST_ORDER_TEXT}
+                                </NotExistOrderTextWrapper>
                                 <LetsUploadFoodsWrapper>
-                                    {ORDER_HEADER_TITLE.LETS_CREATE_FOOD_TEXT}
+                                    {NOTFOUND_ORDER_TEXT.LETS_ORDER_TEXT}
                                 </LetsUploadFoodsWrapper>
                                 <ThemeProvider theme={ButtonTheme}>
                                     <GotoFoodCreateWrapper>
-                                        <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                                        <MaterialUICommonButton onClick={() => gotoFoodIndexHandle()} btnLabel={NOTFOUND_ORDER_TEXT.GOTO_FOOD_INDEX_BUTTON_LABEL}></MaterialUICommonButton>
                                     </GotoFoodCreateWrapper>
                                 </ThemeProvider>
-                            </NotExistTaskWrapper>
+                            </NotExistOrderWrapper>
                             :
-                            state.tasks.map((task, i) =>
-                                <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
-                                    <TaskDispatch.Provider value={dispatch}>
-                                        <TaskState.Provider value={state}>
-                                            <ExistTaskWrapper key={i}>
-                                                <OrderIndexCard task={task} />
-                                            </ExistTaskWrapper>
-                                        </TaskState.Provider>
-                                    </TaskDispatch.Provider>
+                            state.orders.map((order, i) =>
+                                <Link to={orderShowURL(order.id)} style={{ textDecoration: 'none' }}>
+                                    <ExistOrderWrapper key={i}>
+                                        <OrderIndexCard order={order} />
+                                    </ExistOrderWrapper>
                                 </Link>
                             )
                         :
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>
-                                <SkeltonImageWrapper>
+                                <SkeltonOrderWrapper>
                                     <Skeleton variant="rect" height={180} />
-                                </SkeltonImageWrapper>
-                                <SkeltonTitleWrapper>
-                                    <Skeleton variant="rect" height={40} />
-                                </SkeltonTitleWrapper>
+                                </SkeltonOrderWrapper>
+                                <SkeltonOrderWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonOrderWrapper>
+                                <SkeltonOrderWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonOrderWrapper>
+                                <SkeltonOrderWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonOrderWrapper>
                             </SkeltonCardWrapper>
                         </SkeltonsWrapper>
                 }
-            </MyTaskWrapper>
+            </OrderWrapper>
         </Fragment>
     )
 }

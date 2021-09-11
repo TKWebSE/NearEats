@@ -1,15 +1,14 @@
 import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
-import { TaskState, TaskDispatch } from "../../context/Context";
-import { TASK_TEXT } from "../../constants";
+import { ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 
-const TaskIndexCardWrapper = styled.div`
+const OrderIndexCardWrapper = styled.div`
   border: solid;
   border-color: #F0F0F0 ;
   color:black;
@@ -29,11 +28,11 @@ const FoodImage = styled.img`
   height:100%;
 `;
 
-const TaskIndexCardTextWrapper = styled.div`
+const OrderIndexCardTextWrapper = styled.div`
   width:75%;
 `;
 
-const TaskIndexCardUpsideWrapper = styled.div`
+const OrderIndexCardUpsideWrapper = styled.div`
   display: flex;
   align-items:center;
 `;
@@ -52,7 +51,7 @@ const FoodNameWrapper = styled.h2`
   `}
 `;
 
-const TaskStatusWrapper = styled.div`
+const OrderStatusWrapper = styled.div`
   width:21%;
   margin-bottom:1%;
   background-color:${COLORS.STATUS_COLOR};
@@ -71,7 +70,7 @@ const TaskStatusWrapper = styled.div`
   `}
 `;
 
-const TaskIndexCardDownsideWrapper = styled.div`
+const OrderIndexCardDownsideWrapper = styled.div`
   display: flex;
   width:100%;
   align-items:center;
@@ -112,12 +111,12 @@ const FinishedWrapper = styled.div`
   display: flex;
 `;
 
-const TasKUpdateTextWrapper = styled.div`
-  width:75%;
-  text-align:right;
+const OrderUpdateTextWrapper = styled.div`
+  width:100%;
 `;
 
-const TaskUpdateTimeWrapper = styled.div`
+const OrderUpdateTimeWrapper = styled.div`
+  width:100%;
 `;
 
 
@@ -125,66 +124,64 @@ const UnFinishedWrapper = styled.div`
   display: flex;
 `;
 
-const TaskCreateTextWrapper = styled.div`
+const OrderCreateTextWrapper = styled.div`
   width:100%;
 `;
 
-const TaskCreateTimeWrapper = styled.div`
-  width:60%;
+const OrderCreateTimeWrapper = styled.div`
+  width:100%;
 `;
 
 
 
-export const OrderIndexCard = ({ task }) => {
-  const state = useContext(TaskState);
-  const dispatch = useContext(TaskDispatch)
+export const OrderIndexCard = ({ order }) => {
 
-  console.log(getOrderStatusTimeText(task.order_status).STATUS_TEXT)
+  console.log(getOrderStatusTimeText(order.order_status).STATUS_TEXT)
 
   return (
     <Fragment>
-      <TaskIndexCardWrapper>
+      <OrderIndexCardWrapper>
         <FoodImageWrapper>
           <FoodImage src={foodImage} alt="foodImage"></FoodImage>
         </FoodImageWrapper>
-        <TaskIndexCardTextWrapper>
-          <TaskIndexCardUpsideWrapper>
+        <OrderIndexCardTextWrapper>
+          <OrderIndexCardUpsideWrapper>
             <FoodNameWrapper>
-              {task.name}
+              {order.name}
             </FoodNameWrapper>
-            <TaskStatusWrapper>
-              {getOrderStatusText(task.order_status).STATUS_TEXT}
-            </TaskStatusWrapper>
-          </TaskIndexCardUpsideWrapper>
-          <TaskIndexCardDownsideWrapper>
+            <OrderStatusWrapper>
+              {getOrderStatusText(order.order_status).STATUS_TEXT}
+            </OrderStatusWrapper>
+          </OrderIndexCardUpsideWrapper>
+          <OrderIndexCardDownsideWrapper>
             <FoodPriceWrapper>
-              ￥{task.price}
+              ￥{order.price}
             </FoodPriceWrapper>
             <TimeWrapper>
               {
-                task.order_status === 1 ?
-                  <FinishedWrapper>
-                    <TasKUpdateTextWrapper>
-                      {getOrderStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TasKUpdateTextWrapper>
-                    <TaskUpdateTimeWrapper>
-                      {changeJSTDate(task.updated_at)}
-                    </TaskUpdateTimeWrapper>
-                  </FinishedWrapper>
-                  :
+                order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
                   <UnFinishedWrapper>
-                    <TaskCreateTextWrapper>
-                      {getOrderStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TaskCreateTextWrapper>
-                    <TaskCreateTimeWrapper>
-                      {changeJSTDate(task.created_at)}
-                    </TaskCreateTimeWrapper>
+                    <OrderCreateTextWrapper>
+                      {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
+                    </OrderCreateTextWrapper>
+                    <OrderCreateTimeWrapper>
+                      {changeJSTDate(order.created_at)}
+                    </OrderCreateTimeWrapper>
                   </UnFinishedWrapper>
+                  :
+                  <FinishedWrapper>
+                    <OrderUpdateTextWrapper>
+                      {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
+                    </OrderUpdateTextWrapper>
+                    <OrderUpdateTimeWrapper>
+                      {changeJSTDate(order.updated_at)}
+                    </OrderUpdateTimeWrapper>
+                  </FinishedWrapper>
               }
             </TimeWrapper>
-          </TaskIndexCardDownsideWrapper>
-        </TaskIndexCardTextWrapper>
-      </TaskIndexCardWrapper>
+          </OrderIndexCardDownsideWrapper>
+        </OrderIndexCardTextWrapper>
+      </OrderIndexCardWrapper>
     </Fragment>
   )
 }

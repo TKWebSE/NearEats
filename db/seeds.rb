@@ -32,7 +32,7 @@ end
   maker = User.find(x+1)
   food = Food.find(x)   
 
-  4.times do |m|
+  5.times do |m|
     order = Order.new(
       food_id:food.id,
       order_user_id: user.id,

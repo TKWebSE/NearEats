@@ -1,23 +1,23 @@
-import React, {Fragment, useEffect, useReducer,useContext} from 'react';
+import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import {SessionState,SessionDispatch} from "../context/Context";
+import { SessionState, SessionDispatch } from "../context/Context";
 import { fetchMyFoodsIndex } from '../apis/foodApis';
-import { REQUEST_STATE ,FOOD_HEADER_TITLE} from '../constants';
-import { 
+import { REQUEST_STATE, FOOD_HEADER_TITLE } from '../constants';
+import {
     initializeState,
     foodsListActionTypes,
     foodsListReducer,
 } from '../reducer/foodsListReducer';
-import {FoodCard} from '../component/foodComponent/FoodCard';
-import {NOTFOUND_FOOD_TEXT} from "../constants";
+import { FoodCard } from '../component/foodComponent/FoodCard';
+import { NOTFOUND_FOOD_TEXT } from "../constants";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
-import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
-import {foodCreateURL} from "../urls/index";
-import {ButtonTheme} from "../style_constants";
+import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
+import { foodCreateURL } from "../urls/index";
+import { ButtonTheme } from "../style_constants";
 
 const FoodsWrapper = styled.div`
     // display: inline-block
@@ -131,15 +131,15 @@ const SkeltonsWrapper = styled.div`
 `;
 
 const SkeltonCardWrapper = styled.div`
-margin-left:1%;
-width:23%;
-margin-right:1%;
-padding-bottom:5%;
-float: left;
+    margin-left:1%;
+    width:23%;
+    margin-right:1%;
+    padding-bottom:5%;
+    float: left;
 `;
 
 const SkeltonImageWrapper = styled.div`
-height:180px;
+    height:180px;
 `;
 
 const SkeltonTitleWrapper = styled.div`
@@ -147,26 +147,26 @@ const SkeltonTitleWrapper = styled.div`
 `;
 
 export const MyFoods = () => {
-    const [state,dispatch] = useReducer(foodsListReducer,initializeState);
+    const [state, dispatch] = useReducer(foodsListReducer, initializeState);
     const history = useHistory();
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
 
     useEffect(() => {
-        dispatch({type: foodsListActionTypes.FETCHING})
+        dispatch({ type: foodsListActionTypes.FETCHING })
         fetchMyFoodsIndex(
             SessionAuthState.currentUser.id
-            )
-        .then((data) => {
-            dispatch({
-                type: foodsListActionTypes.FETCH_SUCCESS,
-                payload: {
-                    foodsList: data.foods
-                },
-            });
-        })
-        .catch((e) => console.log(e))
-    },[])
+        )
+            .then((data) => {
+                dispatch({
+                    type: foodsListActionTypes.FETCH_SUCCESS,
+                    payload: {
+                        foodsList: data.foods
+                    },
+                });
+            })
+            .catch((e) => console.log(e))
+    }, [])
 
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
@@ -179,136 +179,136 @@ export const MyFoods = () => {
                     {FOOD_HEADER_TITLE.MYFOOD}
                 </FoodsIndexTitle>
                 {
-                state.fetchState === REQUEST_STATE.OK?
-                    state.foodsList === undefined || state.foodsList === []?
-                        <NoFoodsListWrapper>
-                            <NotFoundCatWrapper>
-                                <NotFoundCatImage src={NotFoundCat}/>
-                            </NotFoundCatWrapper>
-                            <NoUploadFoodsWrapper>
-                                {NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
-                            </NoUploadFoodsWrapper>
-                            <LetsUploadFoodsWrapper>
-                                {NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
-                            </LetsUploadFoodsWrapper>
-                            <ThemeProvider theme={ButtonTheme}>
-                            <GotoFoodCreateWrapper>
-                                <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
-                            </GotoFoodCreateWrapper>
-                            </ThemeProvider>
-                        </NoFoodsListWrapper>
-                    :
-                    <FoodListWrapper>
-                    {
-                    state.foodsList.map((food,i) => 
-                        <ContentsList key={i}>
-                            <FoodCardWrapper>
-                                <FoodCard food={food}></FoodCard>
-                            </FoodCardWrapper>
-                        </ContentsList>
-                    )
-                    }
-                    </FoodListWrapper>
-                :
-                <SkeltonsWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                    <SkeltonCardWrapper>
-                        <SkeltonImageWrapper>
-                            <Skeleton variant="rect" height={180}/>
-                        </SkeltonImageWrapper>
-                        <SkeltonTitleWrapper>
-                            <Skeleton variant="rect" height={40}/>
-                        </SkeltonTitleWrapper>
-                    </SkeltonCardWrapper>
-                </SkeltonsWrapper>
-               }
+                    state.fetchState === REQUEST_STATE.OK ?
+                        state.foodsList === undefined || state.foodsList === [] ?
+                            <NoFoodsListWrapper>
+                                <NotFoundCatWrapper>
+                                    <NotFoundCatImage src={NotFoundCat} />
+                                </NotFoundCatWrapper>
+                                <NoUploadFoodsWrapper>
+                                    {NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
+                                </NoUploadFoodsWrapper>
+                                <LetsUploadFoodsWrapper>
+                                    {NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
+                                </LetsUploadFoodsWrapper>
+                                <ThemeProvider theme={ButtonTheme}>
+                                    <GotoFoodCreateWrapper>
+                                        <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
+                                    </GotoFoodCreateWrapper>
+                                </ThemeProvider>
+                            </NoFoodsListWrapper>
+                            :
+                            <FoodListWrapper>
+                                {
+                                    state.foodsList.map((food, i) =>
+                                        <ContentsList key={i}>
+                                            <FoodCardWrapper>
+                                                <FoodCard food={food}></FoodCard>
+                                            </FoodCardWrapper>
+                                        </ContentsList>
+                                    )
+                                }
+                            </FoodListWrapper>
+                        :
+                        <SkeltonsWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                            <SkeltonCardWrapper>
+                                <SkeltonImageWrapper>
+                                    <Skeleton variant="rect" height={180} />
+                                </SkeltonImageWrapper>
+                                <SkeltonTitleWrapper>
+                                    <Skeleton variant="rect" height={40} />
+                                </SkeltonTitleWrapper>
+                            </SkeltonCardWrapper>
+                        </SkeltonsWrapper>
+                }
             </FoodsWrapper>
         </Fragment>
     )

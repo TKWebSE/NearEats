@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import { TaskState, TaskDispatch } from "../../context/Context";
-import { TASK_TEXT } from "../../constants";
+import { ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { changeJSTDate } from "../../AppFunction";
 import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
@@ -113,11 +113,11 @@ const FinishedWrapper = styled.div`
 `;
 
 const TasKUpdateTextWrapper = styled.div`
-  width:75%;
-  text-align:right;
+  width:100%;
 `;
 
 const TaskUpdateTimeWrapper = styled.div`
+  width:100%;
 `;
 
 
@@ -130,7 +130,7 @@ const TaskCreateTextWrapper = styled.div`
 `;
 
 const TaskCreateTimeWrapper = styled.div`
-  width:60%;
+  width:100%;
 `;
 
 
@@ -162,16 +162,7 @@ export const MyTaskIndexCard = ({ task }) => {
             </FoodPriceWrapper>
             <TimeWrapper>
               {
-                task.order_status === 1 ?
-                  <FinishedWrapper>
-                    <TasKUpdateTextWrapper>
-                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TasKUpdateTextWrapper>
-                    <TaskUpdateTimeWrapper>
-                      {changeJSTDate(task.updated_at)}
-                    </TaskUpdateTimeWrapper>
-                  </FinishedWrapper>
-                  :
+                task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                   <UnFinishedWrapper>
                     <TaskCreateTextWrapper>
                       {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
@@ -180,6 +171,15 @@ export const MyTaskIndexCard = ({ task }) => {
                       {changeJSTDate(task.created_at)}
                     </TaskCreateTimeWrapper>
                   </UnFinishedWrapper>
+                  :
+                  <FinishedWrapper>
+                    <TasKUpdateTextWrapper>
+                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
+                    </TasKUpdateTextWrapper>
+                    <TaskUpdateTimeWrapper>
+                      {changeJSTDate(task.updated_at)}
+                    </TaskUpdateTimeWrapper>
+                  </FinishedWrapper>
               }
             </TimeWrapper>
           </TaskIndexCardDownsideWrapper>
