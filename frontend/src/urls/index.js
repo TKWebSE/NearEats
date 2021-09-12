@@ -1,12 +1,12 @@
 const BASE_URL = "http://localhost:3000";
-const API_V1 = "/api/v1" 
+const API_V1 = "/api/v1"
 const AUTH = "/auth"
 
 const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
 //HomeのURL
-export const homeURL = "/home" ;
+export const homeURL = "/home";
 
 //userのURL
 export const userShowURL = (userId) => `/users/${userId}`;
@@ -45,14 +45,14 @@ export const orderEditURL = (orderId) => `/orders/${orderId}/edot`;
 
 //orderのBackendURL
 export const myTaskIndexBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/orders/${userId}${myTaskIndexURL}`;
-export const myTaskShowBackendURL= (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}/taskShow`;
+export const myTaskShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}/taskShow`;
 export const myTaskUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}/taskUpdate`;
 export const orderIndexBackendURL = () => `${BACKEND_DEFAULT_URL}/orders`;
-export const orderShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}/taskShow`;
-export const orderCreateBackendURL =() =>  `${BACKEND_DEFAULT_URL}/orders/create`;
-export const orderEditBackendURL =(orderId) => `${BACKEND_DEFAULT_URL}${orderEditURL(orderId)}`;
+export const orderShowBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderShowURL(orderId)}`;
+export const orderCreateBackendURL = () => `${BACKEND_DEFAULT_URL}/orders/create`;
+export const orderEditBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderEditURL(orderId)}`;
 export const orderUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders/${orderId}/update`;
-export const orderDeleteBackendURL = () =>  `${BACKEND_DEFAULT_URL}/orders/delete`;
+export const orderDeleteBackendURL = () => `${BACKEND_DEFAULT_URL}/orders/delete`;
 
 //session関連のURL
 export const signInURL = `/signin`;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { 
+import {
     myTaskIndexBackendURL,
     myTaskShowBackendURL,
     myTaskUpdateBackendURL,
@@ -10,66 +10,66 @@ import {
 
 //ユーザーのtask一覧を取得する
 export const fetchTaskIndexApi = (user_id) => {
-    return axios.get(myTaskIndexBackendURL(user_id),{
-      params:{
-        user_id:user_id
-      }
-  })
-    .then(res => {
-        return res.data
+    return axios.get(myTaskIndexBackendURL(user_id), {
+        params: {
+            user_id: user_id
+        }
     })
-    .catch((e) => console.error(e))
+        .then(res => {
+            return res.data
+        })
+        .catch((e) => console.error(e))
 }
 //特定のtaskを1件取得する
 export const fetchTaskApi = (order_id) => {
-    return axios.get(myTaskShowBackendURL(order_id),{
-        params:{
-            order_id:order_id
+    return axios.get(myTaskShowBackendURL(order_id), {
+        params: {
+            order_id: order_id
         }
     })
-    .then(res => {
-        console.log(res)
-        return res.data
-    })
-    .catch(e => console.log(e))
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
+        .catch(e => console.log(e))
 }
 
 //特定ののorderを1件取得する
 export const createTaskApi = (order) => {
-    return axios.get(orderShowBackendURL(order.id),{
-        params:{
-            order:order
+    return axios.get(orderShowBackendURL(order.id), {
+        params: {
+            order: order
         }
     })
-    .then(res => {
-        return res.data
-    })
-    .catch(e => console.log(e))
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
 }
 
 //特定ののorderを1件更新する
-export const updateTaskApi = (task,order_status) => {
+export const updateTaskApi = (task, order_status) => {
     console.log(task)
     console.log(order_status)
-    return axios.put(myTaskUpdateBackendURL(task.id),{
-        id:task.id,
-        order_status:order_status,
+    return axios.put(myTaskUpdateBackendURL(task.id), {
+        id: task.id,
+        order_status: order_status,
     })
-    .then(res => {
-        return res.data
-    })
-    .catch(e => console.log(e))
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
 }
 
 //特定ののtaskを1件削除する
 export const deleteOrderApi = (order) => {
-    return axios.delete(orderDeleteBackendURL(order.id),{
-        params:{
-            order:order
+    return axios.delete(orderDeleteBackendURL(order.id), {
+        params: {
+            order: order
         }
     })
-    .then(res => {
-        return res.data
-    })
-    .catch(e => console.log(e))
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
 }

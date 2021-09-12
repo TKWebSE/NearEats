@@ -20,10 +20,10 @@ export const fetchOrederIndexApi = (currentUser_id) => {
 }
 
 //特定ののorderを1件取得する
-export const fetchOrderApi = (order) => {
-    return axios.get(orderShowBackendURL(order.id), {
+export const fetchOrderApi = (orderId) => {
+    return axios.get(orderShowBackendURL(orderId), {
         params: {
-            order: order
+            order_id: orderId
         }
     })
         .then(res => {
