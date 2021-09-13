@@ -14,12 +14,12 @@ export const orderDetailReducer = (state, action) => {
     switch (action.type) {
         case orderDetailActionTypes.FETCHING:
             return {
-                ...state,
-                fetchstate: REQUEST_STATE.LOADING,
+                fetchState: REQUEST_STATE.LOADING,
+                order: state.order,
             }
         case orderDetailActionTypes.FETCH_SUCCESS:
             return {
-                fetchstate: REQUEST_STATE.OK,
+                fetchState: REQUEST_STATE.OK,
                 order: action.payload.order,
             }
         default:

@@ -1,77 +1,109 @@
-import React, { Fragment, useEffect, useReducer } from 'react'
+import React, { Fragment, useEffect, useReducer, useContext } from 'react';
 import styled from "styled-components";
-import Skeleton from '@material-ui/lab/Skeleton';
-import { useHistory } from "react-router";
-import { initializeState, orderDetailActionTypes, orderDetailReducer } from "../reducer/orderDetailReducer";
-import { fetchOrderApi } from "../apis/orderApis";
-import { orderEditURL } from "../urls/index";
-import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
-import { OrderDispatch, OrderState } from "../context/Context";
+import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
-import { ButtonTheme } from "../style_constants";
-import { SaveButton } from "../component/MaterialUISaveButton";
-import { OrderDetailCard } from "../component/orderComponent/OrderDetailCard";
+import Skeleton from '@material-ui/lab/Skeleton';
+import { useHistory } from "react-router-dom";
+import { fetchTaskApi, updateTaskApi } from "../apis/taskApis";
+import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
+import { initializeState, taskActionTypes, taskReducer } from "../reducer/taskReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
+import { TaskDetailCard } from "../component/orderComponent/TaskDetailCard";
+import { myTaskShowBackendURL } from "../urls/index";
+import { COLORS } from "../style_constants";
 
-const OrderDetailHeader = styled.div`
+const TaskDetailWrapper = styled.div`
+    margin-left:20%;
+    margin-right:20%;
 `;
 
-const OrderDetailCardWrapper = styled.div`
+const TaskDetailHeader = styled.h1`
+    margin-top:3%;
+    margin-bottom:3%;
+
 `;
 
-const OrderDetailButton = styled.div`
+const TaskDetailCardWrapper = styled.div`
+    margin-bottom:5%;
 `;
+
+const SkeltonsWrapper = styled.div`
+`;
+
+const SkeltonCardWrapper = styled.div`
+    margin-left:1%;
+    width:23%;
+    margin-right:1%;
+    padding-bottom:5%;
+    float: left;
+`;
+
+const SkeltonImageWrapper = styled.div`
+`;
+
+const SkeltonTitleWrapper = styled.div`
+    padding-top:6%;
+`;
+
 
 export const OrderDetail = ({ match }) => {
-  const [state, dispatch] = useReducer(orderDetailReducer, initializeState);
+  const SessionAuthState = useContext(SessionState);
+  const SessionAuthDispatch = useContext(SessionDispatch)
+  const [state, dispatch] = useReducer(taskReducer, initializeState);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch({ type: orderDetailActionTypes.FETCHING });
-    fetchOrderApi(match.params.orderId)
+    dispatch({ type: taskActionTypes.FETCHING })
+    fetchTaskApi(match.params.orderId)
       .then((data) => {
-        console.log(data)
         dispatch({
-          type: orderDetailActionTypes.FETCH_SUCCESS,
+          type: taskActionTypes.FETCH_TASK,
           payload: {
-            order: data.order[0]
-          }
-        })
+            task: data.task[0]
+          },
+        });
+        dispatch({
+          type: taskActionTypes.FETCH_ORDER_USER,
+          payload: {
+            order_user: data.order_user[0]
+          },
+        });
+        dispatch({
+          type: taskActionTypes.FETCH_SUCCESS,
+        });
       })
-      .catch(e => console.log(e))
-  }, []);
+      .catch((e) => console.log(e))
+  }, [])
 
   console.log(state)
-
-  function submitHandle() {
-    history.push(orderEditURL(state.user.id))
-  }
-
   return (
     <Fragment>
-      <OrderDetailHeader>
-        {ORDER_HEADER_TITLE.OrderDetail}
-      </OrderDetailHeader>
-      {
-        REQUEST_STATE.OK === state.fetchState ?
-          <Fragment>
-            <OrderDetailCardWrapper>
-              <OrderDispatch.Provider value={dispatch}>
-                <OrderState.Provider value={state}>
-                  <OrderDetailCard />
-                </OrderState.Provider>
-              </OrderDispatch.Provider>
-            </OrderDetailCardWrapper>
-            <OrderDetailButton>
-              <ThemeProvider theme={ButtonTheme}>
-                <SaveButton onClick={submitHandle} />
-              </ThemeProvider>
-            </OrderDetailButton>
-          </Fragment>
-          :
-          <Fragment>
-            <Skeleton variant="rect" width={450} height={300} />
-          </Fragment>
-      }
+      <TaskDetailWrapper>
+        <TaskDetailHeader>
+          {ORDER_HEADER_TITLE.TASK_DETAIL}
+        </TaskDetailHeader>
+        {
+          state.fetchState === REQUEST_STATE.OK ?
+            <TaskDispatch.Provider value={dispatch}>
+              <TaskState.Provider value={state}>
+                <TaskDetailCardWrapper>
+                  <TaskDetailCard />
+                </TaskDetailCardWrapper>
+              </TaskState.Provider>
+            </TaskDispatch.Provider>
+            :
+            <SkeltonsWrapper>
+              <SkeltonCardWrapper>
+                <SkeltonImageWrapper>
+                  <Skeleton variant="rect" height={180} />
+                </SkeltonImageWrapper>
+                <SkeltonTitleWrapper>
+                  <Skeleton variant="rect" height={40} />
+                </SkeltonTitleWrapper>
+              </SkeltonCardWrapper>
+            </SkeltonsWrapper>
+        }
+      </TaskDetailWrapper>
     </Fragment>
   )
 }
