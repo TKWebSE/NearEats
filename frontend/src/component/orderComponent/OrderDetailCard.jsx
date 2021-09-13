@@ -6,7 +6,7 @@ import { ButtonTheme, RedButtonTheme } from "../../style_constants";
 import { OrderState, OrderDispatch } from "../../context/Context";
 import foodImage from "../../images/food-image.jpg";
 import { changeJSTDate } from "../../AppFunction";
-import { TASK_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
+import { ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
 import MaterialUISimpleModal from "../MaterialUISimpleModal";
@@ -171,7 +171,7 @@ export const OrderDetailCard = () => {
                     </OrderStatusTextWrapper>
                     <OrderStatusTImeWrapper>
                         {
-                            state.order.order_status === 0 ?
+                            state.order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                                 <UnFinishedWrapper>
                                     <OrderCreateTimeWrapper>
                                         {changeJSTDate(state.order.created_at)}
@@ -188,10 +188,10 @@ export const OrderDetailCard = () => {
                     </OrderStatusTImeWrapper>
                 </OrderStatusWrapper>
                 {
-                    state.order.order_status === "0" ?
+                    state.order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
                         <OrderNotFinishedWrapper>
                             <OrderUserInfoText>
-                                {TASK_TEXT.ORDER_INFO_TEXT}
+                                {ORDER_TEXT.ORDER_VALUATION_TEXT}
                             </OrderUserInfoText>
                             <OrderUserInfoWrapper>
                                 <OrderUserName>
@@ -206,17 +206,17 @@ export const OrderDetailCard = () => {
                                     <OrderDetailFinisheButtomWrapper>
                                         <MaterialUISimpleModal
                                             onClick={() => orderFinisiheHandle()}
-                                            btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}
-                                            modalTilte={TASK_TEXT.TASK_FINISH_MODALTITLE}
-                                            modalText={TASK_TEXT.TASK_FINISH_MODAL_TEXT}
+                                            btnLabel={ORDER_TEXT.TASK_FINISH_BUTTOM_LABEL}
+                                            modalTilte={ORDER_TEXT.TASK_FINISH_MODALTITLE}
+                                            modalText={ORDER_TEXT.TASK_FINISH_MODAL_TEXT}
                                         />
                                     </OrderDetailFinisheButtomWrapper>
                                     <OrderDetailCancelButtomWrapper>
                                         <MaterialUISimpleModal
                                             onClick={() => orderCancelHandle()}
-                                            btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}
-                                            modalTilte={TASK_TEXT.TASK_CANCEL_MODAL_TITLE}
-                                            modalText={TASK_TEXT.TASK_CANCEL_MODAL_TEXT}
+                                            btnLabel={ORDER_TEXT.TASK_CANCEL_BUTTOM_LABEL}
+                                            modalTilte={ORDER_TEXT.TASK_CANCEL_MODAL_TITLE}
+                                            modalText={ORDER_TEXT.TASK_CANCEL_MODAL_TEXT}
                                         />
                                     </OrderDetailCancelButtomWrapper>
                                 </ThemeProvider>

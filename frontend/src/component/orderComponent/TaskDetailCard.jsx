@@ -188,7 +188,7 @@ export const TaskDetailCard = () => {
                     </TaskStatusTImeWrapper>
                 </TaskStatusWrapper>
                 {
-                    state.task.order_status === "0" ?
+                    state.task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                         <TaskNotFinishedWrapper>
                             <OrderUserInfoText>
                                 {TASK_TEXT.ORDER_INFO_TEXT}

@@ -5,19 +5,19 @@ export const initializeState = {
     orders: []
 }
 
-export const oredersActionTypes = {
+export const ordersListActionTypes = {
     FETCHING: "FETCHING",
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const orderIndexReducer = (state, action) => {
+export const ordersListReducer = (state, action) => {
     switch (action.type) {
-        case oredersActionTypes.FETCHING:
+        case ordersListActionTypes.FETCHING:
             return {
                 ...state,
                 fetchState: REQUEST_STATE.LOADING,
             };
-        case oredersActionTypes.FETCH_SUCCESS:
+        case ordersListActionTypes.FETCH_SUCCESS:
             return {
                 fetchState: REQUEST_STATE.OK,
                 orders: action.payload.orders,

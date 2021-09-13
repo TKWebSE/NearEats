@@ -65,14 +65,11 @@ module Api
 
                 order.each do |o| 
                     make_user = User.get_maker_user(o.make_user_id)
-                    logger.debug("コメント")
-                    logger.debug(o)
                 end
-                logger.debug("コメント")
-                logger.debug(order)
+                
                 render json: {
                     order: order,
-                    # make_user:make_user,
+                    make_user:make_user,
                 }, status: :ok
             end
 

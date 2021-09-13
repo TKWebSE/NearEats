@@ -4,26 +4,25 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import { fetchTaskApi, updateTaskApi } from "../apis/taskApis";
-import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
-import { initializeState, taskActionTypes, taskReducer } from "../reducer/taskReducer";
+import { fetchOrderApi, updateOrderApi } from "../apis/orderApis";
+import { SessionState, SessionDispatch, OrderState, OrderDispatch } from "../context/Context";
+import { initializeState, orderActionTypes, orderReducer } from "../reducer/orderReducer";
 import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
-import { TaskDetailCard } from "../component/orderComponent/TaskDetailCard";
+import { OrderDetailCard } from "../component/orderComponent/OrderDetailCard";
 import { myTaskShowBackendURL } from "../urls/index";
 import { COLORS } from "../style_constants";
 
-const TaskDetailWrapper = styled.div`
+const OrderDetailWrapper = styled.div`
     margin-left:20%;
     margin-right:20%;
 `;
 
-const TaskDetailHeader = styled.h1`
+const OrderDetailHeader = styled.h1`
     margin-top:3%;
     margin-bottom:3%;
-
 `;
 
-const TaskDetailCardWrapper = styled.div`
+const OrderDetailCardWrapper = styled.div`
     margin-bottom:5%;
 `;
 
@@ -49,27 +48,27 @@ const SkeltonTitleWrapper = styled.div`
 export const OrderDetail = ({ match }) => {
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch)
-  const [state, dispatch] = useReducer(taskReducer, initializeState);
+  const [state, dispatch] = useReducer(orderReducer, initializeState);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch({ type: taskActionTypes.FETCHING })
-    fetchTaskApi(match.params.orderId)
+    dispatch({ type: orderActionTypes.FETCHING })
+    fetchOrderApi(match.params.orderId)
       .then((data) => {
         dispatch({
-          type: taskActionTypes.FETCH_TASK,
+          type: orderActionTypes.FETCH_ORDER,
           payload: {
-            task: data.task[0]
+            order: data.order[0]
           },
         });
         dispatch({
-          type: taskActionTypes.FETCH_ORDER_USER,
+          type: orderActionTypes.FETCH_MAKE_USER,
           payload: {
-            order_user: data.order_user[0]
+            make_user: data.make_user[0]
           },
         });
         dispatch({
-          type: taskActionTypes.FETCH_SUCCESS,
+          type: orderActionTypes.FETCH_SUCCESS,
         });
       })
       .catch((e) => console.log(e))
@@ -78,19 +77,19 @@ export const OrderDetail = ({ match }) => {
   console.log(state)
   return (
     <Fragment>
-      <TaskDetailWrapper>
-        <TaskDetailHeader>
-          {ORDER_HEADER_TITLE.TASK_DETAIL}
-        </TaskDetailHeader>
+      <OrderDetailWrapper>
+        <OrderDetailHeader>
+          {ORDER_HEADER_TITLE.ORDER_DETAIL_TITLE}
+        </OrderDetailHeader>
         {
           state.fetchState === REQUEST_STATE.OK ?
-            <TaskDispatch.Provider value={dispatch}>
-              <TaskState.Provider value={state}>
-                <TaskDetailCardWrapper>
-                  <TaskDetailCard />
-                </TaskDetailCardWrapper>
-              </TaskState.Provider>
-            </TaskDispatch.Provider>
+            <OrderDispatch.Provider value={dispatch}>
+              <OrderState.Provider value={state}>
+                <OrderDetailCardWrapper>
+                  <OrderDetailCard />
+                </OrderDetailCardWrapper>
+              </OrderState.Provider>
+            </OrderDispatch.Provider>
             :
             <SkeltonsWrapper>
               <SkeltonCardWrapper>
@@ -103,7 +102,7 @@ export const OrderDetail = ({ match }) => {
               </SkeltonCardWrapper>
             </SkeltonsWrapper>
         }
-      </TaskDetailWrapper>
+      </OrderDetailWrapper>
     </Fragment>
   )
 }

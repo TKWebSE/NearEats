@@ -7,7 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
 import { fetchOrederIndexApi } from "../apis/orderApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
-import { initializeState, oredersActionTypes, orderIndexReducer } from "../reducer/orderIndexReducer";
+import { initializeState, ordersListActionTypes, ordersListReducer } from "../reducer/ordersListReducer";
 import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_ORDER_TEXT } from "../constants";
 import { OrderIndexCard } from "../component/orderComponent/OrderIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
@@ -141,17 +141,17 @@ const SkeltonOrderWrapper = styled.div`
 export const OrderIndex = () => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
-    const [state, dispatch] = useReducer(orderIndexReducer, initializeState);
+    const [state, dispatch] = useReducer(ordersListReducer, initializeState);
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: oredersActionTypes.FETCHING })
+        dispatch({ type: ordersListActionTypes.FETCHING })
         console.log(SessionAuthState)
         fetchOrederIndexApi(SessionAuthState.currentUser.id)
             .then((data) => {
                 console.log(data)
                 dispatch({
-                    type: oredersActionTypes.FETCH_SUCCESS,
+                    type: ordersListActionTypes.FETCH_SUCCESS,
                     payload: {
                         orders: data.orders,
                     },
