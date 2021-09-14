@@ -9,12 +9,12 @@ import { changeJSTDate } from "../../AppFunction";
 import { ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import MaterialUISimpleModal from "../MaterialUISimpleModal";
 import { updateOrderApi } from "../../apis/orderApis";
 import { useHistory } from "react-router-dom";
 import { myTaskIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
+import MaterialUIRatingStar from "../MaterialUIUpdateRatingStar";
 
 const OrderDetailCardWrapper = styled.div`
     text-align:left;
@@ -118,7 +118,7 @@ const OrderDetailCardButtom = styled.div`
     margin-top:2%;
 `;
 
-const OrderDetailFinisheButtomWrapper = styled.div`
+const ValuationButtomWrapper = styled.div`
     margin:0 0 0 auto;
 `;
 
@@ -140,7 +140,7 @@ export const OrderDetailCard = () => {
             })
     }
 
-    function orderFinisiheHandle() {
+    function submitValuationHandle() {
         updateOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
             .then((data) => {
                 history.push(myTaskIndexURL);
@@ -195,30 +195,21 @@ export const OrderDetailCard = () => {
                             </OrderUserInfoText>
                             <OrderUserInfoWrapper>
                                 <OrderUserName>
-                                    {state.order_user.name}
+                                    {state.make_user.name}
                                 </OrderUserName>
                                 <OrderUserAddress>
-                                    {state.order_user.address}
+                                    {state.make_user.address}
                                 </OrderUserAddress>
                             </OrderUserInfoWrapper>
                             <OrderDetailCardButtom>
+                                <MaterialUIRatingStar onClick={dispatch({ type:})} />
                                 <ThemeProvider theme={ButtonTheme}>
-                                    <OrderDetailFinisheButtomWrapper>
-                                        <MaterialUISimpleModal
-                                            onClick={() => orderFinisiheHandle()}
-                                            btnLabel={ORDER_TEXT.TASK_FINISH_BUTTOM_LABEL}
-                                            modalTilte={ORDER_TEXT.TASK_FINISH_MODALTITLE}
-                                            modalText={ORDER_TEXT.TASK_FINISH_MODAL_TEXT}
+                                    <ValuationButtomWrapper>
+                                        <MaterialUICommonButton
+                                            onClick={() => submitValuationHandle()}
+                                            btnLabel={ORDER_TEXT.FINISHTASK_BUTTON_LABEL}
                                         />
-                                    </OrderDetailFinisheButtomWrapper>
-                                    <OrderDetailCancelButtomWrapper>
-                                        <MaterialUISimpleModal
-                                            onClick={() => orderCancelHandle()}
-                                            btnLabel={ORDER_TEXT.TASK_CANCEL_BUTTOM_LABEL}
-                                            modalTilte={ORDER_TEXT.TASK_CANCEL_MODAL_TITLE}
-                                            modalText={ORDER_TEXT.TASK_CANCEL_MODAL_TEXT}
-                                        />
-                                    </OrderDetailCancelButtomWrapper>
+                                    </ValuationButtomWrapper>
                                 </ThemeProvider>
                             </OrderDetailCardButtom>
                         </OrderNotFinishedWrapper>

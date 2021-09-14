@@ -2,7 +2,7 @@ import { REQUEST_STATE } from '../constants';
 
 export const initializeState = {
     fetchState: REQUEST_STATE.INITIAL,
-    orders: []
+    orders: [],
 }
 
 export const ordersListActionTypes = {

@@ -119,7 +119,8 @@ export const ORDER_TASK_STATUS_NUMBERS = {
 export const ORDER_TEXT = {
     NOT_EXIST_TASK_TEXT: "注文した商品はありません",
     LETS_CREATE_FOOD_TEXT: "どんな商品を見てみましょう！！",
-    ORDER_VALUATION_TEXT: "評価",
+    ORDER_VALUATION_TEXT: "評価をして取引完了させましょう！",
+    FINISHTASK_BUTTON_LABEL: "取引完了！",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
