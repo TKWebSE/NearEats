@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_024851) do
     t.string "image"
     t.string "email"
     t.integer "point"
+    t.integer "valuation"
     t.string "deleted", default: "f"
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false

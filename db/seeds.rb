@@ -12,6 +12,7 @@
       password: "123456",
       address: "#{n}県#{n}町の1-2-3",
       point: 100,
+      valuation:3,
     )
   
     12.times do |m|

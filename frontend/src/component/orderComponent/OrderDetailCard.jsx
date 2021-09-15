@@ -15,6 +15,7 @@ import { myTaskIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
 import MaterialUIRatingStar from "../MaterialUIUpdateRatingStar";
+import { orderActionTypes } from "../../reducer/orderReducer";
 
 const OrderDetailCardWrapper = styled.div`
     text-align:left;
@@ -202,7 +203,7 @@ export const OrderDetailCard = () => {
                                 </OrderUserAddress>
                             </OrderUserInfoWrapper>
                             <OrderDetailCardButtom>
-                                <MaterialUIRatingStar onClick={dispatch({ type:})} />
+                                <MaterialUIRatingStar />
                                 <ThemeProvider theme={ButtonTheme}>
                                     <ValuationButtomWrapper>
                                         <MaterialUICommonButton
