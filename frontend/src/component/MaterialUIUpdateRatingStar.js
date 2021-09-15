@@ -12,9 +12,9 @@ export default function MaterialUIUpdateRatingStar({ onClick }) {
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">評価をして取引完了させましょう！</Typography>
         <Rating
           name="simple-controlled"
+          size="large"
           value={state.valuation}
           onChange={(event, newValue) => {
             dispatch({

@@ -103,6 +103,18 @@ module Api
                 render json: {}, status: :ok
             end
 
+            def updateValuation
+                order = Order.find(id: params[:id])
+                make_user = User.find(id: order.make_user_id)
+
+                newValuate = make_user.valuate + params[:valuation] 
+
+                render json: {
+                    order: order,
+                    make_user:make_user,
+                }, status: :ok
+            end
+
             private 
 
                 def order_params

@@ -53,6 +53,7 @@ export const orderCreateBackendURL = () => `${BACKEND_DEFAULT_URL}/orders/create
 export const orderEditBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}${orderEditURL(orderId)}`;
 export const orderUpdateBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders/${orderId}/update`;
 export const orderDeleteBackendURL = () => `${BACKEND_DEFAULT_URL}/orders/delete`;
+export const orderUpdateValuationBackendURL = (orderId) => `${BACKEND_DEFAULT_URL}/orders/${orderId}/updateValuation`;
 
 //session関連のURL
 export const signInURL = `/signin`;

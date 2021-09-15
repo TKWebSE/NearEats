@@ -3,7 +3,8 @@ import {
     orderIndexBackendURL,
     orderShowBackendURL,
     orderUpdateBackendURL,
-    orderDeleteBackendURL
+    orderDeleteBackendURL,
+    orderUpdateValuationBackendURL,
 } from '../urls/index'
 
 //order一覧を取得する
@@ -32,9 +33,23 @@ export const fetchOrderApi = (orderId) => {
         .catch(e => console.log(e))
 }
 
-//特定ののorderを1件更新する
-export const updateOrderApi = (order) => {
+//特定のorderを1件更新する
+export const updateOrderApi = (order, valuation) => {
     return axios.put(orderUpdateBackendURL(order.id), {
+        params: {
+            order: order,
+            valuation: valuation,
+        }
+    })
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
+}
+
+//特定のtaskを1件削除する
+export const deleteOrderApi = (order) => {
+    return axios.delete(orderDeleteBackendURL(order.id), {
         params: {
             order: order
         }
@@ -45,11 +60,12 @@ export const updateOrderApi = (order) => {
         .catch(e => console.log(e))
 }
 
-//特定ののtaskを1件削除する
-export const deleteOrderApi = (order) => {
-    return axios.delete(orderDeleteBackendURL(order.id), {
+//特定のorderの
+export const updateValuationApi = (order, valuation) => {
+    return axios.put(orderUpdateValuationBackendURL(order.id), {
         params: {
-            order: order
+            order: order,
+            valuation: valuation,
         }
     })
         .then(res => {

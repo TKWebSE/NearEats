@@ -11,10 +11,10 @@ import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
 import { updateOrderApi } from "../../apis/orderApis";
 import { useHistory } from "react-router-dom";
-import { myTaskIndexURL } from "../../urls/index";
+import { ordersIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
-import MaterialUIRatingStar from "../MaterialUIUpdateRatingStar";
+import MaterialUIUpdateRatingStar from "../MaterialUIUpdateRatingStar";
 import { orderActionTypes } from "../../reducer/orderReducer";
 
 const OrderDetailCardWrapper = styled.div`
@@ -74,8 +74,8 @@ const OrderUserInfoWrapper = styled.div`
     padding-bottom:1%;
 `;
 
-const OrderUserInfoText = styled.h2`
-    color:${COLORS.STATUS_COLOR};
+const OrderValuationText = styled.h2`
+    // color:red;
     margin-bottom:0;
 `;
 
@@ -95,11 +95,16 @@ const OrderStatusTextWrapper = styled.div`
 const OrderStatusTImeWrapper = styled.div`
 `;
 
-const OrderNotFinishedWrapper = styled.div`
+const OrderValuationWrapper = styled.div`
+    border: solid;
+    border-color: #F0F0F0;
+    padding-top:2%;
+    padding-left:2%;
+    padding-bottom:3%;
 `;
 
 const UnFinishedWrapper = styled.div`
-    display: flex;
+    // display: flex;
 `;
 
 const OrderCreateTimeWrapper = styled.div`
@@ -119,6 +124,9 @@ const OrderDetailCardButtom = styled.div`
     margin-top:2%;
 `;
 
+const RatingStarWrapper = styled.div`
+`;
+
 const ValuationButtomWrapper = styled.div`
     margin:0 0 0 auto;
 `;
@@ -133,18 +141,10 @@ export const OrderDetailCard = () => {
     const dispatch = useContext(OrderDispatch)
     const history = useHistory();
 
-    function orderCancelHandle() {
-        console.log(state)
-        updateOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
-            .then((data) => {
-                history.push(myTaskIndexURL);
-            })
-    }
-
     function submitValuationHandle() {
         updateOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
             .then((data) => {
-                history.push(myTaskIndexURL);
+                history.push(ordersIndexURL);
             })
     }
 
@@ -190,30 +190,22 @@ export const OrderDetailCard = () => {
                 </OrderStatusWrapper>
                 {
                     state.order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
-                        <OrderNotFinishedWrapper>
-                            <OrderUserInfoText>
+                        <OrderValuationWrapper>
+                            <OrderValuationText>
                                 {ORDER_TEXT.ORDER_VALUATION_TEXT}
-                            </OrderUserInfoText>
-                            <OrderUserInfoWrapper>
-                                <OrderUserName>
-                                    {state.make_user.name}
-                                </OrderUserName>
-                                <OrderUserAddress>
-                                    {state.make_user.address}
-                                </OrderUserAddress>
-                            </OrderUserInfoWrapper>
-                            <OrderDetailCardButtom>
-                                <MaterialUIRatingStar />
-                                <ThemeProvider theme={ButtonTheme}>
-                                    <ValuationButtomWrapper>
-                                        <MaterialUICommonButton
-                                            onClick={() => submitValuationHandle()}
-                                            btnLabel={ORDER_TEXT.FINISHTASK_BUTTON_LABEL}
-                                        />
-                                    </ValuationButtomWrapper>
-                                </ThemeProvider>
-                            </OrderDetailCardButtom>
-                        </OrderNotFinishedWrapper>
+                            </OrderValuationText>
+                            <RatingStarWrapper>
+                                <MaterialUIUpdateRatingStar />
+                            </RatingStarWrapper>
+                            <ThemeProvider theme={ButtonTheme}>
+                                <ValuationButtomWrapper>
+                                    <MaterialUICommonButton
+                                        onClick={() => submitValuationHandle()}
+                                        btnLabel={ORDER_TEXT.FINISHTASK_BUTTON_LABEL}
+                                    />
+                                </ValuationButtomWrapper>
+                            </ThemeProvider>
+                        </OrderValuationWrapper>
                         :
                         null
                 }
