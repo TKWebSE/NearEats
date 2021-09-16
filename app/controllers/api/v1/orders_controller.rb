@@ -104,15 +104,27 @@ module Api
             end
 
             def updateValuation
-                order = Order.find(id: params[:id])
-                make_user = User.find(id: order.make_user_id)
+                order = Order.find(params[:order_id])
+                make_user = User.find(order.make_user_id)
 
-                newValuate = make_user.valuate + params[:valuation] 
+                newValuation = make_user.valuation + params[:valuation].to_i
+                newValuation = newValuation / 2
 
-                render json: {
-                    order: order,
-                    make_user:make_user,
-                }, status: :ok
+                if make_user.update!(valuation: newValuation)
+                    if order.update!(order_status: 2)
+                        render json: {
+                            order: order,
+                            make_user:make_user,
+                        }, status: :ok
+                    else
+                        logger.debug("ng")
+                        render json: {}, status: :ng
+                    end
+                else
+                    logger.debug("ng")
+                    render json: {}, status: :ng
+                end
+
             end
 
             private 

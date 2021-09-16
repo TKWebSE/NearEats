@@ -9,7 +9,7 @@ import { changeJSTDate } from "../../AppFunction";
 import { ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { updateOrderApi } from "../../apis/orderApis";
+import { updateValuationOrderApi, updateCancelOrderApi } from "../../apis/orderApis";
 import { useHistory } from "react-router-dom";
 import { ordersIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
@@ -141,9 +141,18 @@ export const OrderDetailCard = () => {
     const dispatch = useContext(OrderDispatch)
     const history = useHistory();
 
-    function submitValuationHandle() {
-        updateOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
+    function submitOrderCancelHandle() {
+        updateCancelOrderApi(state.order)
             .then((data) => {
+                console.log(data)
+                history.push(ordersIndexURL);
+            })
+    }
+
+    function submitValuationHandle() {
+        updateValuationOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
+            .then((data) => {
+                console.log(data)
                 history.push(ordersIndexURL);
             })
     }
@@ -188,6 +197,27 @@ export const OrderDetailCard = () => {
 
                     </OrderStatusTImeWrapper>
                 </OrderStatusWrapper>
+                {
+                    state.order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
+                        <OrderValuationWrapper>
+                            <OrderValuationText>
+                                {ORDER_TEXT.ORDER_CANCEL_TEXT}
+                            </OrderValuationText>
+                            <RatingStarWrapper>
+                                <MaterialUIUpdateRatingStar />
+                            </RatingStarWrapper>
+                            <ThemeProvider theme={ButtonTheme}>
+                                <ValuationButtomWrapper>
+                                    <MaterialUICommonButton
+                                        onClick={() => submitOrderCancelHandle()}
+                                        btnLabel={ORDER_TEXT.ORDER_CANCEL_BUTTON_LABEL}
+                                    />
+                                </ValuationButtomWrapper>
+                            </ThemeProvider>
+                        </OrderValuationWrapper>
+                        :
+                        null
+                }
                 {
                     state.order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
                         <OrderValuationWrapper>

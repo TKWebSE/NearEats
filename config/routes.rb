@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         get 'taskIndex', to: 'orders#taskIndex'
         get 'taskShow', to: 'orders#taskShow'
         put 'taskUpdate', to: 'orders#taskUpdate'
-        put `updateValuation`, to: `orders#updateValuation`
+        put 'updateValuation', to: 'orders#updateValuation'
       end
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {

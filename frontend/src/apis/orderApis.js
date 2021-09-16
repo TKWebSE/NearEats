@@ -34,11 +34,10 @@ export const fetchOrderApi = (orderId) => {
 }
 
 //特定のorderを1件更新する
-export const updateOrderApi = (order, valuation) => {
+export const updateOrderApi = (order) => {
     return axios.put(orderUpdateBackendURL(order.id), {
         params: {
             order: order,
-            valuation: valuation,
         }
     })
         .then(res => {
@@ -60,13 +59,23 @@ export const deleteOrderApi = (order) => {
         .catch(e => console.log(e))
 }
 
-//特定のorderの
-export const updateValuationApi = (order, valuation) => {
+//特定のorderをキャンセルする
+export const updateCancelOrderApi = (order, valuation) => {
     return axios.put(orderUpdateValuationBackendURL(order.id), {
-        params: {
-            order: order,
-            valuation: valuation,
-        }
+        order_id: order.id,
+        valuation: valuation,
+    })
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
+}
+
+//特定のuserを評価し、orderを完了にする
+export const updateValuationOrderApi = (order, valuation) => {
+    return axios.put(orderUpdateValuationBackendURL(order.id), {
+        order_id: order.id,
+        valuation: valuation,
     })
         .then(res => {
             return res.data
