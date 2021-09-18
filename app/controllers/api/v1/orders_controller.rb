@@ -130,7 +130,7 @@ module Api
             private 
 
                 def order_params
-                    params.require(:order).permit(:name,:point,:address,:email, :password)
+                    params.require(:order).permit(:order_status)
                 end
 
                 def task_status_params

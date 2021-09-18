@@ -78,21 +78,14 @@ const OrderValuationText = styled.h2`
     // color:red;
     margin-bottom:0;
 `;
-
-const OrderUserName = styled.h3`
-    margin-top:1%;
-
-`;
-
-const OrderUserAddress = styled.div`
-    margin-top:1%;
-`;
-
 const OrderStatusTextWrapper = styled.div`
     float:left;
 `;
 
 const OrderStatusTImeWrapper = styled.div`
+`;
+
+const OrderCancelWrapper = styled.div`
 `;
 
 const OrderValuationWrapper = styled.div`
@@ -142,7 +135,7 @@ export const OrderDetailCard = () => {
     const history = useHistory();
 
     function submitOrderCancelHandle() {
-        updateCancelOrderApi(state.order)
+        updateCancelOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
             .then((data) => {
                 console.log(data)
                 history.push(ordersIndexURL);
@@ -199,13 +192,10 @@ export const OrderDetailCard = () => {
                 </OrderStatusWrapper>
                 {
                     state.order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
-                        <OrderValuationWrapper>
+                        <OrderCancelWrapper>
                             <OrderValuationText>
                                 {ORDER_TEXT.ORDER_CANCEL_TEXT}
                             </OrderValuationText>
-                            <RatingStarWrapper>
-                                <MaterialUIUpdateRatingStar />
-                            </RatingStarWrapper>
                             <ThemeProvider theme={ButtonTheme}>
                                 <ValuationButtomWrapper>
                                     <MaterialUICommonButton
@@ -214,7 +204,7 @@ export const OrderDetailCard = () => {
                                     />
                                 </ValuationButtomWrapper>
                             </ThemeProvider>
-                        </OrderValuationWrapper>
+                        </OrderCancelWrapper>
                         :
                         null
                 }
