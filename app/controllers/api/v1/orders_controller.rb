@@ -88,7 +88,8 @@ module Api
             def update
                 order = Order.find(params[:id])
 
-                if order.update!(order_params)
+                if order.update!(order_status: params[:order_status])
+                    logger.debug(order)
                     render json: {
                         order: order
                     }, status: :ok

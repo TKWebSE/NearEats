@@ -34,9 +34,10 @@ export const fetchOrderApi = (orderId) => {
 }
 
 //特定のorderをキャンセルする
-export const updateCancelOrderApi = (order, valuation) => {
+export const updateCancelOrderApi = (order, order_status) => {
     return axios.put(orderCancelBackendURL(order.id), {
         order_id: order.id,
+        order_status: order_status,
     })
         .then(res => {
             return res.data

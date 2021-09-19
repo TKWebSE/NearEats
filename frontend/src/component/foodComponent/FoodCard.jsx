@@ -1,9 +1,9 @@
-import React ,{ Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styled from "styled-components";
 import media from "styled-media-query";
 import { Link } from "react-router-dom";
 import foodImage from "../../images/food-image.jpg";
-import {foodShowURL} from "../../urls/index";
+import { foodShowURL } from "../../urls/index";
 import Skeleton from '@material-ui/lab/Skeleton';
 
 const FoodCardWrapper = styled.div`
@@ -18,6 +18,7 @@ const MainfoodImage = styled.img`
 const TextWrapper = styled.div`
     margin-bottom:5%;
     text-align:left;
+    color:black;
 `;
 
 const FoodName = styled.h1`
@@ -63,22 +64,22 @@ const OneSkeltonWrapper = styled.div`
 
 
 //foodを表示するカードコンポーネント
-export const FoodCard = ({food}) => {
-    return(
-    <Fragment>
-        <FoodCardWrapper>
-        <Link to={foodShowURL(food.id)} style={{ textDecoration: 'none' }}>
-            <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
-            <TextWrapper>
-                <FoodName>
-                    {food.name}
-                </FoodName>
-                <FoodPrice>
-                    ￥{food.price}
-                </FoodPrice>
-            </TextWrapper>
-        </Link>
-        </FoodCardWrapper>
-    </Fragment>
+export const FoodCard = ({ food }) => {
+    return (
+        <Fragment>
+            <FoodCardWrapper>
+                <Link to={foodShowURL(food.id)} style={{ textDecoration: 'none' }}>
+                    <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
+                    <TextWrapper>
+                        <FoodName>
+                            {food.name}
+                        </FoodName>
+                        <FoodPrice>
+                            ￥{food.price}
+                        </FoodPrice>
+                    </TextWrapper>
+                </Link>
+            </FoodCardWrapper>
+        </Fragment>
     )
 }
