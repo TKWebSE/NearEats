@@ -16,6 +16,7 @@ import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
 import MaterialUIUpdateRatingStar from "../MaterialUIUpdateRatingStar";
 import { orderActionTypes } from "../../reducer/orderReducer";
+import { MaterialUISimpleModal } from "../../component/MaterialUISimpleModal";
 
 const OrderDetailCardWrapper = styled.div`
     text-align:left;
@@ -198,9 +199,11 @@ export const OrderDetailCard = () => {
                             </OrderValuationText>
                             <ThemeProvider theme={ButtonTheme}>
                                 <ValuationButtomWrapper>
-                                    <MaterialUICommonButton
-                                        onClick={() => submitOrderCancelHandle()}
+                                    <MaterialUISimpleModal
                                         btnLabel={ORDER_TEXT.ORDER_CANCEL_BUTTON_LABEL}
+                                        onClick={() => submitOrderCancelHandle()}
+                                        modalTilte={ORDER_TEXT.ORDER_CANCEL_MODAL_TITLE}
+                                        modalText={ORDER_TEXT.ORDER_CANCEL_MODAL_TEXT}
                                     />
                                 </ValuationButtomWrapper>
                             </ThemeProvider>

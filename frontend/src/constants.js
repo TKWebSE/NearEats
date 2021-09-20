@@ -123,6 +123,8 @@ export const ORDER_TEXT = {
     ORDER_CANCEL_BUTTON_LABEL: "キャンセルする",
     ORDER_VALUATION_TEXT: "評価をして取引完了させましょう！",
     FINISHTASK_BUTTON_LABEL: "取引完了！",
+    ORDER_CANCEL_MODAL_TITLE: "注文をキャンセルしますか？",
+    ORDER_CANCEL_MODAL_TEXT: "注文を破棄して、取引を中断します。",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
