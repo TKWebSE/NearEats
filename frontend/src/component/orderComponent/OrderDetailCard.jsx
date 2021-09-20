@@ -16,7 +16,7 @@ import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
 import MaterialUIUpdateRatingStar from "../MaterialUIUpdateRatingStar";
 import { orderActionTypes } from "../../reducer/orderReducer";
-import { MaterialUISimpleModal } from "../../component/MaterialUISimpleModal";
+import MaterialUISimpleModal from "../../component/MaterialUISimpleModal";
 
 const OrderDetailCardWrapper = styled.div`
     text-align:left;
@@ -136,7 +136,7 @@ export const OrderDetailCard = () => {
     const history = useHistory();
 
     function submitOrderCancelHandle() {
-        updateCancelOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
+        updateCancelOrderApi(state.order, state.valuation, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
             .then((data) => {
                 console.log(data)
                 history.push(ordersIndexURL);
