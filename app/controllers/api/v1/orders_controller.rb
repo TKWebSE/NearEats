@@ -108,8 +108,11 @@ module Api
                 order = Order.find(params[:order_id])
                 make_user = User.find(order.make_user_id)
 
+                
                 newValuation = make_user.valuation + params[:valuation].to_i
                 newValuation = newValuation / 2
+                logger.debug(params[:valuation])
+                logger.debug(newValuation)
 
                 if make_user.update!(valuation: newValuation)
                     if order.update!(order_status: 2)

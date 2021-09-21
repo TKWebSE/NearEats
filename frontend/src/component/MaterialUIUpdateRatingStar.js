@@ -9,20 +9,35 @@ export default function MaterialUIUpdateRatingStar({ onClick }) {
   const state = useContext(OrderState);
   const dispatch = useContext(OrderDispatch)
 
+  function onChangeHandle(newValue) {
+    console.log(newValue)
+    if (newValue === null) {
+      dispatch({
+        type: orderActionTypes.UPDATE_VALUATION,
+        payload: {
+          valuation: 1
+        },
+      });
+    } else {
+      dispatch({
+        type: orderActionTypes.UPDATE_VALUATION,
+        payload: {
+          valuation: newValue
+        },
+      });
+    }
+  }
+
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Rating
           name="simple-controlled"
           size="large"
+          precision={1}
           value={state.valuation}
           onChange={(event, newValue) => {
-            dispatch({
-              type: orderActionTypes.UPDATE_VALUATION,
-              payload: {
-                valuation: newValue
-              },
-            });
+            onChangeHandle(newValue)
           }}
         />
       </Box>

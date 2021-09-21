@@ -136,7 +136,7 @@ export const OrderDetailCard = () => {
     const history = useHistory();
 
     function submitOrderCancelHandle() {
-        updateCancelOrderApi(state.order, state.valuation, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
+        updateCancelOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
             .then((data) => {
                 console.log(data)
                 history.push(ordersIndexURL);
@@ -144,12 +144,14 @@ export const OrderDetailCard = () => {
     }
 
     function submitValuationHandle() {
-        updateValuationOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
+        updateValuationOrderApi(state.order, state.valuation, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
             .then((data) => {
                 console.log(data)
                 history.push(ordersIndexURL);
             })
     }
+
+    console.log(state.valuation)
 
     return (
         <Fragment>
