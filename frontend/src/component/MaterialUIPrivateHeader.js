@@ -1,4 +1,4 @@
-import React,{useState,useReducer,useContext} from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import styled from "styled-components";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,16 +15,17 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {SwipeableTemporaryDrawer} from "./MaterialUIDrawer";
-import {headerInitializeState,headerActionTypes,headerReducer} from "../reducer/headerReducer";
-import {sessionActionTypes} from "../reducer/sessionReducer";
-import {SessionDispatch,SessionState} from "../context/Context";
+import { SwipeableTemporaryDrawer } from "./MaterialUIDrawer";
+import { headerInitializeState, headerActionTypes, headerReducer } from "../reducer/headerReducer";
+import { sessionActionTypes } from "../reducer/sessionReducer";
+import { SessionDispatch, SessionState } from "../context/Context";
 import { Link } from "react-router-dom";
-import {foodsIndexURL} from "../urls/index";
-import {HOME_TEXT,HEADER_TEXT} from "../constants";
-import {signOutApi} from "../apis/sessionApis";
-import {useHistory} from "react-router-dom";
-import {homeURL} from "../urls/index";
+import { foodsIndexURL } from "../urls/index";
+import { HOME_TEXT, HEADER_TEXT } from "../constants";
+import { signOutApi } from "../apis/sessionApis";
+import { useHistory } from "react-router-dom";
+import { homeURL } from "../urls/index";
+import AnimatedMultiSelect from "./AnimatedMultiSelect";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -100,7 +101,7 @@ export default function MaterialUIPrivateHeader() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [state, dispacth] = useReducer(headerReducer,headerInitializeState);
+  const [state, dispacth] = useReducer(headerReducer, headerInitializeState);
   const SessionUserState = useContext(SessionState);
   const SessionUserDispatch = useContext(SessionDispatch);
   const history = useHistory();
@@ -127,21 +128,21 @@ export default function MaterialUIPrivateHeader() {
 
   //左サイドバーを制御する
   const handleDrawer = () => {
-    if(state.isOpenDrawer){
-      dispacth({type:headerActionTypes.CLOSEDRAWER})
-    }else{
-      dispacth({type:headerActionTypes.OPENDRAWER})
+    if (state.isOpenDrawer) {
+      dispacth({ type: headerActionTypes.CLOSEDRAWER })
+    } else {
+      dispacth({ type: headerActionTypes.OPENDRAWER })
     }
   }
 
   const handleSignOut = () => {
     signOutApi()
-    .then((data) => {
-      console.log(data)
-      SessionUserDispatch({
-        type:sessionActionTypes.SIGNOUT,
-      });
-    })
+      .then((data) => {
+        console.log(data)
+        SessionUserDispatch({
+          type: sessionActionTypes.SIGNOUT,
+        });
+      })
     handleMenuClose();
     history.push(homeURL)
   }
@@ -203,7 +204,7 @@ export default function MaterialUIPrivateHeader() {
       </MenuItem>
     </Menu>
   );
-  
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -214,15 +215,16 @@ export default function MaterialUIPrivateHeader() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon onClick={() => handleDrawer()}/>
+            <MenuIcon onClick={() => handleDrawer()} />
           </IconButton>
           <TitleWrapper>
-            <Link to={foodsIndexURL} style={{ textDecoration: 'none' ,color: '#FFF'}}>
+            <Link to={foodsIndexURL} style={{ textDecoration: 'none', color: '#FFF' }}>
               <Typography className={classes.title} variant="h5" noWrap textPrimary={"#000"}>
                 {HOME_TEXT.HOME_TITLE}
               </Typography>
             </Link>
           </TitleWrapper>
+          {/* <AnimatedMultiSelect /> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -236,6 +238,7 @@ export default function MaterialUIPrivateHeader() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <AnimatedMultiSelect />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
