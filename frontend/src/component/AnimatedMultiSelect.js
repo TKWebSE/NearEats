@@ -21,11 +21,8 @@ export default function AnimatedMultiSelect() {
       defaultValue={[valueList[4], valueList[5]]}
       placeholder="エリア設定"
       options={valueList}
+      width='2000px'
       styles={{
-        control: () => ({
-          // none of react-select's styles are passed to <Control />
-          width: 200,
-        }),
         singleValue: base => ({
           ...base,
           padding: 5,
