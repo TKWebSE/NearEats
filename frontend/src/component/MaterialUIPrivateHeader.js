@@ -98,6 +98,10 @@ const TitleWrapper = styled.div`
 
 const LocationWrapper = styled.div`
   padding-left:1%;
+  display:flex;
+`;
+
+const LocationText = styled.div`
 `;
 
 //ヘッダーのファンクション
@@ -234,6 +238,9 @@ export default function MaterialUIPrivateHeader() {
           </TitleWrapper>
           <LocationWrapper onClick={handleSetLocation}>
             <RoomIcon />
+            <LocationText>
+              {SessionUserState.nowLocation}
+            </LocationText>
           </LocationWrapper>
           {/* <AnimatedMultiSelect /> */}
           <div className={classes.search}>
