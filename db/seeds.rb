@@ -10,6 +10,7 @@
       name: "testユーザー_#{n}",
       email: "email#{n}@yahoo.co.jp",
       password: "123456",
+      city:"東京都渋谷区",
       address: "#{n}県#{n}町の1-2-3",
       point: 100,
       valuation:3,

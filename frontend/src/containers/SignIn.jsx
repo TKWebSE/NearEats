@@ -92,15 +92,17 @@ export const SignIn = () => {
             currentUser: data.currentUser
           },
         });
+        console.log(data)
         SessionAuthDispatch({
           type: sessionActionTypes.SETNOWLOCATION,
           payload: {
-            nowLocation: data.currentUser.location
+            nowLocation: data.city
           },
         });
         history.push(foodsIndexURL);
       })
       .catch((e) => {
+        console.log(e)
         if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
           console.log(e.response.status)
           dispatch({

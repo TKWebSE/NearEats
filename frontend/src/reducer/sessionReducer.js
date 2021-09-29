@@ -56,7 +56,7 @@ export const sessionReducer = (state, action) => {
                 fetchSessionState: state.fetchSessionState,
                 currentUser: state.currentUser,
                 isLogin: state.is_login,
-                nowLocation: action.payload.data.nowLocation,
+                nowLocation: action.payload.nowLocation,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGMESSAGE:
