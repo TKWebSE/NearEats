@@ -86,13 +86,14 @@ export const SignIn = () => {
     })
     signInApi(state.user)
       .then((data) => {
-        dispatch({
-          type: signInActionTypes.SIGNIN,
+        SessionAuthDispatch({
+          type: sessionActionTypes.SIGNIN,
           payload: {
             currentUser: data.currentUser
           },
         });
         console.log(data)
+        console.log(data.currentUser)
         SessionAuthDispatch({
           type: sessionActionTypes.SETNOWLOCATION,
           payload: {
