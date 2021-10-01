@@ -241,6 +241,12 @@ export default function MaterialUIPrivateHeader() {
             <LocationText>
               {SessionUserState.nowLocation}
             </LocationText>
+            <MaterialUISimpleModal
+              onClick={() => handleSetLocation()}
+              btnLabel={HEADER_TEXT.TASK_FINISH_BUTTOM_LABEL}
+              modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
+              modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
+            />
           </LocationWrapper>
           {/* <AnimatedMultiSelect /> */}
           <div className={classes.search}>

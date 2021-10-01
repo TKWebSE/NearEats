@@ -89,15 +89,13 @@ export const SignIn = () => {
         SessionAuthDispatch({
           type: sessionActionTypes.SIGNIN,
           payload: {
-            currentUser: data.currentUser
+            currentUser: data.data.currentUser
           },
         });
-        console.log(data)
-        console.log(data.currentUser)
         SessionAuthDispatch({
           type: sessionActionTypes.SETNOWLOCATION,
           payload: {
-            nowLocation: data.city
+            nowLocation: data.data.city
           },
         });
         history.push(foodsIndexURL);

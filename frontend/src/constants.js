@@ -20,6 +20,8 @@ export const ERROR_MESSAGE = {
 
 export const HEADER_TEXT = {
     HEADER_TITLE: "Near-Eats",
+    NOWLOCATION_MODAL_TITLE: "エリアの設定",
+    NOWLOCATION_MODAL_TEXT: "",
     PROFILE_TEXT: "プロフィール",
     SIGNIN_HEADER_LABEL: "ログイン",
     SOGNUP_HEADER_LABEL: "新規登録",
