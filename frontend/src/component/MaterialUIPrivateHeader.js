@@ -27,6 +27,7 @@ import { signOutApi } from "../apis/sessionApis";
 import { useHistory } from "react-router-dom";
 import { homeURL } from "../urls/index";
 import AnimatedMultiSelect from "./AnimatedMultiSelect";
+import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -238,15 +239,14 @@ export default function MaterialUIPrivateHeader() {
           </TitleWrapper>
           <LocationWrapper onClick={handleSetLocation}>
             <RoomIcon />
-            <LocationText>
-              {SessionUserState.nowLocation}
-            </LocationText>
             <MaterialUISimpleModal
               onClick={() => handleSetLocation()}
-              btnLabel={HEADER_TEXT.TASK_FINISH_BUTTOM_LABEL}
+              btnLabel={SessionUserState.nowLocation}
               modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
               modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
-            />
+            >
+
+            </MaterialUISimpleModal>
           </LocationWrapper>
           {/* <AnimatedMultiSelect /> */}
           <div className={classes.search}>
