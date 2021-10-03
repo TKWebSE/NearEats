@@ -2,7 +2,6 @@ import React from 'react';
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-// import { colourOptions } from '../data';
 
 const animatedComponents = makeAnimated();
 
@@ -13,8 +12,11 @@ const options = [
   { value: "teretere", label: "Teretere" },
 ]
 
-export default function AnimatedMultiSelect() {
+export default function AnimatedMultiSelect({ placeholederText }) {
   return (
-    <Select options={options} />
+    <Select
+      options={options}
+      placeholder={placeholederText}
+    />
   );
 }

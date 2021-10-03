@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import RoomIcon from '@material-ui/icons/Room';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUICommonButton({ onClick, btnLabel }) {
+export function MaterialUILocationButton({ onClick, btnLabel }) {
   const classes = useStyles();
 
   return (
@@ -17,6 +18,7 @@ export function MaterialUICommonButton({ onClick, btnLabel }) {
         size="medium"
         variant="contained"
         color="primary"
+        startIcon={<RoomIcon />}
         className={classes.button}
         onClick={onClick}
       >

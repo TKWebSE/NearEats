@@ -10,24 +10,22 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import RoomIcon from '@material-ui/icons/Room';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { SwipeableTemporaryDrawer } from "./MaterialUIDrawer";
-import { headerInitializeState, headerActionTypes, headerReducer } from "../reducer/headerReducer";
-import { sessionActionTypes } from "../reducer/sessionReducer";
-import { SessionDispatch, SessionState } from "../context/Context";
+import { headerInitializeState, headerActionTypes, headerReducer } from "../../reducer/headerReducer";
+import { sessionActionTypes } from "../../reducer/sessionReducer";
+import { SessionDispatch, SessionState } from "../../context/Context";
 import { Link } from "react-router-dom";
-import { foodsIndexURL } from "../urls/index";
-import { HOME_TEXT, HEADER_TEXT } from "../constants";
-import { signOutApi } from "../apis/sessionApis";
+import { foodsIndexURL } from "../../urls/index";
+import { HOME_TEXT, HEADER_TEXT } from "../../constants";
+import { signOutApi } from "../../apis/sessionApis";
 import { useHistory } from "react-router-dom";
-import { homeURL } from "../urls/index";
-import AnimatedMultiSelect from "./AnimatedMultiSelect";
-import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
+import { homeURL } from "../../urls/index";
+import MaterialUILocationIconModal from "../HeaderComponent/MaterialUILocationIconModal";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -238,17 +236,14 @@ export default function MaterialUIPrivateHeader() {
             </Link>
           </TitleWrapper>
           <LocationWrapper onClick={handleSetLocation}>
-            <RoomIcon />
-            <MaterialUISimpleModal
+            <MaterialUILocationIconModal
               onClick={() => handleSetLocation()}
               btnLabel={SessionUserState.nowLocation}
               modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
               modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
             >
-
-            </MaterialUISimpleModal>
+            </MaterialUILocationIconModal>
           </LocationWrapper>
-          {/* <AnimatedMultiSelect /> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -262,7 +257,6 @@ export default function MaterialUIPrivateHeader() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <AnimatedMultiSelect />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">

@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
-import { modalButtomLabel } from "../constants";
+import { MaterialUILocationButton } from "../HeaderComponent/MaterialUILocationButton";
+import { MaterialUICommonButton } from "../MaterialUICommonButton";
+import { modalButtomLabel } from "../../constants";
+import { HEADER_TEXT } from "../../constants";
+import AnimatedMultiSelect from "../AnimatedMultiSelect";
+
+const SelectWrapper = styled.div`
+  margin-bottom:3%;
+`;
 
 const OKButtomWrapper = styled.div`
-margin-left:50%;
-float:left;
+  margin-left:50%;
+  float:left;
 `;
 
 const NGButtomWrapper = styled.div``;
@@ -38,11 +45,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUISimpleModal({ btnLabel, onClick, modalTilte, modalText }) {
+export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTilte, modalText }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  console.log(modalTilte)
+  console.log(modalText)
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,12 +66,16 @@ export default function MaterialUISimpleModal({ btnLabel, onClick, modalTilte, m
     handleClose()
   }
 
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">{modalTilte}</h2>
       <p id="simple-modal-description">
         {modalText}
       </p>
+      <SelectWrapper>
+        <AnimatedMultiSelect placeholederText={HEADER_TEXT.NOWLOCATION_MODAL_SELECT_TEXT} />
+      </SelectWrapper>
       <OKButtomWrapper>
         <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
       </OKButtomWrapper>
@@ -74,7 +87,7 @@ export default function MaterialUISimpleModal({ btnLabel, onClick, modalTilte, m
 
   return (
     <div>
-      <MaterialUICommonButton onClick={() => handleOpen()} btnLabel={btnLabel}></MaterialUICommonButton>
+      <MaterialUILocationButton onClick={() => handleOpen()} btnLabel={btnLabel}></MaterialUILocationButton>
       <Modal
         open={open}
         onClose={handleClose}

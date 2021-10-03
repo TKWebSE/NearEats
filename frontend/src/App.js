@@ -26,8 +26,8 @@ import { OrderIndex } from "./containers/OrderIndex";
 import { OrderDetail } from "./containers/OrderDetail";
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import MaterialUIPrivateHeader from "./component/MaterialUIPrivateHeader";
-import MaterialUIGuestHeader from "./component/MaterialUIGuestHeader";
+import MaterialUIPrivateHeader from "./component/HeaderComponent/MaterialUIPrivateHeader";
+import MaterialUIGuestHeader from "./component/HeaderComponent/MaterialUIGuestHeader";
 import { headerTheme } from "./style_constants";
 
 import { SignIn } from "./containers/SignIn";

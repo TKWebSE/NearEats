@@ -22,7 +22,7 @@ export const HEADER_TEXT = {
     HEADER_TITLE: "Near-Eats",
     NOWLOCATION_BUTTON_LABEL: "",
     NOWLOCATION_MODAL_TITLE: "エリアの設定",
-    NOWLOCATION_MODAL_TEXT: "",
+    NOWLOCATION_MODAL_SELECT_TEXT: "エリアの設定",
     PROFILE_TEXT: "プロフィール",
     SIGNIN_HEADER_LABEL: "ログイン",
     SOGNUP_HEADER_LABEL: "新規登録",
