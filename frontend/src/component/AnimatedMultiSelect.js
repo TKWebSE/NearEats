@@ -17,6 +17,7 @@ export default function AnimatedMultiSelect({ placeholederText }) {
     <Select
       options={options}
       placeholder={placeholederText}
+      value={options[0]}
     />
   );
 }
