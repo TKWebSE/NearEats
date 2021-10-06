@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -7,6 +7,9 @@ import { MaterialUICommonButton } from "../MaterialUICommonButton";
 import { modalButtomLabel } from "../../constants";
 import { HEADER_TEXT } from "../../constants";
 import AnimatedMultiSelect from "../AnimatedMultiSelect";
+import { sessionActionTypes } from "../../reducer/sessionReducer";
+import { SessionState, SessionDispatch } from "../../context/Context";
+
 
 const SelectWrapper = styled.div`
   margin-bottom:3%;
@@ -50,8 +53,14 @@ export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTi
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  console.log(modalTilte)
-  console.log(modalText)
+  const [nowSelectLocation, setLocation] = useState(null);
+  const sessionState = useContext(SessionState)
+  const sessionDispatch = useContext(SessionDispatch)
+
+
+  useEffect(() => {
+    setLocation()
+  }, [])
 
   const handleOpen = () => {
     setOpen(true);
@@ -74,7 +83,11 @@ export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTi
         {modalText}
       </p>
       <SelectWrapper>
-        <AnimatedMultiSelect placeholederText={HEADER_TEXT.NOWLOCATION_MODAL_SELECT_TEXT} />
+        <AnimatedMultiSelect
+          placeholederText={HEADER_TEXT.NOWLOCATION_MODAL_SELECT_TEXT}
+          setLocation={setLocation}
+          nowSelectLocation={nowSelectLocation}
+        />
       </SelectWrapper>
       <OKButtomWrapper>
         <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>

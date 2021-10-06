@@ -1,14 +1,14 @@
-import React,{useContext,useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
     Route,
     Redirect,
     useLocation,
-  } from "react-router-dom";
-import {SessionState,SessionDispatch} from "../context/Context";
-import {sessionActionTypes} from "../reducer/sessionReducer";
-import {homeURL} from "../urls/index"
-import {isLoginApi} from "../apis/sessionApis";
+} from "react-router-dom";
+import { SessionState, SessionDispatch } from "../context/Context";
+import { sessionActionTypes } from "../reducer/sessionReducer";
+import { homeURL } from "../urls/index"
+import { isLoginApi } from "../apis/sessionApis";
 import { REQUEST_STATE } from "../constants";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -17,7 +17,7 @@ const CircleWrapper = styled.div`
   padding-top:25%;
 `;
 
-export function PrivateOnlyRoute(props){
+export function PrivateOnlyRoute(props) {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch);
     const location = useLocation();
@@ -25,38 +25,46 @@ export function PrivateOnlyRoute(props){
     // ログイン状態をページ遷移のタイミングで確認する
     useEffect(() => {
         SessionAuthDispatch({
-            type:sessionActionTypes.FETCHING,
+            type: sessionActionTypes.FETCHING,
         })
         console.log("Private側の認証確認中")
         isLoginApi()
-        .then((data)=>{
-            console.log(data)
-            SessionAuthDispatch({
-                type:sessionActionTypes.ISLOGIN,
-                payload: {
-                    data:data
-                },
+            .then((data) => {
+                console.log(data)
+                SessionAuthDispatch({
+                    type: sessionActionTypes.ISLOGIN,
+                    payload: {
+                        data: data
+                    },
+                });
+                if (data.is_login) {
+                    SessionAuthDispatch({
+                        type: sessionActionTypes.SETNOWLOCATION,
+                        payload: {
+                            nowLocation: data.user.city,
+                        },
+                    });
+                }
             })
-        })
-        .catch((e) => console.log(e))
-    },[location.pathname])
+            .catch((e) => console.log(e))
+    }, [location.pathname])
     console.log(SessionAuthState)
 
-    return(
-        SessionAuthState.fetchSessionState === REQUEST_STATE.OK?
-            SessionAuthState.isLogin?
+    return (
+        SessionAuthState.fetchSessionState === REQUEST_STATE.OK ?
+            SessionAuthState.isLogin ?
                 <Route {...props}
                     match={props.computedMatch}
                 />
-            :
+                :
                 <Redirect
                     to={{
-                    pathname: homeURL,
+                        pathname: homeURL,
                     }}
                 />
-        :
+            :
             <CircleWrapper>
-                <CircularProgress/>
-            </CircleWrapper>     
+                <CircularProgress />
+            </CircleWrapper>
     )
-  }
+}
