@@ -37,14 +37,6 @@ export function PrivateOnlyRoute(props) {
                         data: data
                     },
                 });
-                if (data.is_login) {
-                    SessionAuthDispatch({
-                        type: sessionActionTypes.SETNOWLOCATION,
-                        payload: {
-                            nowLocation: data.user.city,
-                        },
-                    });
-                }
             })
             .catch((e) => console.log(e))
     }, [location.pathname])

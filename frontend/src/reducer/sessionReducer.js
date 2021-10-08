@@ -4,7 +4,7 @@ export const initializeState = {
     fetchSessionState: REQUEST_STATE.INITIAL,
     currentUser: [],
     isLogin: false,
-    nowLocation: "東京都新宿区",
+    nowLocation: null,
     message: "",
 }
 

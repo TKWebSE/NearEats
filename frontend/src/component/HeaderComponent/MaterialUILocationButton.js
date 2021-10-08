@@ -22,7 +22,7 @@ export function MaterialUILocationButton({ onClick, btnLabel }) {
         className={classes.button}
         onClick={onClick}
       >
-        {btnLabel}
+        {btnLabel === null || btnLabel === undefined ? "未設定" : btnLabel}
       </Button>
     </div>
   )

@@ -116,10 +116,6 @@ export default function MaterialUIPrivateHeader() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  useEffect(() => {
-
-  }, [])
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -242,9 +238,9 @@ export default function MaterialUIPrivateHeader() {
           <LocationWrapper onClick={handleSetLocation}>
             <MaterialUILocationIconModal
               onClick={() => handleSetLocation()}
-              btnLabel={SessionUserState.nowLocation}
               modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
               modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
+              nowLocation={SessionUserState.nowLocation === undefined || SessionUserState.nowLocation === null ? SessionUserState.currentUser.city : SessionUserState.nowLocation}
             >
             </MaterialUILocationIconModal>
           </LocationWrapper>

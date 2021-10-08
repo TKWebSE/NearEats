@@ -8,7 +8,7 @@ const animatedComponents = makeAnimated();
 const options = [
   { value: "東京都千代田区", label: "東京都千代田区" },
   { value: "東京都中央区", label: "東京都中央区" },
-  { value: "東京都港区", label: "東京都港区区" },
+  { value: "東京都港区", label: "東京都港区" },
   { value: "東京都新宿区", label: "東京都新宿区" },
   { value: "東京都文京区", label: "東京都文京区" },
   { value: "東京都台東区", label: "東京都台東区" },
@@ -34,7 +34,7 @@ const options = [
 export default function AnimatedMultiSelect({ placeholederText, setLocation, nowSelectLocation }) {
 
   function handleChange(value) {
-    setLocation(value)
+    setLocation(value);
   }
 
   console.log(nowSelectLocation)
@@ -42,8 +42,8 @@ export default function AnimatedMultiSelect({ placeholederText, setLocation, now
     <Select
       options={options}
       placeholder={placeholederText}
-      defaultValue={nowSelectLocation}
-      onChange={(event) => { handleChange(event.target.value) }}
+      defaultValue={{ label: nowSelectLocation, value: nowSelectLocation }}
+      onChange={(event) => { handleChange(event.value) }}
     />
   );
 }

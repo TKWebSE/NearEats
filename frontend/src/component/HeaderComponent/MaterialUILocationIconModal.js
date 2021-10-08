@@ -48,19 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTilte, modalText }) {
+export default function MaterialUILocationIconModal({ onClick, modalTilte, modalText, nowLocation }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
-  const [nowSelectLocation, setLocation] = useState(null);
-  const sessionState = useContext(SessionState)
-  const sessionDispatch = useContext(SessionDispatch)
-
-
-  useEffect(() => {
-    setLocation()
-  }, [])
+  const [open, setOpen] = useState(null);
+  const [nowSelectLocation, setLocation] = useState(nowLocation);
+  const SessionUserState = useContext(SessionState);
+  const SessionUserDispatch = useContext(SessionDispatch);
 
   const handleOpen = () => {
     setOpen(true);
@@ -71,10 +66,15 @@ export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTi
   };
 
   const handleOK = () => {
-    onClick()
+    SessionUserDispatch({
+      type: sessionActionTypes.SETNOWLOCATION,
+      payload: {
+        nowLocation: nowSelectLocation
+      },
+    });
     handleClose()
   }
-
+  console.log(nowSelectLocation)
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -100,7 +100,7 @@ export default function MaterialUILocationIconModal({ btnLabel, onClick, modalTi
 
   return (
     <div>
-      <MaterialUILocationButton onClick={() => handleOpen()} btnLabel={btnLabel}></MaterialUILocationButton>
+      <MaterialUILocationButton onClick={() => handleOpen()} btnLabel={nowLocation}></MaterialUILocationButton>
       <Modal
         open={open}
         onClose={handleClose}
