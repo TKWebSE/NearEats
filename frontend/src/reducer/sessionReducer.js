@@ -28,9 +28,10 @@ export const sessionReducer = (state, action) => {
                 message: state.message,
             }
         case sessionActionTypes.SIGNIN:
+            console.log(action)
             return {
                 fetchSessionState: REQUEST_STATE.OK,
-                currentUser: action.payload.currentUser,
+                currentUser: action.payload.data.data,
                 isLogin: true,
                 nowLocation: state.nowLocation,
                 message: state.message,
@@ -40,7 +41,7 @@ export const sessionReducer = (state, action) => {
                 fetchSessionState: REQUEST_STATE.OK,
                 currentUser: null,
                 isLogin: false,
-                nowLocation: state.nowLocation,
+                nowLocation: null,
                 message: state.message,
             }
         case sessionActionTypes.ISLOGIN:

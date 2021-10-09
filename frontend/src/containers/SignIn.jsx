@@ -89,15 +89,15 @@ export const SignIn = () => {
         SessionAuthDispatch({
           type: sessionActionTypes.SIGNIN,
           payload: {
-            currentUser: data.data.currentUser
+            data: data,
           },
         });
-        SessionAuthDispatch({
-          type: sessionActionTypes.SETNOWLOCATION,
-          payload: {
-            nowLocation: data.data.city
-          },
-        });
+        // SessionAuthDispatch({
+        //   type: sessionActionTypes.SETNOWLOCATION,
+        //   payload: {
+        //     nowLocation: data.data.city
+        //   },
+        // });
         history.push(foodsIndexURL);
       })
       .catch((e) => {
