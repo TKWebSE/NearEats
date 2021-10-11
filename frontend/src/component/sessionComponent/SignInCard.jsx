@@ -1,8 +1,8 @@
-import React ,{Fragment} from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { MaterialUIUserPasswordLine } from "../userComponent/MaterialUIUserPasswordLine";
-import {MaterialUISetEmailLine} from "./MaterialUISetEmailLine";
-import {MaterialUISetPasswordLine} from "./MaterialUISetPasswordLine";
+import { MaterialUISetEmailLine } from "./MaterialUISetEmailLine";
+import { MaterialUISetPasswordLine } from "./MaterialUISetPasswordLine";
 
 const EmailWrapper = styled.div`
 `;
@@ -10,15 +10,15 @@ const EmailWrapper = styled.div`
 const PasswordWrapper = styled.div`
 `;
 
-export const SignInCard = () => {
+export const SignInCard = (onKeyDown) => {
 
     return (
-        <Fragment> 
+        <Fragment>
             <EmailWrapper>
-                <MaterialUISetEmailLine></MaterialUISetEmailLine>
+                <MaterialUISetEmailLine onKeyDown={() => onKeyDown()}></MaterialUISetEmailLine>
             </EmailWrapper>
             <PasswordWrapper>
-                <MaterialUISetPasswordLine></MaterialUISetPasswordLine>
+                <MaterialUISetPasswordLine onKeyDown={() => onKeyDown()}></MaterialUISetPasswordLine>
             </PasswordWrapper>
         </Fragment>
     )

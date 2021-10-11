@@ -71,6 +71,12 @@ export const SignIn = () => {
     }
   }, [signInActionTypes])
 
+  function onKeyDown(e) {
+    // if (e.keyCode === 13) {
+    console.log(e)
+    // }
+  }
+
   function submitSignIn() {
     dispatch({
       type: signInActionTypes.SETTINGERRORMESSAGE,
@@ -92,16 +98,9 @@ export const SignIn = () => {
             data: data,
           },
         });
-        // SessionAuthDispatch({
-        //   type: sessionActionTypes.SETNOWLOCATION,
-        //   payload: {
-        //     nowLocation: data.data.city
-        //   },
-        // });
         history.push(foodsIndexURL);
       })
       .catch((e) => {
-        console.log(e)
         if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
           console.log(e.response.status)
           dispatch({
@@ -142,7 +141,7 @@ export const SignIn = () => {
       <SigninWrapper>
         <SessionDispatch.Provider value={dispatch}>
           <SessionState.Provider value={state}>
-            <SignInCard></SignInCard>
+            <SignInCard onKeyDown={() => onKeyDown()}></SignInCard>
           </SessionState.Provider>
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
