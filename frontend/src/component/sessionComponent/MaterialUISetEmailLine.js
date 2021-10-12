@@ -46,7 +46,13 @@ export function MaterialUISetEmailLine({ onKeyDown }) {
                 fullWidth
                 value={SessionEmailState.user.email}
                 onChange={handleChange}
-                onKeyDown={(e) => onKeyDown(e)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter')
+                    event.preventDefault();
+                  console.log("enterrrrrneko")
+                }
+                }
+              // onKeyDown(event)}
               />
             </form>
           </Fragment>

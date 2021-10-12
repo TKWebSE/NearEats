@@ -10,15 +10,15 @@ const EmailWrapper = styled.div`
 const PasswordWrapper = styled.div`
 `;
 
-export const SignInCard = (onKeyDown) => {
+export const SignInCard = ({ onKeyDown }) => {
 
     return (
         <Fragment>
             <EmailWrapper>
-                <MaterialUISetEmailLine onKeyDown={() => onKeyDown()}></MaterialUISetEmailLine>
+                <MaterialUISetEmailLine onKeyDown={(event) => onKeyDown(event)}></MaterialUISetEmailLine>
             </EmailWrapper>
             <PasswordWrapper>
-                <MaterialUISetPasswordLine onKeyDown={() => onKeyDown()}></MaterialUISetPasswordLine>
+                <MaterialUISetPasswordLine onKeyDown={(event) => onKeyDown(event)}></MaterialUISetPasswordLine>
             </PasswordWrapper>
         </Fragment>
     )
