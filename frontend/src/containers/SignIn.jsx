@@ -71,10 +71,8 @@ export const SignIn = () => {
     }
   }, [signInActionTypes])
 
-  function onKeyDown(event) {
-    // if (event.keyCode === 13) {
-    console.log("meeeeelkopoooooooo")
-    // }
+  function onKeyDownEnter(event) {
+    submitSignIn()
   }
 
   function submitSignIn() {
@@ -141,7 +139,7 @@ export const SignIn = () => {
       <SigninWrapper>
         <SessionDispatch.Provider value={dispatch}>
           <SessionState.Provider value={state}>
-            <SignInCard onKeyDown={(event) => onKeyDown(event)}></SignInCard>
+            <SignInCard onKeyDown={(event) => onKeyDownEnter(event)}></SignInCard>
           </SessionState.Provider>
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>

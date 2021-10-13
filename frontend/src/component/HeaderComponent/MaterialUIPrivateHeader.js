@@ -235,7 +235,7 @@ export default function MaterialUIPrivateHeader() {
               </Typography>
             </Link>
           </TitleWrapper>
-          <LocationWrapper onClick={handleSetLocation}>
+          <LocationWrapper onClick={() => handleSetLocation()}>
             <MaterialUILocationIconModal
               onClick={() => handleSetLocation()}
               modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}

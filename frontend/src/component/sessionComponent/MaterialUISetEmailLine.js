@@ -47,12 +47,12 @@ export function MaterialUISetEmailLine({ onKeyDown }) {
                 value={SessionEmailState.user.email}
                 onChange={handleChange}
                 onKeyDown={(event) => {
-                  if (event.key === 'Enter')
+                  if (event.key === 'Enter') {
                     event.preventDefault();
-                  console.log("enterrrrrneko")
+                    onKeyDown(event)
+                  }
                 }
                 }
-              // onKeyDown(event)}
               />
             </form>
           </Fragment>
