@@ -1,14 +1,14 @@
-import React,{Fragment,useEffect,useContext} from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {foodCreateActionTypes} from "../../reducer/foodCreateReducer";
-import {FoodState,FoodDispatch} from "../../context/Context";
+import { foodCreateActionTypes } from "../../reducer/foodCreateReducer";
+import { FoodState, FoodDispatch } from "../../context/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      
+
     },
   },
 }));
@@ -21,34 +21,40 @@ export function MaterialUISetFoodNameLine() {
 
   const handleChange = (event) => {
     FoodNameDispatch({
-      type:foodCreateActionTypes.SETTINGFOODNAME,
-      payload:{
+      type: foodCreateActionTypes.SETTINGFOODNAME,
+      payload: {
         name: event.target.value
       }
     })
   };
-  
+
   return (
     <Fragment>
-        {
-        FoodNameState.food === undefined || FoodNameState.food === null?
-        <Fragment>
+      {
+        FoodNameState.food === undefined || FoodNameState.food === null ?
+          <Fragment>
             LOADING
-        </Fragment>
-        :
-        <Fragment>
-        <form className={classes.root} noValidate autoComplete="off">
-        <TextField 
-            id="outlined-basic" 
-            label="商品名" 
-            variant="outlined" 
-            fullWidth
-            value={FoodNameState.food.name}
-            onChange={handleChange}
-        />
-        </form>
-        </Fragment>
-        }
+          </Fragment>
+          :
+          <Fragment>
+            <form className={classes.root} noValidate autoComplete="off">
+              <TextField
+                id="outlined-basic"
+                label="商品名"
+                variant="outlined"
+                fullWidth
+                value={FoodNameState.food.name}
+                onChange={handleChange}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                  }
+                }
+                }
+              />
+            </form>
+          </Fragment>
+      }
     </Fragment>
   );
 }
