@@ -17,4 +17,3 @@ export function changeJSTDate(date) {
   return `${year}/${month}/${day} (${dayOfWeek}) ${hour}:${minute}`;
 }
 
-//

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import media from "styled-media-query";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import { fetchFoodsIndexApi } from '../apis/foodApis';
+import { fetchFoodsIndexApi, searchFoodsIndex } from '../apis/foodApis';
 import { REQUEST_STATE, FOOD_HEADER_TITLE } from '../constants';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {
@@ -158,7 +158,15 @@ export const Foods = () => {
 
     useEffect(() => {
         dispatch({ type: foodsListActionTypes.FETCHING })
-        fetchFoodsIndexApi()
+        const currentUserserchWord = SessionUserState.searchWord;
+        const currentUserNowLocation = null;
+        if (SessionUserState.nowLocation === null || SessionUserState.nowLocation === undefined) {
+            currentUserNowLocation = SessionUserState.currentUser.city;
+        } else {
+            currentUserNowLocation = SessionUserState.nowLocation;
+        }
+        // fetchFoodsIndexApi()
+        searchFoodsIndex(SessionUserState.currentUser.id, currentUserNowLocation, currentUserserchWord)
             .then((data) => {
                 dispatch({
                     type: foodsListActionTypes.FETCH_SUCCESS,
