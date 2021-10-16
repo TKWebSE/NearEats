@@ -10,8 +10,6 @@ module Api
             end
             
             def myfoods
-                logger.debug("updateこんとろーららららら")
-                logger.debug(params[:user_id])
                 user = User.find_by(id: params[:user_id])
                 foods = Food.where(user_id: user.id).order(updated_at: "DESC");
 
@@ -21,6 +19,7 @@ module Api
             end
 
             def searchIndex
+                logger.debug("searchIndex通った")
                 user = User.find(id: params[:user_id])
                 foods = Food.where(user_id: user.id).order(updated_at: "DESC");
 

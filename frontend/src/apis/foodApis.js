@@ -3,6 +3,7 @@ import { useReducer } from "react";
 import {
     foodsIndexBackendURL,
     MyfoodsIndexBackendURL,
+    foodsSearchIndexBackendURL,
     foodShowBackendURL,
     foodCreateBackendURL,
     foodUpdateBackendURL,
@@ -34,7 +35,7 @@ export const fetchMyFoodsIndex = (user_id) => {
 
 //特定のfoodsの一覧を任意の条件で絞り込み、取得する
 export const searchFoodsIndex = (user_id, currentUserNowLocation, serchWord) => {
-    return axios.get(MyfoodsIndexBackendURL(user_id), {
+    return axios.get(foodsSearchIndexBackendURL, {
         params: {
             user_id: user_id,
             city: currentUserNowLocation,

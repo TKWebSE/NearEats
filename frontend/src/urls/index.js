@@ -30,6 +30,7 @@ export const foodUpdateURL = (foodId) => `/foods/${foodId}`;
 
 //foodのBackendURL
 export const foodsIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
+export const foodsSearchIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}/searchIndex`;
 export const MyfoodsIndexBackendURL = (user_id) => `${BACKEND_DEFAULT_URL}/foods/${user_id}${myFoodsURL}`;
 export const foodCreateBackendURL = `${BACKEND_DEFAULT_URL}/foods`;
 export const foodShowBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodShowURL(foodId)}`;

@@ -158,8 +158,8 @@ export const Foods = () => {
 
     useEffect(() => {
         dispatch({ type: foodsListActionTypes.FETCHING })
-        const currentUserserchWord = SessionUserState.searchWord;
-        const currentUserNowLocation = null;
+        let currentUserserchWord = SessionUserState.searchWord;
+        let currentUserNowLocation = null;
         if (SessionUserState.nowLocation === null || SessionUserState.nowLocation === undefined) {
             currentUserNowLocation = SessionUserState.currentUser.city;
         } else {
