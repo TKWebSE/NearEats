@@ -11,12 +11,14 @@ import {
 } from "../urls/index";
 
 //food一覧を取得する
-export const fetchFoodsIndexApi = () => {
-    return axios.get(foodsIndexBackendURL)
-        .then(res => {
-            return res.data
+export const fetchFoodsIndexApi = (user_id, currentUserNowLocation, serchWord) => {
+    return axios.get(foodsIndexBackendURL, {
+        params: {
+            user_id: user_id,
+            city: currentUserNowLocation,
+            serchWord: serchWord,
         }
-        )
+    })
         .catch(e => console.log(e))
 }
 //ログインしているアカウントが登録したfoodの一覧を取得する
@@ -32,22 +34,6 @@ export const fetchMyFoodsIndex = (user_id) => {
         )
         .catch(e => console.log(e))
 }
-
-//特定のfoodsの一覧を任意の条件で絞り込み、取得する
-export const searchFoodsIndex = (user_id, currentUserNowLocation, serchWord) => {
-    return axios.get(foodsSearchIndexBackendURL, {
-        params: {
-            user_id: user_id,
-            city: currentUserNowLocation,
-            serchWord: serchWord,
-        }
-    })
-        .then(res => {
-            return res.data
-        })
-        .catch(e => console.log(e))
-}
-
 
 //特定のfoodを取得する(editでも使用している)
 export const fetchFoodApi = (food_id) => {

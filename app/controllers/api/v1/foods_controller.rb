@@ -2,25 +2,26 @@ module Api
     module V1
         class FoodsController < ApplicationController
             def index
+                user = User.find_by(id: params[:user_id])
+
+                
                 foods = Food.all.order(updated_at: "DESC");
                 
                 render json: {
                     foods: foods
                 }, status: :ok
             end
+
+            # def index
+            #     foods = Food.all.order(updated_at: "DESC");
+                
+            #     render json: {
+            #         foods: foods
+            #     }, status: :ok
+            # end
             
             def myfoods
                 user = User.find_by(id: params[:user_id])
-                foods = Food.where(user_id: user.id).order(updated_at: "DESC");
-
-                render json: {
-                    foods: foods
-                }, status: :ok
-            end
-
-            def searchIndex
-                logger.debug("searchIndex通った")
-                user = User.find(id: params[:user_id])
                 foods = Food.where(user_id: user.id).order(updated_at: "DESC");
 
                 render json: {

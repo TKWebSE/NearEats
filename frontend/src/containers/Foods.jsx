@@ -165,8 +165,7 @@ export const Foods = () => {
         } else {
             currentUserNowLocation = SessionUserState.nowLocation;
         }
-        // fetchFoodsIndexApi()
-        searchFoodsIndex(SessionUserState.currentUser.id, currentUserNowLocation, currentUserserchWord)
+        fetchFoodsIndexApi(SessionUserState.currentUser.id, currentUserNowLocation, currentUserserchWord)
             .then((data) => {
                 dispatch({
                     type: foodsListActionTypes.FETCH_SUCCESS,
