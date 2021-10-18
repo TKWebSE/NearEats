@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_024851) do
     t.text "description", null: false
     t.string "image"
     t.integer "count", null: false
-    t.string "station", null: false
+    t.string "city", null: false
     t.boolean "deleted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

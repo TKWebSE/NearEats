@@ -22,7 +22,7 @@
         price: 500,
         description: "フード_#{m}の説明文です。",
         count:m,
-        station:"#{m}駅",
+        city:"#{m}駅",
       );
 
     end

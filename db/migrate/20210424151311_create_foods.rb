@@ -7,7 +7,7 @@ class CreateFoods < ActiveRecord::Migration[6.0]
       t.text :description, null: false
       t.string :image
       t.integer :count,null:false
-      t.string :station,null:false
+      t.string :city,null:false
 
       t.boolean :deleted,default:false
       t.timestamps

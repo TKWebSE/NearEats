@@ -250,6 +250,7 @@ export default function MaterialUIPrivateHeader() {
             </div>
             <InputBase
               placeholder="Search foods…"
+              value={"aa"}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
