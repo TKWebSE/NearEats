@@ -9,21 +9,21 @@ module Api
                 logger.debug(params[:city])
                 logger.debug(params[:serchWord])
 
-                if paramsCity == nil ||  paramsCity == undefined
-                    logger.debug("コメント")
-                    # if paramsSearchWord === null ||  paramsSearchWord === undefined
-                    #     foods = Food.where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
-                    # else
-                    #     foods = Food.where("name LIKE ?", "%paramsSearchWord%" ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC"); 
-                    # end
-                else
-                    # if paramsSearchWord === null ||  paramsSearchWord === undefined 
-                    #     # logger.debug("コメント")
-                    #     foods = Food.where(city:paramsCity).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
-                    # else
-                    #     foods = Food.where(city:paramsCity).where("name LIKE ?", "%paramsSearchWord%" ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
-                    # end
-                end
+                # if paramsCity == nil ||  paramsCity == undefined
+                #     logger.debug("コメント")
+                #     # if paramsSearchWord === null ||  paramsSearchWord === undefined
+                #     #     foods = Food.where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                #     # else
+                #     #     foods = Food.where("name LIKE ?", "%paramsSearchWord%" ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC"); 
+                #     # end
+                # else
+                #     # if paramsSearchWord === null ||  paramsSearchWord === undefined 
+                #     #     # logger.debug("コメント")
+                #     #     foods = Food.where(city:paramsCity).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                #     # else
+                #     #     foods = Food.where(city:paramsCity).where("name LIKE ?", "%paramsSearchWord%" ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                #     # end
+                # end
                 foods = nil
 
                 render json: {

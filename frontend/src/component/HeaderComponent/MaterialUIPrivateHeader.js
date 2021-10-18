@@ -137,6 +137,12 @@ export default function MaterialUIPrivateHeader() {
     console.log("せいこうーーーーー")
   }
 
+  const onKeyPressSerchWord = (event) => {
+    if (event.which === 13) {
+      history.push(foodsIndexURL)
+    }
+  }
+
   //左サイドバーを制御する
   const handleDrawer = () => {
     if (state.isOpenDrawer) {
@@ -250,7 +256,20 @@ export default function MaterialUIPrivateHeader() {
             </div>
             <InputBase
               placeholder="Search foods…"
-              value={"aa"}
+              value={SessionUserState.searchWord}
+              onKeyPress={(event) =>
+                onKeyPressSerchWord(event)
+              }
+              onChange={(event) => {
+                //ここ直す
+                SessionUserDispatch({
+                  type: sessionActionTypes.SETTINGSEARCHWORD,
+                  payload: {
+                    searchWord: event.value
+                  },
+                })
+              }
+              }
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

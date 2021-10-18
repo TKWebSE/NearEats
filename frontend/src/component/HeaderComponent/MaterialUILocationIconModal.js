@@ -4,11 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { MaterialUILocationButton } from "../HeaderComponent/MaterialUILocationButton";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { modalButtomLabel } from "../../constants";
-import { HEADER_TEXT } from "../../constants";
+import { HEADER_TEXT, modalButtomLabel } from "../../constants";
 import AnimatedMultiSelect from "../AnimatedMultiSelect";
 import { sessionActionTypes } from "../../reducer/sessionReducer";
 import { SessionState, SessionDispatch } from "../../context/Context";
+import { foodsIndexURL } from "../../urls/index";
+import { useHistory } from "react-router-dom";
 
 
 const SelectWrapper = styled.div`
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MaterialUILocationIconModal({ onClick, modalTilte, modalText, nowLocation }) {
   const classes = useStyles();
+  const history = useHistory();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(null);
@@ -73,6 +75,7 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
       },
     });
     handleClose()
+    history.push(foodsIndexURL)
   }
   console.log(nowSelectLocation)
 

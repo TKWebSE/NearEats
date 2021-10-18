@@ -37,7 +37,7 @@ export default function AnimatedMultiSelect({ placeholederText, setLocation, now
     setLocation(value);
   }
 
-  function keyPress(e) {
+  function onkeyPressHandle(e) {
     if (e.which === 13)
       console.log(e)
   }
@@ -49,7 +49,7 @@ export default function AnimatedMultiSelect({ placeholederText, setLocation, now
       placeholder={placeholederText}
       defaultValue={{ label: nowSelectLocation, value: nowSelectLocation }}
       onChange={(event) => { handleChange(event.value) }}
-      onKeyPress={(e) => keyPress(e)}
+      onKeyPress={(e) => onkeyPressHandle(e)}
     />
   );
 }
