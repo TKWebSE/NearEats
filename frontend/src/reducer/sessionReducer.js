@@ -68,6 +68,7 @@ export const sessionReducer = (state, action) => {
                 message: state.message,
             }
         case sessionActionTypes.SETTINGSEARCHWORD:
+            console.log(action.payload.searchWord)
             return {
                 fetchSessionState: REQUEST_STATE.OK,
                 currentUser: state.currentUser,

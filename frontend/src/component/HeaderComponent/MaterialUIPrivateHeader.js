@@ -112,6 +112,7 @@ export default function MaterialUIPrivateHeader() {
   const SessionUserState = useContext(SessionState);
   const SessionUserDispatch = useContext(SessionDispatch);
   const history = useHistory();
+  const [searchValue, setSearchValue] = useState(SessionUserState.searchWord);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -139,6 +140,12 @@ export default function MaterialUIPrivateHeader() {
 
   const onKeyPressSerchWord = (event) => {
     if (event.which === 13) {
+      SessionUserDispatch({
+        type: sessionActionTypes.SETTINGSEARCHWORD,
+        payload: {
+          searchWord: searchValue,
+        },
+      });
       history.push(foodsIndexURL)
     }
   }
@@ -256,18 +263,12 @@ export default function MaterialUIPrivateHeader() {
             </div>
             <InputBase
               placeholder="Search foods…"
-              value={SessionUserState.searchWord}
+              value={searchValue}
               onKeyPress={(event) =>
                 onKeyPressSerchWord(event)
               }
               onChange={(event) => {
-                //ここ直す
-                SessionUserDispatch({
-                  type: sessionActionTypes.SETTINGSEARCHWORD,
-                  payload: {
-                    searchWord: event.value
-                  },
-                })
+                setSearchValue(event.target.value)
               }
               }
               classes={{
