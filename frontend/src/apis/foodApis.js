@@ -19,6 +19,11 @@ export const fetchFoodsIndexApi = (user_id, currentUserNowLocation, serchWord) =
             serchWord: serchWord,
         }
     })
+        .then(res => {
+            console.log(res)
+            return res.data
+        }
+        )
         .catch(e => console.log(e))
 }
 //ログインしているアカウントが登録したfoodの一覧を取得する
