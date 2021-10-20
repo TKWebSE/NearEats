@@ -22,7 +22,15 @@
         price: 500,
         description: "フード_#{m}の説明文です。",
         count:m,
-        city:"#{m}駅",
+        city:"東京都渋谷区",
+      );
+    12.times do |m|
+      food = user.foods.build(
+        name: "フード名_#{m}",
+        price: 500,
+        description: "フード_#{m}の説明文です。",
+        count:m,
+        city:"東京都新宿区",
       );
 
     end
