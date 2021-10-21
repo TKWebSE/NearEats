@@ -10,12 +10,8 @@ module Api
             end
         
             def show
-                logger.debug("コメント")
-                logger.debug(params)
-                logger.debug(params[:userId])
-                logger.debug("コメント")
-                user = User.find_by(id: 1)
-                logger.debug(user)
+                user = User.find_by(id: params[:userId])
+                
                 render json: {
                     user: user
                 },status: :ok
