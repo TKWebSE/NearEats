@@ -1,18 +1,16 @@
 import React, { Fragment, useReducer, useEffect } from 'react';
 import styled from "styled-components";
-import Skeleton from '@material-ui/lab/Skeleton';
+import media from "styled-media-query";
+import foodImage from "../images/food-image.jpg";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { fetchUserApi } from "../apis/userApis";
 import { initializeState, userActionTypes, userReducer } from "../reducer/userReducer";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { ButtonTheme } from "../style_constants";
 import { userEditURL } from "../urls/index";
-import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
+import { REQUEST_STATE, USER_HEADER_TITLE, USER_LABEL } from "../constants";
 import { useHistory } from "react-router-dom";
-import { USER_LABEL } from "../constants";
-
-const ContentsList = styled.div`
-`;
+import Rating from '@material-ui/lab/Rating';
 
 const UserHeaderWrapper = styled.h1`
   margin-top:5%;
@@ -20,52 +18,38 @@ const UserHeaderWrapper = styled.h1`
 `;
 
 const UserDetailWrapper = styled.div`
-  margin-left:5%;
-  vertical-align:  middle; 
+    text-align:left;
 `;
 
-const UserDetailImageWrapper = styled.div`
+const UserImage = styled.img`
+    width:100%;
+    height:60%;
+    margin-bottom:2%;
 `;
 
-const UserNameWrapper = styled.div`
-  display: table;
+const UserName = styled.h1`
+    margin-top:5%;
+    margin-bottom:0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
-const UserNameLabel = styled.div` 
-  display: table-cell;
+const UserRatingWrapper = styled.div`
 `;
 
-const UserName = styled.div`
-  margin-bottom:1%;
+const UserPrice = styled.h2`
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
-const UserPointWrapper = styled.div`
-  display: table;
-`;
-
-const UserPointLabel = styled.div`
-  display: table-cell;
-`;
-
-const Userpoint = styled.div`
-  margin-bottom:1%;
-`;
-
-const UserAddressWrapper = styled.div`
-  display: table;
-`;
-
-const UserAddressLabel = styled.div`
-  display: table-cell;
-`;
-
-const UserAddress = styled.div`
-  display: table-cell;
+const UserDesicription = styled.div`
+    margin-bottom:5%;
+    overflow-wrap: break-word;
 `;
 
 const UserEditButton = styled.div`
-  margin-left:90%;
-  text-align: right;
 `;
 
 export const UserDetail = ({ match }) => {
@@ -95,50 +79,26 @@ export const UserDetail = ({ match }) => {
       <UserHeaderWrapper>
         {USER_HEADER_TITLE.USER_DETAIL}
       </UserHeaderWrapper>
-      {
-        REQUEST_STATE.OK === state.fetchState ?
-          <UserDetailWrapper>
-            <UserDetailImageWrapper>
-            </UserDetailImageWrapper>
-            <UserNameWrapper>
-              <UserNameLabel>
-                {USER_LABEL.USER_NAME}
-              </UserNameLabel>
-              <UserName>
-                {state.user.name}
-              </UserName>
-            </UserNameWrapper>
-            <UserPointWrapper>
-              <UserPointLabel>
-                {USER_LABEL.USER_POINT}
-              </UserPointLabel>
-              <Userpoint>
-                {state.user.point}
-              </Userpoint>
-            </UserPointWrapper>
-            <UserAddressWrapper>
-              <UserAddressLabel>
-                {USER_LABEL.USER_ADDRESS}
-              </UserAddressLabel>
-              <UserAddress>
-                {state.user.address}
-              </UserAddress>
-            </UserAddressWrapper>
-            <UserEditButton>
-              <ThemeProvider theme={ButtonTheme}>
-                <MaterialUICommonButton onClick={onClickEditHandle} btnLabel={"編集する"} />
-              </ThemeProvider>
-            </UserEditButton>
-          </UserDetailWrapper>
-          :
-          <ContentsList>
-            <Fragment>
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
-            </Fragment>
-          </ContentsList>
-      }
+      <UserDetailWrapper>
+        <UserImage src={foodImage} alt="foodImage"></UserImage>
+        <UserName>
+          {state.user.name}
+        </UserName>
+        <UserRatingWrapper>
+          <Rating name="read-only" value={state.user.valuation} readOnly />
+        </UserRatingWrapper>
+        <UserPrice>
+          {state.user.point}
+        </UserPrice>
+        <UserDesicription>
+          {state.user.address}
+        </UserDesicription>
+        <UserEditButton>
+          <ThemeProvider theme={ButtonTheme}>
+            <MaterialUICommonButton onClick={onClickEditHandle} btnLabel={"編集する"} />
+          </ThemeProvider>
+        </UserEditButton>
+      </UserDetailWrapper>
     </Fragment>
   )
 }
