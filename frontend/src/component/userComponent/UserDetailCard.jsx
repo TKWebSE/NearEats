@@ -1,53 +1,53 @@
-import React, { Fragment, useReducer, useEffect } from 'react';
-import styled from "styled-components";
+import React, { Fragment } from "react";
 import media from "styled-media-query";
+import styled from "styled-components";
+import foodImage from "../../images/food-image.jpg";
+import Rating from '@material-ui/lab/Rating';
+
+const UserCardWrapper = styled.div`
+    text-align:left;
+`;
+
+const UserImage = styled.img`
+    width:100%;
+    height:60%;
+    margin-bottom:2%;
+`;
 
 const UserName = styled.h1`
-margin-top:5%;
-margin-bottom:0px;
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
+    margin-top:5%;
+    margin-bottom:0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 const UserRatingWrapper = styled.div`
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
-const UserPrice = styled.h2`
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
+const UserAddress = styled.h2`
+    margin-bottom:5%;
+    overflow-wrap: break-word;
 `;
 
-const UserDesicription = styled.div`
-margin-bottom:5%;
-overflow-wrap: break-word;
-`;
-
-export const UserDetail = ({ match }) => {
-
+export const UserDetailCard = (user) => {
   return (
     <Fragment>
-      <UserDetailWrapper>
+      <UserCardWrapper>
         <UserImage src={foodImage} alt="foodImage"></UserImage>
         <UserName>
-          {state.user.name}
+          {user.name}
         </UserName>
         <UserRatingWrapper>
-          <Rating name="read-only" value={state.user.valuation} readOnly />
+          <Rating name="read-only" value={user.valuation} readOnly />
         </UserRatingWrapper>
-        <UserPrice>
-          {state.user.point}
-        </UserPrice>
-        <UserDesicription>
-          {state.user.address}
-        </UserDesicription>
-        <UserEditButton>
-          <ThemeProvider theme={ButtonTheme}>
-            <MaterialUICommonButton onClick={onClickEditHandle} btnLabel={"編集する"} />
-          </ThemeProvider>
-        </UserEditButton>
-      </UserDetailWrapper>
+        <UserAddress>
+          {user.address}
+        </UserAddress>
+      </UserCardWrapper>
     </Fragment>
   )
 }
