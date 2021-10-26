@@ -30,12 +30,24 @@ const UserRatingWrapper = styled.div`
 `;
 
 
-const UserAddressWrapper = styled.h2`
+const UserAddressLabel = styled.h2`
 `;
 
 const UserAddress = styled.h2`
     margin-bottom:5%;
     overflow-wrap: break-word;
+`;
+
+const UserEmailLabel = styled.div`
+`;
+
+const UserEmail = styled.div`
+`;
+
+const UserPassWordLabel = styled.div`
+`;
+
+const UserPassWord = styled.div`
 `;
 
 export const UserDetailCard = (user) => {
@@ -49,12 +61,24 @@ export const UserDetailCard = (user) => {
         <UserRatingWrapper>
           <Rating name="read-only" value={user.valuation} readOnly />
         </UserRatingWrapper>
-        <UserAddressWrapper>
+        <UserAddressLabel>
           {USER_LABEL.USER_ADDRESS}
-        </UserAddressWrapper>
+        </UserAddressLabel>
         <UserAddress>
           {user.address}
         </UserAddress>
+        <UserEmailLabel>
+          {USER_LABEL.USER_MAIL}
+        </UserEmailLabel>
+        <UserEmail>
+          {user.email}
+        </UserEmail>
+        <UserPassWordLabel>
+          { }
+        </UserPassWordLabel>
+        <UserPassWord>
+          { }
+        </UserPassWord>
       </UserCardWrapper>
     </Fragment>
   )
