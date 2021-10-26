@@ -3,6 +3,7 @@ import media from "styled-media-query";
 import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";
 import Rating from '@material-ui/lab/Rating';
+import { USER_LABEL } from "../../constants";
 
 const UserCardWrapper = styled.div`
     text-align:left;
@@ -28,6 +29,10 @@ const UserRatingWrapper = styled.div`
     text-overflow: ellipsis;
 `;
 
+
+const UserAddressWrapper = styled.h2`
+`;
+
 const UserAddress = styled.h2`
     margin-bottom:5%;
     overflow-wrap: break-word;
@@ -44,6 +49,9 @@ export const UserDetailCard = (user) => {
         <UserRatingWrapper>
           <Rating name="read-only" value={user.valuation} readOnly />
         </UserRatingWrapper>
+        <UserAddressWrapper>
+          {USER_LABEL.USER_ADDRESS}
+        </UserAddressWrapper>
         <UserAddress>
           {user.address}
         </UserAddress>
