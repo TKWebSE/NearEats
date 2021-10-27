@@ -11,7 +11,9 @@ module Api
         
             def show
                 user = User.find_by(id: params[:userId])
-                
+                logger.debug("リクエストされたユーザデータ")
+                logger.debug(user)
+
                 render json: {
                     user: user
                 },status: :ok

@@ -17,7 +17,7 @@ const UserImage = styled.img`
 
 const UserName = styled.h1`
     margin-top:5%;
-    margin-bottom:0px;
+    margin-bottom:1%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -29,25 +29,57 @@ const UserRatingWrapper = styled.div`
     text-overflow: ellipsis;
 `;
 
-
-const UserAddressLabel = styled.h2`
+const UserUnderDetailWrapper = styled.div`
+  display: flex;
 `;
 
-const UserAddress = styled.h2`
-    margin-bottom:5%;
-    overflow-wrap: break-word;
+const UserLabelWrapper = styled.h2`
+  color:grey;
+  width:40%;
+  font-size:200%;
+`;
+
+const UserDataWrapper = styled.h2`
+  padding-left:2%;
+  font-size:210%;
+`;
+
+const UserPointLabel = styled.div`
+  padding-bottom:1%;
+`;
+
+const UserLocationLabel = styled.div`
+`;
+
+const UserAddressLabel = styled.div`
+  padding-bottom:1%;
 `;
 
 const UserEmailLabel = styled.div`
-`;
-
-const UserEmail = styled.div`
+  padding-bottom:1%;
 `;
 
 const UserPassWordLabel = styled.div`
+  padding-bottom:1%;
+`;
+
+const UserPoint = styled.div`
+  padding-bottom:1%;
+`;
+
+const UserLocation = styled.div`
+`;
+
+const UserAddress = styled.div`
+  padding-bottom:1%;
+`;
+
+const UserEmail = styled.div`
+  padding-bottom:1%;
 `;
 
 const UserPassWord = styled.div`
+  padding-bottom:1%;
 `;
 
 export const UserDetailCard = (user) => {
@@ -61,24 +93,42 @@ export const UserDetailCard = (user) => {
         <UserRatingWrapper>
           <Rating name="read-only" value={user.valuation} readOnly />
         </UserRatingWrapper>
-        <UserAddressLabel>
-          {USER_LABEL.USER_ADDRESS}
-        </UserAddressLabel>
-        <UserAddress>
-          {user.address}
-        </UserAddress>
-        <UserEmailLabel>
-          {USER_LABEL.USER_MAIL}
-        </UserEmailLabel>
-        <UserEmail>
-          {user.email}
-        </UserEmail>
-        <UserPassWordLabel>
-          { }
-        </UserPassWordLabel>
-        <UserPassWord>
-          { }
-        </UserPassWord>
+        <UserUnderDetailWrapper>
+          <UserLabelWrapper>
+            <UserPointLabel>
+              {USER_LABEL.USER_POINTLABEL}
+            </UserPointLabel>
+            <UserLocationLabel>
+              {USER_LABEL.USER_LOCATION_LABEL}
+            </UserLocationLabel>
+            <UserAddressLabel>
+              {USER_LABEL.USER_ADDRESS_LABEL}
+            </UserAddressLabel>
+            <UserEmailLabel>
+              {USER_LABEL.USER_MAIL_LABEL}
+            </UserEmailLabel>
+            <UserPassWordLabel>
+              { }
+            </UserPassWordLabel>
+          </UserLabelWrapper>
+          <UserDataWrapper>
+            <UserPoint>
+              {user.point}
+            </UserPoint>
+            <UserLocation>
+              {user.city}
+            </UserLocation>
+            <UserAddress>
+              {user.address}
+            </UserAddress>
+            <UserEmail>
+              {user.email}
+            </UserEmail>
+            <UserPassWord>
+              { }
+            </UserPassWord>
+          </UserDataWrapper>
+        </UserUnderDetailWrapper>
       </UserCardWrapper>
     </Fragment>
   )

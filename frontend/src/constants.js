@@ -85,10 +85,11 @@ export const ORDER_HEADER_TITLE = {
 
 export const USER_LABEL = {
     USER_NAME: "ユーザー名",
-    USER_ADDRESS: "住所",
-    USER_MAIL: "メールアドレス",
-    USER_PASSWORD: "パスワード",
-    USER_POINT: "ユーザーポイント",
+    USER_POINTLABEL: "ユーザーポイント",
+    USER_LOCATION_LABEL: "ユーザーロケーション",
+    USER_ADDRESS_LABEL: "住所",
+    USER_MAIL_LABEL: "メールアドレス",
+    USER_PASSWORD_LABEL: "パスワード",
 }
 
 export const NOTFOUND_FOOD_TEXT = {
