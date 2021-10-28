@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer, useEffect } from 'react';
+import React, { Fragment, useReducer, useEffect, useContext } from 'react';
 import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -11,7 +11,8 @@ import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
 import { UserDetailCard } from "../component/userComponent/UserDetailCard";
 import { useHistory } from "react-router-dom";
 import { USER_LABEL } from "../constants";
-
+import { SessionState, SessionDispatch } from "../context/Context";
+import { foodsIndexURL } from "../urls/index";
 
 const DetailWrapper = styled.div`
     margin-left:20%;
@@ -31,21 +32,27 @@ const UserCardWrapper = styled.div`
 `;
 
 export const UserDetail = ({ match }) => {
+  const SessionAuthState = useContext(SessionState);
+  const SessionAuthDispatch = useContext(SessionDispatch)
   const [state, dispatch] = useReducer(userReducer, initializeState);
   const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: userActionTypes.FETCHING });
-    fetchUserApi(match.params.userId)
-      .then((data) => {
-        dispatch({
-          type: userActionTypes.FETCH_SUCCESS,
-          payload: {
-            user: data.user
-          }
-        });
-      })
-      .catch(e => console.log(e));
+    if (match.params.userId === SessionAuthState.currentUser.id) {
+      fetchUserApi(match.params.userId)
+        .then((data) => {
+          dispatch({
+            type: userActionTypes.FETCH_SUCCESS,
+            payload: {
+              user: data.user
+            }
+          });
+        })
+        .catch(e => console.log(e));
+    } else {
+      history.push(foodsIndexURL);
+    }
   }, []);
 
   function onClickEditHandle() {

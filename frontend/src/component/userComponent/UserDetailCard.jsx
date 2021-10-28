@@ -21,6 +21,7 @@ const UserName = styled.h1`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size:300%;
 `;
 
 const UserRatingWrapper = styled.div`
@@ -31,6 +32,7 @@ const UserRatingWrapper = styled.div`
 
 const UserUnderDetailWrapper = styled.div`
   display: flex;
+  padding-top:5%;
 `;
 
 const UserLabelWrapper = styled.h2`
@@ -91,7 +93,11 @@ export const UserDetailCard = (user) => {
           {user.name}
         </UserName>
         <UserRatingWrapper>
-          <Rating name="read-only" value={user.valuation} readOnly />
+          <Rating
+            name="read-only"
+            size={'large'}
+            value={user.valuation} readOnly
+          />
         </UserRatingWrapper>
         <UserUnderDetailWrapper>
           <UserLabelWrapper>

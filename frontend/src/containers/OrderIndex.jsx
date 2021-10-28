@@ -140,7 +140,7 @@ const SkeltonOrderWrapper = styled.div`
 
 export const OrderIndex = () => {
     const SessionAuthState = useContext(SessionState);
-    const SessionAuthDispatch = useContext(SessionDispatch)
+    const SessionAuthDispatch = useContext(SessionDispatch);
     const [state, dispatch] = useReducer(ordersListReducer, initializeState);
     const history = useHistory();
 
