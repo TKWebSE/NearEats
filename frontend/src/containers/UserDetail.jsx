@@ -31,6 +31,10 @@ const UserCardWrapper = styled.div`
     margin-bottom:5%;
 `;
 
+const ButtonWrapper = styled.div`
+  float:right;
+`;
+
 export const UserDetail = ({ match }) => {
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch)
@@ -39,7 +43,7 @@ export const UserDetail = ({ match }) => {
 
   useEffect(() => {
     dispatch({ type: userActionTypes.FETCHING });
-    if (match.params.userId === SessionAuthState.currentUser.id) {
+    if (match.params.userId === SessionAuthState.currentUser.id.toString()) {
       fetchUserApi(match.params.userId)
         .then((data) => {
           dispatch({
@@ -77,9 +81,11 @@ export const UserDetail = ({ match }) => {
               <UserCardWrapper>
                 <UserDetailCard {...state.user}></UserDetailCard>
               </UserCardWrapper>
-              <ThemeProvider theme={ButtonTheme}>
-                <MaterialUICommonButton onClick={onClickEditHandle} btnLabel={"編集する"} />
-              </ThemeProvider>
+              <ButtonWrapper>
+                <ThemeProvider theme={ButtonTheme}>
+                  <MaterialUICommonButton onClick={onClickEditHandle} btnLabel={"編集する"} />
+                </ThemeProvider>
+              </ButtonWrapper>
             </Fragment>
         }
       </DetailWrapper>

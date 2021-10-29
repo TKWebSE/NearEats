@@ -14,7 +14,7 @@ export function MaterialUICommonButton({ onClick, btnLabel }) {
   return (
     <div>
       <Button
-        size="medium"
+        size="large"
         variant="contained"
         color="primary"
         className={classes.button}
