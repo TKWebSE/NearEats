@@ -16,7 +16,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL } from "../../urls/index";
+import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL, settingURL } from "../../urls/index";
 import { isLoginApi } from "../../apis/sessionApis";
 import Cookies from "js-cookie";
 
@@ -50,7 +50,7 @@ export const MaterialUIDrawerList = () => {
     }
 
     function settingLink() {
-        history.push(userShowURL(userId));
+        history.push(settingURL);
     }
 
     return (

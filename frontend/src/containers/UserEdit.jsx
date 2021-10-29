@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer, useEffect } from "react";
+import React, { Fragment, useReducer, useEffect, useContext } from "react";
 import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
@@ -28,22 +28,27 @@ const UserEditButton = styled.div`
 
 
 export const UserEdit = ({ match }) => {
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch)
     const [state, dispatch] = useReducer(userReducer, initializeState);
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: userActionTypes.FETCHING });
-        fetchUserApi(match.params.userId)
-            .then((data) => {
-                console.log(state)
-                dispatch({
-                    type: userActionTypes.FETCH_SUCCESS,
-                    payload: {
-                        user: data.user
-                    },
+        if (match.params.userId === SessionAuthState.currentUser.id.toString()) {
+            fetchUserApi(match.params.userId)
+                .then((data) => {
+                    dispatch({
+                        type: userActionTypes.FETCH_SUCCESS,
+                        payload: {
+                            user: data.user
+                        },
+                    })
                 })
-            })
-            .catch(e => console.log(e));
+                .catch(e => console.log(e));
+        } else {
+            history.push(foodsIndexURL);
+        }
     }, []);
 
     function submitHandle() {

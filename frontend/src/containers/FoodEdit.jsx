@@ -39,8 +39,7 @@ export const FoodEdit = ({ match }) => {
     dispatch({ type: foodEditActionTypes.FETCHING });
     fetchFoodApi(match.params.foodId)
       .then((data) => {
-        if (data.food.user_id === SessionAuthState.currentUser.id.toString()) {
-          console.log(data)
+        if (data.food.user_id === SessionAuthState.currentUser.id) {
           dispatch({
             type: foodEditActionTypes.FETCH_SUCCESS,
             payload: {

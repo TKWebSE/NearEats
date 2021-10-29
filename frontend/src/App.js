@@ -34,6 +34,7 @@ import { SignIn } from "./containers/SignIn";
 import { Home } from "./containers/Home";
 import { MyTaskIndex } from "./containers/MyTaskIndex";
 import { MyTaskDetail } from "./containers/MyTaskDetail";
+import { Setting } from "./containers/Setting";
 
 import { sessionApis } from "./apis/sessionApis";
 import { initializeState, sessionActionTypes, sessionReducer } from "./reducer/sessionReducer";
@@ -61,31 +62,31 @@ function App() {
               }
             </ThemeProvider>
             <Switch>
-        //HOME画面
+              {/* HOME画面 */}
               <GuestOnlyRoute
                 exact
                 path="/"
                 component={Home}>
               </GuestOnlyRoute>
-        //HOME画面
+              {/* HOME画面 */}
               <GuestOnlyRoute
                 exact
                 path="/home"
                 component={Home}>
               </GuestOnlyRoute>
-          //signIn画面
+              {/* signIn画面 */}
               <GuestOnlyRoute
                 exact
                 path="/signin"
                 component={SignIn}>
               </GuestOnlyRoute>
-          //user作成画面
+              {/* user作成画面 */}
               <GuestOnlyRoute
                 exact
                 path="/users/create"
                 component={UserCreate}>
               </GuestOnlyRoute>
-          //user詳細画面
+              {/* user詳細画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/users/:userId"
@@ -96,7 +97,7 @@ function App() {
                 }
               >
               </PrivateOnlyRoute>
-          //user編集画面
+              {/* user編集画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/users/:userId/edit"
@@ -107,28 +108,28 @@ function App() {
                 }
               >
               </PrivateOnlyRoute>
-          //foods一覧
+              {/* foods一覧 */}
               <PrivateOnlyRoute
                 exact
                 path="/foods"
                 component={Foods}
               >
               </PrivateOnlyRoute>
-          //Myfoods一覧
+              {/* Myfoods一覧 */}
               <PrivateOnlyRoute
                 exact
                 path="/myfoods"
                 component={MyFoods}
               >
               </PrivateOnlyRoute>
-          //food作成画面
+              {/* food作成画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/foods/create"
                 component={FoodCreate}
               >
               </PrivateOnlyRoute>
-          //food詳細画面
+              {/* food詳細画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/foods/:foodId"
@@ -139,7 +140,7 @@ function App() {
                 }
               >
               </PrivateOnlyRoute>
-          //food編集画面
+              {/* food編集画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/foods/:foodId/edit"
@@ -150,13 +151,13 @@ function App() {
                 }
               >
               </PrivateOnlyRoute>
-          //NyTask一覧画面
+              {/* NyTask一覧画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/taskIndex"
                 component={MyTaskIndex}>
               </PrivateOnlyRoute>
-          //MyTask詳細画面
+              {/* MyTask詳細画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/MyTask/:orderId"
@@ -167,13 +168,13 @@ function App() {
                 }
               >
               </PrivateOnlyRoute>
-          //order一覧画面
+              {/* Order一覧画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/orders"
                 component={OrderIndex}>
               </PrivateOnlyRoute>
-          //Order詳細画面
+              {/* Order詳細画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/orders/:orderId"
@@ -183,6 +184,12 @@ function App() {
                   />
                 }
               >
+              </PrivateOnlyRoute>
+              {/* Setting画面 */}
+              <PrivateOnlyRoute
+                exact
+                path="/setting"
+                component={Setting}>
               </PrivateOnlyRoute>
             </Switch>
           </Router>

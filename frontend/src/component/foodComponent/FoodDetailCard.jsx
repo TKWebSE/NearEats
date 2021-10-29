@@ -1,4 +1,4 @@
-import React,{ Fragment } from "react";
+import React, { Fragment } from "react";
 import media from "styled-media-query";
 import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";

@@ -131,6 +131,10 @@ export const ORDER_TEXT = {
     ORDER_CANCEL_MODAL_TEXT: "注文を破棄して、取引を中断します。",
 }
 
+export const SETTING_TEXT = {
+    USER_DELETE_LINK_TEXT: "アカウントを削除する",
+}
+
 export const NOTFOUND_ORDER_TEXT = {
     NOT_EXIST_ORDER_TEXT: "注文した料理はありません",
     LETS_ORDER_TEXT: "料理を見てみましょう！！",
