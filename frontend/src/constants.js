@@ -132,7 +132,8 @@ export const ORDER_TEXT = {
 }
 
 export const SETTING_TEXT = {
-    USER_DELETE_LINK_TEXT: "アカウントを削除する",
+    BUY_USER_POINT_LINK_TEXT: "",
+    DELETE_USER_LINK_TEXT: "アカウントを削除する",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
