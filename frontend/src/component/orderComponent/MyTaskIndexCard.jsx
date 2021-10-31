@@ -41,6 +41,9 @@ const TaskIndexCardUpsideWrapper = styled.div`
 const FoodNameWrapper = styled.h2`
   width:85%;
   font-size:30px;
+  ${media.greaterThan("large")`
+    font-size:40px;
+  `}
   ${media.lessThan("large")`
     font-size:25px;
   `}
@@ -78,8 +81,11 @@ const TaskIndexCardDownsideWrapper = styled.div`
 `;
 
 const FoodPriceWrapper = styled.h2`
-  width:45%;
+  width:40%;
   font-size:30px;
+  ${media.greaterThan("large")`
+    font-size:40px;
+  `}
   ${media.lessThan("large")`
     font-size:25px;
   `}
@@ -98,9 +104,10 @@ const TimeWrapper = styled.div`
   font-size:20px;
   ${media.lessThan("large")`
     font-size:16px;
+    width:150%;
   `}
   ${media.lessThan("medium")`
-    font-size:11px;
+    fontsize:11px;
   `}
   ${media.lessThan("small")`
     font-size:5px;
@@ -109,31 +116,13 @@ const TimeWrapper = styled.div`
 `;
 
 const FinishedWrapper = styled.div`
-  display: flex;
-`;
-
-const TasKUpdateTextWrapper = styled.div`
-  width:100%;
-`;
-
-const TaskUpdateTimeWrapper = styled.div`
-  width:100%;
+  text-align:right;
 `;
 
 
 const UnFinishedWrapper = styled.div`
-  display: flex;
+  text-align:right;
 `;
-
-const TaskCreateTextWrapper = styled.div`
-  width:100%;
-`;
-
-const TaskCreateTimeWrapper = styled.div`
-  width:100%;
-`;
-
-
 
 export const MyTaskIndexCard = ({ task }) => {
   const state = useContext(TaskState);
@@ -164,21 +153,13 @@ export const MyTaskIndexCard = ({ task }) => {
               {
                 task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                   <UnFinishedWrapper>
-                    <TaskCreateTextWrapper>
-                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TaskCreateTextWrapper>
-                    <TaskCreateTimeWrapper>
-                      {changeJSTDate(task.created_at)}
-                    </TaskCreateTimeWrapper>
+                    {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
+                    {changeJSTDate(task.created_at)}
                   </UnFinishedWrapper>
                   :
                   <FinishedWrapper>
-                    <TasKUpdateTextWrapper>
-                      {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
-                    </TasKUpdateTextWrapper>
-                    <TaskUpdateTimeWrapper>
-                      {changeJSTDate(task.updated_at)}
-                    </TaskUpdateTimeWrapper>
+                    {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
+                    {changeJSTDate(task.updated_at)}
                   </FinishedWrapper>
               }
             </TimeWrapper>

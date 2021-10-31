@@ -79,8 +79,8 @@ export const USER_HEADER_TITLE = {
 export const ORDER_HEADER_TITLE = {
     MYTASK_INDEX_TITLE: "Task一覧",
     TASK_DETAIL: "Taskの詳細",
-    ORDER_INDEX_TITLE: "購入履歴",
-    ORDER_DETAIL_TITLE: "購入履歴の詳細",
+    ORDER_INDEX_TITLE: "注文履歴",
+    ORDER_DETAIL_TITLE: "注文履歴の詳細",
 }
 
 export const USER_LABEL = {
@@ -132,7 +132,8 @@ export const ORDER_TEXT = {
 }
 
 export const SETTING_TEXT = {
-    BUY_USER_POINT_LINK_TEXT: "",
+    BUY_USER_POINT_LINK_TEXT: "ポイントを追加する",
+    LOGOUT_LINK_TEXT: "ログアウトする",
     DELETE_USER_LINK_TEXT: "アカウントを削除する",
 }
 

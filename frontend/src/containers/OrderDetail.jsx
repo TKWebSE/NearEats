@@ -9,7 +9,7 @@ import { SessionState, SessionDispatch, OrderState, OrderDispatch } from "../con
 import { initializeState, orderActionTypes, orderReducer } from "../reducer/orderReducer";
 import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
 import { OrderDetailCard } from "../component/orderComponent/OrderDetailCard";
-import { myTaskShowBackendURL } from "../urls/index";
+import { myTaskShowBackendURL, foodsIndexURL } from "../urls/index";
 import { COLORS } from "../style_constants";
 
 const OrderDetailWrapper = styled.div`
@@ -55,21 +55,25 @@ export const OrderDetail = ({ match }) => {
     dispatch({ type: orderActionTypes.FETCHING })
     fetchOrderApi(match.params.orderId)
       .then((data) => {
-        dispatch({
-          type: orderActionTypes.FETCH_ORDER,
-          payload: {
-            order: data.order[0]
-          },
-        });
-        dispatch({
-          type: orderActionTypes.FETCH_MAKE_USER,
-          payload: {
-            make_user: data.make_user[0]
-          },
-        });
-        dispatch({
-          type: orderActionTypes.FETCH_SUCCESS,
-        });
+        if (data.order[0].order_user_id === SessionAuthState.currentUser.id) {
+          dispatch({
+            type: orderActionTypes.FETCH_ORDER,
+            payload: {
+              order: data.order[0]
+            },
+          });
+          dispatch({
+            type: orderActionTypes.FETCH_MAKE_USER,
+            payload: {
+              make_user: data.make_user[0]
+            },
+          });
+          dispatch({
+            type: orderActionTypes.FETCH_SUCCESS,
+          });
+        } else {
+          history.push(foodsIndexURL)
+        }
       })
       .catch((e) => console.log(e))
   }, [])

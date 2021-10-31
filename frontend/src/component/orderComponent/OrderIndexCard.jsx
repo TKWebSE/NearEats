@@ -40,6 +40,9 @@ const OrderIndexCardUpsideWrapper = styled.div`
 const FoodNameWrapper = styled.h2`
   width:85%;
   font-size:30px;
+  ${media.greaterThan("large")`
+    font-size:40px;
+  `}
   ${media.lessThan("large")`
     font-size:25px;
   `}
@@ -77,8 +80,11 @@ const OrderIndexCardDownsideWrapper = styled.div`
 `;
 
 const FoodPriceWrapper = styled.h2`
-  width:45%;
+  width:40%;
   font-size:30px;
+  ${media.greaterThan("large")`
+    font-size:40px;
+  `}
   ${media.lessThan("large")`
     font-size:25px;
   `}
@@ -108,30 +114,13 @@ const TimeWrapper = styled.div`
 `;
 
 const FinishedWrapper = styled.div`
-  display: flex;
+text-align:right;
 `;
-
-const OrderUpdateTextWrapper = styled.div`
-  width:100%;
-`;
-
-const OrderUpdateTimeWrapper = styled.div`
-  width:100%;
-`;
-
 
 const UnFinishedWrapper = styled.div`
-  display: flex;
-`;
+text-align:right;
 
-const OrderCreateTextWrapper = styled.div`
-  width:100%;
 `;
-
-const OrderCreateTimeWrapper = styled.div`
-  width:100%;
-`;
-
 
 
 export const OrderIndexCard = ({ order }) => {
@@ -161,21 +150,13 @@ export const OrderIndexCard = ({ order }) => {
               {
                 order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
                   <UnFinishedWrapper>
-                    <OrderCreateTextWrapper>
-                      {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
-                    </OrderCreateTextWrapper>
-                    <OrderCreateTimeWrapper>
-                      {changeJSTDate(order.created_at)}
-                    </OrderCreateTimeWrapper>
+                    {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
+                    {changeJSTDate(order.created_at)}
                   </UnFinishedWrapper>
                   :
                   <FinishedWrapper>
-                    <OrderUpdateTextWrapper>
-                      {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
-                    </OrderUpdateTextWrapper>
-                    <OrderUpdateTimeWrapper>
-                      {changeJSTDate(order.updated_at)}
-                    </OrderUpdateTimeWrapper>
+                    {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
+                    {changeJSTDate(order.updated_at)}
                   </FinishedWrapper>
               }
             </TimeWrapper>

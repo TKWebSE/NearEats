@@ -3,8 +3,6 @@
 //UTCをJSTに変換し、フォーマットする
 export function changeJSTDate(date) {
   const newDate = new Date(date)
-  // const newDate = new Date("2014/01/01 02:04")
-  console.log(newDate)
 
   const year = newDate.getFullYear()
   const month = newDate.getMonth() + 1

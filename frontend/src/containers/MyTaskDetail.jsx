@@ -9,7 +9,7 @@ import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../conte
 import { initializeState, taskActionTypes, taskReducer } from "../reducer/taskReducer";
 import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
 import { TaskDetailCard } from "../component/orderComponent/TaskDetailCard";
-import { myTaskShowBackendURL } from "../urls/index";
+import { myTaskShowBackendURL, foodsIndexURL } from "../urls/index";
 import { COLORS } from "../style_constants";
 
 const TaskDetailWrapper = styled.div`
@@ -56,21 +56,26 @@ export const MyTaskDetail = ({ match }) => {
         dispatch({ type: taskActionTypes.FETCHING })
         fetchTaskApi(match.params.orderId)
             .then((data) => {
-                dispatch({
-                    type: taskActionTypes.FETCH_TASK,
-                    payload: {
-                        task: data.task[0]
-                    },
-                });
-                dispatch({
-                    type: taskActionTypes.FETCH_ORDER_USER,
-                    payload: {
-                        order_user: data.order_user[0]
-                    },
-                });
-                dispatch({
-                    type: taskActionTypes.FETCH_SUCCESS,
-                });
+                if (data.task[0].make_user_id === SessionAuthState.currentUser.id) {
+                    dispatch({
+                        type: taskActionTypes.FETCH_TASK,
+                        payload: {
+                            task: data.task[0]
+                        },
+                    });
+                    dispatch({
+                        type: taskActionTypes.FETCH_ORDER_USER,
+                        payload: {
+                            order_user: data.order_user[0]
+                        },
+                    });
+                    dispatch({
+                        type: taskActionTypes.FETCH_SUCCESS,
+                    });
+                } else {
+                    history.push(foodsIndexURL)
+                }
+
             })
             .catch((e) => console.log(e))
     }, [])
