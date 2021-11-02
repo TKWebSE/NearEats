@@ -21,7 +21,7 @@ const UserName = styled.h1`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-size:300%;
+    font-size:200%;
 `;
 
 const UserRatingWrapper = styled.div`
@@ -30,20 +30,23 @@ const UserRatingWrapper = styled.div`
     text-overflow: ellipsis;
 `;
 
-const UserUnderDetailWrapper = styled.div`
+const UserUnderDetailWrapper = styled.h2`
   display: flex;
   padding-top:5%;
+  ${media.greaterThan("large")`
+  
+  `}
 `;
 
-const UserLabelWrapper = styled.h2`
+const UserLabelWrapper = styled.div`
   color:grey;
-  width:40%;
-  font-size:200%;
+  // width:40%;
+  font-size:150%;
 `;
 
-const UserDataWrapper = styled.h2`
+const UserDataWrapper = styled.div`
   padding-left:2%;
-  font-size:210%;
+  font-size:150%;
 `;
 
 const UserPointLabel = styled.div`

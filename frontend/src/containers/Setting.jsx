@@ -11,6 +11,10 @@ const UserSettingWrapper = styled.div`
 const BuyUserPointWrapper = styled.div`
 `;
 
+const EditUserInfoWrapper = styled.div``;
+
+const EditUserAuthInfoWrapper = styled.div``;
+
 const LogoutWrapper = styled.div``;
 
 const DeleteUserWrapper = styled.div``;
@@ -23,6 +27,12 @@ export const Setting = () => {
         <BuyUserPointWrapper>
           {SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
         </BuyUserPointWrapper>
+        <EditUserInfoWrapper>
+          {SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
+        </EditUserInfoWrapper>
+        <EditUserAuthInfoWrapper>
+          {SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
+        </EditUserAuthInfoWrapper>
         <LogoutWrapper>
           {SETTING_TEXT.LOGOUT_LINK_TEXT}
         </LogoutWrapper>

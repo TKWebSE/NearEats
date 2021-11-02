@@ -133,6 +133,8 @@ export const ORDER_TEXT = {
 
 export const SETTING_TEXT = {
     BUY_USER_POINT_LINK_TEXT: "ポイントを追加する",
+    EDIT_USER_INFO_LINK_TEXT: "ユーザー情報の設定",
+    EDIT_USER_AUTH_INFO_LINK_TEXT: "メールアドレス、パスワードの設定",
     LOGOUT_LINK_TEXT: "ログアウトする",
     DELETE_USER_LINK_TEXT: "アカウントを削除する",
 }
