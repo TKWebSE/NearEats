@@ -9,6 +9,14 @@ const UserSettingWrapper = styled.div`
 `;
 
 const BuyUserPointWrapper = styled.div`
+border: solid;
+border-color: #F0F0F0 ;
+color:black;
+border-width:2px;
+display: flex;
+justify-content:space-between;
+height:30%;
+width:100%;
 `;
 
 const EditUserInfoWrapper = styled.div``;
@@ -20,6 +28,10 @@ const LogoutWrapper = styled.div``;
 const DeleteUserWrapper = styled.div``;
 
 export const Setting = () => {
+
+  function handleUserDelete() {
+    console.log("userDeleteeeeeeeeeeeeeee!!!!")
+  }
 
   return (
     <Fragment>
@@ -36,7 +48,7 @@ export const Setting = () => {
         <LogoutWrapper>
           {SETTING_TEXT.LOGOUT_LINK_TEXT}
         </LogoutWrapper>
-        <DeleteUserWrapper>
+        <DeleteUserWrapper onClick={() => { handleUserDelete() }}>
           {SETTING_TEXT.DELETE_USER_LINK_TEXT}
         </DeleteUserWrapper>
       </UserSettingWrapper>
