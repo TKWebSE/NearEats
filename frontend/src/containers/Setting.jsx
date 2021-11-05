@@ -17,6 +17,7 @@ display: flex;
 justify-content:space-between;
 height:30%;
 width:100%;
+text-align:center;
 `;
 
 const EditUserInfoWrapper = styled.div``;
