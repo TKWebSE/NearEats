@@ -29,7 +29,7 @@ const BuyUserPointWrapper = styled.h2`
 
 const BuyUserPointIcon = styled.div`
   padding-top:1%;
-  padding-left:1%;
+  padding-right:1%;
 `;
 
 const BuyUserPointText = styled.div`
@@ -125,6 +125,10 @@ padding-left:1%;
 `;
 
 export const Setting = () => {
+
+  function handleUserEdit() {
+
+  }
 
   function handleUserDelete() {
     console.log("userDeleteeeeeeeeeeeeeee!!!!")
