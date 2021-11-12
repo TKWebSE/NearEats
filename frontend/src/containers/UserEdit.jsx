@@ -29,7 +29,7 @@ const UserEditButton = styled.div`
 
 export const UserEdit = ({ match }) => {
     const SessionAuthState = useContext(SessionState);
-    const SessionAuthDispatch = useContext(SessionDispatch)
+    const SessionAuthDispatch = useContext(SessionDispatch);
     const [state, dispatch] = useReducer(userReducer, initializeState);
     const history = useHistory();
 

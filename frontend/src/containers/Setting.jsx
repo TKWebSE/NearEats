@@ -1,12 +1,16 @@
-import { Fragment } from "react"
+import { Fragment, useContext } from "react"
 import media from "styled-media-query";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 import { SETTING_TEXT } from "../constants";
+import { userEditURL } from "../urls/index";
+import { SessionState, SessionDispatch } from '../context/Context';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
 
 const UserSettingWrapper = styled.div`
   margin-left: 20%;
@@ -125,19 +129,35 @@ padding-left:1%;
 `;
 
 export const Setting = () => {
+  const SessionAuthState = useContext(SessionState);
+  const SessionAuthDispatch = useContext(SessionDispatch)
+  const history = useHistory();
 
-  function handleUserEdit() {
-
+  function handleBuyPoint() {
+    console.log("handleBuyPoint")
   }
 
-  function handleUserDelete() {
+  function handleEditUser() {
+    history.push(userEditURL(SessionAuthState.currentUser.id))
+    console.log("handleEditUser")
+  }
+
+  function handleEditUserAuthInfo() {
+    console.log("handleEditUserAuthInfo")
+  }
+
+  function handleLogout() {
+    console.log("handleLogout")
+  }
+
+  function handleDeleteUser() {
     console.log("userDeleteeeeeeeeeeeeeee!!!!")
   }
 
   return (
     <Fragment>
       <UserSettingWrapper>
-        <BuyUserPointWrapper>
+        <BuyUserPointWrapper onClick={() => { handleBuyPoint() }}>
           <BuyUserPointIcon>
             <AddCircleIcon fontSize='large' />
           </BuyUserPointIcon>
@@ -145,7 +165,7 @@ export const Setting = () => {
             {SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
           </BuyUserPointText>
         </BuyUserPointWrapper>
-        <EditUserInfoWrapper>
+        <EditUserInfoWrapper onClick={() => { handleEditUser() }}>
           <EditUserInfoIcon>
             <PersonAddIcon fontSize='large' />
           </EditUserInfoIcon>
@@ -153,7 +173,7 @@ export const Setting = () => {
             {SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
           </EditUserInfoText>
         </EditUserInfoWrapper>
-        <EditUserAuthInfoWrapper>
+        <EditUserAuthInfoWrapper onClick={() => { handleEditUserAuthInfo() }}>
           <EditUserAuthInfoIcon>
             <VerifiedUserIcon fontSize='large' />
           </EditUserAuthInfoIcon>
@@ -161,7 +181,7 @@ export const Setting = () => {
             {SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
           </EditUserAuthInfoText>
         </EditUserAuthInfoWrapper>
-        <LogoutWrapper>
+        <LogoutWrapper onClick={() => { handleLogout() }}>
           <LogoutIcon>
             <MeetingRoomIcon fontSize='large' />
           </LogoutIcon>
@@ -169,7 +189,7 @@ export const Setting = () => {
             {SETTING_TEXT.LOGOUT_LINK_TEXT}
           </LogoutText>
         </LogoutWrapper>
-        <DeleteUserWrapper onClick={() => { handleUserDelete() }}>
+        <DeleteUserWrapper onClick={() => { handleDeleteUser() }}>
           <DeleteUserIcon>
             <DeleteForeverIcon fontSize='large' />
           </DeleteUserIcon>

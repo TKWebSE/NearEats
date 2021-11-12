@@ -100,9 +100,6 @@ const LocationWrapper = styled.div`
   display:flex;
 `;
 
-const LocationText = styled.div`
-`;
-
 //ヘッダーのファンクション
 export default function MaterialUIPrivateHeader() {
   const classes = useStyles();
