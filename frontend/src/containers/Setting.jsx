@@ -10,7 +10,8 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
+import SettingRectangleModalComponent from "../component/settingComponent/SettingRectangleModalComponent";
+
 
 const UserSettingWrapper = styled.div`
   margin-left: 20%;
@@ -157,6 +158,13 @@ export const Setting = () => {
   return (
     <Fragment>
       <UserSettingWrapper>
+        <SettingRectangleModalComponent
+          Icon={AddCircleIcon}
+          text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
+          onClick={console.log("sssss")}
+          modalTilte={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
+          modalText={SETTING_TEXT.BUY_USER_POINT_MODAL_TEXT}
+        />
         <BuyUserPointWrapper onClick={() => { handleBuyPoint() }}>
           <BuyUserPointIcon>
             <AddCircleIcon fontSize='large' />
@@ -183,7 +191,8 @@ export const Setting = () => {
         </EditUserAuthInfoWrapper>
         <LogoutWrapper onClick={() => { handleLogout() }}>
           <LogoutIcon>
-            <MeetingRoomIcon fontSize='large' />
+            <MeetingRoomIcon fontSize='large'>
+            </MeetingRoomIcon>
           </LogoutIcon>
           <LogoutText>
             {SETTING_TEXT.LOGOUT_LINK_TEXT}

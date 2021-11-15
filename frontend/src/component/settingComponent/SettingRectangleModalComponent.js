@@ -1,35 +1,48 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { MaterialUILocationButton } from "../HeaderComponent/MaterialUILocationButton";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { HEADER_TEXT, modalButtomLabel } from "../../constants";
-import AnimatedMultiSelect from "../AnimatedMultiSelect";
-import { sessionActionTypes } from "../../reducer/sessionReducer";
-import { SessionState, SessionDispatch } from "../../context/Context";
-import { foodsIndexURL } from "../../urls/index";
-import { useHistory } from "react-router-dom";
-
-
-const SelectWrapper = styled.div`
-  margin-bottom:3%;
-`;
+import { modalButtomLabel } from "../../constants";
 
 const OKButtomWrapper = styled.div`
-  margin-left:45%;
-  float:left;
+margin-left:50%;
+float:left;
 `;
 
 const NGButtomWrapper = styled.div``;
+
+
+const RectangleWrapper = styled.h2`
+  border: solid;
+  border-color: #F0F0F0 ;
+  color:black;
+  border-width:2px;
+  display: flex;
+  padding-left:1%;
+  padding-top:1%;
+  padding-bottom:1%;
+  height:100%;
+  width:100%;
+`;
+
+const RectangleIcon = styled.div`
+  padding-top:1%;
+  padding-right:1%;
+`;
+
+const RectangleText = styled.div`
+  padding-top:1%;
+`;
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
 
 function getModalStyle() {
-  const top = 50;
-  const left = 50;
+  const top = 50 + rand();
+  const left = 50 + rand();
 
   return {
     top: `${top}%`,
@@ -49,15 +62,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUILocationIconModal({ onClick, modalTilte, modalText, nowLocation }) {
+export default function SettingRectangleModalComponent({ Icon, text, onClick, modalTilte, modalText }) {
   const classes = useStyles();
-  const history = useHistory();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(null);
-  const [nowSelectLocation, setLocation] = useState(nowLocation);
-  const SessionUserState = useContext(SessionState);
-  const SessionUserDispatch = useContext(SessionDispatch);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -68,16 +77,9 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
   };
 
   const handleOK = () => {
-    SessionUserDispatch({
-      type: sessionActionTypes.SETNOWLOCATION,
-      payload: {
-        nowLocation: nowSelectLocation
-      },
-    });
+    onClick()
     handleClose()
-    history.push(foodsIndexURL)
   }
-  console.log(nowSelectLocation)
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -85,13 +87,6 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
       <p id="simple-modal-description">
         {modalText}
       </p>
-      <SelectWrapper>
-        <AnimatedMultiSelect
-          placeholederText={HEADER_TEXT.NOWLOCATION_MODAL_SELECT_TEXT}
-          setLocation={setLocation}
-          nowSelectLocation={nowSelectLocation}
-        />
-      </SelectWrapper>
       <OKButtomWrapper>
         <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
       </OKButtomWrapper>
@@ -102,8 +97,15 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
   );
 
   return (
-    <div>
-      <MaterialUILocationButton onClick={() => handleOpen()} btnLabel={nowLocation}></MaterialUILocationButton>
+    <Fragment>
+      <RectangleWrapper onClick={() => { handleOpen() }}>
+        <RectangleIcon>
+          <Icon fontSize='large' />
+        </RectangleIcon>
+        <RectangleText>
+          {text}
+        </RectangleText>
+      </RectangleWrapper>
       <Modal
         open={open}
         onClose={handleClose}
@@ -112,6 +114,6 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
       >
         {body}
       </Modal>
-    </div>
+    </Fragment>
   );
 }
