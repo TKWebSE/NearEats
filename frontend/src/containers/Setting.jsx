@@ -11,7 +11,8 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingRectangleModalComponent from "../component/settingComponent/SettingRectangleModalComponent";
-
+import SettingRectangleComponent from "../component/settingComponent/SettingRectangleComponent";
+import SettingRectangleModalInModalComponent from "../component/settingComponent/SettingRectangleModaInModallComponent";
 
 const UserSettingWrapper = styled.div`
   margin-left: 20%;
@@ -161,51 +162,36 @@ export const Setting = () => {
         <SettingRectangleModalComponent
           Icon={AddCircleIcon}
           text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
-          onClick={console.log("sssss")}
-          modalTilte={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
-          modalText={SETTING_TEXT.BUY_USER_POINT_MODAL_TEXT}
+          onClick={() => handleBuyPoint()}
+          modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
+          modalText={""}
         />
-        <BuyUserPointWrapper onClick={() => { handleBuyPoint() }}>
-          <BuyUserPointIcon>
-            <AddCircleIcon fontSize='large' />
-          </BuyUserPointIcon>
-          <BuyUserPointText>
-            {SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
-          </BuyUserPointText>
-        </BuyUserPointWrapper>
-        <EditUserInfoWrapper onClick={() => { handleEditUser() }}>
-          <EditUserInfoIcon>
-            <PersonAddIcon fontSize='large' />
-          </EditUserInfoIcon>
-          <EditUserInfoText>
-            {SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
-          </EditUserInfoText>
-        </EditUserInfoWrapper>
-        <EditUserAuthInfoWrapper onClick={() => { handleEditUserAuthInfo() }}>
-          <EditUserAuthInfoIcon>
-            <VerifiedUserIcon fontSize='large' />
-          </EditUserAuthInfoIcon>
-          <EditUserAuthInfoText>
-            {SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
-          </EditUserAuthInfoText>
-        </EditUserAuthInfoWrapper>
-        <LogoutWrapper onClick={() => { handleLogout() }}>
-          <LogoutIcon>
-            <MeetingRoomIcon fontSize='large'>
-            </MeetingRoomIcon>
-          </LogoutIcon>
-          <LogoutText>
-            {SETTING_TEXT.LOGOUT_LINK_TEXT}
-          </LogoutText>
-        </LogoutWrapper>
-        <DeleteUserWrapper onClick={() => { handleDeleteUser() }}>
-          <DeleteUserIcon>
-            <DeleteForeverIcon fontSize='large' />
-          </DeleteUserIcon>
-          <DeleteUserText>
-            {SETTING_TEXT.DELETE_USER_LINK_TEXT}
-          </DeleteUserText>
-        </DeleteUserWrapper>
+        <SettingRectangleComponent
+          Icon={PersonAddIcon}
+          text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
+          onClick={() => handleEditUser()}
+        />
+        <SettingRectangleModalComponent
+          Icon={VerifiedUserIcon}
+          text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
+          onClick={() => handleEditUserAuthInfo()}
+          modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
+          modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
+        />
+        <SettingRectangleComponent
+          Icon={MeetingRoomIcon}
+          text={SETTING_TEXT.LOGOUT_LINK_TEXT}
+          onClick={() => handleLogout()}
+        />
+        <SettingRectangleModalInModalComponent
+          Icon={DeleteForeverIcon}
+          text={SETTING_TEXT.DELETE_USER_LINK_TEXT}
+          onClick={() => handleDeleteUser()}
+          modalTilte={SETTING_TEXT.DELETE_USER_MODAL_TITLE}
+          modalText={SETTING_TEXT.DELETE_USER_MODAL_TEXT}
+          modalVerificationTitle={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TITLE}
+          modalVerificationText={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TEXT}
+        />
       </UserSettingWrapper>
     </Fragment >
   )

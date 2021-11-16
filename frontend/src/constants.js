@@ -137,10 +137,13 @@ export const SETTING_TEXT = {
     EDIT_USER_AUTH_INFO_LINK_TEXT: "メールアドレス、パスワードの設定",
     LOGOUT_LINK_TEXT: "ログアウト",
     DELETE_USER_LINK_TEXT: "アカウントの削除",
-    BUY_USER_POINT_LINK_TEXT: "追加するポイントの設定をしてください",
-    EDIT_USER_AUTH_INFO_MODAL_TEXT: "",
-    LOGOUT_MODAL_TEXT: "",
-    DELETE_USER_MODAL_TEXT: "",
+    BUY_USER_POINT_MODAL_TITLE: "追加するポイントを設定してください",
+    EDIT_USER_AUTH_INFO_MODAL_TITLE: "メールアドレスとパスワードの確認",
+    EDIT_USER_AUTH_INFO_MODAL_TEXT: "現在登録されているメールアドレスとパスワードを入力してください",
+    DELETE_USER_MODAL_TITLE: "アカウントを削除しますか？",
+    DELETE_USER_MODAL_TEXT: "一度削除したアカウントを復旧することはできません",
+    DELETE_USER_VERIFICATION_MODAL_TITLE: "本当にアカウントを削除しますか？",
+    DELETE_USER_VERIFICATION_MODAL_TEXT: "",
 }
 
 export const NOTFOUND_ORDER_TEXT = {

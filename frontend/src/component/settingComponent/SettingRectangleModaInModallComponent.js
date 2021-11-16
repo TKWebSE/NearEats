@@ -62,11 +62,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SettingRectangleModalComponent({ Icon, text, onClick, modalTilte, modalText }) {
+export default function SettingRectangleModalInModalComponent({ Icon, text, onClick, modalTilte, modalText, modalVerificationTitle, modalVerificationText }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [verificationOpen, setVerificationOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -76,9 +77,22 @@ export default function SettingRectangleModalComponent({ Icon, text, onClick, mo
     setOpen(false);
   };
 
+  const handleVerificationOpen = () => {
+    setVerificationOpen(true);
+  };
+
+  const handleVerificationClose = () => {
+    setVerificationOpen(false);
+  };
+
   const handleOK = () => {
-    onClick()
-    handleClose()
+    handleClose();
+    handleVerificationOpen();
+  }
+
+  const handleVerificationOK = () => {
+    onClick();
+    handleVerificationClose();
   }
 
   const body = (
@@ -92,6 +106,21 @@ export default function SettingRectangleModalComponent({ Icon, text, onClick, mo
       </OKButtomWrapper>
       <NGButtomWrapper>
         <MaterialUICommonButton onClick={() => handleClose()} btnLabel={modalButtomLabel.MODAL_NG}></MaterialUICommonButton>
+      </NGButtomWrapper>
+    </div>
+  );
+
+  const VerificationBody = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">{modalVerificationTitle}</h2>
+      <p id="simple-modal-description">
+        {modalVerificationText}
+      </p>
+      <OKButtomWrapper>
+        <MaterialUICommonButton onClick={() => handleVerificationOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
+      </OKButtomWrapper>
+      <NGButtomWrapper>
+        <MaterialUICommonButton onClick={() => handleVerificationClose()} btnLabel={modalButtomLabel.MODAL_NG}></MaterialUICommonButton>
       </NGButtomWrapper>
     </div>
   );
@@ -113,6 +142,14 @@ export default function SettingRectangleModalComponent({ Icon, text, onClick, mo
         aria-describedby="simple-modal-description"
       >
         {body}
+      </Modal>
+      <Modal
+        open={verificationOpen}
+        onClose={handleVerificationClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {VerificationBody}
       </Modal>
     </Fragment>
   );

@@ -53,8 +53,8 @@ export default function MaterialUISimpleModal({ btnLabel, onClick, modalTilte, m
   };
 
   const handleOK = () => {
-    onClick()
-    handleClose()
+    onClick();
+    handleClose();
   }
 
   const body = (
