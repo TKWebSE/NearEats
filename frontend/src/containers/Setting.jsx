@@ -2,9 +2,10 @@ import { Fragment, useContext } from "react"
 import media from "styled-media-query";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { userEditURL, homeURL } from "../urls/index";
 import { SETTING_TEXT } from "../constants";
-import { userEditURL } from "../urls/index";
-import { SessionState, SessionDispatch } from '../context/Context';
+import { SessionState, SessionDispatch } from "../context/Context";
+import { sessionActionTypes } from "../reducer/sessionReducer";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
@@ -13,6 +14,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingRectangleModalComponent from "../component/settingComponent/SettingRectangleModalComponent";
 import SettingRectangleComponent from "../component/settingComponent/SettingRectangleComponent";
 import SettingRectangleModalInModalComponent from "../component/settingComponent/SettingRectangleModaInModallComponent";
+import { signOutApi } from "../apis/sessionApis";
 
 const UserSettingWrapper = styled.div`
   margin-left: 20%;
@@ -131,8 +133,8 @@ padding-left:1%;
 `;
 
 export const Setting = () => {
-  const SessionAuthState = useContext(SessionState);
-  const SessionAuthDispatch = useContext(SessionDispatch)
+  const SessionUserState = useContext(SessionState);
+  const SessionUserDispatch = useContext(SessionDispatch);
   const history = useHistory();
 
   function handleBuyPoint() {
@@ -140,7 +142,7 @@ export const Setting = () => {
   }
 
   function handleEditUser() {
-    history.push(userEditURL(SessionAuthState.currentUser.id))
+    history.push(userEditURL(SessionUserState.currentUser.id))
     console.log("handleEditUser")
   }
 
@@ -148,51 +150,59 @@ export const Setting = () => {
     console.log("handleEditUserAuthInfo")
   }
 
-  function handleLogout() {
+  function handleSignOut() {
     console.log("handleLogout")
+    signOutApi()
+      .then((data) => {
+        SessionUserDispatch({
+          type: sessionActionTypes.SIGNOUT,
+        });
+      })
+    history.push(homeURL)
   }
+}
 
-  function handleDeleteUser() {
-    console.log("userDeleteeeeeeeeeeeeeee!!!!")
-  }
+function handleDeleteUser() {
+  console.log("userDeleteeeeeeeeeeeeeee!!!!")
+}
 
-  return (
-    <Fragment>
-      <UserSettingWrapper>
-        <SettingRectangleModalComponent
-          Icon={AddCircleIcon}
-          text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
-          onClick={() => handleBuyPoint()}
-          modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
-          modalText={""}
-        />
-        <SettingRectangleComponent
-          Icon={PersonAddIcon}
-          text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
-          onClick={() => handleEditUser()}
-        />
-        <SettingRectangleModalComponent
-          Icon={VerifiedUserIcon}
-          text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
-          onClick={() => handleEditUserAuthInfo()}
-          modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
-          modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
-        />
-        <SettingRectangleComponent
-          Icon={MeetingRoomIcon}
-          text={SETTING_TEXT.LOGOUT_LINK_TEXT}
-          onClick={() => handleLogout()}
-        />
-        <SettingRectangleModalInModalComponent
-          Icon={DeleteForeverIcon}
-          text={SETTING_TEXT.DELETE_USER_LINK_TEXT}
-          onClick={() => handleDeleteUser()}
-          modalTilte={SETTING_TEXT.DELETE_USER_MODAL_TITLE}
-          modalText={SETTING_TEXT.DELETE_USER_MODAL_TEXT}
-          modalVerificationTitle={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TITLE}
-          modalVerificationText={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TEXT}
-        />
-      </UserSettingWrapper>
-    </Fragment >
-  )
+return (
+  <Fragment>
+    <UserSettingWrapper>
+      <SettingRectangleModalComponent
+        Icon={AddCircleIcon}
+        text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
+        onClick={() => handleBuyPoint()}
+        modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
+        modalText={""}
+      />
+      <SettingRectangleComponent
+        Icon={PersonAddIcon}
+        text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
+        onClick={() => handleEditUser()}
+      />
+      <SettingRectangleModalComponent
+        Icon={VerifiedUserIcon}
+        text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
+        onClick={() => handleEditUserAuthInfo()}
+        modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
+        modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
+      />
+      <SettingRectangleComponent
+        Icon={MeetingRoomIcon}
+        text={SETTING_TEXT.LOGOUT_LINK_TEXT}
+        onClick={() => handleSignOut()}
+      />
+      <SettingRectangleModalInModalComponent
+        Icon={DeleteForeverIcon}
+        text={SETTING_TEXT.DELETE_USER_LINK_TEXT}
+        onClick={() => handleDeleteUser()}
+        modalTilte={SETTING_TEXT.DELETE_USER_MODAL_TITLE}
+        modalText={SETTING_TEXT.DELETE_USER_MODAL_TEXT}
+        modalVerificationTitle={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TITLE}
+        modalVerificationText={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TEXT}
+      />
+    </UserSettingWrapper>
+  </Fragment >
+)
 }
