@@ -160,49 +160,49 @@ export const Setting = () => {
       })
     history.push(homeURL)
   }
-}
 
-function handleDeleteUser() {
-  console.log("userDeleteeeeeeeeeeeeeee!!!!")
-}
 
-return (
-  <Fragment>
-    <UserSettingWrapper>
-      <SettingRectangleModalComponent
-        Icon={AddCircleIcon}
-        text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
-        onClick={() => handleBuyPoint()}
-        modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
-        modalText={""}
-      />
-      <SettingRectangleComponent
-        Icon={PersonAddIcon}
-        text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
-        onClick={() => handleEditUser()}
-      />
-      <SettingRectangleModalComponent
-        Icon={VerifiedUserIcon}
-        text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
-        onClick={() => handleEditUserAuthInfo()}
-        modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
-        modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
-      />
-      <SettingRectangleComponent
-        Icon={MeetingRoomIcon}
-        text={SETTING_TEXT.LOGOUT_LINK_TEXT}
-        onClick={() => handleSignOut()}
-      />
-      <SettingRectangleModalInModalComponent
-        Icon={DeleteForeverIcon}
-        text={SETTING_TEXT.DELETE_USER_LINK_TEXT}
-        onClick={() => handleDeleteUser()}
-        modalTilte={SETTING_TEXT.DELETE_USER_MODAL_TITLE}
-        modalText={SETTING_TEXT.DELETE_USER_MODAL_TEXT}
-        modalVerificationTitle={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TITLE}
-        modalVerificationText={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TEXT}
-      />
-    </UserSettingWrapper>
-  </Fragment >
-)
+  function handleDeleteUser() {
+    console.log("userDeleteeeeeeeeeeeeeee!!!!")
+  }
+
+  return (
+    <Fragment>
+      <UserSettingWrapper>
+        <SettingRectangleModalComponent
+          Icon={AddCircleIcon}
+          text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
+          onClick={() => handleBuyPoint()}
+          modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
+          modalText={""}
+        />
+        <SettingRectangleComponent
+          Icon={PersonAddIcon}
+          text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
+          onClick={() => handleEditUser()}
+        />
+        <SettingRectangleModalComponent
+          Icon={VerifiedUserIcon}
+          text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
+          onClick={() => handleEditUserAuthInfo()}
+          modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
+          modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
+        />
+        <SettingRectangleComponent
+          Icon={MeetingRoomIcon}
+          text={SETTING_TEXT.LOGOUT_LINK_TEXT}
+          onClick={() => handleSignOut()}
+        />
+        <SettingRectangleModalInModalComponent
+          Icon={DeleteForeverIcon}
+          text={SETTING_TEXT.DELETE_USER_LINK_TEXT}
+          onClick={() => handleDeleteUser()}
+          modalTilte={SETTING_TEXT.DELETE_USER_MODAL_TITLE}
+          modalText={SETTING_TEXT.DELETE_USER_MODAL_TEXT}
+          modalVerificationTitle={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TITLE}
+          modalVerificationText={SETTING_TEXT.DELETE_USER_VERIFICATION_MODAL_TEXT}
+        />
+      </UserSettingWrapper>
+    </Fragment >
+  )
 }
