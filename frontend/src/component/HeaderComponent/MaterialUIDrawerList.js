@@ -16,7 +16,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL, settingURL } from "../../urls/index";
+import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL, buyPointURL, settingURL } from "../../urls/index";
 import { isLoginApi } from "../../apis/sessionApis";
 import Cookies from "js-cookie";
 
@@ -47,6 +47,10 @@ export const MaterialUIDrawerList = () => {
 
     function ordersLink() {
         history.push(ordersIndexURL);
+    }
+
+    function buyPointLink() {
+        history.push(buyPointURL)
     }
 
     function settingLink() {
@@ -86,6 +90,10 @@ export const MaterialUIDrawerList = () => {
                 <ListItem button onClick={() => ordersLink()}>
                     <ListItemIcon><InboxIcon /></ListItemIcon>
                     <ListItemText primary={DRAWER_TEXT.ORDER_TEXT} />
+                </ListItem>
+                <ListItem button onClick={() => buyPointLink()}>
+                    <ListItemIcon><SettingsIcon /></ListItemIcon>
+                    <ListItemText primary={DRAWER_TEXT.BUY_POINT_TEXT} />
                 </ListItem>
                 <ListItem button onClick={() => settingLink()}>
                     <ListItemIcon><SettingsIcon /></ListItemIcon>

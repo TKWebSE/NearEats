@@ -36,6 +36,7 @@ export const DRAWER_TEXT = {
     TASK_TEXT: "MyTask",
     PROFILE_TEXT: "プロフィール",
     ORDER_TEXT: "注文履歴",
+    BUY_POINT_TEXT: "ポイント購入",
     SETTING_TEXT: "設定",
 }
 
@@ -144,6 +145,10 @@ export const SETTING_TEXT = {
     DELETE_USER_MODAL_TEXT: "一度削除したアカウントを復旧することはできません",
     DELETE_USER_VERIFICATION_MODAL_TITLE: "本当にアカウントを削除しますか？",
     DELETE_USER_VERIFICATION_MODAL_TEXT: "",
+}
+
+export const BUY_POINT_MENU_TEXT = {
+    NOW_POINT: "現在のポイント数",
 }
 
 export const NOTFOUND_ORDER_TEXT = {

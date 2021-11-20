@@ -34,6 +34,7 @@ import { SignIn } from "./containers/SignIn";
 import { Home } from "./containers/Home";
 import { MyTaskIndex } from "./containers/MyTaskIndex";
 import { MyTaskDetail } from "./containers/MyTaskDetail";
+import { BuyPointMenu } from "./containers/BuyPointMenu";
 import { Setting } from "./containers/Setting";
 
 import { sessionApis } from "./apis/sessionApis";
@@ -184,6 +185,12 @@ function App() {
                   />
                 }
               >
+              </PrivateOnlyRoute>
+              {/* ポイント購入画面 */}
+              <PrivateOnlyRoute
+                exact
+                path="/point"
+                component={BuyPointMenu}>
               </PrivateOnlyRoute>
               {/* Setting画面 */}
               <PrivateOnlyRoute
