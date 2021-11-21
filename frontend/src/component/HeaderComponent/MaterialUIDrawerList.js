@@ -13,6 +13,7 @@ import StoreIcon from '@material-ui/icons/Store';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
@@ -92,7 +93,7 @@ export const MaterialUIDrawerList = () => {
                     <ListItemText primary={DRAWER_TEXT.ORDER_TEXT} />
                 </ListItem>
                 <ListItem button onClick={() => buyPointLink()}>
-                    <ListItemIcon><SettingsIcon /></ListItemIcon>
+                    <ListItemIcon><AddCircleIcon /></ListItemIcon>
                     <ListItemText primary={DRAWER_TEXT.BUY_POINT_TEXT} />
                 </ListItem>
                 <ListItem button onClick={() => settingLink()}>

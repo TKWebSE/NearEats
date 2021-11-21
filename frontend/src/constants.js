@@ -133,12 +133,11 @@ export const ORDER_TEXT = {
 }
 
 export const SETTING_TEXT = {
-    BUY_USER_POINT_LINK_TEXT: "ポイントの追加",
+    BUY_USER_POINT_LINK_TEXT: "ポイント購入",
     EDIT_USER_INFO_LINK_TEXT: "ユーザー情報の編集",
     EDIT_USER_AUTH_INFO_LINK_TEXT: "メールアドレス、パスワードの設定",
     LOGOUT_LINK_TEXT: "ログアウト",
     DELETE_USER_LINK_TEXT: "アカウントの削除",
-    BUY_USER_POINT_MODAL_TITLE: "追加するポイントを設定してください",
     EDIT_USER_AUTH_INFO_MODAL_TITLE: "メールアドレスとパスワードの確認",
     EDIT_USER_AUTH_INFO_MODAL_TEXT: "現在登録されているメールアドレスとパスワードを入力してください",
     DELETE_USER_MODAL_TITLE: "アカウントを削除しますか？",

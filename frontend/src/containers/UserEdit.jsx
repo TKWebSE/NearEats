@@ -13,7 +13,7 @@ import { SaveButton } from "../component/MaterialUISaveButton";
 import { SessionState, SessionDispatch, UserDispatch, UserState } from '../context/Context';
 import { foodsIndexURL } from "../urls/index";
 
-const FoodEditHeader = styled.h1`
+const UserEditHeader = styled.h1`
     margin-top:5%;
     margin-left:7%;
 `;
@@ -60,9 +60,9 @@ export const UserEdit = ({ match }) => {
 
     return (
         <Fragment>
-            <FoodEditHeader>
+            <UserEditHeader>
                 {USER_HEADER_TITLE.USER_EDIT}
-            </FoodEditHeader>
+            </UserEditHeader>
             {
                 REQUEST_STATE.OK === state.fetchState ?
                     <Fragment>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { useHistory } from "react-router";
-import { userEditURL, homeURL } from "../urls/index";
+import { userEditURL, homeURL, buyPointURL } from "../urls/index";
 import { SETTING_TEXT } from "../constants";
 import { SessionState, SessionDispatch } from "../context/Context";
 import { sessionActionTypes } from "../reducer/sessionReducer";
@@ -140,12 +140,11 @@ export const Setting = () => {
   const history = useHistory();
 
   function handleBuyPoint() {
-    console.log("handleBuyPoint")
+    history.push(buyPointURL);
   }
 
   function handleEditUser() {
-    history.push(userEditURL(SessionUserState.currentUser.id))
-    console.log("handleEditUser")
+    history.push(userEditURL(SessionUserState.currentUser.id));
   }
 
   function handleEditUserAuthInfo() {
@@ -172,12 +171,10 @@ export const Setting = () => {
     <Fragment>
       <ThemeProvider theme={ButtonTheme}>
         <UserSettingWrapper>
-          <SettingRectangleModalComponent
+          <SettingRectangleComponent
             Icon={AddCircleIcon}
             text={SETTING_TEXT.BUY_USER_POINT_LINK_TEXT}
             onClick={() => handleBuyPoint()}
-            modalTilte={SETTING_TEXT.BUY_USER_POINT_MODAL_TITLE}
-            modalText={""}
           />
           <SettingRectangleComponent
             Icon={PersonAddIcon}

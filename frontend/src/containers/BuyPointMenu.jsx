@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import styled from "styled-components";
 import { BUY_POINT_MENU_TEXT } from "../constants";
-import { BuyPointRectangleModalComponent } from "../component/PointComponent/BuyPointRectangleModalComponent";
+import BuyPointRectangleModalComponent from "../component/PointComponent/BuyPointRectangleModalComponent";
 
 const NowPoint = styled.div``;
 
@@ -13,7 +13,8 @@ export const BuyPointMenu = () => {
     <Fragment>
       <NowPoint>{BUY_POINT_MENU_TEXT.NOW_POINT}</NowPoint>
       <BuyPointListWrapper>
-        <BuyPointRectangleModalComponent />
+        {/* <BuyPointRectangleModalComponent /> */}
+        a
       </BuyPointListWrapper>
     </Fragment>
   )
