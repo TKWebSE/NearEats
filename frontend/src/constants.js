@@ -150,6 +150,10 @@ export const BUY_POINT_MENU_TEXT = {
     NOW_POINT: "現在のポイント数",
 }
 
+export const EDIT_MAIL_TEXT = {
+    HEADER_TITLE: "メールアドレスの変更",
+}
+
 export const NOTFOUND_ORDER_TEXT = {
     NOT_EXIST_ORDER_TEXT: "注文した料理はありません",
     LETS_ORDER_TEXT: "料理を見てみましょう！！",
