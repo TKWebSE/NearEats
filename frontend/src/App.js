@@ -36,6 +36,8 @@ import { MyTaskIndex } from "./containers/MyTaskIndex";
 import { MyTaskDetail } from "./containers/MyTaskDetail";
 import { BuyPointMenu } from "./containers/BuyPointMenu";
 import { Setting } from "./containers/Setting";
+import { UserEditEmail } from "./containers/UserEditEmail";
+import { UserEditPassword } from "./containers/UserEditPassword";
 
 import { sessionApis } from "./apis/sessionApis";
 import { initializeState, sessionActionTypes, sessionReducer } from "./reducer/sessionReducer";
@@ -197,6 +199,18 @@ function App() {
                 exact
                 path="/setting"
                 component={Setting}>
+              </PrivateOnlyRoute>
+              {/* メールアドレス変更画面 */}
+              <PrivateOnlyRoute
+                exact
+                path="/editMail"
+                component={UserEditEmail}>
+              </PrivateOnlyRoute>
+              {/* パスワード変更画面 */}
+              <PrivateOnlyRoute
+                exact
+                path="/editPassword"
+                component={UserEditPassword}>
               </PrivateOnlyRoute>
             </Switch>
           </Router>

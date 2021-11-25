@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { MaterialUILocationButton } from "../HeaderComponent/MaterialUILocationButton";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { HEADER_TEXT, modalButtomLabel } from "../../constants";
+import { HEADER_TEXT, MODAL_BUTTON_LABEL } from "../../constants";
 import AnimatedMultiSelect from "../AnimatedMultiSelect";
 import { sessionActionTypes } from "../../reducer/sessionReducer";
 import { SessionState, SessionDispatch } from "../../context/Context";
@@ -77,7 +77,6 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
     handleClose()
     history.push(foodsIndexURL)
   }
-  console.log(nowSelectLocation)
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -93,10 +92,10 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
         />
       </SelectWrapper>
       <OKButtomWrapper>
-        <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
+        <MaterialUICommonButton onClick={() => handleOK()} btnLabel={MODAL_BUTTON_LABEL.MODAL_OK}></MaterialUICommonButton>
       </OKButtomWrapper>
       <NGButtomWrapper>
-        <MaterialUICommonButton onClick={() => handleClose()} btnLabel={modalButtomLabel.MODAL_NG}></MaterialUICommonButton>
+        <MaterialUICommonButton onClick={() => handleClose()} btnLabel={MODAL_BUTTON_LABEL.MODAL_NG}></MaterialUICommonButton>
       </NGButtomWrapper>
     </div>
   );

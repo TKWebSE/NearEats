@@ -10,6 +10,7 @@ import { SessionState, SessionDispatch } from "../context/Context";
 import { sessionActionTypes } from "../reducer/sessionReducer";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import EmailIcon from '@mui/icons-material/Email';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -147,6 +148,14 @@ export const Setting = () => {
     history.push(userEditURL(SessionUserState.currentUser.id));
   }
 
+  function handleEditEmail() {
+    history.push(userEditURL(SessionUserState.currentUser.id));
+  }
+
+  function handleEditPassWord() {
+    history.push(userEditURL(SessionUserState.currentUser.id));
+  }
+
   function handleEditUserAuthInfo() {
     console.log("handleEditUserAuthInfo")
   }
@@ -182,9 +191,16 @@ export const Setting = () => {
             onClick={() => handleEditUser()}
           />
           <SettingRectangleModalComponent
+            Icon={EmailIcon}
+            text={SETTING_TEXT.EDIT_EMAIL_LINK_TEXT}
+            onClick={() => handleEditEmail()}
+            modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
+            modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
+          />
+          <SettingRectangleModalComponent
             Icon={VerifiedUserIcon}
-            text={SETTING_TEXT.EDIT_USER_AUTH_INFO_LINK_TEXT}
-            onClick={() => handleEditUserAuthInfo()}
+            text={SETTING_TEXT.EDIT_PASSWORD_LINK_TEXT}
+            onClick={() => handleEditPassWord()}
             modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
             modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
           />

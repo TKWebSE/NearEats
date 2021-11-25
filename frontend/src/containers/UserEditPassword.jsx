@@ -1,8 +1,8 @@
 import { Fragment, useContext } from "react"
 import styled from "styled-components";
-import { EDIT_EMAIL_TEXT } from "../constants";
+import { EDIT_PASSWORD_TEXT } from "../constants";
 import { SessionState, SessionDispatch } from "../context/Context";
-import { MaterialUIUserEmailLine } from "../component/userComponent/MaterialUIUserEmailLine";
+import { MaterialUIUserPasswordLine } from "../component/userComponent/MaterialUIUserPasswordLine";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 
 const HeaderWrapper = styled.h1`
@@ -21,7 +21,7 @@ const ChangeMailWrapper = styled.div``;
 
 const ButtonWrapper = styled.div``;
 
-export const UserEditEmail = () => {
+export const UserEditPassword = () => {
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch);
 
@@ -32,10 +32,10 @@ export const UserEditEmail = () => {
   return (
     <Fragment>
       <HeaderWrapper>
-        {EDIT_EMAIL_TEXT.HEADER_TITLE}
+        {EDIT_PASSWORD_TEXT.HEADER_TITLE}
       </HeaderWrapper>
       <ChangeMailWrapper>
-        <MaterialUIUserEmailLine />
+        <MaterialUIUserPasswordLine />
       </ChangeMailWrapper>
       <ButtonWrapper>
         <MaterialUICommonButton />

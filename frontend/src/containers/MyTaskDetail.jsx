@@ -80,7 +80,6 @@ export const MyTaskDetail = ({ match }) => {
             .catch((e) => console.log(e))
     }, [])
 
-    console.log(state)
     return (
         <Fragment>
             <TaskDetailWrapper>

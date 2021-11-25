@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
-import { modalButtomLabel } from "../constants";
+import { MODAL_BUTTON_LABEL } from "../constants";
 
 const OKButtomWrapper = styled.div`
 margin-left:50%;
@@ -64,10 +64,10 @@ export default function MaterialUISimpleModal({ btnLabel, onClick, modalTilte, m
         {modalText}
       </p>
       <OKButtomWrapper>
-        <MaterialUICommonButton onClick={() => handleOK()} btnLabel={modalButtomLabel.MODAL_OK}></MaterialUICommonButton>
+        <MaterialUICommonButton onClick={() => handleOK()} btnLabel={MODAL_BUTTON_LABEL.MODAL_OK}></MaterialUICommonButton>
       </OKButtomWrapper>
       <NGButtomWrapper>
-        <MaterialUICommonButton onClick={() => handleClose()} btnLabel={modalButtomLabel.MODAL_NG}></MaterialUICommonButton>
+        <MaterialUICommonButton onClick={() => handleClose()} btnLabel={MODAL_BUTTON_LABEL.MODAL_NG}></MaterialUICommonButton>
       </NGButtomWrapper>
     </div>
   );

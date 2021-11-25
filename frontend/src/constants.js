@@ -135,7 +135,8 @@ export const ORDER_TEXT = {
 export const SETTING_TEXT = {
     BUY_USER_POINT_LINK_TEXT: "ポイント購入",
     EDIT_USER_INFO_LINK_TEXT: "ユーザー情報の編集",
-    EDIT_USER_AUTH_INFO_LINK_TEXT: "メールアドレス、パスワードの設定",
+    EDIT_EMAIL_LINK_TEXT: "メールアドレスの設定",
+    EDIT_PASSWORD_LINK_TEXT: "パスワードの設定",
     LOGOUT_LINK_TEXT: "ログアウト",
     DELETE_USER_LINK_TEXT: "アカウントの削除",
     EDIT_USER_AUTH_INFO_MODAL_TITLE: "メールアドレスとパスワードの確認",
@@ -150,8 +151,12 @@ export const BUY_POINT_MENU_TEXT = {
     NOW_POINT: "現在のポイント数",
 }
 
-export const EDIT_MAIL_TEXT = {
+export const EDIT_EMAIL_TEXT = {
     HEADER_TITLE: "メールアドレスの変更",
+}
+
+export const EDIT_PASSWORD_TEXT = {
+    HEADER_TITLE: "パスワードの変更",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
@@ -160,7 +165,7 @@ export const NOTFOUND_ORDER_TEXT = {
     GOTO_FOOD_INDEX_BUTTON_LABEL: "料理を探す！",
 }
 
-export const modalButtomLabel = {
+export const MODAL_BUTTON_LABEL = {
     MODAL_OK: "OK",
     MODAL_NG: "キャンセル",
 }
