@@ -190,19 +190,15 @@ export const Setting = () => {
             text={SETTING_TEXT.EDIT_USER_INFO_LINK_TEXT}
             onClick={() => handleEditUser()}
           />
-          <SettingRectangleModalComponent
+          <SettingRectangleComponent
             Icon={EmailIcon}
             text={SETTING_TEXT.EDIT_EMAIL_LINK_TEXT}
             onClick={() => handleEditEmail()}
-            modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
-            modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
           />
-          <SettingRectangleModalComponent
+          <SettingRectangleComponent
             Icon={VerifiedUserIcon}
             text={SETTING_TEXT.EDIT_PASSWORD_LINK_TEXT}
             onClick={() => handleEditPassWord()}
-            modalTilte={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TITLE}
-            modalText={SETTING_TEXT.EDIT_USER_AUTH_INFO_MODAL_TEXT}
           />
           <SettingRectangleComponent
             Icon={MeetingRoomIcon}

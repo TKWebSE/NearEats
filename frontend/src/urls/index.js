@@ -12,6 +12,7 @@ export const homeURL = "/home";
 export const userShowURL = (userId) => `/users/${userId}`;
 export const userCreateURL = `/users/create`;
 export const userEditURL = (userId) => `/users/${userId}/edit`;
+export const userEmailEditURL = `/editMail`;
 
 //userのBackendURL
 export const userShowBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userShowURL(userId)}`;
