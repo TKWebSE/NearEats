@@ -1,5 +1,7 @@
 import { Fragment, useContext } from "react"
 import styled from "styled-components";
+import { ThemeProvider } from '@material-ui/core/styles';
+import { ButtonTheme } from "../style_constants";
 import { EDIT_PASSWORD_TEXT } from "../constants";
 import { SessionState, SessionDispatch } from "../context/Context";
 import { MaterialUIUserPasswordLine } from "../component/userComponent/MaterialUIUserPasswordLine";
@@ -38,7 +40,12 @@ export const UserEditPassword = () => {
         <MaterialUIUserPasswordLine />
       </ChangeMailWrapper>
       <ButtonWrapper>
-        <MaterialUICommonButton />
+        <ThemeProvider theme={ButtonTheme}>
+          <MaterialUICommonButton
+            onClick={() => handleSubmit}
+            btnLabel={EDIT_PASSWORD_TEXT.SUBMIT_BUTTON_LABEL}
+          />
+        </ThemeProvider>
       </ButtonWrapper>
     </Fragment>
   )

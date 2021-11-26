@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { useHistory } from "react-router";
-import { userEditURL, homeURL, buyPointURL } from "../urls/index";
+import { userEditURL, homeURL, buyPointURL, userEmailEditURL } from "../urls/index";
 import { SETTING_TEXT } from "../constants";
 import { SessionState, SessionDispatch } from "../context/Context";
 import { sessionActionTypes } from "../reducer/sessionReducer";
@@ -149,15 +149,11 @@ export const Setting = () => {
   }
 
   function handleEditEmail() {
-    history.push(userEditURL(SessionUserState.currentUser.id));
+    history.push(userEmailEditURL);
   }
 
   function handleEditPassWord() {
     history.push(userEditURL(SessionUserState.currentUser.id));
-  }
-
-  function handleEditUserAuthInfo() {
-    console.log("handleEditUserAuthInfo")
   }
 
   function handleSignOut() {

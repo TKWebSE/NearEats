@@ -151,10 +151,12 @@ export const BUY_POINT_MENU_TEXT = {
 
 export const EDIT_EMAIL_TEXT = {
     HEADER_TITLE: "メールアドレスの変更",
+    SUBMIT_BUTTON_LABEL: "変更する",
 }
 
 export const EDIT_PASSWORD_TEXT = {
     HEADER_TITLE: "パスワードの変更",
+    SUBMIT_BUTTON_LABEL: "変更する",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
