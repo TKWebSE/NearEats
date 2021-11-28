@@ -1,26 +1,20 @@
-import react, {Fragment} from "react";
+import react, { Fragment } from "react";
 import styled from "styled-components";
-import {MaterialUIUserNameLine} from "../userComponent/MaterialUIUserNameLine";
-import {MaterialUIUserAddressLine} from "../userComponent/MaterialUIUserAddressLine";
-import {MaterialUIUserEmailLine} from "./MaterialUIUserEmailLine";
-import {MaterialUIUserPasswordLine} from "../userComponent/MaterialUIUserPasswordLine";
+import { MaterialUIUserNameLine } from "../userComponent/MaterialUIUserNameLine";
+import { MaterialUIUserAddressLine } from "../userComponent/MaterialUIUserAddressLine";
+import { MaterialUIUserEmailLine } from "./MaterialUIUserEmailLine";
+import { MaterialUIUserPasswordLine } from "../userComponent/MaterialUIUserPasswordLine";
 const UserEditWrapper = styled.div`
 `;
 
-const EditUserNameWrapper  = styled.div`
+const EditUserNameWrapper = styled.div`
 `;
 
 const EditUserAddressWrapper = styled.div`
 `;
 
-const EditUserEmailWrapper = styled.div`
-`;
-
-const EditUserPasswordWrapper = styled.div`
-`;
-
 export const UserEditCard = () => {
-    return(
+    return (
         <Fragment>
             <EditUserNameWrapper>
                 <MaterialUIUserNameLine></MaterialUIUserNameLine>
@@ -28,12 +22,6 @@ export const UserEditCard = () => {
             <EditUserAddressWrapper>
                 <MaterialUIUserAddressLine></MaterialUIUserAddressLine>
             </EditUserAddressWrapper>
-            <EditUserEmailWrapper>
-                <MaterialUIUserEmailLine></MaterialUIUserEmailLine>
-            </EditUserEmailWrapper>
-            <EditUserPasswordWrapper>
-                <MaterialUIUserPasswordLine></MaterialUIUserPasswordLine>
-            </EditUserPasswordWrapper>
         </Fragment>
     )
 }

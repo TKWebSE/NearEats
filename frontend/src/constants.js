@@ -152,6 +152,8 @@ export const BUY_POINT_MENU_TEXT = {
 export const EDIT_EMAIL_TEXT = {
     HEADER_TITLE: "メールアドレスの変更",
     SUBMIT_BUTTON_LABEL: "変更する",
+    NOW_EMAIL_LABEL: "現在のメールアドレス",
+    NEW_EMAIL_LABEL: "新しいメールアドレス",
 }
 
 export const EDIT_PASSWORD_TEXT = {

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //userのメールアドレスを設定するためのTextFieldコンポーネント
-export function MaterialUIUserEmailLine() {
+export function MaterialUIUserEmailLine({ label }) {
   const classes = useStyles();
   const state = useContext(UserState);
   const dispatch = useContext(UserDispatch);
@@ -40,7 +40,7 @@ export function MaterialUIUserEmailLine() {
             <form className={classes.root} noValidate autoComplete="off">
               <TextField
                 id="outlined-basic"
-                label="Email"
+                label={label}
                 variant="outlined"
                 fullWidth
                 value={state.user.email}

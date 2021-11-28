@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       
-      resources :users
+      resources :users do
+        put 'updateEmail', to: 'users#updateEmail'
+        put 'updatePassword', to: 'users#updatePassword'
+      end
       
       resources :foods do
         get 'myfoods', to: 'foods#myfoods'

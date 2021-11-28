@@ -49,6 +49,30 @@ module Api
                 render json: {}, status: :ok
             end
 
+            def updateEmail
+                user = User.find_by(id: params[:userId])
+
+                user.update()!
+
+                if(true)
+                    render json: {}, status: :ok
+                else
+                    render json: {}, status: :ng
+                end
+            end
+
+            def updatePassword
+                user = User.find_by(id: params[:userId])
+                
+                user.update(email: )!
+
+                if(true)
+                    render json: {}, status: :ok
+                else
+                    render json: {}, status: :ng
+                end
+            end
+
             private 
 
                 def user_params

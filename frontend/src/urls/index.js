@@ -13,6 +13,7 @@ export const userShowURL = (userId) => `/users/${userId}`;
 export const userCreateURL = `/users/create`;
 export const userEditURL = (userId) => `/users/${userId}/edit`;
 export const userEmailEditURL = `/editMail`;
+export const userPasswordEditURL = `/editPassword`;
 
 //userのBackendURL
 export const userShowBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userShowURL(userId)}`;
@@ -20,6 +21,8 @@ export const userCreateBackendURL = () => `${AUTH_URL}${userCreateURL}`;
 export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
 export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
+export const updateEmailBackendURL = `${BACKEND_DEFAULT_URL}/users/UpdateEmail`;
+export const updatePasswordBackendURL = `${BACKEND_DEFAULT_URL}/users/UpdateEmail`;
 
 //foodのURL
 export const foodsIndexURL = `/foods`;
