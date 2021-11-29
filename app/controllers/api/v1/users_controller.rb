@@ -31,7 +31,6 @@ module Api
             end
             
             def update
-                logger.debug("updateこんとろーららららら")
                 user = User.find(params[:id])
 
                 if user.update!(user_params)
@@ -51,8 +50,8 @@ module Api
 
             def updateEmail
                 user = User.find_by(id: params[:userId])
-
-                user.update()!
+                logger.debug("updateこんとろーららららら")
+                # user.update()!
 
                 if(true)
                     render json: {}, status: :ok
@@ -64,7 +63,8 @@ module Api
             def updatePassword
                 user = User.find_by(id: params[:userId])
                 
-                user.update(email: )!
+                # userのemailに対して、メールを送信する
+                # user.update(email: )!
 
                 if(true)
                     render json: {}, status: :ok

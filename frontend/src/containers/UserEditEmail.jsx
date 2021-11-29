@@ -18,14 +18,19 @@ const Wrapper = styled.div`
 `;
 
 const HeaderWrapper = styled.h1`
-    margin-top:5%;
+  margin-top:5%;
 `;
 
-const NowEmailWrapper = styled.div``;
+const NowEmailWrapper = styled.div`
+  margin-top:5%;
+`;
 
-const ChangeEmailWrapper = styled.div``;
+const ChangeEmailWrapper = styled.div`
+  margin-top:3%;
+`;
 
 const ButtonWrapper = styled.div`
+  margin-top:3%;
   text-align:right;
 `;
 
@@ -47,7 +52,8 @@ export const UserEditEmail = () => {
   function handleSubmit() {
     updateEmailApi(sessionAuthState.currentUser.id, state.user.email)
       .then((data) => {
-        history.push(settingURL)
+        console.log("seiko")
+        // history.push(settingURL)
       })
       .catch(e => console.log(e));
   }
@@ -67,12 +73,14 @@ export const UserEditEmail = () => {
               />
             </NowEmailWrapper>
             <ChangeEmailWrapper>
-              <MaterialUIUserEmailLine label={EDIT_EMAIL_TEXT.NEW_EMAIL_LABEL} />
+              <MaterialUIUserEmailLine
+                label={EDIT_EMAIL_TEXT.NEW_EMAIL_LABEL}
+              />
             </ChangeEmailWrapper>
             <ButtonWrapper>
               <ThemeProvider theme={ButtonTheme}>
                 <MaterialUICommonButton
-                  onClick={() => handleSubmit}
+                  onClick={() => handleSubmit()}
                   btnLabel={EDIT_EMAIL_TEXT.SUBMIT_BUTTON_LABEL}
                 />
               </ThemeProvider>

@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { DRAWER_TEXT } from "../../constants";
+import { DRAWER_TEXT } from "../../../constants";
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
@@ -17,8 +17,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL, buyPointURL, settingURL } from "../../urls/index";
-import { isLoginApi } from "../../apis/sessionApis";
+import { foodsIndexURL, foodCreateURL, myFoodsURL, myTaskIndexURL, userShowURL, ordersIndexURL, buyPointURL, settingURL } from "../../../urls/index";
+import { isLoginApi } from "../../../apis/sessionApis";
 import Cookies from "js-cookie";
 
 export const MaterialUIDrawerList = () => {

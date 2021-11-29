@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
-import { MaterialUIDrawerList } from "../HeaderComponent/MaterialUIDrawerList";
-import { headerInitializeState, headerActionTypes, headerReducer } from "../../reducer/headerReducer";
-import { SessionState, SessionDispatch } from "../../context/Context";
+import { MaterialUIDrawerList } from "./MaterialUIDrawerList";
+import { headerInitializeState, headerActionTypes, headerReducer } from "../../../reducer/headerReducer";
+import { SessionState, SessionDispatch } from "../../../context/Context";
 
 const useStyles = makeStyles({
   list: {

@@ -16,16 +16,17 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { SwipeableTemporaryDrawer } from "./MaterialUIDrawer";
-import { headerInitializeState, headerActionTypes, headerReducer } from "../../reducer/headerReducer";
-import { sessionActionTypes } from "../../reducer/sessionReducer";
-import { SessionDispatch, SessionState } from "../../context/Context";
+import { headerInitializeState, headerActionTypes, headerReducer } from "../../../reducer/headerReducer";
+import { sessionActionTypes } from "../../../reducer/sessionReducer";
+import { SessionDispatch, SessionState } from "../../../context/Context";
 import { Link } from "react-router-dom";
-import { foodsIndexURL } from "../../urls/index";
-import { HOME_TEXT, HEADER_TEXT } from "../../constants";
-import { signOutApi } from "../../apis/sessionApis";
+import { foodsIndexURL } from "../../../urls/index";
+import { HOME_TEXT, HEADER_TEXT } from "../../../constants";
+import { signOutApi } from "../../../apis/sessionApis";
 import { useHistory } from "react-router-dom";
-import { homeURL } from "../../urls/index";
-import MaterialUILocationIconModal from "../HeaderComponent/MaterialUILocationIconModal";
+import { homeURL } from "../../../urls/index";
+import MaterialUILocationIconModal from "./desktopOnly/MaterialUILocationIconModal";
+import MaterialUILocationModbileModal from "./mobileOnly/MaterialUILocationModbileModal";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -167,8 +168,19 @@ export default function MaterialUIPrivateHeader() {
     handleMenuClose();
     history.push(homeURL)
   }
-  //右側のアカウント関連メニュー
+  //画面サイズが通常時の右側の三点ボタン
   const menuId = 'primary-search-account-menu';
+  const renderLocation = (
+    <LocationWrapper onClick={() => handleSetLocation()}>
+      <MaterialUILocationIconModal
+        onClick={() => handleSetLocation()}
+        modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
+        modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
+        nowLocation={SessionUserState.nowLocation === undefined || SessionUserState.nowLocation === null ? SessionUserState.currentUser.city : SessionUserState.nowLocation}
+      >
+      </MaterialUILocationIconModal>
+    </LocationWrapper>
+  );
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -184,7 +196,20 @@ export default function MaterialUIPrivateHeader() {
     </Menu>
   );
 
+  //画面が小さくなった時に適用される右側の三点ボタン
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileLocation = (
+    <LocationWrapper id={mobileMenuId} onClick={() => handleSetLocation()}>
+      <MaterialUILocationModbileModal
+        id={mobileMenuId}
+        onClick={() => handleSetLocation()}
+        modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
+        modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
+        nowLocation={SessionUserState.nowLocation === undefined || SessionUserState.nowLocation === null ? SessionUserState.currentUser.city : SessionUserState.nowLocation}
+      >
+      </MaterialUILocationModbileModal>
+    </LocationWrapper>
+  );
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -195,7 +220,7 @@ export default function MaterialUIPrivateHeader() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/* <MenuItem color="red">
+      <MenuItem color="red">
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -210,8 +235,7 @@ export default function MaterialUIPrivateHeader() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem> */}
-
+      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -245,15 +269,12 @@ export default function MaterialUIPrivateHeader() {
               </Typography>
             </Link>
           </TitleWrapper>
-          <LocationWrapper onClick={() => handleSetLocation()}>
-            <MaterialUILocationIconModal
-              onClick={() => handleSetLocation()}
-              modalTilte={HEADER_TEXT.NOWLOCATION_MODAL_TITLE}
-              modalText={HEADER_TEXT.NOWLOCATION_MODAL_TEXT}
-              nowLocation={SessionUserState.nowLocation === undefined || SessionUserState.nowLocation === null ? SessionUserState.currentUser.city : SessionUserState.nowLocation}
-            >
-            </MaterialUILocationIconModal>
-          </LocationWrapper>
+          <div className={classes.sectionDesktop}>
+            {renderLocation}
+          </div>
+          <div className={classes.sectionMobile}>
+            {renderMobileLocation}
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

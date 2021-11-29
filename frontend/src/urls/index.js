@@ -21,8 +21,8 @@ export const userCreateBackendURL = () => `${AUTH_URL}${userCreateURL}`;
 export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
 export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
-export const updateEmailBackendURL = `${BACKEND_DEFAULT_URL}/users/UpdateEmail`;
-export const updatePasswordBackendURL = `${BACKEND_DEFAULT_URL}/users/UpdateEmail`;
+export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}UpdateEmail`;
+export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}UpdateEmail`;
 
 //foodのURL
 export const foodsIndexURL = `/foods`;
@@ -73,3 +73,5 @@ export const signUpBackendURL = `${AUTH_URL}`;
 export const signInBackendURL = `${AUTH_URL}/sign_in`;
 export const signOutBackendURL = `${AUTH_URL}/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
+export const editEmailURL = `${AUTH_URL}/sessions`;
+export const editPasswordURL = `${AUTH_URL}/password`;

@@ -7,6 +7,8 @@ import {
     userDeleteBackendURL,
     updateEmailBackendURL,
     updatePasswordBackendURL,
+    editEmailURL,
+    editPasswordURL
 } from "../urls/index";
 
 //特定のユーザーを取得する
@@ -70,7 +72,8 @@ export const userDelete = (user) => {
 }
 
 export const updateEmailApi = (userId, email) => {
-    return axios.put(updateEmailBackendURL, {
+    console.log(userId)
+    return axios.put(updateEmailBackendURL(userId), {
         params: {
             userId: userId,
             email: email,
@@ -83,10 +86,21 @@ export const updateEmailApi = (userId, email) => {
 }
 
 export const updatePasswordApi = (userId, password) => {
-    return axios.put(updatePasswordBackendURL, {
+    return axios.put(editEmailURL(userId), {
         params: {
-            userId: userId,
-            password: password,
+
+        }
+    })
+        .then((res) => {
+            return res.data
+        })
+        .catch(e => console.log(e))
+}
+
+export const updateEmail = () => {
+    return axios.put(editPasswordURL, {
+        params: {
+
         }
     })
         .then((res) => {

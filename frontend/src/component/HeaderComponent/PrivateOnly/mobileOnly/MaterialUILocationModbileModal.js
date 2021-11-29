@@ -2,13 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { MaterialUILocationButton } from "../HeaderComponent/MaterialUILocationButton";
-import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { HEADER_TEXT, MODAL_BUTTON_LABEL } from "../../constants";
-import AnimatedMultiSelect from "../AnimatedMultiSelect";
-import { sessionActionTypes } from "../../reducer/sessionReducer";
-import { SessionState, SessionDispatch } from "../../context/Context";
-import { foodsIndexURL } from "../../urls/index";
+import { MaterialUIIconOnlyButton } from "./MaterialUIIconOnlyButton";
+import { MaterialUICommonButton } from "../../../MaterialUICommonButton";
+import { HEADER_TEXT, MODAL_BUTTON_LABEL } from "../../../../constants";
+import AnimatedMultiSelect from "../../../AnimatedMultiSelect";
+import { sessionActionTypes } from "../../../../reducer/sessionReducer";
+import { SessionState, SessionDispatch } from "../../../../context/Context";
+import { foodsIndexURL } from "../../../../urls/index";
 import { useHistory } from "react-router-dom";
 
 
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUILocationIconModal({ onClick, modalTilte, modalText, nowLocation }) {
+export default function MaterialUILocationModbileModal({ onClick, modalTilte, modalText, nowLocation }) {
   const classes = useStyles();
   const history = useHistory();
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -102,7 +102,7 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
 
   return (
     <div>
-      <MaterialUILocationButton onClick={() => handleOpen()} btnLabel={nowLocation}></MaterialUILocationButton>
+      <MaterialUIIconOnlyButton onClick={() => handleOpen()} btnLabel={nowLocation}></MaterialUIIconOnlyButton>
       <Modal
         open={open}
         onClose={handleClose}
