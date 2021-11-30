@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       
       resources :users do
-        put 'updateEmail', to: 'users#updateEmail'
-        put 'updatePassword', to: 'users#updatePassword'
+        put 'updateEmail', to: 'users#update_email'
+        put 'updatePassword', to: 'users#update_password'
       end
       
       resources :foods do

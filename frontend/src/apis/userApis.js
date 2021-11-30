@@ -72,12 +72,12 @@ export const userDelete = (user) => {
 }
 
 export const updateEmailApi = (userId, email) => {
-    console.log(userId)
+    console.log("updateEmailApi")
     return axios.put(updateEmailBackendURL(userId), {
-        params: {
-            userId: userId,
-            email: email,
-        }
+        // params: {
+        userId: userId,
+        email: email,
+        // }
     })
         .then((res) => {
             return res.data

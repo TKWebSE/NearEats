@@ -48,10 +48,12 @@ module Api
                 render json: {}, status: :ok
             end
 
-            def updateEmail
+            def update_email
                 user = User.find_by(id: params[:userId])
                 logger.debug("updateこんとろーららららら")
-                # user.update()!
+                logger.debug(user.name)
+                logger.debug("updateこんとろーららららら")
+                UserMailer.with(user: user).change_emailaddress_email.deliver_later
 
                 if(true)
                     render json: {}, status: :ok
@@ -60,7 +62,7 @@ module Api
                 end
             end
 
-            def updatePassword
+            def update_password
                 user = User.find_by(id: params[:userId])
                 
                 # userのemailに対して、メールを送信する
@@ -76,7 +78,11 @@ module Api
             private 
 
                 def user_params
-                    params.require(:userr).permit(:name,:point,:address,:email, :password)
+                    params.require(:user).permit(:name,:point,:address,:email, :password)
+                end
+
+                def change_email_params
+                    params.require(:user).permit(:id,:email)
                 end
         end
     end
