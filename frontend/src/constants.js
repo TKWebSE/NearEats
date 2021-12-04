@@ -156,6 +156,11 @@ export const EDIT_EMAIL_TEXT = {
     NEW_EMAIL_LABEL: "新しいメールアドレス",
 }
 
+export const COMPLETE_CHANGE_EMAIL = {
+    HEADER_TITLE: "メールアドレス変更完了",
+    SUB_TEXT: "メールアドレスの変更を完了しました。引き続き、NearEatsをお楽しみください。",
+}
+
 export const EDIT_PASSWORD_TEXT = {
     HEADER_TITLE: "パスワードの変更",
     SUBMIT_BUTTON_LABEL: "変更する",

@@ -37,6 +37,7 @@ import { MyTaskDetail } from "./containers/MyTaskDetail";
 import { BuyPointMenu } from "./containers/BuyPointMenu";
 import { Setting } from "./containers/Setting";
 import { UserEditEmail } from "./containers/UserEditEmail";
+import { CompleteChangeEmail } from "./containers/CompleteChangeEmail";
 import { UserEditPassword } from "./containers/UserEditPassword";
 
 import { sessionApis } from "./apis/sessionApis";
@@ -203,8 +204,14 @@ function App() {
               {/* メールアドレス変更画面 */}
               <PrivateOnlyRoute
                 exact
-                path="/editMail"
+                path="/editEmail"
                 component={UserEditEmail}>
+              </PrivateOnlyRoute>
+              {/* メールアドレス変更完了画面 */}
+              <PrivateOnlyRoute
+                exact
+                path="/changeCompleteEmail"
+                component={CompleteChangeEmail}>
               </PrivateOnlyRoute>
               {/* パスワード変更画面 */}
               <PrivateOnlyRoute

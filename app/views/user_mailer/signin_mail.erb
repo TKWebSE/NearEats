@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.email %>様、認証コードです。</h1>
+    <p>
+      NearEatsへのアクセスありがとうございます。
+    </p>
+    <p>
+        以下の番号を入力してログインを完了させましょう！
+        有効期限は<b>10分</b>です。
+    </p>
+    <%=@auth_code%>
+    <p>
+      有効期限が切れた場合、再度メールアドレスを入力してください。認証コードを新たに発行されます。
+    </p>
+    <p>引き続き、NearEatsをどうぞお楽しみくださいませ。</p>
+  </body>
+</html>

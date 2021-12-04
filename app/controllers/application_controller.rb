@@ -15,7 +15,12 @@ class ApplicationController < ActionController::API
         devise_parameter_sanitizer.permit(:sign_up, keys: [:confirm_success_url])
     end
 
-  # private
+    def get_six_string_number
+      number = rand(999999)
+      return format("%06d", number)
+    end
+  
+    # private
 
   #   def http_header_log
   #     request.headers.sort.map { |k, v| logger.info "#{k}:#{v}" }

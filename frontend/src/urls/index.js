@@ -12,7 +12,7 @@ export const homeURL = "/home";
 export const userShowURL = (userId) => `/users/${userId}`;
 export const userCreateURL = `/users/create`;
 export const userEditURL = (userId) => `/users/${userId}/edit`;
-export const userEmailEditURL = `/editMail`;
+export const userEmailEditURL = `/editEmail`;
 export const userPasswordEditURL = `/editPassword`;
 
 //userのBackendURL
@@ -75,3 +75,7 @@ export const signOutBackendURL = `${AUTH_URL}/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
 export const editEmailURL = `${AUTH_URL}/sessions`;
 export const editPasswordURL = `${AUTH_URL}/password`;
+
+//email関連のBackendURL
+export const sendEmailToChangeEmailAddressBackendURL = `${BACKEND_DEFAULT_URL}/sendChangeEmail`;
+export const sendEmailToChangePasswordBackendURL = `${BACKEND_DEFAULT_URL}/sendChangePassword`;

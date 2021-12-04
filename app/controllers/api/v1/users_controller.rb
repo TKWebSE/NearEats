@@ -48,12 +48,31 @@ module Api
                 render json: {}, status: :ok
             end
 
-            def update_email
+            def send_change_email
                 user = User.find_by(id: params[:userId])
                 logger.debug("updateこんとろーららららら")
                 logger.debug(user.name)
                 logger.debug("updateこんとろーららららら")
-                UserMailer.with(user: user).change_emailaddress_email.deliver_later
+                UserMailer.with(user: user).change_emailaddress_email.deliver_later         
+                
+                if(true)
+                    render json: {}, status: :ok
+                else
+                    render json: {}, status: :ng
+                end
+            end
+
+            def send_change_password                
+                UserMailer.with(user: user).change_password_email.deliver_later
+                
+                if(true)
+                    render json: {}, status: :ok
+                else
+                    render json: {}, status: :ng
+                end
+            end
+
+            def update_email
 
                 if(true)
                     render json: {}, status: :ok

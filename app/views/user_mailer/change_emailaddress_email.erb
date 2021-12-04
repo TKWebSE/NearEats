@@ -4,14 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @user.name %>様、example.comへようこそ。</h1>
+    <h1><%= @user.name %>様、NearEatsのメールアドレス変更を完了させましょう！</h1>
       <p>
-      example.comへのサインアップが成功しました。
-      your username is: <%= @user.name %>.<br>
-    </p>
+        <%= @user.name %>様、以下のURLにアクセスして、メールアドレス変更を完了させましょう！
+      </p>
     <p>
-      このサイトにログインするには、<%= @url %>をクリックしてください。
+    <%= @url %>
+      有効期限は<b>10分</b>です
     </p>
-    <p>ご入会ありがとうございます。どうぞお楽しみくださいませ。</p>
+    <p>引き続き、NearEatsをどうぞお楽しみくださいませ。</p>
   </body>
 </html>
