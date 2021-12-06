@@ -37,8 +37,9 @@ import { MyTaskDetail } from "./containers/MyTaskDetail";
 import { BuyPointMenu } from "./containers/BuyPointMenu";
 import { Setting } from "./containers/Setting";
 import { UserEditEmail } from "./containers/UserEditEmail";
-import { CompleteChangeEmail } from "./containers/CompleteChangeEmail";
+import { AuthChangeEmail } from "./containers/AuthChangeEmail";
 import { UserEditPassword } from "./containers/UserEditPassword";
+import { AuthChangePassword } from "./containers/AuthChangePassword";
 
 import { sessionApis } from "./apis/sessionApis";
 import { initializeState, sessionActionTypes, sessionReducer } from "./reducer/sessionReducer";
@@ -210,14 +211,19 @@ function App() {
               {/* メールアドレス変更完了画面 */}
               <PrivateOnlyRoute
                 exact
-                path="/changeCompleteEmail"
-                component={CompleteChangeEmail}>
+                path="/updateEmail"
+                component={AuthChangeEmail}>
               </PrivateOnlyRoute>
               {/* パスワード変更画面 */}
               <PrivateOnlyRoute
                 exact
                 path="/editPassword"
                 component={UserEditPassword}>
+              </PrivateOnlyRoute>
+              <PrivateOnlyRoute
+                exact
+                path="/updatePassword"
+                component={AuthChangePassword}>
               </PrivateOnlyRoute>
             </Switch>
           </Router>

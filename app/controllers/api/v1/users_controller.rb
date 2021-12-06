@@ -49,11 +49,13 @@ module Api
             end
 
             def send_change_email
-                user = User.find_by(id: params[:userId])
+                user = User.find_by(id: params[:user_id])
+                auth_code = get_six_string_number
                 logger.debug("updateこんとろーららららら")
                 logger.debug(user.name)
+                logger.debug(auth_code)
                 logger.debug("updateこんとろーららららら")
-                UserMailer.with(user: user).change_emailaddress_email.deliver_later         
+                UserMailer.with(user: user,url: params[:url],new_email: params[:new_email],auth_code: auth_code).change_emailaddress_email.deliver_later
                 
                 if(true)
                     render json: {}, status: :ok

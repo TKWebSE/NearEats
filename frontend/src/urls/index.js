@@ -21,8 +21,6 @@ export const userCreateBackendURL = () => `${AUTH_URL}${userCreateURL}`;
 export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
 export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
-export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
-export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
 
 //foodのURL
 export const foodsIndexURL = `/foods`;
@@ -31,6 +29,9 @@ export const foodCreateURL = `/foods/create`;
 export const foodShowURL = (foodId) => `/foods/${foodId}`;
 export const foodEditURL = (foodId) => `/foods/${foodId}/edit`;
 export const foodUpdateURL = (foodId) => `/foods/${foodId}`;
+
+//foodのfrontendURL
+export const foodIndexFrontendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
 
 //foodのBackendURL
 export const foodsIndexBackendURL = `${BACKEND_DEFAULT_URL}${foodsIndexURL}`;
@@ -76,6 +77,12 @@ export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
 export const editEmailURL = `${AUTH_URL}/sessions`;
 export const editPasswordURL = `${AUTH_URL}/password`;
 
+//email関連のURL
+export const authChangeEmailURL = `/updateEmail`;
+export const authChangePasswordURL = `/updatePassword`;
+
 //email関連のBackendURL
-export const sendEmailToChangeEmailAddressBackendURL = `${BACKEND_DEFAULT_URL}/sendChangeEmail`;
-export const sendEmailToChangePasswordBackendURL = `${BACKEND_DEFAULT_URL}/sendChangePassword`;
+export const sendEmailToChangeEmailAddressBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangeEmail`;
+export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
+export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangePassword`;
+export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateePassword`;

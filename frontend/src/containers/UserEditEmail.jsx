@@ -9,8 +9,8 @@ import { SessionState, SessionDispatch, UserDispatch, UserState } from '../conte
 import { MaterialUIReadOnlyTextField } from "../component/userComponent/MaterialUIReadOnlyTextField";
 import { MaterialUIUserEmailLine } from "../component/userComponent/MaterialUIUserEmailLine";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
-import { updateEmailApi } from "../apis/userApis";
-import { settingURL } from "../urls/index";
+import { sendEmailToChangeEmailAddressApi } from "../apis/sendEmailapis";
+import { authChangeEmailURL } from "../urls/index";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -50,10 +50,10 @@ export const UserEditEmail = () => {
   }, [])
 
   function handleSubmit() {
-    updateEmailApi(sessionAuthState.currentUser.id, state.user.email)
+    sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
       .then((data) => {
         console.log("seiko")
-        // history.push(settingURL)
+        history.push(authChangeEmailURL)
       })
       .catch(e => console.log(e));
   }

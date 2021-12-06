@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       
       resources :users do
-        get 'sendChangeEmail' to: 'users#send_change_email'
-        get 'sendChangePassword' to: 'users#send_change_password'
+        get 'sendAuthCodeChangeEmail', to: 'users#send_change_email'
+        put 'checkAuthCodeChangeEmail', to: 'users#send_change_email'
+        get 'sendAuthCodeChangePassword', to: 'users#send_change_password'
+        put 'checkAuthCodeChangePassword', to: 'users#send_change_password'
+
         put 'updateEmail', to: 'users#update_email'
         put 'updatePassword', to: 'users#update_password'
       end

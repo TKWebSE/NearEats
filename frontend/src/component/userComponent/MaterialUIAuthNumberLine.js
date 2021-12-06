@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //userのメールアドレスを設定するためのTextFieldコンポーネント
-export function MaterialUIUserEmailLine({ label }) {
+export function MaterialUIUserAuthNumberLine({ label }) {
   const classes = useStyles();
   const state = useContext(UserState);
   const dispatch = useContext(UserDispatch);
