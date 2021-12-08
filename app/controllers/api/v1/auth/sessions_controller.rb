@@ -5,6 +5,7 @@ class Api::V1::Auth::SessionsController < ApplicationController
     logger.debug("んなぁああああああい")
     logger.debug(params)
   end
+  
   def index
     logger.debug("こめんとだよ～＝＝＝＝")
     logger.debug(current_api_v1_user ==nil)

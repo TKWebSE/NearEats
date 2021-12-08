@@ -159,6 +159,7 @@ export const EDIT_EMAIL_TEXT = {
 export const AUTH_CHANGE_EMAIL = {
     HEADER_TITLE: "認証コードを入力してください",
     TEXT_FIELD_LABEL: "認証コード",
+    EDIT_EMAIL_LINK_TEXT: "メールが届かない方はこちら",
     SUBMIT_BUTTON_LABEL: "認証",
     COMPLETE_UPDATE_HEADER_TITLE: "メールアドレス変更完了",
     COMPLETE_UPDATE_EMAIL_TEXT: "メールアドレスの変更を完了しました。引き続き、NearEatsをお楽しみください。",

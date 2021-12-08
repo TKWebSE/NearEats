@@ -1,6 +1,7 @@
 module Api
     module V1 
         class UsersController < ApplicationController
+            require 'date'
             def index
                user = User.all
 
@@ -50,23 +51,36 @@ module Api
 
             def send_change_email
                 user = User.find_by(id: params[:user_id])
+                unconfirmed_email = params[:new_email]
                 auth_code = get_six_string_number
                 logger.debug("updateこんとろーららららら")
                 logger.debug(user.name)
                 logger.debug(auth_code)
                 logger.debug("updateこんとろーららららら")
-                UserMailer.with(user: user,url: params[:url],new_email: params[:new_email],auth_code: auth_code).change_emailaddress_email.deliver_later
-                
-                if(true)
-                    render json: {}, status: :ok
-                else
-                    render json: {}, status: :ng
+                UserMailer.with(
+                    user: user,url: params[:url],
+                    new_email: unconfirmed_email,
+                    auth_code: auth_code
+                ).change_emailaddress_email.deliver_later
+
+                if user.update!(
+                    :confirmation_code auth_code,
+                    :confirmation_sent_at Time.now,
+                    :unconfirmed_email unconfirmed_email
+                )
+                    render json: {
+                        user: user
+                    }, status: :ok
+                else 
+                    render json: { },status: :ng 
                 end
             end
 
             def send_change_password                
                 UserMailer.with(user: user).change_password_email.deliver_later
-                
+
+                if Time.now - user.confirmation_sent_at < 10.minute 
+
                 if(true)
                     render json: {}, status: :ok
                 else
@@ -75,9 +89,24 @@ module Api
             end
 
             def update_email
+                user = User.find_by(id: params[:user_id])
 
-                if(true)
-                    render json: {}, status: :ok
+                if Time.now - user.confirmation_sent_at < 10.minute
+                    render json: { message: 'TimeOut' },status: :ng 
+                end
+                
+                if user.confirmation_code !== params[confirmation_code]
+                    render json: { message: 'differentCode' },status: :ng 
+                end
+
+                if(User.update!(
+                    email: user.unconfirmed_email,
+                    confirmation_code: nil,
+                    confirmed_at: Time.now,
+                    confirmation_sent_at: nil,
+                    unconfirmed_email: nil,
+                    ))
+                    render json: {user: user}, status: :ok
                 else
                     render json: {}, status: :ng
                 end
@@ -85,9 +114,6 @@ module Api
 
             def update_password
                 user = User.find_by(id: params[:userId])
-                
-                # userのemailに対して、メールを送信する
-                # user.update(email: )!
 
                 if(true)
                     render json: {}, status: :ok
@@ -100,6 +126,10 @@ module Api
 
                 def user_params
                     params.require(:user).permit(:name,:point,:address,:email, :password)
+                end
+
+                def email_confirm_params
+                    params.require(:user).permit(:)
                 end
 
                 def change_email_params

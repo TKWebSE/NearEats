@@ -11,12 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//userのメールアドレスを設定するためのTextFieldコンポーネント
+//汎用TextFieldコンポーネント
 export function MaterialUITextField({ label, value, setValue }) {
   const classes = useStyles();
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     setValue(event.target.value)
   };
 
