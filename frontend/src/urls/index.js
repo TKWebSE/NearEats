@@ -84,6 +84,6 @@ export const authChangePasswordURL = `/updatePassword`;
 
 //email関連のBackendURL
 export const sendEmailToChangeEmailAddressBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangeEmail`;
-export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
 export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangePassword`;
+export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
 export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateePassword`;

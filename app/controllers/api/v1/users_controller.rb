@@ -64,9 +64,9 @@ module Api
                 ).change_emailaddress_email.deliver_later
 
                 if user.update!(
-                    :confirmation_code auth_code,
-                    :confirmation_sent_at Time.now,
-                    :unconfirmed_email unconfirmed_email
+                    confirmation_code: auth_code,
+                    confirmation_sent_at: Time.now,
+                    unconfirmed_email: unconfirmed_email
                 )
                     render json: {
                         user: user
@@ -79,8 +79,6 @@ module Api
             def send_change_password                
                 UserMailer.with(user: user).change_password_email.deliver_later
 
-                if Time.now - user.confirmation_sent_at < 10.minute 
-
                 if(true)
                     render json: {}, status: :ok
                 else
@@ -90,16 +88,21 @@ module Api
 
             def update_email
                 user = User.find_by(id: params[:user_id])
+                # logger.debug(params[:params][:confirmation_code])
 
-                if Time.now - user.confirmation_sent_at < 10.minute
-                    render json: { message: 'TimeOut' },status: :ng 
+                if (Time.now - user.confirmation_sent_at) >= 10.minute
+                    render json: {
+                        message: 'TimeOut' 
+                        }, status: :unauthorized
                 end
                 
-                if user.confirmation_code !== params[confirmation_code]
-                    render json: { message: 'differentCode' },status: :ng 
+                if user.confirmation_code != params[:params][:confirmation_code]
+                    render json: { 
+                        message: 'differentCode' 
+                        }, status: :unauthorized
                 end
 
-                if(User.update!(
+                if(user.update!(
                     email: user.unconfirmed_email,
                     confirmation_code: nil,
                     confirmed_at: Time.now,
@@ -108,7 +111,7 @@ module Api
                     ))
                     render json: {user: user}, status: :ok
                 else
-                    render json: {}, status: :ng
+                    render json: {}, status: :unauthorized
                 end
             end
 
@@ -126,10 +129,6 @@ module Api
 
                 def user_params
                     params.require(:user).permit(:name,:point,:address,:email, :password)
-                end
-
-                def email_confirm_params
-                    params.require(:user).permit(:)
                 end
 
                 def change_email_params

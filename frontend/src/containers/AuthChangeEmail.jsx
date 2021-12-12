@@ -36,15 +36,18 @@ const ButtonWrapper = styled.div`
 export const AuthChangeEmail = () => {
   const sessionAuthState = useContext(SessionState);
   const sessionAuthDispatch = useContext(SessionDispatch);
-  const [value, setValue] = useState("");
+  const [confirmationCode, setConfirmationCode] = useState("");
   const history = useHistory();
 
   function handleOnClick() {
     history.push(editEmailURL)
   }
-  //どこからnewEmailをもってくるか
+
   function handleSubmit() {
-    updateEmailApi(sessionAuthState.currentUser.id);
+    updateEmailApi(sessionAuthState.currentUser.id, confirmationCode)
+      .then((data) => {
+        console.log(data)
+      })
   }
 
   return (
@@ -55,8 +58,8 @@ export const AuthChangeEmail = () => {
         </TitleWrapper>
         <MaterialUITextField
           label={AUTH_CHANGE_EMAIL.TEXT_FIELD_LABEL}
-          value={value}
-          setValue={setValue}
+          value={confirmationCode}
+          setValue={setConfirmationCode}
         />
         <LinkWrapper onClick={() => handleOnClick()}>
           {AUTH_CHANGE_EMAIL.EDIT_EMAIL_LINK_TEXT}

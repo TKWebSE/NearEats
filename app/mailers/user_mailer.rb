@@ -4,20 +4,20 @@ class UserMailer < ApplicationMailer
   def signup_before_email
     @user
     @url
-    mail(to: @user.email, subject: 'ユーザー登録を完了させましょう！')
+    mail(to: @user.email, subject: 'ユーザー登録を完了させましょう')
   end
 
   def signup_complete_email
     @user
     @url
-    mail(to: @user.email, subject: 'ユーザー登録が完了しました！')
+    mail(to: @user.email, subject: 'ユーザー登録が完了しました')
   end
 
   def signin_mail
     @user
     @url
     @auth_code
-    mail(to: @user.email, subject: '認証コードでログインしましょう！')
+    mail(to: @user.email, subject: '認証コードでログインしましょう')
   end
 
   def change_emailaddress_email

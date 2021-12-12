@@ -8,9 +8,7 @@ Rails.application.routes.draw do
       
       resources :users do
         get 'sendAuthCodeChangeEmail', to: 'users#send_change_email'
-        put 'checkAuthCodeChangeEmail', to: 'users#send_change_email'
         get 'sendAuthCodeChangePassword', to: 'users#send_change_password'
-        put 'checkAuthCodeChangePassword', to: 'users#send_change_password'
 
         put 'updateEmail', to: 'users#update_email'
         put 'updatePassword', to: 'users#update_password'
