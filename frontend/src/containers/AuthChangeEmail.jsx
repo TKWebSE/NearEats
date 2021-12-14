@@ -33,10 +33,14 @@ const ButtonWrapper = styled.div`
   text-align:right;
 `;
 
+const SuccessText = styled.div`
+`;
+
 export const AuthChangeEmail = () => {
   const sessionAuthState = useContext(SessionState);
   const sessionAuthDispatch = useContext(SessionDispatch);
   const [confirmationCode, setConfirmationCode] = useState("");
+  const [isComplete, setComplete] = useState(false);
   const history = useHistory();
 
   function handleOnClick() {
@@ -47,32 +51,45 @@ export const AuthChangeEmail = () => {
     updateEmailApi(sessionAuthState.currentUser.id, confirmationCode)
       .then((data) => {
         console.log(data)
+        setComplete(true);
       })
   }
 
   return (
     <Fragment>
-      <Wrapper>
-        <TitleWrapper>
-          {AUTH_CHANGE_EMAIL.HEADER_TITLE}
-        </TitleWrapper>
-        <MaterialUITextField
-          label={AUTH_CHANGE_EMAIL.TEXT_FIELD_LABEL}
-          value={confirmationCode}
-          setValue={setConfirmationCode}
-        />
-        <LinkWrapper onClick={() => handleOnClick()}>
-          {AUTH_CHANGE_EMAIL.EDIT_EMAIL_LINK_TEXT}
-        </LinkWrapper>
-        <ButtonWrapper>
-          <ThemeProvider theme={ButtonTheme}>
-            <MaterialUICommonButton
-              onClick={() => handleSubmit()}
-              btnLabel={AUTH_CHANGE_EMAIL.SUBMIT_BUTTON_LABEL}
+      {
+        isComplete === true ?
+          <Wrapper>
+            <TitleWrapper>
+              {AUTH_CHANGE_EMAIL.OMPLETE_UPDATE_HEADER_TITLE}
+            </TitleWrapper>
+            <SuccessText>
+              {AUTH_CHANGE_EMAIL.COMPLETE_UPDATE_EMAIL_TEXT}
+            </SuccessText>
+          </Wrapper>
+          :
+          <Wrapper>
+            <TitleWrapper>
+              {AUTH_CHANGE_EMAIL.HEADER_TITLE}
+            </TitleWrapper>
+            <MaterialUITextField
+              label={AUTH_CHANGE_EMAIL.TEXT_FIELD_LABEL}
+              value={confirmationCode}
+              setValue={setConfirmationCode}
             />
-          </ThemeProvider>
-        </ButtonWrapper>
-      </Wrapper>
+            <LinkWrapper onClick={() => handleOnClick()}>
+              {AUTH_CHANGE_EMAIL.EDIT_EMAIL_LINK_TEXT}
+            </LinkWrapper>
+            <ButtonWrapper>
+              <ThemeProvider theme={ButtonTheme}>
+                <MaterialUICommonButton
+                  onClick={() => handleSubmit()}
+                  btnLabel={AUTH_CHANGE_EMAIL.SUBMIT_BUTTON_LABEL}
+                />
+              </ThemeProvider>
+            </ButtonWrapper>
+          </Wrapper>
+      }
     </Fragment>
   )
 }
