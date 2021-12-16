@@ -53,6 +53,7 @@ export const AuthChangeEmail = () => {
         console.log(data)
         setComplete(true);
       })
+      .catch(e => console.log(e));
   }
 
   return (

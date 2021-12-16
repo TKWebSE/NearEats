@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useReducer } from "react";
+import React, { Fragment, useEffect, useReducer, useState } from "react";
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -45,9 +45,11 @@ import { sessionApis } from "./apis/sessionApis";
 import { initializeState, sessionActionTypes, sessionReducer } from "./reducer/sessionReducer";
 import { SessionDispatch, SessionState } from "./context/Context";
 import Cookies from "js-cookie";
+import { MaterialUISuccessSnackber } from "./component/MaterialUISuccessSnackber"
 
 function App() {
   const [state, dispatch] = useReducer(sessionReducer, initializeState);
+  const [message, setMessage] = useState("");
 
   console.log(Cookies.get())
   return (
@@ -227,6 +229,7 @@ function App() {
               </PrivateOnlyRoute>
             </Switch>
           </Router>
+          <MaterialUISuccessSnackber message={message} />
         </SessionState.Provider>
       </SessionDispatch.Provider>
     </Fragment>
