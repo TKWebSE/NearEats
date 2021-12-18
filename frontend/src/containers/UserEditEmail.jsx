@@ -11,6 +11,8 @@ import { MaterialUIUserEmailLine } from "../component/userComponent/MaterialUIUs
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { sendEmailToChangeEmailAddressApi } from "../apis/sendEmailapis";
 import { authChangeEmailURL } from "../urls/index";
+import { messageActionTypes } from "../reducer/messageReducer";
+import { MessageState, MessageDispatch } from "../context/Context";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -39,6 +41,8 @@ export const UserEditEmail = () => {
   const sessionAuthDispatch = useContext(SessionDispatch);
   const [state, dispatch] = useReducer(userReducer, initializeState);
   const history = useHistory();
+  const messageState = useContext(MessageState);
+  const messageDispatch = useContext(MessageDispatch);
 
   useEffect(() => {
     dispatch({
@@ -50,6 +54,12 @@ export const UserEditEmail = () => {
   }, [])
 
   function handleSubmit() {
+    messageDispatch({
+      type: messageActionTypes.SET_MESSAGE,
+      payload: {
+        message: "認証メールを送信しました"
+      },
+    })
     sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
       .then((data) => {
         console.log("seiko")

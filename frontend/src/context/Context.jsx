@@ -1,4 +1,4 @@
-import {createContext} from "react";
+import { createContext } from "react";
 
 //session用のcontext
 export const SessionState = createContext("");
@@ -19,3 +19,7 @@ export const OrderDispatch = createContext("");
 //task用contest
 export const TaskState = createContext("");
 export const TaskDispatch = createContext("");
+
+//message用context
+export const MessageState = createContext("");
+export const MessageDispatch = createContext("");
