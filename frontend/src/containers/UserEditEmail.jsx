@@ -5,14 +5,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { initializeState, userActionTypes, userReducer } from "../reducer/userReducer";
 import { EDIT_EMAIL_TEXT } from "../constants";
-import { SessionState, SessionDispatch, UserDispatch, UserState } from '../context/Context';
+import { SessionState, SessionDispatch, UserDispatch, UserState, MessageState, MessageDispatch } from '../context/Context';
 import { MaterialUIReadOnlyTextField } from "../component/userComponent/MaterialUIReadOnlyTextField";
 import { MaterialUIUserEmailLine } from "../component/userComponent/MaterialUIUserEmailLine";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { sendEmailToChangeEmailAddressApi } from "../apis/sendEmailapis";
 import { authChangeEmailURL } from "../urls/index";
 import { messageActionTypes } from "../reducer/messageReducer";
-import { MessageState, MessageDispatch } from "../context/Context";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -40,9 +39,9 @@ export const UserEditEmail = () => {
   const sessionAuthState = useContext(SessionState);
   const sessionAuthDispatch = useContext(SessionDispatch);
   const [state, dispatch] = useReducer(userReducer, initializeState);
-  const history = useHistory();
   const messageState = useContext(MessageState);
   const messageDispatch = useContext(MessageDispatch);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({
@@ -54,15 +53,14 @@ export const UserEditEmail = () => {
   }, [])
 
   function handleSubmit() {
-    messageDispatch({
-      type: messageActionTypes.SET_MESSAGE,
-      payload: {
-        message: "認証メールを送信しました"
-      },
-    })
     sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
       .then((data) => {
-        console.log("seiko")
+        messageDispatch({
+          type: messageActionTypes.SET_MESSAGE,
+          payload: {
+            message: EDIT_EMAIL_TEXT.SEND_EMAIL_TEXT
+          },
+        })
         history.push(authChangeEmailURL)
       })
       .catch(e => console.log(e));

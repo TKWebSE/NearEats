@@ -9,15 +9,6 @@ export const HTTP_STATUS_CODE = {
     NOT_ACCEPTABLE: 406,
 }
 
-export const MESSAGE_TEXT = {
-    SUCCESS_SIGNUP_MESSAGE: "新規登録できました。ログインしてみましょう！",
-}
-
-export const ERROR_MESSAGE = {
-    USER_SIGNUP_ERROR: "ユーザーを新規作成できませんでした",
-    USER_SIGNIN_ERROR: "ログインできませんでした。メールアドレス、パスワードを再度入力してください",
-}
-
 export const HEADER_TEXT = {
     HEADER_TITLE: "Near-Eats",
     NOWLOCATION_BUTTON_LABEL: "",
@@ -58,6 +49,21 @@ export const HOME_TEXT = {
     HOWTO_DELIVER_FOOD_TEXT: "アプリの表示に沿って、完成した料理を配達しましょう。",
 }
 
+export const SIGNUP_TEXT = {
+    SIGN_UP_TITLE: "ユーザー作成",
+    SIGN_UP_BUTTON_LABEL: "作成",
+    SUCCESS_SIGNUP_MESSAGE: "新規登録できました。ログインしてみましょう！",
+    USER_SIGNUP_ERROR: "ユーザーを新規作成できませんでした",
+    EMAIL_TEXTFIELD_LABEL: "Email",
+}
+
+export const SIGNIN_TEXT = {
+    SIGN_IN_TITLE: "ログイン",
+    SIGN_IN_BUTTON_LABEL: "ログイン",
+    SIGN_IN_SUCCESS_MESSAGE: "ログインに成功しました",
+    SIGN_IN_ERROR: "ログインできませんでした。メールアドレス、パスワードを再度入力してください",
+}
+
 export const SESSION_HEADER_TITLE = {
     SIGN_IN: "ログイン",
 }
@@ -73,7 +79,6 @@ export const FOOD_HEADER_TITLE = {
 export const USER_HEADER_TITLE = {
     USER_INDEX: "---",
     USER_DETAIL: "ユーザーの詳細",
-    USER_CREATE: "ユーザー作成",
     USER_EDIT: "ユーザーの編集",
 }
 
@@ -154,6 +159,7 @@ export const EDIT_EMAIL_TEXT = {
     SUBMIT_BUTTON_LABEL: "変更する",
     NOW_EMAIL_LABEL: "現在のメールアドレス",
     NEW_EMAIL_LABEL: "新しいメールアドレス",
+    SEND_EMAIL_TEXT: "認証メールを送信しました",
 }
 
 export const AUTH_CHANGE_EMAIL = {

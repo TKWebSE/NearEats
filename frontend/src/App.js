@@ -47,6 +47,7 @@ import { initializeMessage, messageActionTypes, messageReducer } from "./reducer
 import { SessionDispatch, SessionState, MessageDispatch, MessageState } from "./context/Context";
 import Cookies from "js-cookie";
 import { MaterialUISuccessSnackber } from "./component/MaterialUISuccessSnackber"
+import { MaterialUIErrorSnackber } from "./component/MaterialUIErrorSnackber";
 
 function App() {
   const [state, dispatch] = useReducer(sessionReducer, initializeState);
@@ -234,6 +235,7 @@ function App() {
                 </Switch>
               </Router>
               <MaterialUISuccessSnackber message={messageState.message} dispatch={messageDispatch} />
+              <MaterialUIErrorSnackber message={messageState.errorMessage} dispatch={messageDispatch} />
             </MessageState.Provider>
           </MessageDispatch.Provider>
         </SessionState.Provider>

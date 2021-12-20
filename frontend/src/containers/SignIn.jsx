@@ -5,16 +5,14 @@ import { initializeState, signInActionTypes, signInReducer } from "../reducer/si
 import { sessionActionTypes } from "../reducer/sessionReducer";
 import { useHistory } from "react-router";
 import { signInApi } from "../apis/sessionApis";
-import { SESSION_HEADER_TITLE } from "../constants";
 import { SignInCard } from "../component/sessionComponent/SignInCard";
-import { SessionDispatch, SessionState } from "../context/Context";
+import { SessionDispatch, SessionState, MessageState, MessageDispatch } from "../context/Context";
 import { foodsIndexURL, signInURL } from "../urls/index";
 import { MaterialUILoginButton } from "../component/sessionComponent/MaterialUILoginButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
-import { HTTP_STATUS_CODE, ERROR_MESSAGE } from "../constants";
-import { MaterialUIErrorSnackber } from "../component/MaterialUIErrorSnackber";
-import { MaterialUISuccessSnackber } from "../component/MaterialUISuccessSnackber";
+import { HTTP_STATUS_CODE, SIGNIN_TEXT } from "../constants";
+import { messageActionTypes } from "../reducer/messageReducer";
 
 const SignImnHeader = styled.h1`
   margin-top:5%;
@@ -56,38 +54,15 @@ export const SignIn = () => {
   const [state, dispatch] = useReducer(signInReducer, initializeState);
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch);
+  const messageState = useContext(MessageState);
+  const messageDispatch = useContext(MessageDispatch);
   const history = useHistory();
-
-  useEffect(() => {
-    if (SessionAuthState.message !== "") {
-      if (state.message === "") {
-        dispatch({
-          type: signInActionTypes.SETTINGMESSAGE,
-          payload: {
-            message: SessionAuthState.message
-          },
-        })
-      }
-    }
-  }, [signInActionTypes])
 
   function onKeyDownEnter(event) {
     submitSignIn()
   }
 
   function submitSignIn() {
-    dispatch({
-      type: signInActionTypes.SETTINGERRORMESSAGE,
-      payload: {
-        errorMessage: ""
-      },
-    })
-    dispatch({
-      type: signInActionTypes.SETTINGMESSAGE,
-      payload: {
-        message: ""
-      },
-    })
     signInApi(state.user)
       .then((data) => {
         SessionAuthDispatch({
@@ -96,15 +71,21 @@ export const SignIn = () => {
             data: data,
           },
         });
+        messageDispatch({
+          type: messageActionTypes.SET_MESSAGE,
+          payload: {
+            message: SIGNIN_TEXT.SIGN_IN_SUCCESS_MESSAGE
+          },
+        })
         history.push(foodsIndexURL);
       })
       .catch((e) => {
         if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
           console.log(e.response.status)
-          dispatch({
-            type: signInActionTypes.SETTINGERRORMESSAGE,
+          messageDispatch({
+            type: messageActionTypes.SET_ERROR_MESSAGE,
             payload: {
-              errorMessage: ERROR_MESSAGE.USER_SIGNIN_ERROR
+              errorMessage: SIGNIN_TEXT.SIGN_IN_ERROR
             },
           })
           history.push(signInURL)
@@ -113,28 +94,13 @@ export const SignIn = () => {
         }
       })
   }
-  console.log(state)
 
   return (
     <Fragment>
       <SignImnHeader>
-        {SESSION_HEADER_TITLE.SIGN_IN}
+        {SIGNIN_TEXT.SIGN_IN_TITLE}
       </SignImnHeader>
       <MessageWrapper>
-        {
-          state.errorMessage === "" ?
-            state.message === "" ?
-              null
-              :
-              <MessageSuccessWrapper>
-                <MaterialUISuccessSnackber message={state.message} />
-              </MessageSuccessWrapper>
-            :
-            <MessageErrorWrapper>
-              <MaterialUIErrorSnackber message={state.errorMessage} />
-            </MessageErrorWrapper>
-        }
-
       </MessageWrapper>
       <SigninWrapper>
         <SessionDispatch.Provider value={dispatch}>
@@ -144,7 +110,7 @@ export const SignIn = () => {
         </SessionDispatch.Provider>
         <SubmitbuttomWrapper>
           <ThemeProvider theme={ButtonTheme}>
-            <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={"ログイン"} />
+            <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={SIGNIN_TEXT.SIGN_IN_BUTTON_LABEL} />
           </ThemeProvider>
         </SubmitbuttomWrapper>
       </SigninWrapper>
