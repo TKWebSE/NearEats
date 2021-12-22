@@ -160,6 +160,7 @@ export const EDIT_EMAIL_TEXT = {
     NOW_EMAIL_LABEL: "現在のメールアドレス",
     NEW_EMAIL_LABEL: "新しいメールアドレス",
     SEND_EMAIL_TEXT: "認証メールを送信しました",
+    REGEXP_ERROR: "メールアドレスを入力してください",
 }
 
 export const AUTH_CHANGE_EMAIL = {
@@ -167,16 +168,16 @@ export const AUTH_CHANGE_EMAIL = {
     TEXT_FIELD_LABEL: "認証コード",
     EDIT_EMAIL_LINK_TEXT: "メールが届かない方はこちら",
     SUBMIT_BUTTON_LABEL: "認証",
-    COMPLETE_UPDATE_HEADER_TITLE: "メールアドレス変更完了",
-    COMPLETE_UPDATE_EMAIL_TEXT: "メールアドレスの変更を完了しました。引き続き、NearEatsをお楽しみください。",
+    COMPLETE_CHANGE_EMAIL_MESSAGE: "メールアドレス変更完了",
+    ERROR_CHANGE_EMAIL_MESSAGE: "認証できませんでした",
 }
 
 export const EDIT_PASSWORD_TEXT = {
-    HEADER_TITLE: "認証コードを入力してください",
-    TEXT_FIELD_LABEL: "認証コード",
-    SUBMIT_BUTTON_LABEL: "認証",
-    COMPLETE_UPDATE_HEADER_TITLE: "パスワード変更完了",
-    COMPLETE_UPDATE_PASSWORD_TEXT: "パスワードの変更を完了しました。引き続き、NearEatsをお楽しみください。",
+    HEADER_TITLE: "新しいパスワードを入力してください",
+    NEW_PASSWORD_LABEL: "新しいパスワード",
+    CONFIRMATION_LABEL: "確認用",
+    SUBMIT_BUTTON_LABEL: "設定",
+    ERROR_UNMATCHPASSWORD: "確認用に同じパスワードを入力してください"
 }
 
 export const NOTFOUND_ORDER_TEXT = {

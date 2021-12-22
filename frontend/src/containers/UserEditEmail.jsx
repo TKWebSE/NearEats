@@ -52,18 +52,43 @@ export const UserEditEmail = () => {
     })
   }, [])
 
+  function onKeyDownEnter(event) {
+    handleSubmit()
+  }
+
   function handleSubmit() {
-    sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
-      .then((data) => {
-        messageDispatch({
-          type: messageActionTypes.SET_MESSAGE,
-          payload: {
-            message: EDIT_EMAIL_TEXT.SEND_EMAIL_TEXT
-          },
+    try {
+      const regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{2,}.[A-Za-z0-9]{2,}$/;
+      if (!(regexp.test(state.user.email))) {
+        throw EDIT_EMAIL_TEXT.REGEXP_ERROR
+      }
+      sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
+        .then((data) => {
+          messageDispatch({
+            type: messageActionTypes.SET_MESSAGE,
+            payload: {
+              message: EDIT_EMAIL_TEXT.SEND_EMAIL_TEXT
+            },
+          })
+          history.push(authChangeEmailURL)
         })
-        history.push(authChangeEmailURL)
+        .catch(e =>
+          messageDispatch({
+            type: messageActionTypes.SET_ERROR_MESSAGE,
+            payload: {
+              errorMessage: EDIT_EMAIL_TEXT.ERROR_CHANGE_EMAIL_MESSAGE
+            },
+          })
+        );
+    } catch (e) {
+      messageDispatch({
+        type: messageActionTypes.SET_ERROR_MESSAGE,
+        payload: {
+          errorMessage: e
+        },
       })
-      .catch(e => console.log(e));
+      console.log(e)
+    }
   }
 
   return (
@@ -83,6 +108,7 @@ export const UserEditEmail = () => {
             <ChangeEmailWrapper>
               <MaterialUIUserEmailLine
                 label={EDIT_EMAIL_TEXT.NEW_EMAIL_LABEL}
+                onKeyDown={(event) => onKeyDownEnter(event)}
               />
             </ChangeEmailWrapper>
             <ButtonWrapper>

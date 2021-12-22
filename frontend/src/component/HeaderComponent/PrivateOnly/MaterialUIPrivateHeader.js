@@ -160,7 +160,6 @@ export default function MaterialUIPrivateHeader() {
   const handleSignOut = () => {
     signOutApi()
       .then((data) => {
-        console.log(data)
         SessionUserDispatch({
           type: sessionActionTypes.SIGNOUT,
         });

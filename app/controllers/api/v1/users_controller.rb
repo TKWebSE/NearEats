@@ -91,15 +91,11 @@ module Api
                 # logger.debug(params[:params][:confirmation_code])
 
                 if (Time.now - user.confirmation_sent_at) >= 10.minute
-                    render json: {
-                        message: 'TimeOut' 
-                        }, status: :unauthorized
+                    raise RuntimeError
                 end
                 
                 if user.confirmation_code != params[:params][:confirmation_code]
-                    render json: { 
-                        message: 'differentCode' 
-                        }, status: :unauthorized
+                    raise RuntimeError
                 end
 
                 if(user.update!(

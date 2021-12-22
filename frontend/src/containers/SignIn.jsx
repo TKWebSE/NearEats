@@ -81,7 +81,6 @@ export const SignIn = () => {
       })
       .catch((e) => {
         if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
-          console.log(e.response.status)
           messageDispatch({
             type: messageActionTypes.SET_ERROR_MESSAGE,
             payload: {

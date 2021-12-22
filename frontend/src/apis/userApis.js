@@ -55,7 +55,9 @@ export const userUpdateApi = (user) => {
         .then((res) => {
             return res.data
         })
-        .catch(e => console.log(e))
+        .catch((e) => {
+            throw e
+        })
 }
 
 //ユーザーを削除する
@@ -63,44 +65,6 @@ export const userDelete = (user) => {
     return axios.delete(userDeleteBackendURL(user.id), {
         params: {
             user: user
-        }
-    })
-        .then((res) => {
-            return res.data
-        })
-        .catch(e => console.log(e))
-}
-
-export const updateEmailApi = (userId, email) => {
-    console.log("updateEmailApi")
-    return axios.put(updateEmailBackendURL(userId), {
-        // params: {
-        userId: userId,
-        email: email,
-        // }
-    })
-        .then((res) => {
-            return res.data
-        })
-        .catch(e => console.log(e))
-}
-
-export const updatePasswordApi = (userId, password) => {
-    return axios.put(editEmailURL(userId), {
-        params: {
-
-        }
-    })
-        .then((res) => {
-            return res.data
-        })
-        .catch(e => console.log(e))
-}
-
-export const updateEmail = () => {
-    return axios.put(editPasswordURL, {
-        params: {
-
         }
     })
         .then((res) => {

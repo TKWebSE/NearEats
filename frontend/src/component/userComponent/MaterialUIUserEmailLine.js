@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //userのメールアドレスを設定するためのTextFieldコンポーネント
-export function MaterialUIUserEmailLine({ label }) {
+export function MaterialUIUserEmailLine({ label, onKeyDown }) {
   const classes = useStyles();
   const state = useContext(UserState);
   const dispatch = useContext(UserDispatch);
-  console.log(state)
+
   const handleChange = (event) => {
     dispatch({
       type: userActionTypes.SETTINGUSEREMAIL,
@@ -48,6 +48,7 @@ export function MaterialUIUserEmailLine({ label }) {
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     event.preventDefault();
+                    onKeyDown(event)
                   }
                 }
                 }

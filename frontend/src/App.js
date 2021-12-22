@@ -52,9 +52,7 @@ import { MaterialUIErrorSnackber } from "./component/MaterialUIErrorSnackber";
 function App() {
   const [state, dispatch] = useReducer(sessionReducer, initializeState);
   const [messageState, messageDispatch] = useReducer(messageReducer, initializeState);
-  console.log(state)
 
-  console.log(Cookies.get())
   return (
     <Fragment>
       <SessionDispatch.Provider value={dispatch}>

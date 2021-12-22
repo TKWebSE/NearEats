@@ -23,17 +23,19 @@ export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
 }
 
 //パスワード変更時の認証コードを送る
-export const sendEmailToChangePasswordApi = (userId, newEmail) => {
+export const sendEmailToChangePasswordApi = (userId, newPassword) => {
   return axios.get(sendEmailToChangePasswordBackendURL(userId), {
     params: {
       userId: userId,
-      newEmail: newEmail,
+      newEmail: newPassword,
     }
   })
     .then((res) => {
       return res.data
     })
-    .catch(e => console.log(e))
+    .catch((e) => {
+      throw e
+    })
 }
 
 //emailを更新する
@@ -48,7 +50,9 @@ export const updateEmailApi = (userId, confirmationCode) => {
     .then((res) => {
       return res.data
     })
-    .catch(e => console.log(e))
+    .catch((e) => {
+      throw e
+    })
 }
 
 //passwordを更新する
@@ -63,5 +67,7 @@ export const updatePasswordApi = (userId, confirmationCode) => {
     .then((res) => {
       return res.data
     })
-    .catch(e => console.log(e))
+    .catch((e) => {
+      throw e
+    })
 }

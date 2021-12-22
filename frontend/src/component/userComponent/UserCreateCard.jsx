@@ -27,7 +27,8 @@ export const UserCreateCard = () => {
         <Fragment>
             <UserCreateWrapper>
                 <CreatetUserNameWrapper>
-                    <MaterialUIUserNameLine></MaterialUIUserNameLine>
+                    <MaterialUIUserNameLine>
+                    </MaterialUIUserNameLine>
                 </CreatetUserNameWrapper>
                 <CreatetUserEmailWrapper>
                     <MaterialUIUserEmailLine label={SIGNUP_TEXT.EMAIL_TEXTFIELD_LABEL}> </MaterialUIUserEmailLine>

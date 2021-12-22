@@ -30,7 +30,6 @@ export function PrivateOnlyRoute(props) {
         console.log("Private側の認証確認中")
         isLoginApi()
             .then((data) => {
-                console.log(data)
                 SessionAuthDispatch({
                     type: sessionActionTypes.ISLOGIN,
                     payload: {
@@ -40,7 +39,6 @@ export function PrivateOnlyRoute(props) {
             })
             .catch((e) => console.log(e))
     }, [location.pathname])
-    console.log(SessionAuthState)
 
     return (
         SessionAuthState.fetchSessionState === REQUEST_STATE.OK ?
