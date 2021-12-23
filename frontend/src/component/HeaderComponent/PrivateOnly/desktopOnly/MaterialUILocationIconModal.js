@@ -54,7 +54,7 @@ export default function MaterialUILocationIconModal({ onClick, modalTilte, modal
   const history = useHistory();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
   const [nowSelectLocation, setLocation] = useState(nowLocation);
   const SessionUserState = useContext(SessionState);
   const SessionUserDispatch = useContext(SessionDispatch);

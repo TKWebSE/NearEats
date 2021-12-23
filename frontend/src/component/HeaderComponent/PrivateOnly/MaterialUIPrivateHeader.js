@@ -110,7 +110,7 @@ export default function MaterialUIPrivateHeader() {
   const SessionUserState = useContext(SessionState);
   const SessionUserDispatch = useContext(SessionDispatch);
   const history = useHistory();
-  const [searchValue, setSearchValue] = useState(SessionUserState.searchWord);
+  const [searchValue, setSearchValue] = useState(SessionUserState.searchWord === null ? "" : SessionUserState.searchWord);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -155,6 +155,14 @@ export default function MaterialUIPrivateHeader() {
     } else {
       dispacth({ type: headerActionTypes.OPENDRAWER })
     }
+  }
+
+  function handleNotice() {
+    console.log("handleNotice")
+  }
+
+  function handleTaskNotification() {
+    console.log("handleTaskNotification")
   }
 
   const handleSignOut = () => {
@@ -220,7 +228,7 @@ export default function MaterialUIPrivateHeader() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem color="red">
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -228,19 +236,20 @@ export default function MaterialUIPrivateHeader() {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton aria-label="show 11 new notifications" color="inherit" onClick={() => handleTaskNotification}>
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          onClick={handleProfileMenuOpen}
         >
           <AccountCircle />
         </IconButton>
@@ -258,12 +267,13 @@ export default function MaterialUIPrivateHeader() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => handleDrawer()}
           >
-            <MenuIcon onClick={() => handleDrawer()} />
+            <MenuIcon />
           </IconButton>
           <TitleWrapper>
             <Link to={foodsIndexURL} style={{ textDecoration: 'none', color: '#FFF' }}>
-              <Typography className={classes.title} variant="h5" noWrap textPrimary={"#000"}>
+              <Typography className={classes.title} variant="h5" noWrap textprimary={"#000"}>
                 {HOME_TEXT.HOME_TITLE}
               </Typography>
             </Link>
@@ -297,12 +307,12 @@ export default function MaterialUIPrivateHeader() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={() => handleTaskNotification}>
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>

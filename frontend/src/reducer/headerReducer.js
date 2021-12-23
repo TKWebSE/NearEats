@@ -10,17 +10,16 @@ export const headerActionTypes = {
     CLOSEDRAWER: "CLOSEDRAWER",
 }
 
-export const headerReducer = (state,action) => {
+export const headerReducer = (state, action) => {
     switch (action.type) {
         case headerActionTypes.OPENDRAWER:
-            console.log("nekoneko")
             return {
-                isOpenDrawer:true,
-                fetchState:REQUEST_STATE.OPENDRAWER,
+                isOpenDrawer: true,
+                fetchState: REQUEST_STATE.OPENDRAWER,
             }
         case headerActionTypes.CLOSEDRAWER:
             return {
-                isOpenDrawer:false,
+                isOpenDrawer: false,
                 fetchState: REQUEST_STATE.CLOSEDRAWER,
             }
         default:

@@ -46,23 +46,15 @@ export const UserEditPassword = () => {
   const messageDispatch = useContext(MessageDispatch);
   const [newPasswordValue, setNewPassword] = useState("");
   const [confirmationPasswordValue, setConfirmationPassword] = useState("");
-  const [state, dispatch] = useReducer(userReducer, initializeState);
+  // const [state, dispatch] = useReducer(userReducer, initializeState);
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch({
-      type: userActionTypes.SETTINGUSERPASSWORD,
-      payload: {
-        password: sessionAuthState.currentUser.password
-      }
-    })
-  }, [])
 
   function onKeyDownEnter(event) {
     handleSubmit()
   }
 
   function handleSubmit() {
+    console.log("aaaaaa")
     try {
       if (!(newPasswordValue === confirmationPasswordValue)) {
         throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD
