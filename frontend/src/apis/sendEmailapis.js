@@ -5,6 +5,8 @@ import {
   updateEmailBackendURL,
   sendEmailToChangePasswordBackendURL,
   updatePasswordBackendURL,
+  authChangePasswordURL,
+  testPasswordBackendURL,
 } from "../urls/index";
 
 //email変更時の認証コードを送る

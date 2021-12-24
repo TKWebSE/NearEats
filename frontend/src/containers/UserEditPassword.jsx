@@ -27,16 +27,7 @@ const ChangePasswordWrapper = styled.div``;
 const ConfirmPasswordWrapper = styled.div``;
 
 const ButtonWrapper = styled.div`
-  padding-left:90%;
-  ${media.lessThan("large")`
-    padding-left:89%;
-  `}
-  ${media.lessThan("medium")`
-    padding-left:80%;
-  `}
-  ${media.lessThan("small")`
-    padding-left:70%;
-  `}
+  text-align:right;
 `;
 
 export const UserEditPassword = () => {
@@ -54,11 +45,10 @@ export const UserEditPassword = () => {
   }
 
   function handleSubmit() {
-    console.log("aaaaaa")
     try {
-      if (!(newPasswordValue === confirmationPasswordValue)) {
-        throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD
-      }
+      // if (!(newPasswordValue === confirmationPasswordValue)) {
+      //   throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD
+      // }
       sendEmailToChangePasswordApi(sessionAuthState.currentUser.id, newPasswordValue)
         .then((data) => {
           history.push(authChangePasswordURL)
@@ -99,7 +89,7 @@ export const UserEditPassword = () => {
         <ButtonWrapper>
           <ThemeProvider theme={ButtonTheme}>
             <MaterialUICommonButton
-              onClick={() => handleSubmit}
+              onClick={handleSubmit}
               btnLabel={EDIT_PASSWORD_TEXT.SUBMIT_BUTTON_LABEL}
             />
           </ThemeProvider>

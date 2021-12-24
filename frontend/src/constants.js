@@ -180,6 +180,15 @@ export const EDIT_PASSWORD_TEXT = {
     ERROR_UNMATCHPASSWORD: "確認用に同じパスワードを入力してください"
 }
 
+export const AUTH_CHANGE_PASSWORD = {
+    HEADER_TITLE: "認証コードを入力してください",
+    TEXT_FIELD_LABEL: "認証コード",
+    EDIT_PASSWORD_LINK_TEXT: "メールが届かない方はこちら",
+    SUBMIT_BUTTON_LABEL: "認証",
+    COMPLETE_CHANGE_PASSWORD_MESSAGE: "メールアドレス変更完了",
+    ERROR_CHANGE_PASSWORD_MESSAGE: "認証できませんでした",
+}
+
 export const NOTFOUND_ORDER_TEXT = {
     NOT_EXIST_ORDER_TEXT: "注文した料理はありません",
     LETS_ORDER_TEXT: "料理を見てみましょう！！",

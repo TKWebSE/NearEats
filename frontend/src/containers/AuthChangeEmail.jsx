@@ -34,9 +34,6 @@ const ButtonWrapper = styled.div`
   text-align:right;
 `;
 
-const SuccessText = styled.div`
-`;
-
 export const AuthChangeEmail = () => {
   const sessionAuthState = useContext(SessionState);
   const sessionAuthDispatch = useContext(SessionDispatch);

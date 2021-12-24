@@ -76,7 +76,8 @@ module Api
                 end
             end
 
-            def send_change_password                
+            def send_change_password
+                user = User.find_by(id: params[:user_id])
                 UserMailer.with(user: user).change_password_email.deliver_later
 
                 if(true)
