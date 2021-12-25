@@ -50,7 +50,7 @@ export const AuthChangePassword = () => {
     //ここ変える
     updateEmailApi(sessionAuthState.currentUser.id, confirmationCode)
       .then((data) => {
-        console.log(data)
+
         messageDispatch({
           type: messageActionTypes.SET_MESSAGE,
           payload: {
