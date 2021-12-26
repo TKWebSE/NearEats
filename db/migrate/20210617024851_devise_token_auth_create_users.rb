@@ -13,15 +13,18 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
       t.boolean  :allow_password_change, :default => false
+      t.string :confirmation_password_code
+      t.datetime :confirmation_password_sent_at
+      t.string   :unconfirmed_password
 
       ## Rememberable
       t.datetime :remember_created_at
 
       ## Confirmable
-      t.string :confirmation_code
       t.string   :confirmation_token
       t.datetime :confirmed_at
-      t.datetime :confirmation_sent_at
+      t.string :confirmation_email_code
+      t.datetime :confirmation_email_sent_at
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable

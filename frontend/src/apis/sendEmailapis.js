@@ -28,8 +28,9 @@ export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
 export const sendEmailToChangePasswordApi = (userId, newPassword) => {
   return axios.get(sendEmailToChangePasswordBackendURL(userId), {
     params: {
-      userId: userId,
-      newEmail: newPassword,
+      user_id: userId,
+      url: foodIndexFrontendURL,
+      new_password: newPassword,
     }
   })
     .then((res) => {

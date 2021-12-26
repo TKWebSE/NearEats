@@ -37,7 +37,6 @@ export const UserEditPassword = () => {
   const messageDispatch = useContext(MessageDispatch);
   const [newPasswordValue, setNewPassword] = useState("");
   const [confirmationPasswordValue, setConfirmationPassword] = useState("");
-  // const [state, dispatch] = useReducer(userReducer, initializeState);
   const history = useHistory();
 
   function onKeyDownEnter(event) {
@@ -46,11 +45,24 @@ export const UserEditPassword = () => {
 
   function handleSubmit() {
     try {
-      // if (!(newPasswordValue === confirmationPasswordValue)) {
-      //   throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD
-      // }
+      if (newPasswordValue === "" || confirmationPasswordValue === "") {
+        throw EDIT_PASSWORD_TEXT.ERROR_BLANK_PASSWORD_MESSAGE
+      }
+      if (!(newPasswordValue === confirmationPasswordValue)) {
+        throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD_MESSAGE
+      }
+      const regexp = /^[A-Za-z0-9]{8,15}$/;
+      if (!(regexp.test(newPasswordValue))) {
+        throw EDIT_PASSWORD_TEXT.ERROR_VALUATION_MESSAGE
+      }
       sendEmailToChangePasswordApi(sessionAuthState.currentUser.id, newPasswordValue)
         .then((data) => {
+          messageDispatch({
+            type: messageActionTypes.SET_MESSAGE,
+            payload: {
+              message: EDIT_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
+            },
+          })
           history.push(authChangePasswordURL)
         })
         .catch(e => console.log(e));

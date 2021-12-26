@@ -53,10 +53,7 @@ module Api
                 user = User.find_by(id: params[:user_id])
                 unconfirmed_email = params[:new_email]
                 auth_code = get_six_string_number
-                logger.debug("updateこんとろーららららら")
-                logger.debug(user.name)
-                logger.debug(auth_code)
-                logger.debug("updateこんとろーららららら")
+
                 UserMailer.with(
                     user: user,url: params[:url],
                     new_email: unconfirmed_email,
@@ -64,8 +61,8 @@ module Api
                 ).change_emailaddress_email.deliver_later
 
                 if user.update!(
-                    confirmation_code: auth_code,
-                    confirmation_sent_at: Time.now,
+                    confirmation_email_code: auth_code,
+                    confirmation_email_sent_at: Time.now,
                     unconfirmed_email: unconfirmed_email
                 )
                     render json: {
@@ -78,12 +75,25 @@ module Api
 
             def send_change_password
                 user = User.find_by(id: params[:user_id])
+                auth_code = get_six_string_number
+                new_password = params[:new_password]
                 UserMailer.with(user: user).change_password_email.deliver_later
 
-                if(true)
-                    render json: {}, status: :ok
-                else
-                    render json: {}, status: :ng
+                logger.debug("updateこんとろーららららら")
+                logger.debug(user.name)
+                logger.debug(auth_code)
+                logger.debug("updateこんとろーららららら")
+
+                if user.update!(
+                    confirmation_password_code: auth_code,
+                    confirmation_password_sent_at: Time.now,
+                    unconfirmed_password: unconfirmed_password
+                )
+                    render json: {
+                        user: user
+                    }, status: :ok
+                else 
+                    render json: { },status: :ng 
                 end
             end
 

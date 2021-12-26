@@ -177,7 +177,10 @@ export const EDIT_PASSWORD_TEXT = {
     NEW_PASSWORD_LABEL: "新しいパスワード",
     CONFIRMATION_LABEL: "確認用",
     SUBMIT_BUTTON_LABEL: "設定",
-    ERROR_UNMATCHPASSWORD: "確認用に同じパスワードを入力してください"
+    SEND_EMAIL_MESSAGE: "認証メールを送信しました",
+    ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
+    ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
+    ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
 }
 
 export const AUTH_CHANGE_PASSWORD = {

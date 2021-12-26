@@ -23,14 +23,14 @@ class UserMailer < ApplicationMailer
   def change_emailaddress_email
     @user = params[:user]
     @url  = params[:url]
-    @new_email = params[:new_email]
     @auth_code = params[:auth_code]
     mail(to: @new_email, subject: 'メールアドレス変更を完了させましょう')
   end
 
   def change_password_email
-    @user
-    @url
+    @user = params[:user]
+    @url  = params[:url]
+    @auth_code = params[:auth_code]
     mail(to: @user.email, subject: 'パスワードを変更しました')
   end
 
