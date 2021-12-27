@@ -55,7 +55,8 @@ module Api
                 auth_code = get_six_string_number
 
                 UserMailer.with(
-                    user: user,url: params[:url],
+                    user: user,
+                    url: params[:url],
                     new_email: unconfirmed_email,
                     auth_code: auth_code
                 ).change_emailaddress_email.deliver_later
@@ -77,17 +78,21 @@ module Api
                 user = User.find_by(id: params[:user_id])
                 auth_code = get_six_string_number
                 new_password = params[:new_password]
-                UserMailer.with(user: user).change_password_email.deliver_later
+                UserMailer.with(
+                    user: user,
+                    url: params[:url],
+                    auth_code: auth_code
+                ).change_password_email.deliver_later
 
                 logger.debug("updateこんとろーららららら")
-                logger.debug(user.name)
                 logger.debug(auth_code)
                 logger.debug("updateこんとろーららららら")
 
+                render json:{},status: :ok
                 if user.update!(
                     confirmation_password_code: auth_code,
                     confirmation_password_sent_at: Time.now,
-                    unconfirmed_password: unconfirmed_password
+                    unconfirmed_password: new_password
                 )
                     render json: {
                         user: user
@@ -99,21 +104,20 @@ module Api
 
             def update_email
                 user = User.find_by(id: params[:user_id])
-                # logger.debug(params[:params][:confirmation_code])
 
-                if (Time.now - user.confirmation_sent_at) >= 10.minute
+                if (Time.now - user.confirmation_email_sent_at) >= 10.minute
                     raise RuntimeError
                 end
                 
-                if user.confirmation_code != params[:params][:confirmation_code]
+                if user.confirmation_email_code != params[:params][:confirmation_code]
                     raise RuntimeError
                 end
 
                 if(user.update!(
                     email: user.unconfirmed_email,
-                    confirmation_code: nil,
+                    confirmation_email_code: nil,
                     confirmed_at: Time.now,
-                    confirmation_sent_at: nil,
+                    confirmation_email_sent_at: nil,
                     unconfirmed_email: nil,
                     ))
                     render json: {user: user}, status: :ok
