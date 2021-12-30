@@ -49,7 +49,6 @@ export const AuthChangeEmail = () => {
   function handleSubmit() {
     updateEmailApi(sessionAuthState.currentUser.id, confirmationCode)
       .then((data) => {
-        console.log(data)
         messageDispatch({
           type: messageActionTypes.SET_MESSAGE,
           payload: {

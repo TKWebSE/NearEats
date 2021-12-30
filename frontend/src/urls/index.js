@@ -75,10 +75,11 @@ export const signInBackendURL = `${AUTH_URL}/sign_in`;
 export const signOutBackendURL = `${AUTH_URL}/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
 // export const editEmailURL = `${AUTH_URL}/sessions`;
-export const editPasswordURL = `${AUTH_URL}/password`;
+// export const editPasswordURL = `${AUTH_URL}/password`;
 
 //email関連のURL
 export const editEmailURL = `/editEmail`;
+export const editPasswordURL = `/editPassword`;
 export const authChangeEmailURL = `/updateEmail`;
 export const authChangePasswordURL = `/updatePassword`;
 
@@ -86,4 +87,4 @@ export const authChangePasswordURL = `/updatePassword`;
 export const sendEmailToChangeEmailAddressBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangeEmail`;
 export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangePassword`;
 export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
-export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateePassword`;
+export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updatePassword`;

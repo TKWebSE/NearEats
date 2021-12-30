@@ -183,13 +183,21 @@ export const EDIT_PASSWORD_TEXT = {
     ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
 }
 
-export const AUTH_CHANGE_PASSWORD = {
-    HEADER_TITLE: "認証コードを入力してください",
-    TEXT_FIELD_LABEL: "認証コード",
+export const UPDATE_PASSWORD_TEXT = {
+    CHECK_AUTHCODE_TITLE: "認証コードを入力してください",
+    AUTHCODE_LABEL: "認証コード",
     EDIT_PASSWORD_LINK_TEXT: "メールが届かない方はこちら",
-    SUBMIT_BUTTON_LABEL: "認証",
-    COMPLETE_CHANGE_PASSWORD_MESSAGE: "メールアドレス変更完了",
-    ERROR_CHANGE_PASSWORD_MESSAGE: "認証できませんでした",
+    CHECK_AUTHCODE_BUTTON_LABEL: "認証",
+    COMPLETE_CHECK_AUTHCODE_MESSAGE: "認証しました",
+    ERROR_CHECK_AUTHCODE_MESSAGE: "認証できませんでした",
+    UPDATE_PASSWORD_TITLE: "新しいパスワードを入力してください",
+    NEW_PASSWORD_LABEL: "新しいパスワード",
+    CONFIRMATION_LABEL: "確認用",
+    UPDATE_PASSWORD_BUTTON_LABEL: "設定",
+    COMPLETE_UPDATE_PASSWORD_MESSAGE: "パスワード変更完了",
+    ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
+    ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
+    ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
 }
 
 export const NOTFOUND_ORDER_TEXT = {

@@ -82,13 +82,8 @@ module Api
                     user: user,
                     url: params[:url],
                     auth_code: auth_code
-                ).change_password_email.deliver_later
+                ).change_password_email.deliver_later\
 
-                logger.debug("updateこんとろーららららら")
-                logger.debug(auth_code)
-                logger.debug("updateこんとろーららららら")
-
-                render json:{},status: :ok
                 if user.update!(
                     confirmation_password_code: auth_code,
                     confirmation_password_sent_at: Time.now,
@@ -109,7 +104,7 @@ module Api
                     raise RuntimeError
                 end
                 
-                if user.confirmation_email_code != params[:params][:confirmation_code]
+                if user.confirmation_email_code != params[:params][:confirmation_email_code]
                     raise RuntimeError
                 end
 
@@ -127,12 +122,26 @@ module Api
             end
 
             def update_password
-                user = User.find_by(id: params[:userId])
+                user = User.find_by(id: params[:user_id])
 
-                if(true)
-                    render json: {}, status: :ok
+                if (Time.now - user.confirmation_password_sent_at) >= 10.minute
+                    raise RuntimeError
+                end
+                
+                if user.confirmation_email_code != params[:params][:confirmation_password_code]
+                    raise RuntimeError
+                end
+
+                if(user.update!(
+                    email: user.unconfirmed_email,
+                    confirmation_password_code: nil,
+                    confirmed_at: Time.now,
+                    confirmation_password_sent_at: nil,
+                    unconfirmed_password: nil,
+                    ))
+                    render json: {user: user}, status: :ok
                 else
-                    render json: {}, status: :ng
+                    render json: {}, status: :unauthorized
                 end
             end
 
