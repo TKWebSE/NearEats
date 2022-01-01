@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //汎用TextFieldコンポーネント
-export function MaterialUITextField({ label, value, setValue }) {
+export function MaterialUITextField({ label, value, setValue, onKeyDown }) {
   const classes = useStyles();
 
   const handleChange = (event) => {
@@ -33,6 +33,7 @@ export function MaterialUITextField({ label, value, setValue }) {
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 event.preventDefault();
+                onKeyDown(event)
               }
             }
             }

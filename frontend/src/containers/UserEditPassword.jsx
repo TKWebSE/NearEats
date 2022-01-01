@@ -12,6 +12,7 @@ import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { sendEmailToChangePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
 import { authChangePasswordURL } from "../urls/index";
+import { MaterialUIReadOnlyTextField } from "../component/userComponent/MaterialUIReadOnlyTextField";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -22,9 +23,7 @@ const HeaderWrapper = styled.h1`
     margin-top:5%;
 `;
 
-const ChangePasswordWrapper = styled.div``;
-
-const ConfirmPasswordWrapper = styled.div``;
+const EmailWrapper = styled.div``;
 
 const ButtonWrapper = styled.div`
   text-align:right;
@@ -44,36 +43,24 @@ export const UserEditPassword = () => {
   }
 
   function handleSubmit() {
-    try {
-      if (newPasswordValue === "" || confirmationPasswordValue === "") {
-        throw EDIT_PASSWORD_TEXT.ERROR_BLANK_PASSWORD_MESSAGE
-      }
-      if (!(newPasswordValue === confirmationPasswordValue)) {
-        throw EDIT_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD_MESSAGE
-      }
-      const regexp = /^[A-Za-z0-9]{8,15}$/;
-      if (!(regexp.test(newPasswordValue))) {
-        throw EDIT_PASSWORD_TEXT.ERROR_VALUATION_MESSAGE
-      }
-      sendEmailToChangePasswordApi(sessionAuthState.currentUser.id, newPasswordValue)
-        .then((data) => {
-          messageDispatch({
-            type: messageActionTypes.SET_MESSAGE,
-            payload: {
-              message: EDIT_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
-            },
-          })
-          history.push(authChangePasswordURL)
+    sendEmailToChangePasswordApi(sessionAuthState.currentUser.id)
+      .then((data) => {
+        messageDispatch({
+          type: messageActionTypes.SET_MESSAGE,
+          payload: {
+            message: EDIT_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
+          },
         })
-        .catch(e => console.log(e));
-    } catch (e) {
-      messageDispatch({
-        type: messageActionTypes.SET_ERROR_MESSAGE,
-        payload: {
-          errorMessage: e
-        },
+        history.push(authChangePasswordURL)
       })
-    }
+      .catch(e =>
+        messageDispatch({
+          type: messageActionTypes.SET_ERROR_MESSAGE,
+          payload: {
+            errorMessage: e
+          },
+        })
+      );
   }
 
   return (
@@ -82,22 +69,12 @@ export const UserEditPassword = () => {
         <HeaderWrapper>
           {EDIT_PASSWORD_TEXT.HEADER_TITLE}
         </HeaderWrapper>
-        <ChangePasswordWrapper>
-          <MaterialUIPasswordLine
-            label={EDIT_PASSWORD_TEXT.NEW_PASSWORD_LABEL}
-            value={newPasswordValue}
-            setValue={setNewPassword}
-            onKeyDown={(event) => onKeyDownEnter(event)}
+        <EmailWrapper>
+          <MaterialUIReadOnlyTextField
+            label={EDIT_PASSWORD_TEXT.NOW_EMAIL_LABEL}
+            value={sessionAuthState.currentUser.email}
           />
-        </ChangePasswordWrapper>
-        <ConfirmPasswordWrapper>
-          <MaterialUIPasswordLine
-            label={EDIT_PASSWORD_TEXT.CONFIRMATION_LABEL}
-            value={confirmationPasswordValue}
-            setValue={setConfirmationPassword}
-            onKeyDown={(event) => onKeyDownEnter(event)}
-          />
-        </ConfirmPasswordWrapper>
+        </EmailWrapper>
         <ButtonWrapper>
           <ThemeProvider theme={ButtonTheme}>
             <MaterialUICommonButton

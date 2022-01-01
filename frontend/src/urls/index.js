@@ -74,6 +74,7 @@ export const signUpBackendURL = `${AUTH_URL}`;
 export const signInBackendURL = `${AUTH_URL}/sign_in`;
 export const signOutBackendURL = `${AUTH_URL}/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
+
 // export const editEmailURL = `${AUTH_URL}/sessions`;
 // export const editPasswordURL = `${AUTH_URL}/password`;
 
@@ -87,4 +88,6 @@ export const authChangePasswordURL = `/updatePassword`;
 export const sendEmailToChangeEmailAddressBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangeEmail`;
 export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangePassword`;
 export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
-export const updatePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updatePassword`;
+export const checkPasswordConfirmationCodeBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updatePassword`;
+
+export const updatePasswordBackendURL = `${AUTH_URL}/`;

@@ -173,10 +173,9 @@ export const AUTH_CHANGE_EMAIL = {
 }
 
 export const EDIT_PASSWORD_TEXT = {
-    HEADER_TITLE: "新しいパスワードを入力してください",
-    NEW_PASSWORD_LABEL: "新しいパスワード",
-    CONFIRMATION_LABEL: "確認用",
-    SUBMIT_BUTTON_LABEL: "設定",
+    HEADER_TITLE: "認証コードを送信します",
+    NOW_EMAIL_LABEL: "登録されているメールアドレス",
+    SUBMIT_BUTTON_LABEL: "送信",
     SEND_EMAIL_MESSAGE: "認証メールを送信しました",
     ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
     ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
@@ -189,6 +188,7 @@ export const UPDATE_PASSWORD_TEXT = {
     EDIT_PASSWORD_LINK_TEXT: "メールが届かない方はこちら",
     CHECK_AUTHCODE_BUTTON_LABEL: "認証",
     COMPLETE_CHECK_AUTHCODE_MESSAGE: "認証しました",
+    ERROR_BLANK_AUTHCODE_MESSAGE: "認証コードを入力してください",
     ERROR_CHECK_AUTHCODE_MESSAGE: "認証できませんでした",
     UPDATE_PASSWORD_TITLE: "新しいパスワードを入力してください",
     NEW_PASSWORD_LABEL: "新しいパスワード",

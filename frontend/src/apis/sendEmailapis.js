@@ -4,9 +4,8 @@ import {
   sendEmailToChangeEmailAddressBackendURL,
   updateEmailBackendURL,
   sendEmailToChangePasswordBackendURL,
+  checkPasswordConfirmationCodeBackendURL,
   updatePasswordBackendURL,
-  authChangePasswordURL,
-  testPasswordBackendURL,
 } from "../urls/index";
 
 //email変更時の認証コードを送る
@@ -25,12 +24,11 @@ export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
 }
 
 //パスワード変更時の認証コードを送る
-export const sendEmailToChangePasswordApi = (userId, newPassword) => {
+export const sendEmailToChangePasswordApi = (userId) => {
   return axios.get(sendEmailToChangePasswordBackendURL(userId), {
     params: {
       user_id: userId,
       url: foodIndexFrontendURL,
-      new_password: newPassword,
     }
   })
     .then((res) => {
@@ -58,14 +56,26 @@ export const updateEmailApi = (userId, confirmationCode) => {
     })
 }
 
-//passwordを更新する
-export const updatePasswordApi = (userId, confirmationCode) => {
-  return axios.put(updatePasswordBackendURL(userId), {
+//passwordのconfirmationCodeを確認する
+export const checkPasswordConfirmationCodeApi = (userId, confirmationCode) => {
+  return axios.put(checkPasswordConfirmationCodeBackendURL(userId), {
     params: {
       user_id: userId,
-      url: foodIndexFrontendURL,
       confirmation_code: confirmationCode,
     }
+  })
+    .then((res) => {
+      return res.data
+    })
+    .catch((e) => {
+      throw e
+    })
+}
+
+//passwordを更新する
+export const updatePasswordApi = (password) => {
+  return axios.put(updatePasswordBackendURL, {
+    password: password,
   })
     .then((res) => {
       return res.data

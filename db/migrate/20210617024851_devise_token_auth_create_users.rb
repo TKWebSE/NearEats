@@ -15,7 +15,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.boolean  :allow_password_change, :default => false
       t.string :confirmation_password_code
       t.datetime :confirmation_password_sent_at
-      t.string   :unconfirmed_password
 
       ## Rememberable
       t.datetime :remember_created_at

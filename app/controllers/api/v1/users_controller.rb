@@ -77,7 +77,7 @@ module Api
             def send_change_password
                 user = User.find_by(id: params[:user_id])
                 auth_code = get_six_string_number
-                new_password = params[:new_password]
+
                 UserMailer.with(
                     user: user,
                     url: params[:url],
@@ -87,7 +87,6 @@ module Api
                 if user.update!(
                     confirmation_password_code: auth_code,
                     confirmation_password_sent_at: Time.now,
-                    unconfirmed_password: new_password
                 )
                     render json: {
                         user: user
@@ -132,17 +131,7 @@ module Api
                     raise RuntimeError
                 end
 
-                if(user.update!(
-                    email: user.unconfirmed_email,
-                    confirmation_password_code: nil,
-                    confirmed_at: Time.now,
-                    confirmation_password_sent_at: nil,
-                    unconfirmed_password: nil,
-                    ))
-                    render json: {user: user}, status: :ok
-                else
-                    render json: {}, status: :unauthorized
-                end
+                render json: {user: user}, status: :ok
             end
 
             private 
