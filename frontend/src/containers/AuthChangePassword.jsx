@@ -1,6 +1,9 @@
 import { Fragment, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import {
+  useParams,
+} from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { UPDATE_PASSWORD_TEXT } from "../constants";
@@ -47,8 +50,10 @@ export const AuthChangePassword = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [newPasswordValue, setNewPassword] = useState("");
   const [confirmationPasswordValue, setConfirmationPassword] = useState("")
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(true);
   const history = useHistory();
+  const params = useParams();
+  console.log({ params })
 
 
   function handleOnClick() {

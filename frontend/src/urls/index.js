@@ -90,4 +90,6 @@ export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAUL
 export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
 export const checkPasswordConfirmationCodeBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updatePassword`;
 
-export const updatePasswordBackendURL = `${AUTH_URL}/`;
+export const PasswordAuthBackendURL = `${AUTH_URL}/password`;
+
+export const updatePasswordBackendURL = `${AUTH_URL}/password`;

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-          passwords:     'api/v1/auth/passwords',
+          # passwords:     'api/v1/auth/passwords',
           registrations: 'api/v1/auth/registrations',
       }
 

@@ -126,8 +126,8 @@ module Api
                 if (Time.now - user.confirmation_password_sent_at) >= 10.minute
                     raise RuntimeError
                 end
-                
-                if user.confirmation_email_code != params[:params][:confirmation_password_code]
+
+                if user.confirmation_password_code != params[:params][:confirmation_code]
                     raise RuntimeError
                 end
 
