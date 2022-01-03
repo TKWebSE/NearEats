@@ -50,9 +50,6 @@ export const isLoginApi = () => {
     const uid = Cookies.get("uid");
     const accessToken = Cookies.get("access_token");
     const client = Cookies.get("client");
-    console.log(uid)
-    console.log(accessToken)
-    console.log(client)
     return axios.get(sessionIsLoginBackendURL, {
         headers: {
             'access-token': accessToken,

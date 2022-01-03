@@ -90,12 +90,11 @@ export const checkPasswordConfirmationCodeApi = (userId, confirmationCode) => {
 }
 
 //passwordを更新する
-export const updatePasswordApi = (password, passwordConfirmation) => {
-  //reset_password_tokenがいる？しかし、reset_password_tokenをparamsから取る方法？
+export const updatePasswordApi = (password, passwordConfirmation, resetPasswordToken) => {
   return axios.put(updatePasswordBackendURL, {
     password: password,
     password_confirmation: passwordConfirmation,
-    reset_password_token: "c_TDRzhHIL_fv3NFHQ89pw"
+    reset_password_token: resetPasswordToken,
   })
     .then((res) => {
       return res.data

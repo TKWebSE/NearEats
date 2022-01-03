@@ -2,7 +2,7 @@ import { Fragment, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import {
-  useParams,
+  useLocation,
 } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
@@ -50,55 +50,16 @@ export const AuthChangePassword = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [newPasswordValue, setNewPassword] = useState("");
   const [confirmationPasswordValue, setConfirmationPassword] = useState("")
-  const [isAuthenticated, setAuthenticated] = useState(true);
   const history = useHistory();
-  const params = useParams();
-  console.log({ params })
-
+  const search = useLocation().search;
+  const query = new URLSearchParams(search);
 
   function handleOnClick() {
     history.push(editPasswordURL)
   }
 
-  function onKeyDownEnterCheckAuthCode(event) {
-    handleCheckAuthCodeSubmit()
-  }
-
   function onKeyDownEnterUpdatePassword(event) {
     handlePasswordSubmit()
-  }
-
-  function handleCheckAuthCodeSubmit() {
-    try {
-      if (confirmationCode === "") {
-        throw UPDATE_PASSWORD_TEXT.ERROR_BLANK_AUTHCODE_MESSAGE
-      }
-      checkPasswordConfirmationCodeApi(sessionAuthState.currentUser.id, confirmationCode)
-        .then((data) => {
-          messageDispatch({
-            type: messageActionTypes.SET_MESSAGE,
-            payload: {
-              message: UPDATE_PASSWORD_TEXT.COMPLETE_CHECK_AUTHCODE_MESSAGE
-            },
-          })
-          setAuthenticated(true);
-        })
-        .catch((e) => {
-          messageDispatch({
-            type: messageActionTypes.SET_ERROR_MESSAGE,
-            payload: {
-              errorMessage: UPDATE_PASSWORD_TEXT.ERROR_CHECK_AUTHCODE_MESSAGE
-            },
-          })
-        });
-    } catch (e) {
-      messageDispatch({
-        type: messageActionTypes.SET_ERROR_MESSAGE,
-        payload: {
-          errorMessage: e
-        },
-      })
-    }
   }
 
   function handlePasswordSubmit() {
@@ -113,12 +74,12 @@ export const AuthChangePassword = () => {
       if (!(regexp.test(newPasswordValue))) {
         throw UPDATE_PASSWORD_TEXT.ERROR_VALUATION_MESSAGE
       }
-      updatePasswordApi(newPasswordValue, confirmationPasswordValue)
+      updatePasswordApi(newPasswordValue, confirmationPasswordValue, query.get('reset_password_token'))
         .then((data) => {
           messageDispatch({
             type: messageActionTypes.SET_MESSAGE,
             payload: {
-              message: UPDATE_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
+              message: UPDATE_PASSWORD_TEXT.COMPLETE_UPDATE_PASSWORD_MESSAGE
             },
           })
           history.push(authChangePasswordURL)
@@ -142,61 +103,38 @@ export const AuthChangePassword = () => {
 
   return (
     <Fragment>
-      {
-        isAuthenticated ?
-          <Wrapper>
-            <TitleWrapper>
-              {UPDATE_PASSWORD_TEXT.UPDATE_PASSWORD_TITLE}
-            </TitleWrapper>
-            <ChangePasswordWrapper>
-              <MaterialUIPasswordLine
-                label={UPDATE_PASSWORD_TEXT.NEW_PASSWORD_LABEL}
-                value={newPasswordValue}
-                setValue={setNewPassword}
-                onKeyDown={(event) => onKeyDownEnterUpdatePassword(event)}
-              />
-            </ChangePasswordWrapper>
-            <ConfirmPasswordWrapper>
-              <MaterialUIPasswordLine
-                label={UPDATE_PASSWORD_TEXT.CONFIRMATION_LABEL}
-                value={confirmationPasswordValue}
-                setValue={setConfirmationPassword}
-                onKeyDown={(event) => onKeyDownEnterUpdatePassword(event)}
-              />
-            </ConfirmPasswordWrapper>
-            <ButtonWrapper>
-              <ThemeProvider theme={ButtonTheme}>
-                <MaterialUICommonButton
-                  onClick={handlePasswordSubmit}
-                  btnLabel={UPDATE_PASSWORD_TEXT.UPDATE_PASSWORD_BUTTON_LABEL}
-                />
-              </ThemeProvider>
-            </ButtonWrapper>
-          </Wrapper>
-          :
-          <Wrapper>
-            <TitleWrapper>
-              {UPDATE_PASSWORD_TEXT.CHECK_AUTHCODE_TITLE}
-            </TitleWrapper>
-            <MaterialUITextField
-              label={UPDATE_PASSWORD_TEXT.AUTHCODE_LABEL}
-              value={confirmationCode}
-              setValue={setConfirmationCode}
-              onKeyDown={(event) => onKeyDownEnterCheckAuthCode(event)}
+      <Wrapper>
+        <TitleWrapper>
+          {UPDATE_PASSWORD_TEXT.UPDATE_PASSWORD_TITLE}
+        </TitleWrapper>
+        <ChangePasswordWrapper>
+          <MaterialUIPasswordLine
+            label={UPDATE_PASSWORD_TEXT.NEW_PASSWORD_LABEL}
+            value={newPasswordValue}
+            setValue={setNewPassword}
+            onKeyDown={(event) => onKeyDownEnterUpdatePassword(event)}
+          />
+        </ChangePasswordWrapper>
+        <ConfirmPasswordWrapper>
+          <MaterialUIPasswordLine
+            label={UPDATE_PASSWORD_TEXT.CONFIRMATION_LABEL}
+            value={confirmationPasswordValue}
+            setValue={setConfirmationPassword}
+            onKeyDown={(event) => onKeyDownEnterUpdatePassword(event)}
+          />
+        </ConfirmPasswordWrapper>
+        <LinkWrapper onClick={() => handleOnClick()}>
+          {UPDATE_PASSWORD_TEXT.EDIT_PASSWORD_LINK_TEXT}
+        </LinkWrapper>
+        <ButtonWrapper>
+          <ThemeProvider theme={ButtonTheme}>
+            <MaterialUICommonButton
+              onClick={handlePasswordSubmit}
+              btnLabel={UPDATE_PASSWORD_TEXT.UPDATE_PASSWORD_BUTTON_LABEL}
             />
-            <LinkWrapper onClick={() => handleOnClick()}>
-              {UPDATE_PASSWORD_TEXT.EDIT_PASSWORD_LINK_TEXT}
-            </LinkWrapper>
-            <ButtonWrapper>
-              <ThemeProvider theme={ButtonTheme}>
-                <MaterialUICommonButton
-                  onClick={() => handleCheckAuthCodeSubmit()}
-                  btnLabel={UPDATE_PASSWORD_TEXT.CHECK_AUTHCODE_BUTTON_LABEL}
-                />
-              </ThemeProvider>
-            </ButtonWrapper>
-          </Wrapper >
-      }
+          </ThemeProvider>
+        </ButtonWrapper>
+      </Wrapper>
     </Fragment >
   )
 }

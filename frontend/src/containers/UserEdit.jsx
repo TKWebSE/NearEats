@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router";
 import { fetchUserApi, userUpdateApi } from "../apis/userApis";
-import { REQUEST_STATE, USER_HEADER_TITLE } from "../constants";
+import { REQUEST_STATE, USER_EDIT } from "../constants";
 import { initializeState, userActionTypes, userReducer } from "../reducer/userReducer";
 import { userShowURL } from "../urls/index";
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -61,7 +61,7 @@ export const UserEdit = ({ match }) => {
     return (
         <Fragment>
             <UserEditHeader>
-                {USER_HEADER_TITLE.USER_EDIT}
+                {USER_EDIT.TITLE}
             </UserEditHeader>
             {
                 REQUEST_STATE.OK === state.fetchState ?
@@ -75,7 +75,10 @@ export const UserEdit = ({ match }) => {
                         </UserEditCardWrapper>
                         <UserEditButton>
                             <ThemeProvider theme={ButtonTheme}>
-                                <SaveButton onClick={submitHandle} />
+                                <SaveButton
+                                    onClick={submitHandle}
+                                    btnLabel={USER_EDIT.BTN_LABEL}
+                                />
                             </ThemeProvider>
                         </UserEditButton>
                     </Fragment>

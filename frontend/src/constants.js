@@ -82,6 +82,11 @@ export const USER_HEADER_TITLE = {
     USER_EDIT: "ユーザーの編集",
 }
 
+export const USER_EDIT = {
+    TITLE: "ユーザー情報の編集",
+    BTN_LABEL: "保存",
+}
+
 export const ORDER_HEADER_TITLE = {
     MYTASK_INDEX_TITLE: "Task一覧",
     TASK_DETAIL: "Taskの詳細",
@@ -183,16 +188,10 @@ export const EDIT_PASSWORD_TEXT = {
 }
 
 export const UPDATE_PASSWORD_TEXT = {
-    CHECK_AUTHCODE_TITLE: "認証コードを入力してください",
-    AUTHCODE_LABEL: "認証コード",
-    EDIT_PASSWORD_LINK_TEXT: "メールが届かない方はこちら",
-    CHECK_AUTHCODE_BUTTON_LABEL: "認証",
-    COMPLETE_CHECK_AUTHCODE_MESSAGE: "認証しました",
-    ERROR_BLANK_AUTHCODE_MESSAGE: "認証コードを入力してください",
-    ERROR_CHECK_AUTHCODE_MESSAGE: "認証できませんでした",
     UPDATE_PASSWORD_TITLE: "新しいパスワードを入力してください",
     NEW_PASSWORD_LABEL: "新しいパスワード",
     CONFIRMATION_LABEL: "確認用",
+    EDIT_PASSWORD_LINK_TEXT: "認証できない方はこちら",
     UPDATE_PASSWORD_BUTTON_LABEL: "設定",
     COMPLETE_UPDATE_PASSWORD_MESSAGE: "パスワード変更完了",
     ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",

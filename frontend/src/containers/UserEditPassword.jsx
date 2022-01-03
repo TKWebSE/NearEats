@@ -8,10 +8,10 @@ import { initializeState, userActionTypes, userReducer } from "../reducer/userRe
 import { EDIT_PASSWORD_TEXT } from "../constants";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from "../context/Context";
 import { MaterialUIPasswordLine } from "../component/userComponent/MaterialUIPasswordLine";
-import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
+import { MaterialUISendEmailButton } from "../component/MaterialUISendEmailButton";
 import { sendEmailToChangePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
-import { authChangePasswordURL } from "../urls/index";
+import { settingURL } from "../urls/index";
 import { MaterialUIReadOnlyTextField } from "../component/userComponent/MaterialUIReadOnlyTextField";
 
 const Wrapper = styled.div`
@@ -34,13 +34,8 @@ export const UserEditPassword = () => {
   const sessionAuthDispatch = useContext(SessionDispatch);
   const messageState = useContext(MessageState);
   const messageDispatch = useContext(MessageDispatch);
-  const [newPasswordValue, setNewPassword] = useState("");
-  const [confirmationPasswordValue, setConfirmationPassword] = useState("");
-  const history = useHistory();
 
-  function onKeyDownEnter(event) {
-    handleSubmit()
-  }
+  const history = useHistory();
 
   function handleSubmit() {
     sendEmailToChangePasswordApi(sessionAuthState.currentUser.id)
@@ -51,7 +46,7 @@ export const UserEditPassword = () => {
             message: EDIT_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
           },
         })
-        history.push(authChangePasswordURL)
+        history.push(settingURL)
       })
       .catch(e =>
         messageDispatch({
@@ -77,7 +72,7 @@ export const UserEditPassword = () => {
         </EmailWrapper>
         <ButtonWrapper>
           <ThemeProvider theme={ButtonTheme}>
-            <MaterialUICommonButton
+            <MaterialUISendEmailButton
               onClick={handleSubmit}
               btnLabel={EDIT_PASSWORD_TEXT.SUBMIT_BUTTON_LABEL}
             />

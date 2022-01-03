@@ -22,7 +22,7 @@ export function MaterialUISuccessSnackber({ message, dispatch }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (message === "") {
+    if (message === "" || message === undefined) {
       setOpen(false);
     } else {
       setOpen(true);
