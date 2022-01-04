@@ -1,7 +1,9 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
 export const COLORS = {
   MAIN_COLOR: '#00695f',
+  MAIN_COLOR_DARK: "",
   BORDER: '#e2e2e2',
   SUB_TEXT: '#545454',
   DELETE_WARN_BUTTON_COLOR: "#e91e63",
@@ -24,7 +26,7 @@ export const headerTheme = createMuiTheme({
   },
 });
 
-//デフォルトbuttonの色を設定
+//デフォルトbuttonの色を設定(MaterialUI)
 export const ButtonTheme = createMuiTheme({
   palette: {
     primary: {
@@ -32,15 +34,28 @@ export const ButtonTheme = createMuiTheme({
     },
   },
   secondary: {
-    main: COLORS.DELETE_WARN_BUTTON_COLOR
+    main: COLORS.SUB_BUTTON
   },
 });
 
-//削除ボタンの色を設定
+//削除ボタンの色を設定(MaterialUI)
 export const RedButtonTheme = createMuiTheme({
   palette: {
     primary: {
       main: COLORS.DELETE_WARN_BUTTON_COLOR
+    },
+  },
+});
+
+//送信ボタンの色を設定(MUI)
+export const MUIButtontheme = createTheme({
+  components: {
+    LoadingButton: {
+      styleOverrides: {
+        containedPrimary: {
+          color: '#00695f',
+        },
+      },
     },
   },
 });

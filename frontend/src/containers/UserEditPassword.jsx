@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import { ThemeProvider } from '@material-ui/core/styles';
 import media from "styled-media-query";
-import { ButtonTheme } from "../style_constants";
+import { MUIButtontheme } from "../style_constants";
 import { initializeState, userActionTypes, userReducer } from "../reducer/userReducer";
 import { EDIT_PASSWORD_TEXT } from "../constants";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from "../context/Context";
@@ -71,7 +71,7 @@ export const UserEditPassword = () => {
           />
         </EmailWrapper>
         <ButtonWrapper>
-          <ThemeProvider theme={ButtonTheme}>
+          <ThemeProvider theme={MUIButtontheme}>
             <MaterialUISendEmailButton
               onClick={handleSubmit}
               btnLabel={EDIT_PASSWORD_TEXT.SUBMIT_BUTTON_LABEL}

@@ -7,12 +7,18 @@ import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { styled } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
 }));
+
+const CustomButton = styled(LoadingButton)({
+  color: 'red'
+});
+
 
 export function SaveButton({ onClick, btnLabel }) {
   const classes = useStyles();
@@ -25,7 +31,7 @@ export function SaveButton({ onClick, btnLabel }) {
 
   return (
     <div>
-      <LoadingButton
+      <CustomButton
         size="large"
         color="primary"
         onClick={handleClick}
@@ -36,7 +42,7 @@ export function SaveButton({ onClick, btnLabel }) {
         className={classes.button}
       >
         {btnLabel}
-      </LoadingButton>
+      </CustomButton>
     </div>
   )
 }

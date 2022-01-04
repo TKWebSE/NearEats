@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import SendIcon from '@mui/icons-material/Send';
-import SaveIcon from '@material-ui/icons/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { COLORS } from "../style_constants";
+import { styled } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
 }));
+
+const CustomButton = styled(LoadingButton)({
+  backgroundColor: COLORS.MAIN_COLOR,
+  opacity: 0.9,
+  "&:hover": {
+    backgroundColor: COLORS.MAIN_COLOR,
+    opacity: 1,
+  },
+});
 
 export function MaterialUISendEmailButton({ onClick, btnLabel }) {
   const classes = useStyles();
@@ -25,27 +31,18 @@ export function MaterialUISendEmailButton({ onClick, btnLabel }) {
 
   return (
     <div>
-      <Button
-        size="large"
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={onClick}
-      >
-        {btnLabel}
-      </Button>
-      <LoadingButton
+      <CustomButton
         size="large"
         variant="contained"
         color="primary"
         onClick={handleClick}
         loading={loading}
-        loadingPosition="start"
-        startIcon={<SendIcon />}
+        loadingPosition="end"
+        endIcon={<SendIcon />}
         className={classes.button}
       >
         {btnLabel}
-      </LoadingButton>
+      </CustomButton>
     </div>
   )
 }
