@@ -42,7 +42,7 @@ export const AuthChangeEmail = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const history = useHistory();
 
-  function handleOnClick() {
+  function handleLinkClick() {
     history.push(editEmailURL)
   }
 
@@ -78,7 +78,7 @@ export const AuthChangeEmail = () => {
           value={confirmationCode}
           setValue={setConfirmationCode}
         />
-        <LinkWrapper onClick={() => handleOnClick()}>
+        <LinkWrapper onClick={() => handleLinkClick()}>
           {AUTH_CHANGE_EMAIL.EDIT_EMAIL_LINK_TEXT}
         </LinkWrapper>
         <ButtonWrapper>

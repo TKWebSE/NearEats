@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //汎用TextFieldコンポーネント
-export function MaterialUITextField({ label, value, setValue, onKeyDown }) {
+export function MaterialUITextField({ label, value, setValue, onKeyDown, helperText }) {
   const classes = useStyles();
 
   const handleChange = (event) => {
@@ -29,6 +29,7 @@ export function MaterialUITextField({ label, value, setValue, onKeyDown }) {
             variant="outlined"
             fullWidth
             value={value}
+            helperText={helperText}
             onChange={(event) => handleChange(event)}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {

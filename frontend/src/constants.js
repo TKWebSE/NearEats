@@ -60,12 +60,14 @@ export const SIGNUP_TEXT = {
 export const SIGNIN_TEXT = {
     SIGN_IN_TITLE: "ログイン",
     SIGN_IN_BUTTON_LABEL: "ログイン",
+    FORGET_PASSWORD_LINK_TEXT: "パスワードを忘れた方はこちら",
     SIGN_IN_SUCCESS_MESSAGE: "ログインに成功しました",
     SIGN_IN_ERROR: "ログインできませんでした。メールアドレス、パスワードを再度入力してください",
 }
 
 export const PASSWORD_RESET_SEND_EMAIL_TEXT = {
-    HEADER_TITLE: "パスワードを忘れた",
+    HEADER_TITLE: "パスワードの再設定",
+    HEADER_TEXT: "登録されているメールアドレスを入力してください。認証コードを送信します。",
     EMAIL_TEXT_FIELD_LABEL: "登録されているメール",
     SUBMIT_BUTTON_LABEL: "送信",
     SEND_EMAIL_MESSAGE: "認証メールを送信しました",
@@ -178,7 +180,6 @@ export const EDIT_EMAIL_TEXT = {
     NOW_EMAIL_LABEL: "現在のメールアドレス",
     NEW_EMAIL_LABEL: "新しいメールアドレス",
     SEND_EMAIL_TEXT: "認証メールを送信しました",
-    REGEXP_ERROR: "メールアドレスを入力してください",
 }
 
 export const AUTH_CHANGE_EMAIL = {
@@ -221,4 +222,8 @@ export const NOTFOUND_ORDER_TEXT = {
 export const MODAL_BUTTON_LABEL = {
     MODAL_OK: "OK",
     MODAL_NG: "キャンセル",
+}
+
+export const VALUATION_ERROR = {
+    EMAIL_REGEXP_ERROR: "メールアドレスを入力してください",
 }

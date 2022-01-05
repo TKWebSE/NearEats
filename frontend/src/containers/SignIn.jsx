@@ -7,8 +7,8 @@ import { useHistory } from "react-router";
 import { signInApi } from "../apis/sessionApis";
 import { SignInCard } from "../component/sessionComponent/SignInCard";
 import { SessionDispatch, SessionState, MessageState, MessageDispatch } from "../context/Context";
-import { foodsIndexURL, signInURL } from "../urls/index";
-import { MaterialUILoginButton } from "../component/sessionComponent/MaterialUILoginButton";
+import { foodsIndexURL, signInURL, passwordResetSendEmailURL } from "../urls/index";
+import { CommonReloadButton } from "../component/CommonReloadButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { HTTP_STATUS_CODE, SIGNIN_TEXT } from "../constants";
@@ -21,30 +21,32 @@ const Wrapper = styled.div`
 
 const SignImnHeader = styled.h1`
   margin-top:5%;
-  margin-left:7%;
+  // margin-left:7%;
 `;
 
-const MessageWrapper = styled.div`
-  margin-left:6%;
-  margin-right:5%;
-`;
-
-const SigninWrapper = styled.div`
-  margin-left:5%;
-  margin-right:5%;
+const LinkWrapper = styled.a`
+  padding-left:1%;
+  color:skyblue;
+  cursor : pointer;
+  transition: color .3s;
+  &:hover {
+    transition: color .3s;
+    color:blue;
+  }
 `;
 
 const SubmitbuttomWrapper = styled.div`
-  padding-left:90%;
-  ${media.lessThan("large")`
-    padding-left:89%;
-  `}
-  ${media.lessThan("medium")`
-    padding-left:80%;
-  `}
-  ${media.lessThan("small")`
-    padding-left:70%;
-  `}
+  text-align:right;
+  // padding-left:90%;
+  // ${media.lessThan("large")`
+  //   padding-left:89%;
+  // `}
+  // ${media.lessThan("medium")`
+  //   padding-left:80%;
+  // `}
+  // ${media.lessThan("small")`
+  //   padding-left:70%;
+  // `}
 `;
 
 export const SignIn = () => {
@@ -57,6 +59,10 @@ export const SignIn = () => {
 
   function onKeyDownEnter(event) {
     submitSignIn()
+  }
+
+  function handleLinkClick() {
+    history.push(passwordResetSendEmailURL);
   }
 
   function submitSignIn() {
@@ -97,20 +103,20 @@ export const SignIn = () => {
         <SignImnHeader>
           {SIGNIN_TEXT.SIGN_IN_TITLE}
         </SignImnHeader>
-        <MessageWrapper>
-        </MessageWrapper>
-        <SigninWrapper>
-          <SessionDispatch.Provider value={dispatch}>
-            <SessionState.Provider value={state}>
-              <SignInCard onKeyDown={(event) => onKeyDownEnter(event)}></SignInCard>
-            </SessionState.Provider>
-          </SessionDispatch.Provider>
-          <SubmitbuttomWrapper>
-            <ThemeProvider theme={ButtonTheme}>
-              <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={SIGNIN_TEXT.SIGN_IN_BUTTON_LABEL} />
-            </ThemeProvider>
-          </SubmitbuttomWrapper>
-        </SigninWrapper>
+        <SessionDispatch.Provider value={dispatch}>
+          <SessionState.Provider value={state}>
+            <SignInCard onKeyDown={(event) => onKeyDownEnter(event)}></SignInCard>
+          </SessionState.Provider>
+        </SessionDispatch.Provider>
+        <LinkWrapper onClick={() => handleLinkClick()}>
+          {SIGNIN_TEXT.FORGET_PASSWORD_LINK_TEXT}
+        </LinkWrapper>
+        <SubmitbuttomWrapper>
+          <CommonReloadButton
+            onClick={() => submitSignIn()}
+            btnLabel={SIGNIN_TEXT.SIGN_IN_BUTTON_LABEL}
+          />
+        </SubmitbuttomWrapper>
       </Wrapper>
     </Fragment>
   )

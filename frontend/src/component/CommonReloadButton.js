@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@mui/icons-material/Send';
+import SaveIcon from '@material-ui/icons/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { COLORS } from "../style_constants";
 import { styled } from '@mui/material/styles';
@@ -20,14 +20,14 @@ const CustomButton = styled(LoadingButton)({
   },
 });
 
-export function MaterialUISendEmailButton({ onClick, btnLabel, setLoadOut }) {
+export function CommonReloadButton({ onClick, btnLabel, icon }) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
   function handleClick() {
     setLoading(true);
-    onClick()
-    setTimeout(setLoading, 4000, false);
+    onClick();
+    setLoading(false);
   }
 
   return (
@@ -38,8 +38,8 @@ export function MaterialUISendEmailButton({ onClick, btnLabel, setLoadOut }) {
         color="primary"
         onClick={handleClick}
         loading={loading}
-        loadingPosition="end"
-        endIcon={<SendIcon />}
+        loadingPosition="center"
+        endIcon={icon}
         className={classes.button}
       >
         {btnLabel}

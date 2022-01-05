@@ -9,6 +9,7 @@ import { sendEmailToChangePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
 import { homeURL, passwordResetAuthURLFullURL } from "../urls/index";
 import { MaterialUITextField } from "../component/MaterialUITextField";
+import { validateEmail } from "../AppFunction";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -36,25 +37,34 @@ export const PasswordResetSendEmail = () => {
   }
 
   function handleSubmit() {
-    //メールアドレスのバリデーションはる
-    sendEmailToChangePasswordApi(email, passwordResetAuthURLFullURL)
-      .then((data) => {
-        messageDispatch({
-          type: messageActionTypes.SET_MESSAGE,
-          payload: {
-            message: PASSWORD_RESET_SEND_EMAIL_TEXT.SEND_EMAIL_MESSAGE
-          },
+    try {
+      validateEmail(email);
+      sendEmailToChangePasswordApi(email, passwordResetAuthURLFullURL)
+        .then((data) => {
+          messageDispatch({
+            type: messageActionTypes.SET_MESSAGE,
+            payload: {
+              message: PASSWORD_RESET_SEND_EMAIL_TEXT.SEND_EMAIL_MESSAGE
+            },
+          })
+          history.push(homeURL)
         })
-        history.push(homeURL)
+        .catch(e =>
+          messageDispatch({
+            type: messageActionTypes.SET_ERROR_MESSAGE,
+            payload: {
+              errorMessage: e
+            },
+          })
+        );
+    } catch (e) {
+      messageDispatch({
+        type: messageActionTypes.SET_ERROR_MESSAGE,
+        payload: {
+          errorMessage: e
+        },
       })
-      .catch(e =>
-        messageDispatch({
-          type: messageActionTypes.SET_ERROR_MESSAGE,
-          payload: {
-            errorMessage: e
-          },
-        })
-      );
+    }
   }
 
   return (
@@ -69,6 +79,7 @@ export const PasswordResetSendEmail = () => {
             value={email}
             setValue={setEmail}
             onKeyDown={(event) => onKeyDownEnter(event)}
+            helperText={PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TEXT}
           />
         </EmailWrapper>
         <ButtonWrapper>

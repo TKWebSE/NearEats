@@ -12,6 +12,7 @@ import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { sendEmailToChangeEmailAddressApi } from "../apis/sendEmailapis";
 import { authChangeEmailURL } from "../urls/index";
 import { messageActionTypes } from "../reducer/messageReducer";
+import { validateEmail } from "../AppFunction";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -58,10 +59,7 @@ export const UserEditEmail = () => {
 
   function handleSubmit() {
     try {
-      const regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{2,}.[A-Za-z0-9]{2,}$/;
-      if (!(regexp.test(state.user.email))) {
-        throw EDIT_EMAIL_TEXT.REGEXP_ERROR
-      }
+      validateEmail(state.user.email)
       sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
         .then((data) => {
           messageDispatch({
@@ -87,7 +85,6 @@ export const UserEditEmail = () => {
           errorMessage: e
         },
       })
-      console.log(e)
     }
   }
 

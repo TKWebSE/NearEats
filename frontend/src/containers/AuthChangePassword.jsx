@@ -51,7 +51,7 @@ export const AuthChangePassword = () => {
   const search = useLocation().search;
   const query = new URLSearchParams(search);
 
-  function handleOnClick() {
+  function handleLinkClick() {
     history.push(editPasswordURL)
   }
 
@@ -120,7 +120,7 @@ export const AuthChangePassword = () => {
             onKeyDown={(event) => onKeyDownEnterUpdatePassword(event)}
           />
         </ConfirmPasswordWrapper>
-        <LinkWrapper onClick={() => handleOnClick()}>
+        <LinkWrapper onClick={() => handleLinkClick()}>
           {UPDATE_PASSWORD_TEXT.EDIT_PASSWORD_LINK_TEXT}
         </LinkWrapper>
         <ButtonWrapper>
