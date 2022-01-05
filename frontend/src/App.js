@@ -32,6 +32,8 @@ import { headerTheme } from "./style_constants";
 
 import { SignIn } from "./containers/SignIn";
 import { Home } from "./containers/Home";
+import { PasswordResetSendEmail } from "./containers/PasswordResetSendEmail";
+import { PasswordResetAuth } from "./containers/PasswordResetAuth";
 import { MyTaskIndex } from "./containers/MyTaskIndex";
 import { MyTaskDetail } from "./containers/MyTaskDetail";
 import { BuyPointMenu } from "./containers/BuyPointMenu";
@@ -95,6 +97,18 @@ function App() {
                     exact
                     path="/users/create"
                     component={UserCreate}>
+                  </GuestOnlyRoute>
+                  {/* パスワードリセットのメール送信画面 */}
+                  <GuestOnlyRoute
+                    exact
+                    path="/passwordResetSentEmail"
+                    component={PasswordResetSendEmail}>
+                  </GuestOnlyRoute>
+                  {/* パスワードリセット画面 */}
+                  <GuestOnlyRoute
+                    exact
+                    path="/PasswordResetAuth"
+                    component={AuthChangePassword}>
                   </GuestOnlyRoute>
                   {/* user詳細画面 */}
                   <PrivateOnlyRoute

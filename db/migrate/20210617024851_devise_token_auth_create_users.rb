@@ -13,7 +13,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
       t.boolean  :allow_password_change, :default => false
-      t.string :confirmation_password_code
+      # t.string :confirmation_password_code
       t.datetime :confirmation_password_sent_at
 
       ## Rememberable

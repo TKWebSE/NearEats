@@ -43,11 +43,8 @@ const ButtonWrapper = styled.div`
 `;
 
 export const AuthChangePassword = () => {
-  const sessionAuthState = useContext(SessionState);
-  const sessionAuthDispatch = useContext(SessionDispatch);
   const messageState = useContext(MessageState);
   const messageDispatch = useContext(MessageDispatch);
-  const [confirmationCode, setConfirmationCode] = useState("");
   const [newPasswordValue, setNewPassword] = useState("");
   const [confirmationPasswordValue, setConfirmationPassword] = useState("")
   const history = useHistory();

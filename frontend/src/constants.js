@@ -64,6 +64,19 @@ export const SIGNIN_TEXT = {
     SIGN_IN_ERROR: "ログインできませんでした。メールアドレス、パスワードを再度入力してください",
 }
 
+export const PASSWORD_RESET_SEND_EMAIL_TEXT = {
+    HEADER_TITLE: "パスワードを忘れた",
+    EMAIL_TEXT_FIELD_LABEL: "登録されているメール",
+    SUBMIT_BUTTON_LABEL: "送信",
+    SEND_EMAIL_MESSAGE: "認証メールを送信しました",
+    ERROR_SEND_EMAIL_MESSAGE: "メールの送信ができませんでした",
+}
+
+export const PASSWORD_RESET_AUTH_TEXT = {
+    HEADER_TITLE: "パスワードを再設定してください",
+
+}
+
 export const SESSION_HEADER_TITLE = {
     SIGN_IN: "ログイン",
 }

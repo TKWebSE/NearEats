@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { COLORS } from "../style_constants";
 import { styled } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,9 +12,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CustomButton = styled(LoadingButton)({
-  color: 'red'
+  backgroundColor: COLORS.MAIN_COLOR,
+  opacity: 0.9,
+  "&:hover": {
+    backgroundColor: COLORS.MAIN_COLOR,
+    opacity: 1,
+  },
 });
-
 
 export function SaveButton({ onClick, btnLabel }) {
   const classes = useStyles();
@@ -33,12 +33,12 @@ export function SaveButton({ onClick, btnLabel }) {
     <div>
       <CustomButton
         size="large"
+        variant="contained"
         color="primary"
         onClick={handleClick}
         loading={loading}
-        loadingPosition="start"
-        startIcon={<SaveIcon />}
-        variant="contained"
+        loadingPosition="end"
+        endIcon={<SaveIcon />}
         className={classes.button}
       >
         {btnLabel}

@@ -14,6 +14,11 @@ import { ButtonTheme } from "../style_constants";
 import { HTTP_STATUS_CODE, SIGNIN_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
 
+const Wrapper = styled.div`
+  margin-left:20%;
+  margin-right:20%;
+`;
+
 const SignImnHeader = styled.h1`
   margin-top:5%;
   margin-left:7%;
@@ -22,14 +27,6 @@ const SignImnHeader = styled.h1`
 const MessageWrapper = styled.div`
   margin-left:6%;
   margin-right:5%;
-`;
-
-const MessageSuccessWrapper = styled.div`
-  color:blue;
-`;
-
-const MessageErrorWrapper = styled.div`
-
 `;
 
 const SigninWrapper = styled.div`
@@ -96,23 +93,25 @@ export const SignIn = () => {
 
   return (
     <Fragment>
-      <SignImnHeader>
-        {SIGNIN_TEXT.SIGN_IN_TITLE}
-      </SignImnHeader>
-      <MessageWrapper>
-      </MessageWrapper>
-      <SigninWrapper>
-        <SessionDispatch.Provider value={dispatch}>
-          <SessionState.Provider value={state}>
-            <SignInCard onKeyDown={(event) => onKeyDownEnter(event)}></SignInCard>
-          </SessionState.Provider>
-        </SessionDispatch.Provider>
-        <SubmitbuttomWrapper>
-          <ThemeProvider theme={ButtonTheme}>
-            <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={SIGNIN_TEXT.SIGN_IN_BUTTON_LABEL} />
-          </ThemeProvider>
-        </SubmitbuttomWrapper>
-      </SigninWrapper>
+      <Wrapper>
+        <SignImnHeader>
+          {SIGNIN_TEXT.SIGN_IN_TITLE}
+        </SignImnHeader>
+        <MessageWrapper>
+        </MessageWrapper>
+        <SigninWrapper>
+          <SessionDispatch.Provider value={dispatch}>
+            <SessionState.Provider value={state}>
+              <SignInCard onKeyDown={(event) => onKeyDownEnter(event)}></SignInCard>
+            </SessionState.Provider>
+          </SessionDispatch.Provider>
+          <SubmitbuttomWrapper>
+            <ThemeProvider theme={ButtonTheme}>
+              <MaterialUILoginButton onClick={() => submitSignIn()} btnLabel={SIGNIN_TEXT.SIGN_IN_BUTTON_LABEL} />
+            </ThemeProvider>
+          </SubmitbuttomWrapper>
+        </SigninWrapper>
+      </Wrapper>
     </Fragment>
   )
 }

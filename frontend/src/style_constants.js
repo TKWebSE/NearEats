@@ -46,16 +46,3 @@ export const RedButtonTheme = createMuiTheme({
     },
   },
 });
-
-//送信ボタンの色を設定(MUI)
-export const MUIButtontheme = createTheme({
-  components: {
-    LoadingButton: {
-      styleOverrides: {
-        containedPrimary: {
-          color: '#00695f',
-        },
-      },
-    },
-  },
-});

@@ -2,6 +2,7 @@ const BASE_URL = "http://localhost:3000";
 const API_V1 = "/api/v1"
 const AUTH = "/auth"
 
+const FRONTEND_DEFAULT_URL = `http://localhost:3001`;
 const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
@@ -75,21 +76,19 @@ export const signInBackendURL = `${AUTH_URL}/sign_in`;
 export const signOutBackendURL = `${AUTH_URL}/sign_out`;
 export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
 
-// export const editEmailURL = `${AUTH_URL}/sessions`;
-// export const editPasswordURL = `${AUTH_URL}/password`;
-
-//email関連のURL
+//email送信関連のURL
 export const editEmailURL = `/editEmail`;
 export const editPasswordURL = `/editPassword`;
 export const authChangeEmailURL = `/updateEmail`;
 export const authChangePasswordURL = `/updatePassword`;
+export const passwordResetSendEmailURL = `/passwordResetSentEmail`;
+export const passwordResetAuthURL = `/passwordResetAuth`;
+export const authChangePasswordFullURL = `${FRONTEND_DEFAULT_URL}${authChangePasswordURL}`;
+export const passwordResetAuthURLFullURL = `${FRONTEND_DEFAULT_URL}${passwordResetAuthURL}`;
 
-//email関連のBackendURL
+//email送信関連のBackendURL
 export const sendEmailToChangeEmailAddressBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangeEmail`;
-export const sendEmailToChangePasswordBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/sendAuthCodeChangePassword`;
 export const updateEmailBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updateEmail`;
-export const checkPasswordConfirmationCodeBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/updatePassword`;
-
 export const PasswordAuthBackendURL = `${AUTH_URL}/password`;
-
 export const updatePasswordBackendURL = `${AUTH_URL}/password`;
+

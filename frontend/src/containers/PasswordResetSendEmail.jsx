@@ -2,13 +2,13 @@ import { Fragment, useContext, useReducer, useEffect, useState } from "react"
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import media from "styled-media-query";
-import { EDIT_PASSWORD_TEXT } from "../constants";
-import { SessionState, SessionDispatch, MessageState, MessageDispatch } from "../context/Context";
+import { PASSWORD_RESET_SEND_EMAIL_TEXT } from "../constants";
+import { MessageState, MessageDispatch } from "../context/Context";
 import { MaterialUISendEmailButton } from "../component/MaterialUISendEmailButton";
 import { sendEmailToChangePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
-import { settingURL, authChangePasswordFullURL } from "../urls/index";
-import { MaterialUIReadOnlyTextField } from "../component/userComponent/MaterialUIReadOnlyTextField";
+import { homeURL, passwordResetAuthURLFullURL } from "../urls/index";
+import { MaterialUITextField } from "../component/MaterialUITextField";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -25,23 +25,27 @@ const ButtonWrapper = styled.div`
   text-align:right;
 `;
 
-export const UserEditPassword = () => {
-  const sessionAuthState = useContext(SessionState);
-  const sessionAuthDispatch = useContext(SessionDispatch);
+export const PasswordResetSendEmail = () => {
   const messageState = useContext(MessageState);
+  const [email, setEmail] = useState();
   const messageDispatch = useContext(MessageDispatch);
   const history = useHistory();
 
+  function onKeyDownEnter(event) {
+    handleSubmit()
+  }
+
   function handleSubmit() {
-    sendEmailToChangePasswordApi(sessionAuthState.currentUser.email, authChangePasswordFullURL)
+    //メールアドレスのバリデーションはる
+    sendEmailToChangePasswordApi(email, passwordResetAuthURLFullURL)
       .then((data) => {
         messageDispatch({
           type: messageActionTypes.SET_MESSAGE,
           payload: {
-            message: EDIT_PASSWORD_TEXT.SEND_EMAIL_MESSAGE
+            message: PASSWORD_RESET_SEND_EMAIL_TEXT.SEND_EMAIL_MESSAGE
           },
         })
-        history.push(settingURL)
+        history.push(homeURL)
       })
       .catch(e =>
         messageDispatch({
@@ -57,18 +61,20 @@ export const UserEditPassword = () => {
     <Fragment>
       <Wrapper>
         <HeaderWrapper>
-          {EDIT_PASSWORD_TEXT.HEADER_TITLE}
+          {PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TITLE}
         </HeaderWrapper>
         <EmailWrapper>
-          <MaterialUIReadOnlyTextField
-            label={EDIT_PASSWORD_TEXT.NOW_EMAIL_LABEL}
-            value={sessionAuthState.currentUser.email}
+          <MaterialUITextField
+            label={PASSWORD_RESET_SEND_EMAIL_TEXT.EMAIL_TEXT_FIELD_LABEL}
+            value={email}
+            setValue={setEmail}
+            onKeyDown={(event) => onKeyDownEnter(event)}
           />
         </EmailWrapper>
         <ButtonWrapper>
           <MaterialUISendEmailButton
             onClick={handleSubmit}
-            btnLabel={EDIT_PASSWORD_TEXT.SUBMIT_BUTTON_LABEL}
+            btnLabel={PASSWORD_RESET_SEND_EMAIL_TEXT.SUBMIT_BUTTON_LABEL}
           />
         </ButtonWrapper>
       </Wrapper>

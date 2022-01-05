@@ -24,27 +24,11 @@ export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
     .catch(e => console.log(e))
 }
 
-//パスワード変更時の認証コードを送る
-// export const sendEmailToChangePasswordApi = (userId) => {
-//   return axios.get(sendEmailToChangePasswordBackendURL(userId), {
-//     params: {
-//       user_id: userId,
-//       url: foodIndexFrontendURL,
-//     }
-//   })
-//     .then((res) => {
-//       return res.data
-//     })
-//     .catch((e) => {
-//       throw e
-//     })
-// }
-
-//実験用
-export const sendEmailToChangePasswordApi = (userId, confirmationCode) => {
+//パスワードリセットのメールを送信する
+export const sendEmailToChangePasswordApi = (email, redirectUrl) => {
   return axios.post(PasswordAuthBackendURL, {
-    email: "natumesouseki01@yahoo.co.jp",
-    redirect_url: "http://localhost:3001/updatePassword",
+    email: email,
+    redirect_url: redirectUrl,
   })
     .then((res) => {
       return res.data
@@ -53,8 +37,6 @@ export const sendEmailToChangePasswordApi = (userId, confirmationCode) => {
       throw e
     })
 }
-
-
 
 //emailを更新する
 export const updateEmailApi = (userId, confirmationCode) => {
@@ -62,22 +44,6 @@ export const updateEmailApi = (userId, confirmationCode) => {
     params: {
       user_id: userId,
       url: foodIndexFrontendURL,
-      confirmation_code: confirmationCode,
-    }
-  })
-    .then((res) => {
-      return res.data
-    })
-    .catch((e) => {
-      throw e
-    })
-}
-
-// passwordのconfirmationCodeを確認する
-export const checkPasswordConfirmationCodeApi = (userId, confirmationCode) => {
-  return axios.put(checkPasswordConfirmationCodeBackendURL(userId), {
-    params: {
-      user_id: userId,
       confirmation_code: confirmationCode,
     }
   })
