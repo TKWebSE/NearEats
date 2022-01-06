@@ -101,14 +101,14 @@ function App() {
                   {/* パスワードリセットのメール送信画面 */}
                   <GuestOnlyRoute
                     exact
-                    path="/passwordResetSentEmail"
+                    path="/passwordResetSendEmail"
                     component={PasswordResetSendEmail}>
                   </GuestOnlyRoute>
                   {/* パスワードリセット画面 */}
                   <GuestOnlyRoute
                     exact
                     path="/PasswordResetAuth"
-                    component={AuthChangePassword}>
+                    component={PasswordResetAuth}>
                   </GuestOnlyRoute>
                   {/* user詳細画面 */}
                   <PrivateOnlyRoute

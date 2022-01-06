@@ -14,6 +14,7 @@ import { editPasswordURL, authChangePasswordURL, settingURL } from "../urls/inde
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
 import { checkPasswordConfirmationCodeApi, updatePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
+import { validateDoublePassword } from "../AppFunction";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -61,16 +62,7 @@ export const AuthChangePassword = () => {
 
   function handlePasswordSubmit() {
     try {
-      if (newPasswordValue === "" || confirmationPasswordValue === "") {
-        throw UPDATE_PASSWORD_TEXT.ERROR_BLANK_PASSWORD_MESSAGE
-      }
-      if (!(newPasswordValue === confirmationPasswordValue)) {
-        throw UPDATE_PASSWORD_TEXT.ERROR_UNMATCHPASSWORD_MESSAGE
-      }
-      const regexp = /^[A-Za-z0-9]{8,15}$/;
-      if (!(regexp.test(newPasswordValue))) {
-        throw UPDATE_PASSWORD_TEXT.ERROR_VALUATION_MESSAGE
-      }
+      validateDoublePassword(newPasswordValue, confirmationPasswordValue)
       updatePasswordApi(newPasswordValue, confirmationPasswordValue, query.get('reset_password_token'))
         .then((data) => {
           messageDispatch({

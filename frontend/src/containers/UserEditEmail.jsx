@@ -59,7 +59,7 @@ export const UserEditEmail = () => {
 
   function handleSubmit() {
     try {
-      validateEmail(state.user.email)
+      validateEmail(state.user.email);
       sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
         .then((data) => {
           messageDispatch({

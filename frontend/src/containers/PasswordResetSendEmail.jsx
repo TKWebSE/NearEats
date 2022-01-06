@@ -49,14 +49,14 @@ export const PasswordResetSendEmail = () => {
           })
           history.push(homeURL)
         })
-        .catch(e =>
+        .catch((e) => {
           messageDispatch({
             type: messageActionTypes.SET_ERROR_MESSAGE,
             payload: {
               errorMessage: e
             },
           })
-        );
+        });
     } catch (e) {
       messageDispatch({
         type: messageActionTypes.SET_ERROR_MESSAGE,

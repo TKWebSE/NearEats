@@ -5,6 +5,7 @@ export const REQUEST_STATE = {
 }
 export const HTTP_STATUS_CODE = {
     UN_AUTHORIZED: 401,
+    NOT_FOUND: 404,
     UNPROCESSABLE_ENTITY: 422,
     NOT_ACCEPTABLE: 406,
 }
@@ -75,8 +76,12 @@ export const PASSWORD_RESET_SEND_EMAIL_TEXT = {
 }
 
 export const PASSWORD_RESET_AUTH_TEXT = {
-    HEADER_TITLE: "パスワードを再設定してください",
-
+    HEADER_TITLE: "パスワードを再設定しましょう！",
+    NEW_PASSWORD_LABEL: "新しいパスワード",
+    CONFIMATION_PASSWORD_LABEL: "確認用",
+    SEND_EMAIL_LINK_TEXT: "メールを再送信する",
+    SUBMIT_BUTTON_LABEL: "設定",
+    COMPLETE_UPDATE_PASSWORD_MESSAGE: "パスワード変更完了",
 }
 
 export const SESSION_HEADER_TITLE = {
@@ -208,9 +213,6 @@ export const UPDATE_PASSWORD_TEXT = {
     EDIT_PASSWORD_LINK_TEXT: "認証できない方はこちら",
     UPDATE_PASSWORD_BUTTON_LABEL: "設定",
     COMPLETE_UPDATE_PASSWORD_MESSAGE: "パスワード変更完了",
-    ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
-    ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
-    ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
 }
 
 export const NOTFOUND_ORDER_TEXT = {
@@ -225,5 +227,9 @@ export const MODAL_BUTTON_LABEL = {
 }
 
 export const VALUATION_ERROR = {
+    NAME_VALUATION_ERROR: "名前を入力してください",
     EMAIL_REGEXP_ERROR: "メールアドレスを入力してください",
+    ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
+    ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
+    ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
 }

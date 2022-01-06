@@ -13,6 +13,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { HTTP_STATUS_CODE, SIGNIN_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
+import { validateEmail } from "../AppFunction";
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -66,35 +67,45 @@ export const SignIn = () => {
   }
 
   function submitSignIn() {
-    signInApi(state.user)
-      .then((data) => {
-        SessionAuthDispatch({
-          type: sessionActionTypes.SIGNIN,
-          payload: {
-            data: data,
-          },
-        });
-        messageDispatch({
-          type: messageActionTypes.SET_MESSAGE,
-          payload: {
-            message: SIGNIN_TEXT.SIGN_IN_SUCCESS_MESSAGE
-          },
-        })
-        history.push(foodsIndexURL);
-      })
-      .catch((e) => {
-        if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
-          messageDispatch({
-            type: messageActionTypes.SET_ERROR_MESSAGE,
+    try {
+      validateEmail(state.user.email);
+      signInApi(state.user)
+        .then((data) => {
+          SessionAuthDispatch({
+            type: sessionActionTypes.SIGNIN,
             payload: {
-              errorMessage: SIGNIN_TEXT.SIGN_IN_ERROR
+              data: data,
+            },
+          });
+          messageDispatch({
+            type: messageActionTypes.SET_MESSAGE,
+            payload: {
+              message: SIGNIN_TEXT.SIGN_IN_SUCCESS_MESSAGE
             },
           })
-          history.push(signInURL)
-        } else {
-          throw e;
-        }
+          history.push(foodsIndexURL);
+        })
+        .catch((e) => {
+          if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
+            messageDispatch({
+              type: messageActionTypes.SET_ERROR_MESSAGE,
+              payload: {
+                errorMessage: SIGNIN_TEXT.SIGN_IN_ERROR
+              },
+            })
+            history.push(signInURL)
+          } else {
+            throw e;
+          }
+        })
+    } catch (e) {
+      messageDispatch({
+        type: messageActionTypes.SET_ERROR_MESSAGE,
+        payload: {
+          errorMessage: e
+        },
       })
+    }
   }
 
   return (

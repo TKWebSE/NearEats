@@ -15,6 +15,7 @@ import { signInURL, userCreateURL } from "../urls/index";
 import { sessionActionTypes } from "../reducer/sessionReducer";
 import { HTTP_STATUS_CODE, SIGNUP_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
+import { validateName, validateEmail, validateDoublePassword } from "../AppFunction";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -48,30 +49,46 @@ export const UserCreate = () => {
     const messageDispatch = useContext(MessageDispatch);
     const history = useHistory();
 
-    function SubmitHandle() {
-        userCreateApi(state.user)
-            .then((data) => {
-                messageDispatch({
-                    type: messageActionTypes.SET_MESSAGE,
-                    payload: {
-                        message: SIGNUP_TEXT.SUCCESS_SIGNUP_MESSAGE
-                    },
-                })
-                history.push(signInURL)
-            })
-            .catch((e) => {
-                if (e.response.status === HTTP_STATUS_CODE.UNPROCESSABLE_ENTITY) {
+    function onKeyDownEnter(event) {
+        handleSubmit()
+    }
+
+    function handleSubmit() {
+        try {
+            validateName(state.user.name);
+            validateEmail(state.user.email);
+            validateDoublePassword(state.user.password, state.user.passwordConfirmation);
+            userCreateApi(state.user)
+                .then((data) => {
                     messageDispatch({
-                        type: messageActionTypes.SET_ERROR_MESSAGE,
+                        type: messageActionTypes.SET_MESSAGE,
                         payload: {
-                            errorMessage: SIGNUP_TEXT.USER_SIGNUP_ERROR
+                            message: SIGNUP_TEXT.SUCCESS_SIGNUP_MESSAGE
                         },
                     })
-                    history.push(userCreateURL)
-                } else {
-                    throw e;
-                }
+                    history.push(signInURL)
+                })
+                .catch((e) => {
+                    if (e.response.status === HTTP_STATUS_CODE.UNPROCESSABLE_ENTITY) {
+                        messageDispatch({
+                            type: messageActionTypes.SET_ERROR_MESSAGE,
+                            payload: {
+                                errorMessage: SIGNUP_TEXT.USER_SIGNUP_ERROR
+                            },
+                        })
+                        history.push(userCreateURL)
+                    } else {
+                        throw e;
+                    }
+                })
+        } catch (e) {
+            messageDispatch({
+                type: messageActionTypes.SET_ERROR_MESSAGE,
+                payload: {
+                    errorMessage: e
+                },
             })
+        }
     }
 
     return (
@@ -87,7 +104,7 @@ export const UserCreate = () => {
                         </UserCreateCardWrapper>
                         <UserCreateSubmitWrapper>
                             <ThemeProvider theme={ButtonTheme}>
-                                <MaterialUICommonButton onClick={SubmitHandle} btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL} />
+                                <MaterialUICommonButton onClick={handleSubmit} btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL} />
                             </ThemeProvider>
                         </UserCreateSubmitWrapper>
                     </UserState.Provider>

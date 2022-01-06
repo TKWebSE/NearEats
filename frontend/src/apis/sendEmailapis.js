@@ -8,6 +8,8 @@ import {
   updatePasswordBackendURL,
   PasswordAuthBackendURL,
 } from "../urls/index";
+import { HTTP_STATUS_CODE, PASSWORD_RESET_SEND_EMAIL_TEXT } from "../constants";
+import { CatchingPokemonSharp } from "@mui/icons-material";
 
 //email変更時の認証コードを送る
 export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
@@ -34,7 +36,11 @@ export const sendEmailToChangePasswordApi = (email, redirectUrl) => {
       return res.data
     })
     .catch((e) => {
-      throw e
+      if (e.response.status === HTTP_STATUS_CODE.NOT_FOUND) {
+        throw PASSWORD_RESET_SEND_EMAIL_TEXT.ERROR_SEND_EMAIL_MESSAGE
+      } else {
+        throw e;
+      }
     })
 }
 
