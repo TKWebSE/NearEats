@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer, useContext } from "react";
+import React, { Fragment, useReducer, useState, useContext } from "react";
 import media from "styled-media-query";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import { initializeState, userReducer, userActionTypes } from "../reducer/userRe
 import { SessionDispatch } from "../context/Context";
 import { UserDispatch, UserState, MessageDispatch, MessageState } from "../context/Context";
 import { UserCreateCard } from "../component/userComponent/UserCreateCard";
-import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
+import { CommonReloadButton } from "../component/CommonReloadButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { signInURL, userCreateURL } from "../urls/index";
@@ -16,6 +16,7 @@ import { sessionActionTypes } from "../reducer/sessionReducer";
 import { HTTP_STATUS_CODE, SIGNUP_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
 import { validateName, validateEmail, validateDoublePassword } from "../AppFunction";
+import { PasswordTextField } from "../component/PasswordTextField";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -47,6 +48,10 @@ export const UserCreate = () => {
     const SessionAuthDispatch = useContext(SessionDispatch);
     const messageState = useContext(MessageState);
     const messageDispatch = useContext(MessageDispatch);
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [passwordConfirmation, setPasswordConfirmation] = useState();
     const history = useHistory();
 
     function onKeyDownEnter(event) {
@@ -99,13 +104,20 @@ export const UserCreate = () => {
                 </UserCreateHeader>
                 <UserDispatch.Provider value={dispatch}>
                     <UserState.Provider value={state}>
+                        <PasswordTextField
+                            label={SIGNUP_TEXT.PASSWORD_TEXTFIELD_LABEL}
+                            value={password}
+                            setValue={setPassword}
+                            onKeyDown={onKeyDownEnter}
+                        />
                         <UserCreateCardWrapper>
                             <UserCreateCard></UserCreateCard>
                         </UserCreateCardWrapper>
                         <UserCreateSubmitWrapper>
-                            <ThemeProvider theme={ButtonTheme}>
-                                <MaterialUICommonButton onClick={handleSubmit} btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL} />
-                            </ThemeProvider>
+                            <CommonReloadButton
+                                onClick={handleSubmit}
+                                btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL}
+                            />
                         </UserCreateSubmitWrapper>
                     </UserState.Provider>
                 </UserDispatch.Provider>

@@ -52,6 +52,7 @@ export const HOME_TEXT = {
 
 export const SIGNUP_TEXT = {
     SIGN_UP_TITLE: "ユーザー作成",
+    PASSWORD_TEXTFIELD_LABEL: "パスワード",
     SIGN_UP_BUTTON_LABEL: "作成",
     SUCCESS_SIGNUP_MESSAGE: "新規登録できました。ログインしてみましょう！",
     USER_SIGNUP_ERROR: "ユーザーを新規作成できませんでした",

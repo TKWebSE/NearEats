@@ -3,14 +3,6 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
         # module V1
         #   module Auth
 
-        def update 
-          logger.debug("こめんとだよ～＝＝＝＝")
-          logger.debug(params)
-          logger.debug(current_api_v1_user ==nil)
-          logger.debug(current_api_v1_user)
-          super
-
-        end
               private
               def sign_up_params
                 params.require(:registration).permit(:registration,:name,:email, :img, :password, :password_confirmation,:addressm,:session)
