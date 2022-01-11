@@ -4,10 +4,10 @@ import { signInBackendURL, signOutBackendURL, sessionIsLoginBackendURL } from '.
 import Cookies from "js-cookie";
 
 //ログインする
-export const signInApi = (user) => {
+export const signInApi = (email, password) => {
     return axios.post(signInBackendURL, {
-        email: user.email,
-        password: user.password,
+        email: email,
+        password: password,
     })
         .then(res => {
             Cookies.set("user_id", res.data.data["id"])

@@ -7,7 +7,6 @@ import { userCreateApi } from "../apis/userApis";
 import { initializeState, userReducer, userActionTypes } from "../reducer/userReducer";
 import { SessionDispatch } from "../context/Context";
 import { UserDispatch, UserState, MessageDispatch, MessageState } from "../context/Context";
-import { UserCreateCard } from "../component/userComponent/UserCreateCard";
 import { CommonReloadButton } from "../component/CommonReloadButton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
@@ -17,6 +16,7 @@ import { HTTP_STATUS_CODE, SIGNUP_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
 import { validateName, validateEmail, validateDoublePassword } from "../AppFunction";
 import { PasswordTextField } from "../component/PasswordTextField";
+import { MaterialUITextField } from "../component/MaterialUITextField";
 
 const UserCreateWrapper = styled.div`
     margin-left:10%;
@@ -26,21 +26,12 @@ const UserCreateWrapper = styled.div`
 const UserCreateHeader = styled.h1`
 `;
 
-const MessageWrapper = styled.div`
-    color:red;
-    padding-left:1%;
-`;
-
-const UserCreateCardWrapper = styled.div`
-
-`;
-
 const UserCreateSubmitWrapper = styled.div`
-    margin-left:90%;
+    padding-top:1%;
     text-align: right;
-    ${media.lessThan("small")`
-        margin-left:80%;
-    `}
+    // ${media.lessThan("small")`
+    //     margin-left:80%;
+    // `}
 `;
 
 export const UserCreate = () => {
@@ -48,10 +39,10 @@ export const UserCreate = () => {
     const SessionAuthDispatch = useContext(SessionDispatch);
     const messageState = useContext(MessageState);
     const messageDispatch = useContext(MessageDispatch);
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [passwordConfirmation, setPasswordConfirmation] = useState();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const history = useHistory();
 
     function onKeyDownEnter(event) {
@@ -60,10 +51,10 @@ export const UserCreate = () => {
 
     function handleSubmit() {
         try {
-            validateName(state.user.name);
-            validateEmail(state.user.email);
-            validateDoublePassword(state.user.password, state.user.passwordConfirmation);
-            userCreateApi(state.user)
+            validateName(name);
+            validateEmail(email);
+            validateDoublePassword(password, passwordConfirmation);
+            userCreateApi(name, email, password, passwordConfirmation)
                 .then((data) => {
                     messageDispatch({
                         type: messageActionTypes.SET_MESSAGE,
@@ -102,25 +93,36 @@ export const UserCreate = () => {
                 <UserCreateHeader>
                     {SIGNUP_TEXT.SIGN_UP_TITLE}
                 </UserCreateHeader>
-                <UserDispatch.Provider value={dispatch}>
-                    <UserState.Provider value={state}>
-                        <PasswordTextField
-                            label={SIGNUP_TEXT.PASSWORD_TEXTFIELD_LABEL}
-                            value={password}
-                            setValue={setPassword}
-                            onKeyDown={onKeyDownEnter}
-                        />
-                        <UserCreateCardWrapper>
-                            <UserCreateCard></UserCreateCard>
-                        </UserCreateCardWrapper>
-                        <UserCreateSubmitWrapper>
-                            <CommonReloadButton
-                                onClick={handleSubmit}
-                                btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL}
-                            />
-                        </UserCreateSubmitWrapper>
-                    </UserState.Provider>
-                </UserDispatch.Provider>
+                <MaterialUITextField
+                    label={SIGNUP_TEXT.USER_NAME_TEXTFIELD_LABEL}
+                    value={name}
+                    setValue={setName}
+                    onKeyDown={onKeyDownEnter}
+                />
+                <MaterialUITextField
+                    label={SIGNUP_TEXT.EMAIL_TEXTFIELD_LABEL}
+                    value={email}
+                    setValue={setEmail}
+                    onKeyDown={onKeyDownEnter}
+                />
+                <PasswordTextField
+                    label={SIGNUP_TEXT.PASSWORD_TEXTFIELD_LABEL}
+                    value={password}
+                    setValue={setPassword}
+                    onKeyDown={onKeyDownEnter}
+                />
+                <PasswordTextField
+                    label={SIGNUP_TEXT.PASSWORD_CONFIRMATION_TEXTFIELD_LABEL}
+                    value={passwordConfirmation}
+                    setValue={setPasswordConfirmation}
+                    onKeyDown={onKeyDownEnter}
+                />
+                <UserCreateSubmitWrapper>
+                    <CommonReloadButton
+                        onClick={handleSubmit}
+                        btnLabel={SIGNUP_TEXT.SIGN_UP_BUTTON_LABEL}
+                    />
+                </UserCreateSubmitWrapper>
             </UserCreateWrapper>
         </Fragment>
     )

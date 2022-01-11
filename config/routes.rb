@@ -25,6 +25,9 @@ Rails.application.routes.draw do
         put 'updateValuation', to: 'orders#updateValuation'
       end
 
+      post 'checkout', to: 'stripes#checkout'
+
+
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
           # passwords:     'api/v1/auth/passwords',
           registrations: 'api/v1/auth/registrations',

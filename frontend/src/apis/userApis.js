@@ -26,12 +26,12 @@ export const fetchUserApi = (userId) => {
 }
 
 //ユーザーを作成する
-export const userCreateApi = (user) => {
+export const userCreateApi = (name, email, password, passwordConfirmation) => {
     return axios.post(signUpBackendURL, {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        password_confirmation: user.passwordConfirmation
+        name: name,
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation
     })
         .then((res) => {
             return res.data

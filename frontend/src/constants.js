@@ -52,7 +52,10 @@ export const HOME_TEXT = {
 
 export const SIGNUP_TEXT = {
     SIGN_UP_TITLE: "ユーザー作成",
+    USER_NAME_TEXTFIELD_LABEL: "アカウント名",
+    EMAIL_TEXTFIELD_LABEL: "メールアドレス",
     PASSWORD_TEXTFIELD_LABEL: "パスワード",
+    PASSWORD_CONFIRMATION_TEXTFIELD_LABEL: "パスワード確認用",
     SIGN_UP_BUTTON_LABEL: "作成",
     SUCCESS_SIGNUP_MESSAGE: "新規登録できました。ログインしてみましょう！",
     USER_SIGNUP_ERROR: "ユーザーを新規作成できませんでした",
@@ -61,6 +64,8 @@ export const SIGNUP_TEXT = {
 
 export const SIGNIN_TEXT = {
     SIGN_IN_TITLE: "ログイン",
+    EMAIL_TEXTFIELD_LABEL: "メールアドレス",
+    PASSWORD_TEXTFIELD_LABEL: "パスワード",
     SIGN_IN_BUTTON_LABEL: "ログイン",
     FORGET_PASSWORD_LINK_TEXT: "パスワードを忘れた方はこちら",
     SIGN_IN_SUCCESS_MESSAGE: "ログインに成功しました",
