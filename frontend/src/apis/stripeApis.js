@@ -14,3 +14,12 @@ export const stripeCheckoutApi = () => {
     })
     .catch(e => console.log(e))
 }
+
+//後で消す。フロントエンドが出るか確認する用
+export const stripeCheckoutAApi = () => {
+  return axios.post('/create-checkout-session')
+    .then(res => {
+      return res.data
+    })
+    .catch(e => console.log(e))
+}

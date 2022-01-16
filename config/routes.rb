@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
 
       post 'checkout', to: 'stripes#checkout'
-
+      post 'webhook', to: 'stripes#webhook'
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
           # passwords:     'api/v1/auth/passwords',

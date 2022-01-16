@@ -182,6 +182,7 @@ export const SETTING_TEXT = {
 }
 
 export const BUY_POINT_MENU_TEXT = {
+    TITLE: "ポイント購入",
     NOW_POINT: "現在のポイント数",
 }
 
