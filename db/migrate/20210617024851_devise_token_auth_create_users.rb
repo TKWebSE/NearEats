@@ -39,6 +39,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.integer :point
       t.integer :valuation
+      t.string :stripe_customer_id
       t.string :deleted,default:false
 
       ## Tokens

@@ -42,6 +42,7 @@ module Api
                 success_url: params[:buyPointfrontendURL] + '?success=true',
                 cancel_url: params[:buyPointfrontendURL] + '?canceled=true',
             })
+            logger.debug("paymentここ")
             # redirect_to session.url
             render json: { url:session.url}
         end
@@ -84,6 +85,16 @@ module Api
             logger.debug("fulfill_order")
             logger.debug(current_api_v1_user == nil)
             logger.debug("fulfill_order")
+            
+            customer = Stripe::Customer.retrieve('cus_L4SjzoihNhpso5')
+            user = User.find_by(stripe_customer_id: customer.id)
+
+            if user.update!(point: params[:amount])
+              render {user:user},status 200
+            else
+              throw e
+            end
+
           end
 
       end

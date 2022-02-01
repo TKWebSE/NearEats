@@ -14,6 +14,7 @@
       address: "#{n}県#{n}町の1-2-3",
       point: 100,
       valuation:3,
+      stripe_customer_id: "cus_L4PnH4PzhSqvXM",
     )
   
     12.times do |m|
