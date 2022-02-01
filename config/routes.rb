@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         put 'updateValuation', to: 'orders#updateValuation'
       end
 
+      get 'productIndex', to: 'stripes#product_index'
       post 'checkout', to: 'stripes#checkout'
       post 'webhook', to: 'stripes#webhook'
 

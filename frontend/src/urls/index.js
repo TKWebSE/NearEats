@@ -63,7 +63,9 @@ export const orderUpdateValuationBackendURL = (orderId) => `${BACKEND_DEFAULT_UR
 
 //point関連のURL
 export const buyPointURL = `/point`;
+export const buyPointfrontendURL = `${FRONTEND_DEFAULT_URL}/point`;
 
+export const stripeProductionIndexBackendURL = `${BACKEND_DEFAULT_URL}/productIndex`;
 export const stripeCheckoutBackendURL = `${BACKEND_DEFAULT_URL}/checkout`;
 export const checkoutSuccessURL = `${BACKEND_DEFAULT_URL}/checkoutSuccess`;
 export const checkoutCancelURL = `${BACKEND_DEFAULT_URL}/checkoutCancel`;

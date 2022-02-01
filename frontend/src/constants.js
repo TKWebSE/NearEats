@@ -184,6 +184,8 @@ export const SETTING_TEXT = {
 export const BUY_POINT_MENU_TEXT = {
     TITLE: "ポイント購入",
     NOW_POINT: "現在のポイント数",
+    COMPLETE_BUY_POINT_TEXT: "ポイントを購入しました",
+    NOT_COMPLETE_BUY_POINT_TEXT: "ポイントを購入できませんでした",
 }
 
 export const EDIT_EMAIL_TEXT = {

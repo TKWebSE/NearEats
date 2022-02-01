@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
     # def current_user
     #     @current_user ||= User.find(session[:user_id]) if session[:user_id]
     # end
-    YOUR_DOMAIN = 'http://localhost:3000'
+    YOUR_DOMAIN = 'http://localhost:3001'
 
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:confirm_success_url])

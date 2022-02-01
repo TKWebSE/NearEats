@@ -2,22 +2,45 @@ module Api
   module V1 
       class StripesController < ApplicationController
 
+        def product_index 
+          product_list = Stripe::Product.list({limit: 3})
+          price_list = Stripe::Price.list({limit: 3})
+
+          products = [];
+          i = 0
+          product_list.each do |product|
+            sss = {price_id:"",name:"",price:"",imageUrl:""}
+            sss[:name] = product.name;
+            sss[:imageUrl] = product.images[0];
+            # [:name].push(product.name)
+            products.push(sss)
+            logger.debug("こめんとだよ～＝＝＝＝")
+            # logger.debug(price_list.data)
+            logger.debug(sss)
+            logger.debug("こめんとだよ～＝＝＝＝")
+          end     
+
+          render json: {
+            product_list:product_list,
+            price_list: price_list,
+          }
+        end
+
         def checkout
             def self.register_customer(card_token)
               Stripe::Customer.create({
                 source: card_token,
               })
             end
-          
             session = Stripe::Checkout::Session.create({
               line_items: [{
                 # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                price: 'price_1KGNUJLVJytCiVtmq477brLC',
+                price: params[:priceID],
                 quantity: 1,
               }],
               mode: 'payment',
-                success_url: YOUR_DOMAIN + '?success=true',
-                cancel_url: YOUR_DOMAIN + '?canceled=true',
+                success_url: params[:buyPointfrontendURL] + '?success=true',
+                cancel_url: params[:buyPointfrontendURL] + '?canceled=true',
             })
             # redirect_to session.url
             render json: { url:session.url}
@@ -40,16 +63,27 @@ module Api
             # Invalid signature
             return status 400
           end
-          fulfill_order
+
+          case event.type
+          when 'payment_intent.succeeded'
+              payment_intent = event.data.object
+          # ... handle other event types
+              fulfill_order
+          else
+              puts "Unhandled event type: #{event.type}"
+          end
+
           render json: { }
         end
         
         private
 
-          def fulfill_order(checkout_session)
+          def fulfill_order()
             # TODO: fill in with your own logic
-            puts "Fulfilling order for #{checkout_session.inspect}"
-            logger.debug(current_api_v1_user)
+            # logger.debug(current_api_v1_user)
+            logger.debug("fulfill_order")
+            logger.debug(current_api_v1_user == nil)
+            logger.debug("fulfill_order")
           end
 
       end

@@ -24,9 +24,11 @@ import { foodsIndexURL } from "../../../urls/index";
 import { HOME_TEXT, HEADER_TEXT } from "../../../constants";
 import { signOutApi } from "../../../apis/sessionApis";
 import { useHistory } from "react-router-dom";
-import { homeURL } from "../../../urls/index";
+import { homeURL, buyPointURL } from "../../../urls/index";
 import MaterialUILocationIconModal from "./desktopOnly/MaterialUILocationIconModal";
 import MaterialUILocationModbileModal from "./mobileOnly/MaterialUILocationModbileModal";
+import { COLORS } from "../../../style_constants";
+import { MaterialUICommonButton } from "../../MaterialUICommonButton";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -101,6 +103,11 @@ const LocationWrapper = styled.div`
   display:flex;
 `;
 
+const PointWrapper = styled.div`
+  padding-left:1%;
+  display:flex;
+`;
+
 //ヘッダーのファンクション
 export default function MaterialUIPrivateHeader() {
   const classes = useStyles();
@@ -146,6 +153,10 @@ export default function MaterialUIPrivateHeader() {
       });
       history.push(foodsIndexURL)
     }
+  }
+
+  function handlePoint() {
+    history.push(buyPointURL);
   }
 
   //左サイドバーを制御する
@@ -201,6 +212,23 @@ export default function MaterialUIPrivateHeader() {
       <MenuItem onClick={handleMenuClose}>{HEADER_TEXT.PROFILE_TEXT}</MenuItem>
       <MenuItem onClick={handleSignOut}>{HEADER_TEXT.SIGNOUT_TEXT}</MenuItem>
     </Menu>
+  );
+  //ポイントのボタン
+  const renderPoint = (
+    <PointWrapper>
+      <MaterialUICommonButton
+        onClick={() => handlePoint()}
+        btnLabel={SessionUserState.currentUser.point + "P"}
+      />
+    </PointWrapper >
+  );
+  const renderMobilePoimt = (
+    <PointWrapper>
+      <MaterialUICommonButton
+        onClick={() => handlePoint()}
+        btnLabel={SessionUserState.currentUser.point + "P"}
+      />
+    </PointWrapper >
   );
 
   //画面が小さくなった時に適用される右側の三点ボタン
@@ -306,6 +334,14 @@ export default function MaterialUIPrivateHeader() {
             />
           </div>
           <div className={classes.grow} />
+          <PointWrapper className="MuiInputBase-root makeStyles-inputRoot-245">
+            <div className={classes.sectionDesktop}>
+              {renderPoint}
+            </div>
+            <div className={classes.sectionMobile}>
+              {renderMobilePoimt}
+            </div>
+          </PointWrapper>
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
               <Badge badgeContent={4} color="secondary">

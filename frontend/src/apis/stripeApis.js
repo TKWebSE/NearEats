@@ -2,24 +2,29 @@ import axios from 'axios';
 import {
   checkoutSuccessURL,
   checkoutCancelURL,
-  stripeCheckoutBackendURL
+  stripeProductionIndexBackendURL,
+  stripeCheckoutBackendURL,
+  buyPointfrontendURL,
 } from '../urls/index'
 
+//productのlistを取得する(Stripeから商品一覧を取得する)
+export const stripeProductionIndexApi = () => {
+  return axios.get(stripeProductionIndexBackendURL)
+    .then(res => {
+      return res.data
+    })
+    .catch(e => console.log(e))
+}
 
 //Userをstripe上に顧客として作成をする
-export const stripeCheckoutApi = () => {
-  return axios.post(stripeCheckoutBackendURL)
+export const stripeCheckoutApi = (priceID) => {
+  return axios.post(stripeCheckoutBackendURL, {
+    priceID: priceID,
+    buyPointfrontendURL: buyPointfrontendURL,
+  })
     .then(res => {
       return res.data
     })
     .catch(e => console.log(e))
 }
 
-//後で消す。フロントエンドが出るか確認する用
-export const stripeCheckoutAApi = () => {
-  return axios.post('/create-checkout-session')
-    .then(res => {
-      return res.data
-    })
-    .catch(e => console.log(e))
-}

@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 
 export const COLORS = {
   MAIN_COLOR: '#00695f',
-  MAIN_COLOR_DARK: "",
+  MAIN_COLOR_LIGHT: "#006951",
   BORDER: '#e2e2e2',
   SUB_TEXT: '#545454',
   DELETE_WARN_BUTTON_COLOR: "#e91e63",
