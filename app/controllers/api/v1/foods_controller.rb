@@ -5,7 +5,7 @@ module Api
                 user = User.find_by(id: params[:user_id])
                 paramsCity = params[:city]
                 paramsSearchWord = params[:serchWord]
-                logger.debug("コメント")
+
                 logger.debug(params[:city])
                 logger.debug(params[:serchWord])
 
@@ -43,6 +43,29 @@ module Api
 
                 render json: {
                     foods: foods
+                }, status: :ok
+            end
+
+            def buyfood
+                order_user = User.find(params[:order_user_id]) 
+                food = Food.find(params[:food_id])
+                make_user = User.find(food.user.id)
+
+                if order_user.point < food.price
+                    throw e;
+                end
+
+                order = Order.new(make_user:make_user,order_user:order_user,food:food)
+
+                food.update!(count: 0)  
+
+                new_point = order_user.point - food.price
+                order_user.update!(point: new_point)
+
+                render json: {
+                    order:order,
+                    food:food,
+                    user:user,
                 }, status: :ok
             end
 

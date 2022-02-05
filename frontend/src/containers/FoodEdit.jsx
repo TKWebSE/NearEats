@@ -31,7 +31,7 @@ const FoodCardWrapper = styled.div`
 
 export const FoodEdit = ({ match }) => {
   const SessionAuthState = useContext(SessionState);
-  const SessionAuthDispatch = useContext(SessionDispatch)
+  const SessionAuthDispatch = useContext(SessionDispatch);
   const [state, dispatch] = useReducer(foodEditReducer, initializeState);
   const history = useHistory();
 

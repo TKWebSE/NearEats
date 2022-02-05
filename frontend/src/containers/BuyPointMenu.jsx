@@ -13,7 +13,7 @@ import Point1000Image from "../images/Point1000Image.jpg";
 import Point2000Image from "../images/Point2000Image.jpg";
 import Point5000Image from "../images/Point5000Image.jpg";
 import Point10000Image from "../images/Point10000Image.jpg";
-import { MessageState, MessageDispatch } from '../context/Context';
+import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
 import { messageActionTypes } from "../reducer/messageReducer";
 
 const Wrapper = styled.div`
@@ -66,6 +66,8 @@ const BuyPointListWrapper = styled.div``;
 
 export const BuyPointMenu = () => {
   const history = useHistory();
+  const SessionAuthState = useContext(SessionState);
+  const SessionAuthDispatch = useContext(SessionDispatch);
   const messageState = useContext(MessageState);
   const messageDispatch = useContext(MessageDispatch);
   const search = useLocation().search;
@@ -101,7 +103,7 @@ export const BuyPointMenu = () => {
   ]
 
   function handleSubmit(priceID) {
-    stripeCheckoutApi(priceID)
+    stripeCheckoutApi(SessionAuthState.currentUser.stripe_customer_id, priceID)
       .then((data) => {
         window.location.replace(data.url)
       })

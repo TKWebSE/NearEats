@@ -33,9 +33,10 @@ module Api
               })
             end
             session = Stripe::Checkout::Session.create({
+              customer: params[:stripe_customer_id],
               line_items: [{
                 # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                price: params[:priceID],
+                price: params[:price_id],
                 quantity: 1,
               }],
               mode: 'payment',
@@ -81,16 +82,14 @@ module Api
 
           def fulfill_order()
             # TODO: fill in with your own logic
-            # logger.debug(current_api_v1_user)
-            logger.debug("fulfill_order")
-            logger.debug(current_api_v1_user == nil)
-            logger.debug("fulfill_order")
             
-            customer = Stripe::Customer.retrieve('cus_L4SjzoihNhpso5')
+            customer = Stripe::Customer.retrieve(params[:data][:object][:customer])
             user = User.find_by(stripe_customer_id: customer.id)
 
-            if user.update!(point: params[:amount])
-              render {user:user},status 200
+            update_amount = user.point + params[:data][:object][:amount] 
+
+            if user.update!(point: update_amount);
+              return status 200
             else
               throw e
             end

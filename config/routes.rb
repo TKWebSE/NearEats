@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       
       resources :foods do
         get 'myfoods', to: 'foods#myfoods'
+        put 'buyfood', to: 'foods#buyfood'
       end
 
       resources :orders do

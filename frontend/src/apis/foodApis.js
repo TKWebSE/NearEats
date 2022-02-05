@@ -7,7 +7,8 @@ import {
     foodShowBackendURL,
     foodCreateBackendURL,
     foodUpdateBackendURL,
-    foodDeleteBackendURL
+    foodDeleteBackendURL,
+    foodBuyBackendURL
 } from "../urls/index";
 
 //food一覧を取得する
@@ -95,4 +96,20 @@ export const deleteFoodApi = (food) => {
             return res.data
         })
         .catch(e => console.log(e));
+}
+
+//foodを購入する
+export const buyFoodApi = (foodId, userId) => {
+    return axios.put(foodBuyBackendURL(foodId), {
+        // food: {
+        food_id: foodId,
+        order_user_id: userId,
+        // }
+    })
+        .then((res) => {
+            console.log(res)
+            return res.data
+        })
+        .catch(e => console.log(e))
+
 }

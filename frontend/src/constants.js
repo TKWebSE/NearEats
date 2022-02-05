@@ -98,7 +98,6 @@ export const FOOD_HEADER_TITLE = {
     FOOD_INDEX: "近くの料理を検索",
     MYFOOD: "出品した料理一覧",
     FOOD_CREATE: "料理の作成",
-    FOOD_DETAIL: "料理の詳細",
     FOOD_EDIT: "料理の編集",
 }
 
@@ -127,6 +126,15 @@ export const USER_LABEL = {
     USER_ADDRESS_LABEL: "住所",
     USER_MAIL_LABEL: "メールアドレス",
     USER_PASSWORD_LABEL: "パスワード",
+}
+
+export const FOOD_DETAIL_TEXT = {
+    EDIT_FOOD_LABEL: "編集する",
+    BUY_FOOD_LABEL: "購入する",
+    BUY_FOOD_MODAL_TITLE: "この商品を購入しますか？",
+    BUY_FOOD_MESSAGE: "購入しました",
+    BUY_POINT_MODAL_TITLE: "ポイントが不足しています。ポイントを購入しましょう！",
+    BUY_POINT_LABEL: "ポイント画面へ",
 }
 
 export const NOTFOUND_FOOD_TEXT = {

@@ -6,7 +6,7 @@ import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { MODAL_BUTTON_LABEL } from "../constants";
 
 const OKButtomWrapper = styled.div`
-margin-left:50%;
+margin-left:40%;
 float:left;
 `;
 

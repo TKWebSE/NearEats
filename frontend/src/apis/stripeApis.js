@@ -17,9 +17,10 @@ export const stripeProductionIndexApi = () => {
 }
 
 //Userをstripe上に顧客として作成をする
-export const stripeCheckoutApi = (priceID) => {
+export const stripeCheckoutApi = (stripe_customer_id, priceID) => {
   return axios.post(stripeCheckoutBackendURL, {
-    priceID: priceID,
+    stripe_customer_id: stripe_customer_id,
+    price_id: priceID,
     buyPointfrontendURL: buyPointfrontendURL,
   })
     .then(res => {

@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect, useReducer } from "react";
+import React, { Fragment, useEffect, useReducer, useContext } from "react";
 import styled from "styled-components";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from "@material-ui/lab/Skeleton"
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { ButtonTheme } from "../style_constants";
-import { REQUEST_STATE, FOOD_HEADER_TITLE } from "../constants";
-import { fetchFoodApi } from "../apis/foodApis";
+import { REQUEST_STATE, FOOD_DETAIL_TEXT } from "../constants";
+import { fetchFoodApi, buyFoodApi } from "../apis/foodApis";
 import {
     initializeState,
     foodDetailActionTypes,
@@ -13,9 +13,13 @@ import {
 } from "../reducer/foodDetail";
 import { FoodDetailCard } from "../component/foodComponent/FoodDetailCard";
 import { useHistory } from "react-router-dom";
-import { foodEditURL } from "../urls/index";
+import { foodEditURL, buyPointURL, foodsIndexURL } from "../urls/index";
+import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
+import { messageActionTypes } from "../reducer/messageReducer";
+import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
 
 const DetailWrapper = styled.div`
+    margin-top:5%;
     margin-left:20%;
     margin-right:20%;
 `;
@@ -24,17 +28,20 @@ const LoadingWrapper = styled.div`
     
 `;
 
-const FoodDetailHeader = styled.h1`
-    margin-top:3%;
-    margin-bottom:3%;
-`;
-
 const FoodCardWrapper = styled.div`
     margin-bottom:5%;
 `;
 
+const BtnWrapper = styled.div`
+    text-align:right;
+`;
+
 export const FoodDetail = ({ match }) => {
     const [state, dispatch] = useReducer(foodDetailReducer, initializeState);
+    const SessionAuthState = useContext(SessionState);
+    const SessionAuthDispatch = useContext(SessionDispatch);
+    const messageState = useContext(MessageState);
+    const messageDispatch = useContext(MessageDispatch);
     const history = useHistory();
 
     useEffect(() => {
@@ -50,31 +57,69 @@ export const FoodDetail = ({ match }) => {
             .catch(e => console.log(e));
     }, []);
 
-    function onClickHandle() {
+    function handleEditFood() {
         history.push(foodEditURL(state.food.id))
     }
+
+    function handleGotoBuyPoint() {
+        history.push(buyPointURL)
+    }
+
+    function handleBuyFood() {
+        buyFoodApi(state.food.id, SessionAuthState.currentUser.id)
+            .then((data) => {
+                messageDispatch({
+                    type: messageActionTypes.SET_MESSAGE,
+                    payload: {
+                        message: FOOD_DETAIL_TEXT.BUY_FOOD_MESSAGE
+                    },
+                })
+                // history.push(foodsIndexURL)
+            })
+            .catch(e => console.log(e));
+    }
+
+    console.log(state)
 
     return (
         <Fragment>
             <DetailWrapper>
-                <FoodDetailHeader>
-                    {FOOD_HEADER_TITLE.FOOD_DETAIL}
-                </FoodDetailHeader>
                 {
-                    REQUEST_STATE.LOADING === state.fetchState ?
-                        <Fragment>
-                            <LoadingWrapper>
-                                <Skeleton variant="rect" width={450} height={300} />
-                            </LoadingWrapper>
-                        </Fragment>
-                        :
+                    REQUEST_STATE.OK === state.fetchState ?
                         <Fragment>
                             <FoodCardWrapper>
                                 <FoodDetailCard {...state.food}></FoodDetailCard>
                             </FoodCardWrapper>
-                            <ThemeProvider theme={ButtonTheme}>
-                                <MaterialUICommonButton onClick={onClickHandle} btnLabel={"編集する"} />
-                            </ThemeProvider>
+                            <BtnWrapper>
+                                <ThemeProvider theme={ButtonTheme}>
+                                    {
+                                        SessionAuthState.currentUser.id === state.food.userId ?
+                                            <MaterialUICommonButton
+                                                onClick={handleEditFood}
+                                                btnLabel={FOOD_DETAIL_TEXT.EDIT_FOOD_LABEL}
+                                            />
+                                            :
+                                            SessionAuthState.currentUser.point < state.food.price ?
+                                                < MaterialUISimpleModal
+                                                    btnLabel={FOOD_DETAIL_TEXT.BUY_FOOD_LABEL}
+                                                    onClick={handleGotoBuyPoint}
+                                                    modalTilte={FOOD_DETAIL_TEXT.BUY_POINT_MODAL_TITLE}
+                                                />
+                                                :
+                                                <MaterialUISimpleModal
+                                                    btnLabel={FOOD_DETAIL_TEXT.BUY_FOOD_LABEL}
+                                                    onClick={handleBuyFood}
+                                                    modalTilte={FOOD_DETAIL_TEXT.BUY_FOOD_MODAL_TITLE}
+                                                />
+                                    }
+                                </ThemeProvider>
+                            </BtnWrapper>
+                        </Fragment>
+                        :
+                        <Fragment>
+                            <LoadingWrapper>
+                                <Skeleton variant="rect" width={450} height={300} />
+                            </LoadingWrapper>
                         </Fragment>
                 }
             </DetailWrapper>
