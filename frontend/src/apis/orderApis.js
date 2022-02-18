@@ -33,6 +33,20 @@ export const fetchOrderApi = (orderId) => {
         .catch(e => console.log(e))
 }
 
+//特定ののorderを数件取得する
+export const fetchOrdersApi = (orderId) => {
+    return axios.get(orderShowBackendURL(orderId), {
+        params: {
+            order_id: orderId
+        }
+    })
+        .then(res => {
+            return res.data
+        })
+        .catch(e => console.log(e))
+}
+
+
 //特定のorderをキャンセルする
 export const updateCancelOrderApi = (order, order_status) => {
     return axios.put(orderCancelBackendURL(order.id), {

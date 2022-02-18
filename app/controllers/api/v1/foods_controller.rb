@@ -11,15 +11,15 @@ module Api
 
                 if paramsCity == nil ||  paramsCity == ""
                     if paramsSearchWord == nil ||  paramsSearchWord  == ""
-                        foods = Food.where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                        foods = Food.where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     else
-                        foods = Food.where("name like ?", `%1%` ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC"); 
+                        foods = Food.where("name like ?", `%1%` ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC"); 
                     end
                 else
                     if paramsSearchWord === nil ||  paramsSearchWord  == ""
-                        foods = Food.where(city:paramsCity).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                        foods = Food.where(city:paramsCity).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     else
-                        foods = Food.where(city:paramsCity).where("name like ?", "%1%" ).where(deleted: false).where.not(user_id:user.id).order(updated_at: "DESC");
+                        foods = Food.where(city:paramsCity).where("name like ?", "%1%" ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     end
                 end
                 logger.debug(foods)
@@ -55,7 +55,12 @@ module Api
                     throw e;
                 end
 
+                if food.count <= 0
+                    throw e;
+                end
+
                 order = Order.new(make_user:make_user,order_user:order_user,food:food)
+                order.save!
 
                 food.update!(count: 0)  
 
@@ -65,7 +70,7 @@ module Api
                 render json: {
                     order:order,
                     food:food,
-                    user:user,
+                    order_user:order_user,
                 }, status: :ok
             end
 
@@ -95,7 +100,6 @@ module Api
             def create
                 food = Food.new(food_params)
                 food.count = 1
-                food.station = "東京駅"
 
                 if food.save!
                     render json: {
@@ -135,7 +139,7 @@ module Api
             private 
 
                 def food_params
-                    params.require(:food).permit(:name,:price,:description,:user_id)
+                    params.require(:food).permit(:image,:name,:price,:description,:city,:user_id)
                 end
         end
     end

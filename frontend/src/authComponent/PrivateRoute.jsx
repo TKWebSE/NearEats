@@ -9,8 +9,10 @@ import { SessionState, SessionDispatch } from "../context/Context";
 import { sessionActionTypes } from "../reducer/sessionReducer";
 import { homeURL } from "../urls/index"
 import { isLoginApi } from "../apis/sessionApis";
+import { fetchOrdersApi } from "../apis/orderApis";
 import { REQUEST_STATE } from "../constants";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { orderActionTypes } from "../reducer/orderReducer";
 
 const CircleWrapper = styled.div`
   text-align:center;
@@ -30,6 +32,10 @@ export function PrivateOnlyRoute(props) {
         console.log("Private側の認証確認中")
         isLoginApi()
             .then((data) => {
+                // // fetchOrdersApi(dat)
+                //     .then((dataO) => {
+                //         console.log(data0)
+                console.log(data)
                 SessionAuthDispatch({
                     type: sessionActionTypes.ISLOGIN,
                     payload: {

@@ -58,7 +58,17 @@ export const isLoginApi = () => {
         },
     })
         .then(res => {
+            console.log(res)
             return res.data
         })
         .catch((e) => console.error(e))
 }
+
+// export const notificationTasksApis = () => {
+//     return axios.get(sessionIsLoginBackendURL, {
+//     })
+//         .then(res => {
+//             return res.data
+//         })
+//         .catch((e) => console.error(e))
+// }

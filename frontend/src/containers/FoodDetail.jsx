@@ -74,7 +74,7 @@ export const FoodDetail = ({ match }) => {
                         message: FOOD_DETAIL_TEXT.BUY_FOOD_MESSAGE
                     },
                 })
-                // history.push(foodsIndexURL)
+                history.push(foodsIndexURL)
             })
             .catch(e => console.log(e));
     }
@@ -93,7 +93,7 @@ export const FoodDetail = ({ match }) => {
                             <BtnWrapper>
                                 <ThemeProvider theme={ButtonTheme}>
                                     {
-                                        SessionAuthState.currentUser.id === state.food.userId ?
+                                        SessionAuthState.currentUser.id == state.food.user_id ?
                                             <MaterialUICommonButton
                                                 onClick={handleEditFood}
                                                 btnLabel={FOOD_DETAIL_TEXT.EDIT_FOOD_LABEL}

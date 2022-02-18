@@ -37,22 +37,22 @@ export function MaterialUIFoodPriceLine() {
             LOADING
           </Fragment>
           :
-          <form className={classes.root} noValidate autoComplete="off">
-            <TextField
-              id="outlined-basic"
-              label="価格"
-              variant="outlined"
-              fullWidth
-              value={FoodPriceState.food.price}
-              onChange={handleChange}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault();
-                }
+          // <form className={classes.root} noValidate autoComplete="off">
+          <TextField
+            id="outlined-basic"
+            label="価格"
+            variant="outlined"
+            fullWidth
+            value={FoodPriceState.food.price}
+            onChange={handleChange}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
               }
-              }
-            />
-          </form>
+            }
+            }
+          />
+        // </form>
       }
     </Fragment>
   );

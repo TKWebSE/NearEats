@@ -6,6 +6,8 @@ const FRONTEND_DEFAULT_URL = `http://localhost:3001`;
 const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
+export const publicImageURL = "/"
+
 //HomeのURL
 export const homeURL = "/home";
 

@@ -265,7 +265,7 @@ export default function MaterialUIPrivateHeader() {
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit" onClick={() => handleTaskNotification}>
-          <Badge badgeContent={11} color="secondary">
+          <Badge badgeContent={Object.keys(SessionUserState).length} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>

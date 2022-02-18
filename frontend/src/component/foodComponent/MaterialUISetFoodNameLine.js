@@ -37,22 +37,22 @@ export function MaterialUISetFoodNameLine() {
           </Fragment>
           :
           <Fragment>
-            <form className={classes.root} noValidate autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="商品名"
-                variant="outlined"
-                fullWidth
-                value={FoodNameState.food.name}
-                onChange={handleChange}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    event.preventDefault();
-                  }
+            {/* <form className={classes.root} noValidate autoComplete="off"> */}
+            <TextField
+              id="outlined-basic"
+              label="商品名"
+              variant="outlined"
+              fullWidth
+              value={FoodNameState.food.name}
+              onChange={handleChange}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
                 }
-                }
-              />
-            </form>
+              }
+              }
+            />
+            {/* </form> */}
           </Fragment>
       }
     </Fragment>

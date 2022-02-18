@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useReducer, useContext } from 'react';
+import React, { Fragment, useEffect, useReducer, useContext, useState } from 'react';
 import styled from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { SaveButton } from "../component/MaterialUISaveButton";
 import { ButtonTheme } from "../style_constants";
-import { FOOD_HEADER_TITLE, REQUEST_STATE } from "../constants";
+import { FOOD_EDIT_TEXT, REQUEST_STATE } from "../constants";
 import { fetchFoodApi, updateFoodApi } from '../apis/foodApis';
 import { initializeState, foodEditActionTypes, foodEditReducer } from "../reducer/foodEditReducer";
 import { FoodEditCard } from "../component/foodComponent/FoodEditCard";
@@ -21,18 +21,32 @@ const DetailWrapper = styled.div`
 
 const FoodEditHeader = styled.h1`
   margin-top:5%;
-  margin-left:5%;
 `;
 
 const FoodCardWrapper = styled.div`
   margin-bottom:5%;
   margin-left:5&;
 `;
+const BtnWrapper = styled.div`
+  text-align:right;
+`;
+
+const SkeltonImage = styled.div`
+  margin-bottom:2%;
+`;
+
+const SkeltonTitle = styled.div`
+  margin-bottom:2%;
+`;
+
+const SkeltonDescription = styled.div``;
+
 
 export const FoodEdit = ({ match }) => {
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch);
   const [state, dispatch] = useReducer(foodEditReducer, initializeState);
+  const [city, setCity] = useState(SessionAuthState.currentUser.city);
   const history = useHistory();
 
   useEffect(() => {
@@ -54,38 +68,52 @@ export const FoodEdit = ({ match }) => {
   }, []);
 
   const submitHandle = (e) => {
-    updateFoodApi(state.food)
+    updateFoodApi(state.food, city)
       .then((data) => {
         history.push(foodShowURL(data.food.id))
       })
       .catch(e => console.log(e))
   }
-
+  console.log(state)
   return (
     <Fragment>
       <DetailWrapper>
         <FoodEditHeader>
-          {FOOD_HEADER_TITLE.FOOD_EDIT}
+          {FOOD_EDIT_TEXT.HEADER_TITLE}
         </FoodEditHeader>
         {
-          REQUEST_STATE.LOADING === state.fetchState ?
-            <Fragment>
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
-              <Skeleton variant="rect" width={450} height={300} />
-            </Fragment>
-            :
+          REQUEST_STATE.OK === state.fetchstate ?
             <Fragment>
               <FoodCardWrapper>
                 <FoodDispatch.Provider value={dispatch}>
                   <FoodState.Provider value={state}>
-                    <FoodEditCard />
+                    <FoodEditCard
+                      setCity={setCity}
+                      city={city}
+                    />
                   </FoodState.Provider>
                 </FoodDispatch.Provider>
-                <ThemeProvider theme={ButtonTheme}>
-                  <SaveButton onClick={submitHandle} />
-                </ThemeProvider>
+                <BtnWrapper>
+                  <ThemeProvider theme={ButtonTheme}>
+                    <SaveButton
+                      onClick={submitHandle}
+                      btnLabel={FOOD_EDIT_TEXT.SAVE_BTN_LABEL}
+                    />
+                  </ThemeProvider>
+                </BtnWrapper>
               </FoodCardWrapper>
+            </Fragment>
+            :
+            <Fragment>
+              <SkeltonImage>
+                <Skeleton variant="rect" width={450} height={300} />
+              </SkeltonImage>
+              <SkeltonTitle>
+                <Skeleton variant="rect" width={450} height={30} />
+              </SkeltonTitle>
+              <SkeltonDescription>
+                <Skeleton variant="rect" width={450} height={30} />
+              </SkeltonDescription>
             </Fragment>
         }
       </DetailWrapper>

@@ -37,26 +37,26 @@ export function MaterialUIFoodDescriptionMultiLine() {
           </Fragment>
           :
           <Fragment>
-            <form className={classes.root} noValidate autoComplete="off">
-              <div>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="料理の説明"
-                  multiline
-                  rows={4}
-                  fullWidth
-                  defaultValue={FoodDescriptionState.food.description}
-                  variant="outlined"
-                  onChange={handleChange}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      event.preventDefault();
-                    }
+            {/* <form className={classes.root} noValidate autoComplete="off"> */}
+            <div>
+              <TextField
+                id="outlined-multiline-static"
+                label="料理の説明"
+                multiline
+                rows={4}
+                fullWidth
+                defaultValue={FoodDescriptionState.food.description}
+                variant="outlined"
+                onChange={handleChange}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
                   }
-                  }
-                />
-              </div>
-            </form>
+                }
+                }
+              />
+            </div>
+            {/* </form> */}
           </Fragment>
       }
     </Fragment>

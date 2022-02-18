@@ -5,9 +5,8 @@ module Api
             def taskIndex
                 user = User.find_by(id: params[:user_id])
 
-                tasks = Food.joins(:orders).merge(
-                    Order.where(make_user_id: user.id)
-                ).select("foods.*,orders.*").order(updated_at: "DESC")
+                tasks = Order.joins(:food).where(make_user_id: user.id)
+                .select("foods.*,orders.*").order(updated_at: "DESC")
 
                 render json: {
                     tasks: tasks,
@@ -50,9 +49,12 @@ module Api
             def index
                 user = User.find_by(id: params[:user_id])
 
-                orders = Food.joins(:orders).merge(
-                    Order.where(order_user_id: user.id)
-                ).select("foods.*,orders.*").order(updated_at: "DESC")
+                # orders = Food.joins(:orders).merge(
+                #     Order.where(order_user_id: user.id)
+                # ).select("foods.*,orders.*").order(updated_at: "DESC")
+
+                orders = Order.joins(:food).where(order_user_id: user.id)
+                .select("foods.*,orders.*").order(updated_at: "DESC")
 
                 render json: {
                     orders: orders,
