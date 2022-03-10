@@ -144,8 +144,12 @@ export const FOOD_DETAIL_TEXT = {
 export const FOOD_EDIT_TEXT = {
     HEADER_TITLE: "料理の編集",
     FOOD_PHOTO_UPLOAD_TEXT: "画像をアップロード",
+    FOOD_NAME_LABEL: "料理名",
+    FOOD_PRICE_LABEL: "価格",
+    FOOD_DESCRIPTION_LABEL: "説明",
     LOCATION_PLACEHOLDER_TEXT: "地域",
     SAVE_BTN_LABEL: "変更",
+    NO_IMAGE_MESSAGE: "画像が設定されていません",
 }
 
 export const NOTFOUND_FOOD_TEXT = {
@@ -260,4 +264,8 @@ export const VALUATION_ERROR = {
     ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
     ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
     ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
+}
+
+export const APPIMAGE_ERROR = {
+    NO_IMAGE_ERROR: "画像が設定されていません",
 }

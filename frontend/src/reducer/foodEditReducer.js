@@ -32,10 +32,10 @@ export const foodEditReducer = (state, action) => {
                 fetchstate: REQUEST_STATE.OK,
                 food: {
                     id: state.food.id,
-                    image: action.payload.image,
+                    image: action.payload.value,
                     name: state.food.name,
                     price: state.food.price,
-                    description: action.payload.description,
+                    description: state.food.description,
                 }
             }
         case foodEditActionTypes.SETTINGFOODNAME:
@@ -44,7 +44,7 @@ export const foodEditReducer = (state, action) => {
                 food: {
                     id: state.food.id,
                     image: state.image,
-                    name: action.payload.name,
+                    name: action.payload.value,
                     price: state.food.price,
                     description: state.food.description,
                 }
@@ -56,7 +56,7 @@ export const foodEditReducer = (state, action) => {
                     id: state.food.id,
                     image: state.image,
                     name: state.food.name,
-                    price: action.payload.price,
+                    price: action.payload.value,
                     description: state.food.description,
                 }
             }
@@ -68,7 +68,7 @@ export const foodEditReducer = (state, action) => {
                     image: state.image,
                     name: state.food.name,
                     price: state.food.price,
-                    description: action.payload.description,
+                    description: action.payload.value,
                 }
             }
         default:

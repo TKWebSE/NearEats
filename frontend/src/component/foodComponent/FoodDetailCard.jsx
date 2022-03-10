@@ -3,6 +3,7 @@ import media from "styled-media-query";
 import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";
 import { changeJSTDate } from "../../AppFunction";
+import { changeImageURL } from "../../AppImageFunction";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -47,7 +48,7 @@ export const FoodDetailCard = (food) => {
     return (
         <Fragment>
             <FoodCardWrapper>
-                <FoodImage src={food.image} alt="foodImage"></FoodImage>
+                <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
                 <FoodName>
                     {food.name}
                 </FoodName>

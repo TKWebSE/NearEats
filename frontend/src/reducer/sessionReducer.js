@@ -6,6 +6,7 @@ export const initializeState = {
     isLogin: false,
     nowLocation: null,
     searchWord: null,
+    notification: 0,
     message: "",
 }
 
@@ -16,6 +17,7 @@ export const sessionActionTypes = {
     ISLOGIN: "ISLOGIN",
     SETNOWLOCATION: "SETNOWLOCATION",
     SETTINGSEARCHWORD: "SETTINGSEARCHWORD",
+    SETTINGNOTIFICATION: "SETTINGNOTIFICATION",
     SETTINGMESSAGE: "SETTINGMESSAGE",
 }
 
@@ -28,6 +30,7 @@ export const sessionReducer = (state, action) => {
                 isLogin: state.isLogin,
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
+                notification: state.notification,
                 message: state.message,
             }
         case sessionActionTypes.SIGNIN:
@@ -38,6 +41,7 @@ export const sessionReducer = (state, action) => {
                 isLogin: true,
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
+                notification: state.notification,
                 message: state.message,
             }
         case sessionActionTypes.SIGNOUT:
@@ -47,15 +51,21 @@ export const sessionReducer = (state, action) => {
                 isLogin: false,
                 nowLocation: null,
                 searchWord: null,
+                notification: state.notification,
                 message: state.message,
             }
         case sessionActionTypes.ISLOGIN:
+            let notification = 0
+            if (action.payload.data.tasks != null) {
+                notification = Object.keys(action.payload.data.tasks).length
+            }
             return {
                 fetchSessionState: REQUEST_STATE.OK,
                 currentUser: action.payload.data.user,
                 isLogin: action.payload.data.is_login,
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
+                notification: notification,
                 message: state.message,
             }
         case sessionActionTypes.SETNOWLOCATION:
@@ -65,16 +75,27 @@ export const sessionReducer = (state, action) => {
                 isLogin: state.is_login,
                 nowLocation: action.payload.nowLocation,
                 searchWord: state.searchWord,
+                notification: state.notification,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGSEARCHWORD:
-            console.log(action.payload.searchWord)
             return {
                 fetchSessionState: REQUEST_STATE.OK,
                 currentUser: state.currentUser,
                 isLogin: state.is_login,
                 nowLocation: state.nowLocation,
                 searchWord: action.payload.searchWord,
+                notification: state.notification,
+                message: state.message,
+            }
+        case sessionActionTypes.SETTINGNOTIFICATION:
+            return {
+                fetchSessionState: REQUEST_STATE.OK,
+                currentUser: state.currentUser,
+                isLogin: state.is_login,
+                nowLocation: state.nowLocation,
+                searchWord: state.searchWord,
+                notification: action.payload.notification,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGMESSAGE:
@@ -84,6 +105,7 @@ export const sessionReducer = (state, action) => {
                 isLogin: state.is_login,
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
+                notification: state.notification,
                 message: action.payload.message,
             }
         default:

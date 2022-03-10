@@ -1,11 +1,12 @@
 import React, { Fragment, useContext, useState } from "react";
 import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";
+import foodSelectImage from "../../images/food-select.jpg";
 import { MaterialUIFoodDescriptionMultiLine } from "../foodComponent/MaterialUIFoodDescriptionMultiLine";
 import { MaterialUIFoodPriceLine } from "../foodComponent/MaterialUIFoodPriceLine";
 import { MaterialUISetFoodNameLine } from "../foodComponent/MaterialUISetFoodNameLine";
 import MUIAnimatedMultiSelect from "../../component/MUIAnimatedMultiSelect";
-import { FOOD_EDIT_TEXT } from "../../constants";
+import { FOOD_EDIT_TEXT, REQUEST_STATE } from "../../constants";
 import { foodEditActionTypes } from "../../reducer/foodEditReducer";
 import { FoodDispatch, FoodState } from '../../context/Context';
 
@@ -69,9 +70,6 @@ const SelectWrapper = styled.div`
 
 //foodの編集画面用のカードコンポーネント
 export const FoodEditCard = ({ setCity, city }) => {
-    const [image, setImage] = useState({
-        file: foodImage,
-    });
     const FoodEditState = useContext(FoodState)
     const FoodEditDispatch = useContext(FoodDispatch)
 
@@ -81,7 +79,6 @@ export const FoodEditCard = ({ setCity, city }) => {
             var file = files[0]
             var reader = new FileReader()
             reader.onload = (e) => {
-                // setImage({ file: e.target.result })
                 FoodEditDispatch({
                     type: foodEditActionTypes.SETTINGFOODIMAGE,
                     payload: {
@@ -98,32 +95,17 @@ export const FoodEditCard = ({ setCity, city }) => {
                 }
             })
         }
-
-        // if (e.target.files && e.target.files[0]) {
-        //     const file = e.target.files[0]
-        //     const reader = new FileReader()
-        //     // reader.readAsText(e.target.files[0])
-        //     reader.onload = (e) => {
-        //         console.log(e)
-        //         FoodEditDispatch({
-        //             type: foodEditActionTypes.SETTINGFOODIMAGE,
-        //             payload: {
-        //                 image: e.target.result
-        //             }
-        //         })
-        //         reader.readAsDataURL(file)
-        //     }
-        // }
     }
+
     console.log(FoodEditState)
     return (
         <Fragment>
             <FoodCardWrapper>
-                <FoodImageWrapper htmlfor={"upload-button"} >
+                <FoodImageWrapper htmlFor={"upload-button"} >
                     {
                         FoodEditState.food.image ?
                             <FoodImage src={
-                                FoodEditState.food.image
+                                foodSelectImage
                             }
                                 alt="dummy" >
                             </FoodImage>
@@ -134,17 +116,11 @@ export const FoodEditCard = ({ setCity, city }) => {
                                 alt="dummy" >
                             </FoodImage>
                     }
-
-                    {/* <FoodImage src={image.file} alt="dummy" > */}
-                    {/* </FoodImage> */}
-                    {/* <FoodUploadText >
-                        {FOOD_EDIT_TEXT.FOOD_PHOTO_UPLOAD_TEXT}
-                    </FoodUploadText > */}
                 </FoodImageWrapper>
                 <input
                     type="file"
                     id="upload-button"
-                    // style={{ display: "none" }}
+                    style={{ display: "none" }}
                     onChange={onChangeFhoto}
                 />
                 <FoodName>

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://localhost:3000";
 const API_V1 = "/api/v1"
 const AUTH = "/auth"
 

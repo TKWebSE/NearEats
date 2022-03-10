@@ -40,7 +40,9 @@ module Api
             def myfoods
                 user = User.find_by(id: params[:user_id])
                 foods = Food.where(user_id: user.id).order(updated_at: "DESC");
-
+                
+                logger.debug("user")
+                logger.debug(foods)
                 render json: {
                     foods: foods
                 }, status: :ok
@@ -76,7 +78,7 @@ module Api
 
             def show 
                 food = Food.find_by(id: params[:id])
-
+                logger.debug(food.inspect)
                 render json: {
                     food: food
                 }, status: :ok

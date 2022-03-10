@@ -73,21 +73,25 @@ export const createFoodApi = (food, city, user_id) => {
 }
 
 //foodを更新する
-export const updateFoodApi = (food, city) => {
-    console.log(foodUpdateBackendURL(food.id))
-    return axios.put(foodUpdateBackendURL(food.id), {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        },
-        food: {
-            id: food.id,
-            // image: food.image,
-            name: food.name,
-            price: food.price,
-            description: food.description,
-            city: city,
+export const updateFoodApi = (food, formData, city) => {
+    console.log(formData)
+    return axios.put(foodUpdateBackendURL(food.id),
+        formData
+        ,
+        // food: {
+        //     id: food.id,
+        //     image: formData,
+        //     name: food.name,
+        //     price: food.price,
+        //     description: food.description,
+        //     city: city,
+        // },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         }
-    })
+    )
         .then((res) => {
             return res.data
         })

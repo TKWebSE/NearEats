@@ -1,7 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-
+import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
 
 const animatedComponents = makeAnimated();
 
@@ -31,7 +34,17 @@ const options = [
   { value: "東京都江戸川区", label: "東京都江戸川区" },
 ]
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+
+    },
+  },
+}));
+
 export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city }) {
+  const classes = useStyles();
 
   function handleChange(value) {
     setCity(value);
@@ -41,14 +54,25 @@ export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city
     if (e.which === 13)
       console.log(e)
   }
+  console.log(city)
 
   return (
-    <Select
-      options={options}
-      placeholder={placeholederText}
-      defaultValue={{ label: city, value: city }}
-      onChange={(event) => { handleChange(event.value) }}
-      onKeyPress={(e) => onkeyPressHandle(e)}
-    />
+    <Fragment>
+      <form className={classes.root} noValidate autoComplete="off">
+        <InputLabel id="demo-simple-select-helper-label">提供地域</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="提供地域"
+          options={options}
+          placeholder={placeholederText}
+          defaultValue={{ label: city, value: city }}
+          onChange={(event) => { handleChange(event.value) }}
+          variant="outlined"
+          onKeyPress={(e) => onkeyPressHandle(e)}
+        >
+        </Select>
+      </form>
+    </Fragment>
   );
 }

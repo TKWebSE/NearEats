@@ -20,16 +20,27 @@ module Api
                 },status: :ok
             end
 
-            def create
-                user = User.new(name: params[:name])
-                if user.save
-                    render json: {
-                        user: user
-                    },status: :ok
-                else
-                    render json: {}
-                end
-            end
+            # def create
+            #     user = User.new(name: params[:name])
+
+            #     customer = Stripe::Customer.create({
+            #         email: params[:email],
+            #         name: params[:name],
+            #       })
+            #       logger.debug("リクエストされたユーザデータ")
+            #       logger.debug(customer)
+            #       logger.debug("リクエストされたユーザデータ")
+            #       user.stripe_customer_id = customer.id
+            #       logger.debug(user)
+            #       logger.debug("リクエストされたユーザデータ")
+            #     if user.save
+            #         render json: {
+            #             user: user
+            #         },status: :ok
+            #     else
+            #         render json: {}
+            #     end
+            # end
             
             def update
                 user = User.find(params[:id])

@@ -31,7 +31,8 @@ export const userCreateApi = (name, email, password, passwordConfirmation) => {
         name: name,
         email: email,
         password: password,
-        password_confirmation: passwordConfirmation
+        password_confirmation: passwordConfirmation,
+        stripe_customer_id: "",
     })
         .then((res) => {
             return res.data

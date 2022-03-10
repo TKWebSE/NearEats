@@ -24,7 +24,7 @@ import { foodsIndexURL } from "../../../urls/index";
 import { HOME_TEXT, HEADER_TEXT } from "../../../constants";
 import { signOutApi } from "../../../apis/sessionApis";
 import { useHistory } from "react-router-dom";
-import { homeURL, buyPointURL } from "../../../urls/index";
+import { homeURL, buyPointURL, myTaskIndexURL } from "../../../urls/index";
 import MaterialUILocationIconModal from "./desktopOnly/MaterialUILocationIconModal";
 import MaterialUILocationModbileModal from "./mobileOnly/MaterialUILocationModbileModal";
 import { COLORS } from "../../../style_constants";
@@ -125,7 +125,7 @@ export default function MaterialUIPrivateHeader() {
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  console.log(SessionUserState)
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -168,12 +168,13 @@ export default function MaterialUIPrivateHeader() {
     }
   }
 
-  function handleNotice() {
-    console.log("handleNotice")
-  }
+  // function handleNotice() {
+  //   console.log("handleNotice")
+  // }
 
   function handleTaskNotification() {
-    console.log("handleTaskNotification")
+    console.log(myTaskIndexURL)
+    history.push(myTaskIndexURL)
   }
 
   const handleSignOut = () => {
@@ -218,7 +219,7 @@ export default function MaterialUIPrivateHeader() {
     <PointWrapper>
       <MaterialUICommonButton
         onClick={() => handlePoint()}
-        btnLabel={SessionUserState.currentUser.point + "P"}
+        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point : 0 + "P"}
       />
     </PointWrapper >
   );
@@ -226,7 +227,7 @@ export default function MaterialUIPrivateHeader() {
     <PointWrapper>
       <MaterialUICommonButton
         onClick={() => handlePoint()}
-        btnLabel={SessionUserState.currentUser.point + "P"}
+        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point : 0 + "P"}
       />
     </PointWrapper >
   );
@@ -255,17 +256,20 @@ export default function MaterialUIPrivateHeader() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem color="red">
+      {/* <MenuItem color="red">
         <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit" onClick={() => handleTaskNotification}>
-          <Badge badgeContent={Object.keys(SessionUserState).length} color="secondary">
+        <IconButton
+          aria-label="show 11 new notifications" color="inherit"
+          onClick={() => handleTaskNotification()}
+        >
+          <Badge badgeContent={SessionUserState.notification} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -343,13 +347,14 @@ export default function MaterialUIPrivateHeader() {
             </div>
           </PointWrapper>
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
+            {/* <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={() => handleTaskNotification}>
-              <Badge badgeContent={17} color="secondary">
+            </IconButton> */}
+            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={() =>
+              handleTaskNotification()}>
+              <Badge badgeContent={SessionUserState.notification} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

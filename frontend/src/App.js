@@ -55,6 +55,7 @@ function App() {
   const [state, dispatch] = useReducer(sessionReducer, initializeState);
   const [messageState, messageDispatch] = useReducer(messageReducer, initializeState);
   console.warn()
+  console.log(state)
   return (
     <Fragment>
       <SessionDispatch.Provider value={dispatch}>
