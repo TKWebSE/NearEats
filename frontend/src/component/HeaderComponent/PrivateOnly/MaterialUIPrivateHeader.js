@@ -219,7 +219,7 @@ export default function MaterialUIPrivateHeader() {
     <PointWrapper>
       <MaterialUICommonButton
         onClick={() => handlePoint()}
-        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point : 0 + "P"}
+        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point + "P" : 0 + "P"}
       />
     </PointWrapper >
   );
@@ -227,7 +227,7 @@ export default function MaterialUIPrivateHeader() {
     <PointWrapper>
       <MaterialUICommonButton
         onClick={() => handlePoint()}
-        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point : 0 + "P"}
+        btnLabel={SessionUserState.currentUser.point ? SessionUserState.currentUser.point + "P" : 0 + "P"}
       />
     </PointWrapper >
   );

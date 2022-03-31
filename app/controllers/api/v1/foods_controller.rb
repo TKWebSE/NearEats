@@ -85,7 +85,7 @@ module Api
             end
 
             def new
-                user = Restaurant.find(1)
+                user = User.find(params[:user_id])
                 food = user.foods.build(
                     id: params[:id],name: params[:name],price: params[:price]
                     )

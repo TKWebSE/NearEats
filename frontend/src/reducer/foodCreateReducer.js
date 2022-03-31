@@ -1,5 +1,6 @@
 export const initializeState = {
     food: {
+        image: "",
         name: "",
         price: 0,
         description: "",
@@ -9,6 +10,7 @@ export const initializeState = {
 
 export const foodCreateActionTypes = {
     INITIAL: "INITIAL",
+    SETFOODIMAGE: "SETFOODIMAGE",
     SETTINGFOODNAME: "SETTINGFOODNAME",
     SETTINGFOODPRICE: "SETTINGFOODPRICE",
     SETTINGFOODDESCRIPTION: "SETTINGFOODDESCRIPTION",
@@ -18,10 +20,21 @@ export const foodCreateActionTypes = {
 
 export const foodCreateReducer = (state, action) => {
     switch (action.type) {
+        case foodCreateActionTypes.SETFOODIMAGE:
+            return {
+                food: {
+                    image: action.payload.image,
+                    name: state.food.name,
+                    price: state.food.price,
+                    description: state.food.description,
+                    city: state.food.city,
+                }
+            }
         case foodCreateActionTypes.SETTINGFOODNAME:
             return {
                 food: {
-                    name: action.payload.name,
+                    image: state.food.image,
+                    name: action.payload.value,
                     price: state.food.price,
                     description: state.food.description,
                     city: state.food.city,
@@ -30,8 +43,9 @@ export const foodCreateReducer = (state, action) => {
         case foodCreateActionTypes.SETTINGFOODPRICE:
             return {
                 food: {
+                    image: state.food.image,
                     name: state.food.name,
-                    price: action.payload.price,
+                    price: action.payload.value,
                     description: state.food.description,
                     city: state.food.city,
                 }
@@ -39,15 +53,17 @@ export const foodCreateReducer = (state, action) => {
         case foodCreateActionTypes.SETTINGFOODDESCRIPTION:
             return {
                 food: {
+                    image: state.food.image,
                     name: state.food.name,
                     price: state.food.price,
-                    description: action.payload.description,
+                    description: action.payload.value,
                     city: state.food.city,
                 }
             }
         case foodCreateActionTypes.SETTINGFOODCITY:
             return {
                 food: {
+                    image: state.food.image,
                     name: state.food.name,
                     price: state.food.price,
                     description: state.food.description,

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import foodImage from "../../images/food-image.jpg";
 import { changeJSTDate } from "../../AppFunction";
 import { changeImageURL } from "../../AppImageFunction";
+import noImage from "../../images/noImage.jpg";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -44,11 +45,11 @@ const FoodCity = styled.div`
 // `;
 
 export const FoodDetailCard = (food) => {
-    console.log(food)
+
     return (
         <Fragment>
             <FoodCardWrapper>
-                <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
+                <FoodImage src={food.image.url === null ? noImage : changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
                 <FoodName>
                     {food.name}
                 </FoodName>

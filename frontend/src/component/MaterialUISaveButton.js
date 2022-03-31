@@ -27,6 +27,9 @@ export function SaveButton({ onClick, btnLabel }) {
   function handleClick() {
     setLoading(true);
     onClick();
+    setTimeout(function () {
+      setLoading(false);
+    }.bind(this), 5000);
   }
 
   return (

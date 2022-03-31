@@ -128,6 +128,9 @@ export const USER_LABEL = {
 
 export const FOOD_CREATE_TEXT = {
     HEADER_TITLE: "料理の作成",
+    FOOD_NAME_LABEL: "料理名",
+    FOOD_PRICE_LABEL: "価格",
+    FOOD_DESCRIPTION_LABEL: "説明",
     LOCATION_PLACEHOLDER_TEXT: "地域",
     SAVE_BTN_LABEL: "作成",
 }
@@ -264,8 +267,9 @@ export const VALUATION_ERROR = {
     ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
     ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
     ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
-}
-
-export const APPIMAGE_ERROR = {
     NO_IMAGE_ERROR: "画像が設定されていません",
+    NO_FOOD_NAME: "料理名を入力してください",
+    PRICE_ERROR: "1から99999の間で価格を設定してください",
+    NO_DESCRIPTION_ERROR: "商品説明を入力してください",
+    OVER_DESCRIPTION_ERROR: "商品情報は200文字以内で入力してください",
 }

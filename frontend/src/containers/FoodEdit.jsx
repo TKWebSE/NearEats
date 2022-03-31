@@ -96,8 +96,6 @@ export const FoodEdit = ({ match }) => {
   const [state, dispatch] = useReducer(foodEditReducer, initializeState);
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
   const [city, setCity] = useState(SessionAuthState.currentUser.city);
   const history = useHistory();
 
@@ -123,24 +121,8 @@ export const FoodEdit = ({ match }) => {
     const files = e.target.files
     if (files.length > 0) {
       var file = files[0]
-      var reader = new FileReader()
       setImage(file)
       setPreview(window.URL.createObjectURL(file))
-      dispatch({
-        type: foodEditActionTypes.SETTINGFOODIMAGE,
-        payload: {
-          value: file
-        }
-      })
-      // reader.onload = (e) => {
-      //   dispatch({
-      //     type: foodEditActionTypes.SETTINGFOODIMAGE,
-      //     payload: {
-      //       image: e.target.result
-      //     }
-      //   })
-      // };
-      reader.readAsDataURL(file)
     } else {
       dispatch({
         type: foodEditActionTypes.SETTINGFOODIMAGE,
@@ -162,8 +144,6 @@ export const FoodEdit = ({ match }) => {
       formData.append('food[price]', state.food.price);
       formData.append('food[description]', state.food.description);
       formData.append('food[city]', state.food.city);
-      // formData.append("content", content)
-      console.log(formData.entries())
       return formData
     } catch (e) {
       messageDispatch({
@@ -225,7 +205,7 @@ export const FoodEdit = ({ match }) => {
                 <TextFieldInReducer
                   label={FOOD_EDIT_TEXT.FOOD_NAME_LABEL}
                   value={state.food.name}
-                  dispacth={dispatch}
+                  dispatch={dispatch}
                   actionType={foodEditActionTypes.SETTINGFOODNAME}
                   onKeyDown={onKeyDownEnter}
                 />
@@ -234,7 +214,7 @@ export const FoodEdit = ({ match }) => {
                 <TextFieldInReducer
                   label={FOOD_EDIT_TEXT.FOOD_PRICE_LABEL}
                   value={state.food.price}
-                  dispacth={dispatch}
+                  dispatch={dispatch}
                   actionType={foodEditActionTypes.SETTINGFOODPRICE}
                   onKeyDown={onKeyDownEnter}
                 />
@@ -243,7 +223,7 @@ export const FoodEdit = ({ match }) => {
                 <MultiLineTextFieldInReducer
                   label={FOOD_EDIT_TEXT.FOOD_DESCRIPTION_LABEL}
                   value={state.food.description}
-                  dispacth={dispatch}
+                  dispatch={dispatch}
                   actionType={foodEditActionTypes.SETTINGFOODDESCRIPTION}
                   onKeyDown={onKeyDownEnter}
                 />

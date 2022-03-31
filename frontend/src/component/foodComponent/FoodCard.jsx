@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import foodImage from "../../images/food-image.jpg";
 import { foodShowURL } from "../../urls/index";
 import Skeleton from '@material-ui/lab/Skeleton';
+import { changeImageURL } from "../../AppImageFunction";
+import noImage from "../../images/noImage.jpg";
 
 const FoodCardWrapper = styled.div`
     text-align:center;
 `;
 
-const MainfoodImage = styled.img`
+const FoodImage = styled.img`
     width:100%;
     height:60%;
 `;
@@ -69,7 +71,7 @@ export const FoodCard = ({ food }) => {
         <Fragment>
             <FoodCardWrapper>
                 <Link to={foodShowURL(food.id)} style={{ textDecoration: 'none' }}>
-                    <MainfoodImage src={foodImage} alt="foodImage"></MainfoodImage>
+                    <FoodImage src={food.image.url === null ? noImage : changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
                     <TextWrapper>
                         <FoodName>
                             {food.name}
