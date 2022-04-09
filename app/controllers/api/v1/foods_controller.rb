@@ -116,12 +116,12 @@ module Api
                food = Food.find_by(id: params[:id])
 
             #    name: foodparams[:name],price: foodparams[:price],description: foodparams[:description]
-               if food.update(food_params) 
+               if food.update!(food_params) 
                     render json: {
                         food:food
                     },status: :ok
                else
-                   reder json: {}
+                   render json: {}
                end
             end
 
