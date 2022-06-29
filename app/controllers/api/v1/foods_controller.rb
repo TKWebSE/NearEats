@@ -102,6 +102,14 @@ module Api
             def create
                 food = Food.new(food_params)
                 food.count = 1
+                logger.debug(food.image.url)
+                if params[:image] != nil
+                    img = MiniMagick::Image.read(params[:image])
+                    img.resize_to_fill "128x128" 
+                    img.write "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+                    food.image = img 
+                    logger.debug(food.image.url)
+                end
 
                 if food.save!
                     render json: {

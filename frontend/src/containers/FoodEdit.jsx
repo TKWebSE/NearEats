@@ -19,10 +19,12 @@ import MUIAnimatedMultiSelect from "../component/MUIAnimatedMultiSelect";
 import { foodsIndexURL } from "../urls/index";
 import { messageActionTypes } from "../reducer/messageReducer";
 import { handleCreatePost } from "../AppImageFunction";
+import { changeImageURL } from "../AppImageFunction";
 
 const DetailWrapper = styled.div`
   margin-left:20%;
   margin-right:20%;
+  margin-bottom:5%;
 `;
 
 const FoodEditHeader = styled.h1`
@@ -170,6 +172,9 @@ export const FoodEdit = ({ match }) => {
   }
 
   console.log(state)
+  // console.log(state.food.image.url)
+  console.log(preview)
+  console.log(foodSelectImage)
   return (
     <Fragment>
       <DetailWrapper>
@@ -188,10 +193,8 @@ export const FoodEdit = ({ match }) => {
                       alt="dummy" >
                     </FoodImage>
                     :
-                    <FoodImage src={
-                      foodSelectImage
-                    }
-                      alt="dummy" >
+                    <FoodImage
+                      src={state.food.image.url === null ? foodSelectImage : changeImageURL(state.food.image.url)} alt="foodImage">
                     </FoodImage>
                 }
               </FoodImageWrapper>

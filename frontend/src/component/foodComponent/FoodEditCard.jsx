@@ -129,6 +129,12 @@ export const FoodEditCard = ({ setCity, city }) => {
                 <FoodPrice>
                     <MaterialUIFoodPriceLine></MaterialUIFoodPriceLine>
                 </FoodPrice>
+                {
+                    FoodEditState.food.image.url ?
+                        "true"
+                        :
+                        "false"
+                }
                 <FoodDesicription>
                     <MaterialUIFoodDescriptionMultiLine></MaterialUIFoodDescriptionMultiLine>
                 </FoodDesicription>

@@ -6,6 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
+  # process resize_to_fit: [200, 200]
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -29,13 +30,14 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # 画像の上限を700pxにする
-  process :resize_to_limit => [400, 400]
+  # process :resize_to_limit => [400, 400]
 
   # 保存形式をJPGにする
   # process :convert => 'jpg'
 
   # Create different versions of your uploaded files:
   version :thumb do
+    # image.resize "300x300"
     process resize_to_fit: [300, 300]
   end
 
