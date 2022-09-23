@@ -125,7 +125,7 @@ const TaskDetailFinisheButtomWrapper = styled.div`
 const TaskDetailCancelButtomWrapper = styled.div`
 `;
 
-s
+
 
 export const TaskDetailCard = () => {
     const state = useContext(TaskState);
