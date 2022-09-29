@@ -3,7 +3,7 @@ class Api::V1::Auth::SessionsController < ApplicationController
 
   def create 
     logger.debug(params)
-  endaaaaaaaaaaa
+  end
   
   def index
     user = current_api_v1_user
