@@ -15,7 +15,7 @@ services:
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
-      - 3306:3306
+      - "3306:3306"
   api:
     build:
       context: ./
@@ -29,7 +29,7 @@ services:
       TZ: Asia/Tokyo
       RAILS_ENV: development
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
       - db
   front:
