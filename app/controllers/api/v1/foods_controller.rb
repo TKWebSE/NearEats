@@ -1,6 +1,8 @@
 module Api
     module V1
         class FoodsController < ApplicationController
+            require "mini_magick"
+            
             def index
                 user = User.find_by(id: params[:user_id])
                 paramsCity = params[:city]
@@ -121,7 +123,15 @@ module Api
             end
 
             def update
-               food = Food.find_by(id: params[:id])
+                food = Food.find_by(id: params[:id])
+                logger.debug("aaaaa")
+                logger.debug(food_params[:name])
+            
+                # image = MiniMagick::Image.open("宇宙猫.jpg")
+                # image.path #=> "/var/folders/k7/6zx6dx6x7ys3rv3srh0nyfj00000gn/T/magick20140921-75881-1yho3zc.jpg"
+                # image.resize "100x100"
+                # image.format "jpg" 
+                # image.write "output.png"
 
             #    name: foodparams[:name],price: foodparams[:price],description: foodparams[:description]
                if food.update!(food_params) 
