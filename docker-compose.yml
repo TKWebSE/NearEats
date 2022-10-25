@@ -29,15 +29,15 @@ services:
       RAILS_ENV: development
     ports:
       - "3000:3000"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
   front:
-    command: sh -c "cd frontend"
     build:
       context: ./frontend
       dockerfile: DockerFile
     volumes:
       - ./frontend
+    # command: sh -c "cd frontend && npm start"
     ports:
       - "8000:3001"
 volumes:
