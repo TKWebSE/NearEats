@@ -1,3 +1,4 @@
 FROM node:16.15.0-alpine
-WORKDIR /
+WORKDIR /var/www
+COPY ./package.json /var/www/
 RUN npm install
