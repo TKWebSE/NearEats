@@ -5,4 +5,3 @@ WORKDIR /nearEatsDocekr
 ADD Gemfile /NearEatsDocekr/Gemfile
 ADD Gemfile.lock /nearEatsDocekr/Gemfile.lock
 RUN bundlnearEatsDocekre install
-ADD . /
