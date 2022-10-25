@@ -37,7 +37,7 @@ services:
       dockerfile: DockerFile
     volumes:
       - ./frontend
-    command: sh -c "cd frontend && npm start"
+    # command: sh -c "cd frontend && npm start"
     ports:
       - "8000:3001"
 volumes:
