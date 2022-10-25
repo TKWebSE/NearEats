@@ -34,7 +34,7 @@ services:
   front:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     volumes:
       - ./frontend
     command: sh -c "cd frontend && npm start"
