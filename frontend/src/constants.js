@@ -133,6 +133,7 @@ export const FOOD_CREATE_TEXT = {
     FOOD_DESCRIPTION_LABEL: "説明",
     LOCATION_PLACEHOLDER_TEXT: "地域",
     SAVE_BTN_LABEL: "作成",
+    CANT_CREATE_FOOD: "作成できませんでした"
 }
 
 export const FOOD_DETAIL_TEXT = {

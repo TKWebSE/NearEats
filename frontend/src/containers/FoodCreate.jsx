@@ -22,6 +22,7 @@ import { createFormData } from "../AppImageFunction";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
 import { messageActionTypes } from "../reducer/messageReducer";
 import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
+import { CollectionsBookmarkRounded } from "@mui/icons-material";
 
 const FoodCreateWrappwer = styled.div`
     margin-left:20%;
@@ -101,7 +102,15 @@ export const FoodCreate = () => {
                     console.log(data)
                     history.push(foodShowURL(data.food.id))
                 })
-                .catch(e => console.log(e))
+                .catch(e => {
+                    console.log("きょうはあれ")
+                    messageDispatch({
+                        type: messageActionTypes.SET_ERROR_MESSAGE,
+                        payload: {
+                            errorMessage: FOOD_CREATE_TEXT.CANT_CREATE_FOOD
+                        }
+                    })
+                });
         } catch (e) {
             messageDispatch({
                 type: messageActionTypes.SET_ERROR_MESSAGE,
