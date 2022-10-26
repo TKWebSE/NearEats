@@ -165,10 +165,18 @@ export const FoodEdit = ({ match }) => {
     const formData = await createFormData();
 
     updateFoodApi(state.food, formData, city)
+
       .then((data) => {
         history.push(foodShowURL(data.food.id))
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        messageDispatch({
+          type: messageActionTypes.SET_ERROR_MESSAGE,
+          payload: {
+            errorMessage: FOOD_EDIT_TEXT.CANT_CHANGE_UPLOAD
+          }
+        })
+      });
   }
 
   console.log(state)

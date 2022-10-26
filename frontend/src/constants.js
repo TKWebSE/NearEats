@@ -153,6 +153,7 @@ export const FOOD_EDIT_TEXT = {
     LOCATION_PLACEHOLDER_TEXT: "地域",
     SAVE_BTN_LABEL: "変更",
     NO_IMAGE_MESSAGE: "画像が設定されていません",
+    CANT_CHANGE_UPLOAD: "変更できませんでした",
 }
 
 export const NOTFOUND_FOOD_TEXT = {
