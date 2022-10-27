@@ -11,12 +11,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  def default_url
-    'sample.jpg'
-  end
+  # def default_url
+  #   'sample.jpg'
+  # end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -40,11 +40,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   # process :convert => 'jpg'
 
   # Create different versions of your uploaded files:
-  version :thumb do
-    # image = MiniMagick::Image.open(uri)
-    # image.resize "300x300"
-    process resize_to_fit: [300, 300]
-  end
+  # version :thumb do
+  #   # image = MiniMagick::Image.open(uri)
+  #   # image.resize "300x300"
+  #   process resize_to_fit: [300, 300]
+  # end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:

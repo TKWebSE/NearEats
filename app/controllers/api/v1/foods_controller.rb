@@ -133,6 +133,13 @@ module Api
                 # image.format "jpg" 
                 # image.write "output.png"
 
+                # if food_params[:image] != nil
+                #     logger.debug("nnnnn")
+                #     img = MiniMagick::Image.read(food_params[:image])
+                #     img.resize_to_fill "128x128"#resizeをresize_to_fillに変更
+                #     img.write "public/images/hoge.jpg"
+                #  end
+
             #    name: foodparams[:name],price: foodparams[:price],description: foodparams[:description]
                if food.update!(food_params) 
                     render json: {
