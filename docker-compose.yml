@@ -2,20 +2,15 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:14.2
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./docker/db/data:/var/lib/mysql
-      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    image: postgres:14
+    container_name: postgres
     ports:
-      - "3306:3306"
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=passw0rd
+
   app:
     build: .
     command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -35,5 +30,4 @@ services:
     ports:
       - "8000:3001"
 volumes:
-  mysql_data:
-    driver: local
+  db-store:
