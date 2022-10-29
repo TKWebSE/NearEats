@@ -13,8 +13,24 @@ const FoodCardWrapper = styled.div`
 `;
 
 const FoodImage = styled.img`
-    width:100%;
-    height:60%;
+// width:320px;
+// height:180px;
+${media.greaterThan("huge")`
+width:300px;
+height:160px;
+`}
+    ${media.lessThan("huge")`
+    width:200px;
+    height:140px;
+    `}
+    ${media.lessThan("medium")`
+    width:140px;
+    height:100px;
+    `}
+    ${media.lessThan("small")`
+    width:320px;
+    height:180px;
+    `}
 `;
 
 const TextWrapper = styled.div`

@@ -77,7 +77,7 @@ const NotFoundCatWrapper = styled.div`
 
 const NotFoundCatImage = styled.img`
     ${media.lessThan("small")`
-        width:120%;
+        width:100%;
     `}
 `;
 
