@@ -16,11 +16,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f /neareats/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     image: rails:dev
     volumes:
-      - ./myapp
-      - ./vendor/bundle:/myapp/vendor/bundle
+      - .:/neareats
+      - ./vendor/bundle:/neareats/vendor/bundle
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
