@@ -1,31 +1,33 @@
-version: '3.8'
+version: "3"
 
 services:
   db:
-    image: mysql:5.7
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    image: mysql:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - mysql_vol:/var/lib/mysql
-
-  app:
-    build: .
-    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/app
+      - mysql-data:/var/lib/mysql
+      - /tmp/dockerdir:/etc/mysql/conf.d/
     ports:
-      - "3000:3000"
+      - 3306:3306
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: rails:dev
+    volumes:
+      - ./myapp
+      - ./vendor/bundle:/myapp/vendor/bundle
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: development
+    ports:
+      - 3001:3000
     depends_on:
       - db
-  front:
-    build:
-      context: ./frontend
-      dockerfile: DockerFile
-    volumes:
-      - /frontend
-    command: sh -c "cd frontend && npm start"
-    ports:
-      - "8000:3001"
+
 volumes:
-  mysql_vol:
+  mysql-data:
