@@ -1,12 +1,12 @@
-import React,{Fragment} from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
-import {MaterialUICommonButton} from "../component/MaterialUICommonButton";
-import {ButtonTheme} from "../style_constants";
-import {useHistory} from "react-router-dom";
-import {userCreateURL,signInURL} from "../urls/index";
-import {HOME_TEXT} from "../constants";
+import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
+import { ButtonTheme } from "../style_constants";
+import { useHistory } from "react-router-dom";
+import { guestCreateURL, signInURL } from "../urls/index";
+import { HOME_TEXT } from "../constants";
 import homeMainImage from "../images/home-main-image.jpg";
 import menu1 from "../images/menu1.jpg";
 import menu2 from "../images/menu2.jpg";
@@ -68,11 +68,15 @@ const SubTitleWrapper = styled.div`
 `;
 
 const SignUpWrapper = styled.div`
-    padding-top:20%;
+    padding-top:10%;
     font-size: 20%;
+    ${media.lessThan("medium")`
+        padding-top:5%;
+        // font-size:250%;
+    `}
     ${media.lessThan("small")`
-        padding-top:10%;
-        font-size: 20%;
+        padding-top:3%;
+        // font-size: 20%;
     `}
 `;
 
@@ -196,11 +200,11 @@ const HowToDeliverFoodImage = styled.img`
     width:100%;
 `;
 
-export const Home = ()=> {
+export const Home = () => {
     const history = useHistory();
 
     function signUpHandle() {
-        history.push(userCreateURL)
+        history.push(guestCreateURL)
     }
 
     function signInHandle() {
@@ -210,96 +214,96 @@ export const Home = ()=> {
     return (
         <Fragment>
             <HomeWrapper>
-            <MainWrapper>
-                <ImgWrapper>
-                    <HomeMainImage src={homeMainImage} alt="homeMainImage"></HomeMainImage>
-                </ImgWrapper>
-                <MainTextWrapper>
-                    <TitleWrapper>
-                        {HOME_TEXT.HOME_TITLE}
-                    </TitleWrapper>
-                    <SubTitleWrapper>
-                        {HOME_TEXT.SUB_TITLE}
-                    </SubTitleWrapper>
-                    <ThemeProvider theme={ButtonTheme}>
-                        <SignUpWrapper>
-                            <MaterialUICommonButton onClick={() => signUpHandle()} btnLabel={HOME_TEXT.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
-                        </SignUpWrapper>
-                        <SignInWrapper>
-                            <MaterialUICommonButton onClick={() => signInHandle()} btnLabel={HOME_TEXT.SIGNIN_BUTTON_LABEL}></MaterialUICommonButton>
-                        </SignInWrapper>
-                    </ThemeProvider>
-                </MainTextWrapper>
-            </MainWrapper>
-            <ServiceWrapper>
-                <BuyerWrapper>
-                    <BuyerTitleWrapper>
-                        {HOME_TEXT.BUYER_TITLE}
-                    </BuyerTitleWrapper>
-                    <BuyerTextWrapper>
-                        {HOME_TEXT.BUYER_TEXT}
-                    </BuyerTextWrapper>
-                    <MenuImageWrapper>
-                        <MenuImage src={menu1} alt="menuFirstImage"></MenuImage>
-                        <MenuImage src={menu2} alt="menuSecondImage"></MenuImage>
-                        <MenuImage src={menu3} alt="menuThirdImage"></MenuImage>
-                        <MenuImage src={menu4} alt="menuForthImage"></MenuImage>
-                    </MenuImageWrapper>
-                </BuyerWrapper>
-                <SellerWrapper>
-                    <SellerTitleWrapper>
-                        {HOME_TEXT.SELLER_TITLE}
-                    </SellerTitleWrapper>
-                    <SellerTextWrapper>
-                        {HOME_TEXT.SELLER_TEXT}
-                    </SellerTextWrapper>
-                    <CookImageWrapper>
-                        <CookImage src={cook1} alt="cookFirstImage"/>
-                        <CookImage src={cook2} alt="cookSecondImage"/>
-                        <CookImage src={cook3} alt="cookThirdImage"/>
-                        <CookImage src={cook4} alt="cookForthImage"/>
-                    </CookImageWrapper>
-                    
-                </SellerWrapper>
-            </ServiceWrapper>
-            <HowToWrapper>
-                <HowToTitleWrapper>
-                    {HOME_TEXT.HOWTO_TITLE}
-                </HowToTitleWrapper>
-                <HowToUploadWrapper>
-                    <HowToUploadTitle>
-                        {HOME_TEXT.HOWTO_UPLOAD_TITLE}
-                    </HowToUploadTitle>
-                    <HowToUploadText>
-                        {HOME_TEXT.HOWTO_UPLOAD_TEXT}
-                    </HowToUploadText>
-                    <HowToUploadImageWrapper>
-                        <HowToUploadImage src={howto1} alt="howToImageFirst"/>
-                    </HowToUploadImageWrapper>
-                </HowToUploadWrapper>
-                <HowToGetTaskAndCookWrapper>
-                    <HowToGetTaskAndCookTitle>
-                        {HOME_TEXT.HOWTO_GETTASK_AND_COOK_TITLE}
-                    </HowToGetTaskAndCookTitle>
-                    <HowToGetTaskAndCookText>
-                        {HOME_TEXT.HOWTO_GETTASK_AND_COOK_TEXT}
-                    </HowToGetTaskAndCookText>
-                    <HowToGetTaskAndCookImageWrapper>
-                        <HowToGetTaskAndCookImage src={howto2} alt="howToImageSecond"/>
-                    </HowToGetTaskAndCookImageWrapper>
-                </HowToGetTaskAndCookWrapper>
-                <HowToDeliverFoodWrapper>
-                    <HowToDeliverFoodTitle>
-                        {HOME_TEXT.HOWTO_DELIVER_FOOD_TITLE}
-                    </HowToDeliverFoodTitle>
-                    <HowToDeliverFoodText>
-                        {HOME_TEXT.HOWTO_DELIVER_FOOD_TEXT}
-                    </HowToDeliverFoodText>
-                    <HowToDeliverFoodImageWrapper>
-                        <HowToDeliverFoodImage src={howto3} alt="howToImageThord"/>
-                    </HowToDeliverFoodImageWrapper>
-                </HowToDeliverFoodWrapper>
-            </HowToWrapper>
+                <MainWrapper>
+                    <ImgWrapper>
+                        <HomeMainImage src={homeMainImage} alt="homeMainImage"></HomeMainImage>
+                    </ImgWrapper>
+                    <MainTextWrapper>
+                        <TitleWrapper>
+                            {HOME_TEXT.HOME_TITLE}
+                        </TitleWrapper>
+                        <SubTitleWrapper>
+                            {HOME_TEXT.SUB_TITLE}
+                        </SubTitleWrapper>
+                        <ThemeProvider theme={ButtonTheme}>
+                            <SignUpWrapper>
+                                <MaterialUICommonButton onClick={() => signUpHandle()} btnLabel={HOME_TEXT.SOGNUP_BUTTON_LABEL}></MaterialUICommonButton>
+                            </SignUpWrapper>
+                            <SignInWrapper>
+                                <MaterialUICommonButton onClick={() => signInHandle()} btnLabel={HOME_TEXT.SIGNIN_BUTTON_LABEL}></MaterialUICommonButton>
+                            </SignInWrapper>
+                        </ThemeProvider>
+                    </MainTextWrapper>
+                </MainWrapper>
+                <ServiceWrapper>
+                    <BuyerWrapper>
+                        <BuyerTitleWrapper>
+                            {HOME_TEXT.BUYER_TITLE}
+                        </BuyerTitleWrapper>
+                        <BuyerTextWrapper>
+                            {HOME_TEXT.BUYER_TEXT}
+                        </BuyerTextWrapper>
+                        <MenuImageWrapper>
+                            <MenuImage src={menu1} alt="menuFirstImage"></MenuImage>
+                            <MenuImage src={menu2} alt="menuSecondImage"></MenuImage>
+                            <MenuImage src={menu3} alt="menuThirdImage"></MenuImage>
+                            <MenuImage src={menu4} alt="menuForthImage"></MenuImage>
+                        </MenuImageWrapper>
+                    </BuyerWrapper>
+                    <SellerWrapper>
+                        <SellerTitleWrapper>
+                            {HOME_TEXT.SELLER_TITLE}
+                        </SellerTitleWrapper>
+                        <SellerTextWrapper>
+                            {HOME_TEXT.SELLER_TEXT}
+                        </SellerTextWrapper>
+                        <CookImageWrapper>
+                            <CookImage src={cook1} alt="cookFirstImage" />
+                            <CookImage src={cook2} alt="cookSecondImage" />
+                            <CookImage src={cook3} alt="cookThirdImage" />
+                            <CookImage src={cook4} alt="cookForthImage" />
+                        </CookImageWrapper>
+
+                    </SellerWrapper>
+                </ServiceWrapper>
+                <HowToWrapper>
+                    <HowToTitleWrapper>
+                        {HOME_TEXT.HOWTO_TITLE}
+                    </HowToTitleWrapper>
+                    <HowToUploadWrapper>
+                        <HowToUploadTitle>
+                            {HOME_TEXT.HOWTO_UPLOAD_TITLE}
+                        </HowToUploadTitle>
+                        <HowToUploadText>
+                            {HOME_TEXT.HOWTO_UPLOAD_TEXT}
+                        </HowToUploadText>
+                        <HowToUploadImageWrapper>
+                            <HowToUploadImage src={howto1} alt="howToImageFirst" />
+                        </HowToUploadImageWrapper>
+                    </HowToUploadWrapper>
+                    <HowToGetTaskAndCookWrapper>
+                        <HowToGetTaskAndCookTitle>
+                            {HOME_TEXT.HOWTO_GETTASK_AND_COOK_TITLE}
+                        </HowToGetTaskAndCookTitle>
+                        <HowToGetTaskAndCookText>
+                            {HOME_TEXT.HOWTO_GETTASK_AND_COOK_TEXT}
+                        </HowToGetTaskAndCookText>
+                        <HowToGetTaskAndCookImageWrapper>
+                            <HowToGetTaskAndCookImage src={howto2} alt="howToImageSecond" />
+                        </HowToGetTaskAndCookImageWrapper>
+                    </HowToGetTaskAndCookWrapper>
+                    <HowToDeliverFoodWrapper>
+                        <HowToDeliverFoodTitle>
+                            {HOME_TEXT.HOWTO_DELIVER_FOOD_TITLE}
+                        </HowToDeliverFoodTitle>
+                        <HowToDeliverFoodText>
+                            {HOME_TEXT.HOWTO_DELIVER_FOOD_TEXT}
+                        </HowToDeliverFoodText>
+                        <HowToDeliverFoodImageWrapper>
+                            <HowToDeliverFoodImage src={howto3} alt="howToImageThord" />
+                        </HowToDeliverFoodImageWrapper>
+                    </HowToDeliverFoodWrapper>
+                </HowToWrapper>
             </HomeWrapper>
         </Fragment>
     )

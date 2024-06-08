@@ -7,6 +7,8 @@ export const initializeState = {
     nowLocation: null,
     searchWord: null,
     notification: 0,
+    orders: [],
+    tasks: [],
     message: "",
 }
 
@@ -19,6 +21,7 @@ export const sessionActionTypes = {
     SETTINGSEARCHWORD: "SETTINGSEARCHWORD",
     SETTINGNOTIFICATION: "SETTINGNOTIFICATION",
     SETTINGMESSAGE: "SETTINGMESSAGE",
+    TRUE_LOGIN: "TRUE_LOGIN",
 }
 
 export const sessionReducer = (state, action) => {
@@ -31,6 +34,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
                 notification: state.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SIGNIN:
@@ -42,6 +47,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
                 notification: state.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SIGNOUT:
@@ -52,12 +59,15 @@ export const sessionReducer = (state, action) => {
                 nowLocation: null,
                 searchWord: null,
                 notification: state.notification,
+                orders: [],
+                tasks: [],
                 message: state.message,
             }
         case sessionActionTypes.ISLOGIN:
             let notification = 0
-            if (action.payload.data.tasks != null) {
-                notification = Object.keys(action.payload.data.tasks).length
+            if (action.payload.data !== null && action.payload.data !== undefined &&
+                action.payload.data.tasks !== null && action.payload.data.tasks !== undefined) {
+                notification = action.payload.data.tasks + action.payload.data.orders
             }
             return {
                 fetchSessionState: REQUEST_STATE.OK,
@@ -66,6 +76,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
                 notification: notification,
+                orders: action.payload.data.orders,
+                tasks: action.payload.data.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SETNOWLOCATION:
@@ -76,6 +88,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: action.payload.nowLocation,
                 searchWord: state.searchWord,
                 notification: state.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGSEARCHWORD:
@@ -86,6 +100,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: action.payload.searchWord,
                 notification: state.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGNOTIFICATION:
@@ -96,6 +112,8 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
                 notification: action.payload.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: state.message,
             }
         case sessionActionTypes.SETTINGMESSAGE:
@@ -106,7 +124,24 @@ export const sessionReducer = (state, action) => {
                 nowLocation: state.nowLocation,
                 searchWord: state.searchWord,
                 notification: state.notification,
+                orders: state.orders,
+                tasks: state.tasks,
                 message: action.payload.message,
+            }
+        case sessionActionTypes.TRUE_LOGIN:
+            return {
+                fetchSessionState: REQUEST_STATE.OK,
+                currentUser:
+                {
+                    id: 1, provider: "email", uid: "email0@yahoo.co.jp", allow_password_change: false, confirmation_password_sent_at: null, confirmation_email_code: null, confirmation_email_sent_at: null, name: "testユーザー_0", city: "東京都渋谷区", address: "0県0町の1-2-3", image: null, email: "email0@yahoo.co.jp", point: 100, valuation: 3, stripe_customer_id: "cus_L4PnH4PzhSqvXM", deleted: "f", created_at: "2023-01-25 05:35:54", updated_at: "2023-01-25 05:35:54"
+                },
+                isLogin: true,
+                nowLocation: "東京都渋谷区",
+                searchWord: "",
+                notification: 0,
+                orders: [],
+                tasks: [],
+                message: "",
             }
         default:
             break;

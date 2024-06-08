@@ -1,14 +1,30 @@
-import { BASE_URL } from "./urls/index";
+import { BASE_URL, MIDDLE_IMAGE_URL } from "./urls/index";
 import { VALUATION_ERROR } from "./constants";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from './context/Context';
 
-//urlをバックエンドのものに成形する
+//URLをバックエンドのものに成形する
 export function changeImageURL(url) {
   let newUrl = url.substr(BASE_URL.length);
   // newUrl = newUrl.substr(0, newUrl.length - 4)
   console.log(BASE_URL + newUrl)
+  console.log(newUrl)
+  console.log(url)
   return BASE_URL + newUrl
 }
+
+//orderからImageを読み出すときのURLを成形する
+export function changeImageOrderURL(url, foodId) {
+  let newUrl = url.substr(BASE_URL.length);
+  // newUrl = newUrl.substr(0, newUrl.length - 4)
+  let returnURL = MIDDLE_IMAGE_URL(foodId) + url
+  console.log(MIDDLE_IMAGE_URL(foodId) + url)
+  console.log(newUrl)
+  console.log(url)
+  console.log(foodId)
+
+  return returnURL
+}
+
 
 //Foodの画像データなどをForm形式に変換する
 export const createFormData = (state, city, user_id) => {

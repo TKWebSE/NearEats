@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
+import { NotFoundCatComponent } from "../component/notFoundComponent/NotFoundCatComponent";
 import { fetchOrederIndexApi } from "../apis/orderApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
 import { initializeState, ordersListActionTypes, ordersListReducer } from "../reducer/ordersListReducer";
-import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_ORDER_TEXT } from "../constants";
+import { initializeFoodListState, foodsListActionTypes, foodsListReducer } from "../reducer/foodsListReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../constants";
 import { OrderIndexCard } from "../component/orderComponent/OrderIndexCard";
-import NotFoundCat from "../images/NotFoundCat.jpeg";
+// import NotFoundCat from "../images/NotFoundCat.jpeg";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { foodsIndexURL, orderShowURL } from "../urls/index";
 import { ButtonTheme } from "../style_constants";
@@ -19,6 +21,7 @@ const OrderWrapper = styled.div`
     margin-top:5%;
     margin-right:10%;
     margin-left:10%;
+    margin-bottom:5%;
 `;
 
 const OrderIndexTitle = styled.h1`
@@ -46,77 +49,18 @@ const NotExistOrderWrapper = styled.div`
     `}
 `;
 
+const FinishTaskWrapper = styled.div`
+    margin-bottom:1%;
+    background-color:lightcyan;
+`;
+
 const ExistOrderWrapper = styled.div`
     padding-bottom:1%;
 `;
 
-
-const NoFoodsListWrapper = styled.div`
-    padding-top:5%;
-    padding-left:26%;
-    position:relative;
-    ${media.lessThan("medium")`
-        padding-left:14%;
-    `}
-    ${media.lessThan("small")`
-        padding-left:0%;
-    `}
-`;
-
-const NotFoundCatWrapper = styled.div`
-`;
-
-const NotFoundCatImage = styled.img`
-    ${media.lessThan("small")`
-        width:120%;
-    `}
-`;
-
-const NotExistOrderTextWrapper = styled.h3`
-    position:absolute;
-    top: 50%;
-    left: 30%;
-    font-size:150%;
-    ${media.lessThan("large")`
-        left:32%;
-    `}
-    ${media.lessThan("medium")`
-        left:20%;
-    `}
-    ${media.lessThan("small")`
-        left:5%;
-    `}
-`;
-
-const LetsUploadFoodsWrapper = styled.h3`
-    position:absolute;
-    top: 60%;
-    left: 30%;
-    font-size:150%;
-    ${media.lessThan("large")`
-        left:32%;
-    `}
-    ${media.lessThan("medium")`
-        left:20%;
-    `}
-    ${media.lessThan("small")`
-        left:5%;
-    `}
-`;
-
-const GotoFoodCreateWrapper = styled.div`
-    position:absolute;
-    top: 80%;
-    left: 37%;
-    ${media.lessThan("large")`
-        left:40%;
-    `}
-    ${media.lessThan("medium")`
-        left:34%;
-    `}
-    ${media.lessThan("small")`
-        left:25%;
-    `}
+const CancelExistOrderWrapper = styled.div`
+    margin-bottom:1%;
+    background-color:darkgray;
 `;
 
 const SkeltonsWrapper = styled.div`
@@ -142,18 +86,24 @@ export const OrderIndex = () => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch);
     const [state, dispatch] = useReducer(ordersListReducer, initializeState);
+    const [foodsState, foodsDispatch] = useReducer(foodsListReducer, initializeFoodListState);
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: ordersListActionTypes.FETCHING })
-        console.log(SessionAuthState)
+        dispatch({ type: foodsListActionTypes.FETCHING })
         fetchOrederIndexApi(SessionAuthState.currentUser.id)
             .then((data) => {
-                console.log(data)
                 dispatch({
                     type: ordersListActionTypes.FETCH_SUCCESS,
                     payload: {
                         orders: data.orders,
+                    },
+                });
+                foodsDispatch({
+                    type: foodsListActionTypes.FETCH_SUCCESS,
+                    payload: {
+                        foodsList: data.foods,
                     },
                 });
             })
@@ -163,7 +113,9 @@ export const OrderIndex = () => {
     function gotoFoodIndexHandle() {
         history.push(foodsIndexURL);
     }
+
     console.log(state)
+
     return (
         <Fragment>
             <OrderWrapper>
@@ -172,31 +124,44 @@ export const OrderIndex = () => {
                 </OrderIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
-                        state.orders === [] ?
+                        state.orders === [] || state.orders[0] === undefined ?
                             <NotExistOrderWrapper>
-                                <NotFoundCatWrapper>
-                                    <NotFoundCatImage src={NotFoundCat} />
-                                </NotFoundCatWrapper>
-                                <NotExistOrderTextWrapper>
-                                    {NOTFOUND_ORDER_TEXT.NOT_EXIST_ORDER_TEXT}
-                                </NotExistOrderTextWrapper>
-                                <LetsUploadFoodsWrapper>
-                                    {NOTFOUND_ORDER_TEXT.LETS_ORDER_TEXT}
-                                </LetsUploadFoodsWrapper>
-                                <ThemeProvider theme={ButtonTheme}>
-                                    <GotoFoodCreateWrapper>
-                                        <MaterialUICommonButton onClick={() => gotoFoodIndexHandle()} btnLabel={NOTFOUND_ORDER_TEXT.GOTO_FOOD_INDEX_BUTTON_LABEL}></MaterialUICommonButton>
-                                    </GotoFoodCreateWrapper>
-                                </ThemeProvider>
+                                <NotFoundCatComponent
+                                    firstText={NOTFOUND_ORDER_TEXT.NOT_EXIST_ORDER_TEXT}
+                                    secondText={NOTFOUND_ORDER_TEXT.LETS_ORDER_TEXT}
+                                    btnLabel={NOTFOUND_ORDER_TEXT.GOTO_FOOD_INDEX_BUTTON_LABEL}
+                                    onClick={() => gotoFoodIndexHandle()}
+                                />
                             </NotExistOrderWrapper>
                             :
-                            state.orders.map((order, i) =>
-                                <Link to={orderShowURL(order.id)} style={{ textDecoration: 'none' }}>
-                                    <ExistOrderWrapper key={i}>
-                                        <OrderIndexCard order={order} />
-                                    </ExistOrderWrapper>
-                                </Link>
-                            )
+                            foodsState.foodsList.map((food, f) =>
+                                state.orders.map((order, o) =>
+                                    <div>
+                                        <Fragment>
+                                            {food.id === order.food_id ?
+                                                < Link to={orderShowURL(order.id)} style={{ textDecoration: 'none' }}>
+                                                    {
+                                                        order.order_status === ORDER_TASK_STATUS_NUMBERS.COMPLETE_ORDER ?
+                                                            <FinishTaskWrapper>
+                                                                <OrderIndexCard order={order} food={food} />
+                                                            </FinishTaskWrapper>
+                                                            :
+                                                            order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL || order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL ?
+                                                                <CancelExistOrderWrapper key={o}>
+                                                                    <OrderIndexCard order={order} food={food} />
+                                                                </CancelExistOrderWrapper>
+                                                                :
+                                                                <ExistOrderWrapper key={o}>
+                                                                    <OrderIndexCard order={order} food={food} />
+                                                                </ExistOrderWrapper>
+                                                    }
+                                                </Link>
+                                                :
+                                                <div></div>
+                                            }
+                                        </Fragment>
+                                    </div>
+                                ))
                         :
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>
@@ -216,6 +181,6 @@ export const OrderIndex = () => {
                         </SkeltonsWrapper>
                 }
             </OrderWrapper>
-        </Fragment>
+        </Fragment >
     )
 }

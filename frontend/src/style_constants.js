@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { createTheme } from '@mui/material/styles';
+// import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@material-ui/core/styles'
 
 export const COLORS = {
   MAIN_COLOR: '#00695f',
@@ -18,7 +19,7 @@ export const FONT_SIZE = {
 }
 
 //ヘッダーの色を定義
-export const headerTheme = createMuiTheme({
+export const headerTheme = createTheme({
   palette: {
     primary: {
       main: COLORS.MAIN_COLOR
@@ -27,7 +28,7 @@ export const headerTheme = createMuiTheme({
 });
 
 //デフォルトbuttonの色を設定(MaterialUI)
-export const ButtonTheme = createMuiTheme({
+export const ButtonTheme = createTheme({
   palette: {
     primary: {
       main: COLORS.MAIN_COLOR
@@ -39,7 +40,7 @@ export const ButtonTheme = createMuiTheme({
 });
 
 //削除ボタンの色を設定(MaterialUI)
-export const RedButtonTheme = createMuiTheme({
+export const RedButtonTheme = createTheme({
   palette: {
     primary: {
       main: COLORS.DELETE_WARN_BUTTON_COLOR

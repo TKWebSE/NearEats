@@ -5,9 +5,7 @@ import Box from '@material-ui/core/Box';
 import { OrderState, OrderDispatch } from "../context/Context";
 import { orderActionTypes } from "../reducer/orderReducer";
 
-export default function MaterialUIUpdateRatingStar({ onClick }) {
-  const state = useContext(OrderState);
-  const dispatch = useContext(OrderDispatch)
+export default function MaterialUIUpdateRatingStar({ onClick, valuation, dispatch }) {
 
   function onChangeHandle(newValue) {
     console.log(newValue)
@@ -35,7 +33,7 @@ export default function MaterialUIUpdateRatingStar({ onClick }) {
           name="simple-controlled"
           size="large"
           precision={1}
-          value={state.valuation}
+          value={valuation}
           onChange={(event, newValue) => {
             onChangeHandle(newValue)
           }}

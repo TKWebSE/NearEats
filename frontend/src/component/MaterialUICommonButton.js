@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { ButtonTheme } from "../style_constants";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -8,20 +10,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MaterialUICommonButton({ onClick, btnLabel }) {
+export function MaterialUICommonButton({ onClick, btnLabel, color }) {
   const classes = useStyles();
 
   return (
     <div>
-      <Button
-        size="large"
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={onClick}
-      >
-        {btnLabel}
-      </Button>
+      <ThemeProvider theme={ButtonTheme}>
+        <Button
+          size="large"
+          variant="contained"
+          color={color ? color : 'primary'}
+          className={classes.button}
+          onClick={onClick}
+        >
+          {btnLabel}
+        </Button>
+      </ThemeProvider>
     </div>
   )
 }

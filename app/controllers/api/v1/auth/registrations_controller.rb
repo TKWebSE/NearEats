@@ -1,21 +1,17 @@
 class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsController
 
-  def create 
-    super
+  # ユーザーをサインアップする
+  # def create 
+  #   super
     
-    user = User.find_by(email: params[:email])
-    if user 
-      customer = Stripe::Customer.create({
-        email: params[:email],
-        name: params[:name],
-      })
-      user.stripe_customer_id = customer.id
-      user.save!
-    else
-      throw e
-    end
 
-  end 
+  #     # customer = Stripe::Customer.create({
+  #     #   email: params[:email],
+  #     #   name: params[:name],
+  #     # })
+  #     # user.stripe_customer_id = customer.id
+  #     # user.save!
+  # end 
 
         private
         def sign_up_params

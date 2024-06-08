@@ -10,6 +10,7 @@ import {
 } from "../urls/index";
 import { HTTP_STATUS_CODE, PASSWORD_RESET_SEND_EMAIL_TEXT } from "../constants";
 import { CatchingPokemonSharp } from "@mui/icons-material";
+import Cookies from "js-cookie";
 
 //email変更時の認証コードを送る
 export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
@@ -23,7 +24,14 @@ export const sendEmailToChangeEmailAddressApi = (userId, newEmail) => {
     .then((res) => {
       return res.data
     })
-    .catch(e => console.log(e))
+    .catch((e) => {
+      if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
+        throw PASSWORD_RESET_SEND_EMAIL_TEXT.ERROR_ANOTHER_EMAIL_MESSAGE
+      } else {
+        throw PASSWORD_RESET_SEND_EMAIL_TEXT.ERROR_SEND_EMAIL_MESSAGE
+      }
+    }
+    )
 }
 
 //パスワードリセットのメールを送信する
@@ -54,6 +62,7 @@ export const updateEmailApi = (userId, confirmationCode) => {
     }
   })
     .then((res) => {
+      Cookies.set("uid", res.data.user.email)
       return res.data
     })
     .catch((e) => {

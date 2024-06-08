@@ -10,6 +10,12 @@ import { messageActionTypes } from "../reducer/messageReducer";
 import { homeURL, passwordResetAuthURLFullURL } from "../urls/index";
 import { MaterialUITextField } from "../component/MaterialUITextField";
 import { validateEmail } from "../AppFunction";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const CircleWrapper = styled.div`
+  text-align:center;
+  padding-top:25%;
+`;
 
 const Wrapper = styled.div`
   margin-left:20%;
@@ -31,12 +37,14 @@ export const PasswordResetSendEmail = () => {
   const [email, setEmail] = useState();
   const messageDispatch = useContext(MessageDispatch);
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   function onKeyDownEnter(event) {
     handleSubmit()
   }
 
   function handleSubmit() {
+    setLoading(true);
     try {
       validateEmail(email);
       sendEmailToChangePasswordApi(email, passwordResetAuthURLFullURL)
@@ -47,9 +55,11 @@ export const PasswordResetSendEmail = () => {
               message: PASSWORD_RESET_SEND_EMAIL_TEXT.SEND_EMAIL_MESSAGE
             },
           })
+          setLoading(false);
           history.push(homeURL)
         })
         .catch((e) => {
+          setLoading(false);
           messageDispatch({
             type: messageActionTypes.SET_ERROR_MESSAGE,
             payload: {
@@ -58,6 +68,7 @@ export const PasswordResetSendEmail = () => {
           })
         });
     } catch (e) {
+      setLoading(false);
       messageDispatch({
         type: messageActionTypes.SET_ERROR_MESSAGE,
         payload: {
@@ -69,26 +80,33 @@ export const PasswordResetSendEmail = () => {
 
   return (
     <Fragment>
-      <Wrapper>
-        <HeaderWrapper>
-          {PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TITLE}
-        </HeaderWrapper>
-        <EmailWrapper>
-          <MaterialUITextField
-            label={PASSWORD_RESET_SEND_EMAIL_TEXT.EMAIL_TEXT_FIELD_LABEL}
-            value={email}
-            setValue={setEmail}
-            onKeyDown={(event) => onKeyDownEnter(event)}
-            helperText={PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TEXT}
-          />
-        </EmailWrapper>
-        <ButtonWrapper>
-          <MaterialUISendEmailButton
-            onClick={handleSubmit}
-            btnLabel={PASSWORD_RESET_SEND_EMAIL_TEXT.SUBMIT_BUTTON_LABEL}
-          />
-        </ButtonWrapper>
-      </Wrapper>
+      {
+        loading ?
+          <CircleWrapper>
+            <CircularProgress />
+          </CircleWrapper>
+          :
+          <Wrapper>
+            <HeaderWrapper>
+              {PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TITLE}
+            </HeaderWrapper>
+            <EmailWrapper>
+              <MaterialUITextField
+                label={PASSWORD_RESET_SEND_EMAIL_TEXT.EMAIL_TEXT_FIELD_LABEL}
+                value={email}
+                setValue={setEmail}
+                onKeyDown={(event) => onKeyDownEnter(event)}
+                helperText={PASSWORD_RESET_SEND_EMAIL_TEXT.HEADER_TEXT}
+              />
+            </EmailWrapper>
+            <ButtonWrapper>
+              <MaterialUISendEmailButton
+                onClick={handleSubmit}
+                btnLabel={PASSWORD_RESET_SEND_EMAIL_TEXT.SUBMIT_BUTTON_LABEL}
+              />
+            </ButtonWrapper>
+          </Wrapper>
+      }
     </Fragment>
   )
 }

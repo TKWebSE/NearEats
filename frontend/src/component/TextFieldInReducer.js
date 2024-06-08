@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
 //汎用TextFieldコンポーネント
 export function TextFieldInReducer({ label, value, dispatch, actionType, onKeyDown, helperText }) {
   const classes = useStyles();
+  console.log(value)
+  console.log(actionType)
 
   const handleChange = (event) => {
     dispatch({

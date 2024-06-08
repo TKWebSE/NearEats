@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //userの住所を設定するためのTextFieldコンポーネント
-export function MaterialUIUserAddressLine() {
+export function MaterialUIUserAddressLine(onKeyPress) {
   const classes = useStyles();
   const state = useContext(UserState);
   const dispatch = useContext(UserDispatch);
@@ -23,10 +23,14 @@ export function MaterialUIUserAddressLine() {
     dispatch({
       type: userActionTypes.SETTINGUSERADDRESS,
       payload: {
-        address: event.target.value
+        value: event.target.value
       }
     })
   };
+
+  const onKeyDownHandle = (event) => {
+    onKeyPress(event)
+  }
 
   return (
     <Fragment>
@@ -48,6 +52,7 @@ export function MaterialUIUserAddressLine() {
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     event.preventDefault();
+                    onKeyDownHandle(event);
                   }
                 }
                 }

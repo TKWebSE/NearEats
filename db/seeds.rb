@@ -15,10 +15,22 @@
       point: 100,
       valuation:3,
       stripe_customer_id: "cus_L4PnH4PzhSqvXM",
+      activate:true,
     )
       
     user.save!
 end
+
+user = User.new(
+  name:"TKTKTK",
+  email:"natumesouseki01@yahoo.co.jp",
+  password:"123456",
+  address:"住所です",
+  point:10000,
+  stripe_customer_id:"cus_L4PnH4PzhSqvXM",
+  activate:true,
+)
+user.save!
 
 # foodを作る
   user = User.first
@@ -28,7 +40,7 @@ end
       name:"クロワッサン",
       price:"400",
       description: "やきたてクロワッサンです！",
-      image: "test1.jpg",
+      image: "sample1.jpg",
       count: 1,
       city: "東京都渋谷区",
       deleted: false,

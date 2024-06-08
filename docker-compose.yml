@@ -1,22 +1,30 @@
-version: "3"
-
+version: '3.9'
+# サービス (コンテナ) を定義します。
 services:
+  # 今回は postgres をサービスとして定義しました。
   db:
-    image: mysql:8.0
+    # Docker Image は postgres:12-alpine を使います。postgres:12-alpine は postgres:12 と比較して、イメージサイズが小さくなっています。
+    image: postgres:14-alpine
+    # コンテナの名前を指定します。
+    container_name: neareats_development
+    # 環境変数を設定します。
     environment:
-      MYSQL_ROOT_PASSWORD: password
-    command: --default-authentication-plugin=mysql_native_password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - TZ=Asia/Tokyo
+      # ENV['POSTGRE_SQL_PASSWORD']
+      # - POSTGRES_DB=mydb
+      # データの永続化
     volumes:
-      - mysql-data:/var/lib/mysql
-      - /tmp/dockerdir:/etc/mysql/conf.d/
+      # postgresディレクトリを/var/lib/postgresql/dataにマウントする
+      - .:/neareats/db
+    # ポートの指定（HOST:CONTAINER）
     ports:
-      - 3306:3306
-
+      - 5432:5432
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /bin/sh -c "rm -f /neareats/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     image: rails:dev
     volumes:
       - .:/neareats
@@ -26,17 +34,27 @@ services:
       RAILS_ENV: development
     ports:
       - 3000:3000
+      # - 127.0.0.1:3000
+    command: /bin/sh -c "cd /neareats && rake db:create &&  rake db:migrate  &&  rake db:seed  && rm -f /myapp/tmp/pids/server.pid && rails s  -b '0.0.0.0'"
+    # "rm -f /neareats/tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     depends_on:
       - db
-  front:
+    # extra_hosts:
+    #   - localhost:127.0.0.1
+
+  frontend:
     build:
-      context: ./frontend/
+      context: ./frontend
       dockerfile: Dockerfile
     volumes:
+      - .:/frontend
       - ./frontend:/usr/src/app
-    command: sh -c "cd app && yarn && yarn start"
+    command: sh -c "cd frontend && npm start"
     ports:
       - "3001:3000"
-
-volumes:
-  mysql-data:
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    # extra_hosts:
+    #   - localhost:127.0.0.1

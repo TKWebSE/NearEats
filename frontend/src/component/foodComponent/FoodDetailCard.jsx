@@ -5,6 +5,7 @@ import foodImage from "../../images/food-image.jpg";
 import { changeJSTDate } from "../../AppFunction";
 import { changeImageURL } from "../../AppImageFunction";
 import noImage from "../../images/noImage.jpg";
+import { FOOD_DETAIL_TEXT } from "../../constants";
 
 const FoodCardWrapper = styled.div`
     text-align:left;
@@ -30,7 +31,7 @@ const FoodPrice = styled.h2`
     text-overflow: ellipsis;
 `;
 
-const FoodDesicription = styled.div`
+const FoodDesicription = styled.h2`
     margin-bottom:5%;
     overflow-wrap: break-word;
 `;
@@ -60,7 +61,7 @@ export const FoodDetailCard = (food) => {
                     {food.description}
                 </FoodDesicription>
                 <FoodCity>
-                    {food.city}
+                    {FOOD_DETAIL_TEXT.LOCATION_TEXT}{food.city}
                 </FoodCity>
                 {/* <FoodCreatedTime>
                     最終更新日時:{changeJSTDate(food.created_at)}

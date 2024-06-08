@@ -18,6 +18,8 @@ import SettingRectangleModalComponent from "../component/settingComponent/Settin
 import SettingRectangleComponent from "../component/settingComponent/SettingRectangleComponent";
 import SettingRectangleModalInModalComponent from "../component/settingComponent/SettingRectangleModaInModallComponent";
 import { signOutApi } from "../apis/sessionApis";
+import { deleteAllFoodForOneUserApi } from "../apis/foodApis";
+import { userDelete } from "../apis/userApis";
 
 const UserSettingWrapper = styled.div`
   margin-left: 20%;
@@ -157,7 +159,6 @@ export const Setting = () => {
   }
 
   function handleSignOut() {
-    console.log("handleLogout")
     signOutApi()
       .then((data) => {
         SessionUserDispatch({
@@ -170,6 +171,16 @@ export const Setting = () => {
 
   function handleDeleteUser() {
     console.log("userDeleteeeeeeeeeeeeeee!!!!")
+    deleteAllFoodForOneUserApi(SessionUserState.currentUser)
+      .then((data) => {
+        userDelete(SessionUserState.currentUser)
+          .then((data) => {
+            SessionUserDispatch({
+              type: sessionActionTypes.SIGNOUT,
+            });
+          })
+        history.push(homeURL)
+      })
   }
 
   return (

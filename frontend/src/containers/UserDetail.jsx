@@ -1,9 +1,7 @@
 import React, { Fragment, useReducer, useEffect, useContext } from 'react';
 import styled from "styled-components";
 import Skeleton from '@material-ui/lab/Skeleton';
-import {
-  useParams,
-} from 'react-router-dom';
+import { useParams, } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { fetchUserApi } from "../apis/userApis";
 import { initializeState, userActionTypes, userReducer } from "../reducer/userReducer";
@@ -44,7 +42,6 @@ export const UserDetail = ({ match }) => {
   const [state, dispatch] = useReducer(userReducer, initializeState);
   const history = useHistory();
   const params = useParams();
-  console.log(params)
 
   useEffect(() => {
     dispatch({ type: userActionTypes.FETCHING });
@@ -54,7 +51,7 @@ export const UserDetail = ({ match }) => {
           dispatch({
             type: userActionTypes.FETCH_SUCCESS,
             payload: {
-              user: data.user
+              value: data.user
             }
           });
         })

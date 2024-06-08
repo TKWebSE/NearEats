@@ -1,7 +1,27 @@
 FROM node:alpine
 
 
+COPY . /frontend
+COPY package.json /frontend
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -y yarn
+WORKDIR /frontend
+
+RUN npm install 
+RUN npm i js-cookie
+RUN npm i react-select
+RUN npm i styled-media-query
+RUN npm i react-scripts
+RUN npm i @mui/material @emotion/react @emotion/styled
+RUN npm i @mui/material @mui/styled-engine-sc styled-components
+RUN npm i @mui/lab @mui/material
+RUN npm i @material-table/core@next
+
+RUN npm i yarn
+# ENV PATH /frontend/node_modules/.bin:$PATH
+RUN npm install 
+
+
+# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+# RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# RUN apt-get update && apt-get install -y yarn
+

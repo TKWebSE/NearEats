@@ -10,21 +10,22 @@ module Api
 
                 logger.debug(params[:city])
                 logger.debug(params[:serchWord])
-
+                
                 if paramsCity == nil ||  paramsCity == ""
                     if paramsSearchWord == nil ||  paramsSearchWord  == ""
                         foods = Food.where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     else
-                        foods = Food.where("name like ?", `%1%` ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC"); 
+                        serchWordAddRegex = "%" + params[:serchWord] + "%"
+                        foods = Food.where("name like ?", serchWordAddRegex ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC"); 
                     end
                 else
                     if paramsSearchWord === nil ||  paramsSearchWord  == ""
                         foods = Food.where(city:paramsCity).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     else
-                        foods = Food.where(city:paramsCity).where("name like ?", "%1%" ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
+                        serchWordAddRegex = "%" + params[:serchWord] + "%"
+                        foods = Food.where(city:paramsCity).where("name like ?", serchWordAddRegex ).where(deleted: false).where.not(user_id:user.id).where.not(count: 0).order(updated_at: "DESC");
                     end
                 end
-                logger.debug(foods)
 
                 render json: {
                     foods: foods
@@ -66,7 +67,7 @@ module Api
                 order = Order.new(make_user:make_user,order_user:order_user,food:food)
                 order.save!
 
-                food.update!(count: 0)  
+                food.update!(count: 0,buy_time:Time.now)  
 
                 new_point = order_user.point - food.price
                 order_user.update!(point: new_point)
@@ -103,6 +104,8 @@ module Api
 
             def create
                 food = Food.new(food_params)
+                logger.debug(food)
+                logger.debug(food.user_id)
                 food.count = 1
                 logger.debug(food.image.url)
                 if params[:image] != nil
@@ -112,12 +115,18 @@ module Api
                     food.image = img 
                     logger.debug(food.image.url)
                 end
-
+                logger.debug("save前")
+                logger.debug(food.user_id)
+                
                 if food.save!
+                    logger.debug("save成功！")
+                    logger.debug(food.user_id)
                     render json: {
                         food: food
                     }, status: :ok
                 else
+                    logger.debug("save失敗！")
+                    logger.debug(food.user_id)
                     render json: {}
                 end
             end
@@ -125,7 +134,16 @@ module Api
             def update
                 food = Food.find_by(id: params[:id])
                 logger.debug("aaaaa")
-                logger.debug(food_params[:name])
+                logger.debug(food)
+                logger.debug(food_params[:image])
+                logger.debug(food_params[:image] == "undefined")
+                if food_params[:image]
+                    logger.debug("true")
+                else
+                    logger.debug("false")
+                end
+                    # <ActionDispatch::Http::UploadedFile:0x00007f7570549128>になる(imageあるとき)
+                # undefinedになっていた↑
             
                 # image = MiniMagick::Image.open("宇宙猫.jpg")
                 # image.path #=> "/var/folders/k7/6zx6dx6x7ys3rv3srh0nyfj00000gn/T/magick20140921-75881-1yho3zc.jpg"
@@ -141,22 +159,51 @@ module Api
                 #  end
 
             #    name: foodparams[:name],price: foodparams[:price],description: foodparams[:description]
-               if food.update!(food_params) 
+
+                    if food.update!(image_food_params) 
+                        render json: {
+                            food:food
+                        },status: :ok
+                    else
+                        render json: {}
+                    end
+            end
+
+            def updateNoImageFood
+                food = Food.find(params[:food][:id])
+                logger.debug("aaaaa")
+                logger.debug(food)
+                logger.debug(food.name)
+                logger.debug(food.id)
+                if food.update!(no_image_food_params) 
                     render json: {
                         food:food
                     },status: :ok
-               else
-                   render json: {}
-               end
+                else
+                    render json: {}
+                end
+            end
+
+            def destroyAllFoodForOneUser
+                user = User.find(params[:user_id]);
+
+                if Food.where(user_id:user.id).destroy_all
+                    render json: {},status: :ok
+                else
+                    render json: {},status: :ng
+                end
             end
 
             def destroy
                 food = Food.find(params[:id])
-                food.deleted = true
+                order = Order.find_by(food_id: food.id)
                 
-                if food.save
+                if order != nil
+                    raise RuntimeError
+                end
+
+                if food.destroy
                     render json: {
-                        food: food
                     } ,status: :ok
                 else
                     render json: {}
@@ -168,6 +215,15 @@ module Api
                 def food_params
                     params.require(:food).permit(:image,:name,:price,:description,:city,:user_id)
                 end
+
+                def image_food_params
+                    params.require(:food).permit(:image,:name,:price,:description,:city)
+                end
+
+                def no_image_food_params
+                    params.require(:food).permit(:name,:price,:description,:city) 
+                end
+
         end
     end
 end

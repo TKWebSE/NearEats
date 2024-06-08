@@ -8,6 +8,7 @@ export const HTTP_STATUS_CODE = {
     NOT_FOUND: 404,
     UNPROCESSABLE_ENTITY: 422,
     NOT_ACCEPTABLE: 406,
+    Internal_Server_Error: 500,
 }
 
 export const HEADER_TEXT = {
@@ -18,6 +19,8 @@ export const HEADER_TEXT = {
     PROFILE_TEXT: "プロフィール",
     SIGNIN_HEADER_LABEL: "ログイン",
     SOGNUP_HEADER_LABEL: "新規登録",
+    NOTIFICATION_HEADER_TEXT: "お知らせ",
+    NOTIFICATION_TASK_HEADER_TEXT: "通知",
     SIGNOUT_TEXT: "ログアウト",
 }
 
@@ -54,12 +57,30 @@ export const SIGNUP_TEXT = {
     SIGN_UP_TITLE: "ユーザー作成",
     USER_NAME_TEXTFIELD_LABEL: "アカウント名",
     EMAIL_TEXTFIELD_LABEL: "メールアドレス",
-    PASSWORD_TEXTFIELD_LABEL: "パスワード",
-    PASSWORD_CONFIRMATION_TEXTFIELD_LABEL: "パスワード確認用",
     SIGN_UP_BUTTON_LABEL: "作成",
-    SUCCESS_SIGNUP_MESSAGE: "新規登録できました。ログインしてみましょう！",
+    SUCCESS_SIGNUP_MESSAGE: "メールを送信しました。認証コードを入力してください",
     USER_SIGNUP_ERROR: "ユーザーを新規作成できませんでした",
     EMAIL_TEXTFIELD_LABEL: "Email",
+}
+
+export const GUEST_ACTIVATE = {
+    HEADER_TITLE: "認証コードを入力してください",
+    TEXT_FIELD_LABEL: "認証コード",
+    AUTH_CODE_HELPER_TEXT: "",
+    SIGN_UP_LINK_TEXT: "メールが届かない方はこちら",
+    SUBMIT_BUTTON_LABEL: "認証",
+    COMPLETE_ACTIVATE_MESSAGE: "認証しました",
+    ERROR_ACTIVATE_MESSAGE: "認証できませんでした",
+}
+
+export const PASSWORD_REGISTRATION = {
+    HEADER_TITLE: "パスワードの設定",
+    TEXT_FIELD_LABEL: "認証コード",
+    PASSWORD_TEXTFIELD_LABEL: "パスワード",
+    PASSWORD_CONFIRMATION_TEXTFIELD_LABEL: "パスワード確認用",
+    SUBMIT_BUTTON_LABEL: "設定",
+    COMPLETE_REGISTRATION_MESSAGE: "ユーザー登録完了しました",
+    ERROR_PASSWORD_RAGISTRATION_MESSAGE: "パスワードを設定できませんでした",
 }
 
 export const SIGNIN_TEXT = {
@@ -78,6 +99,7 @@ export const PASSWORD_RESET_SEND_EMAIL_TEXT = {
     EMAIL_TEXT_FIELD_LABEL: "登録されているメール",
     SUBMIT_BUTTON_LABEL: "送信",
     SEND_EMAIL_MESSAGE: "認証メールを送信しました",
+    ERROR_ANOTHER_EMAIL_MESSAGE: "別のメールアドレスを入力してください",
     ERROR_SEND_EMAIL_MESSAGE: "メールの送信ができませんでした",
 }
 
@@ -108,10 +130,11 @@ export const USER_HEADER_TITLE = {
 export const USER_EDIT = {
     TITLE: "ユーザー情報の編集",
     BTN_LABEL: "保存",
+    NOWLOCATION_PLACEHOLDER_TEXT: "配達エリア",
+    EDIT_ERROR: "変更できませんでした",
 }
 
 export const ORDER_HEADER_TITLE = {
-    MYTASK_INDEX_TITLE: "Task一覧",
     TASK_DETAIL: "Taskの詳細",
     ORDER_INDEX_TITLE: "注文履歴",
     ORDER_DETAIL_TITLE: "注文履歴の詳細",
@@ -120,7 +143,7 @@ export const ORDER_HEADER_TITLE = {
 export const USER_LABEL = {
     USER_NAME: "ユーザー名",
     USER_POINTLABEL: "ユーザーポイント",
-    USER_LOCATION_LABEL: "ユーザーロケーション",
+    USER_LOCATION_LABEL: "ロケーション",
     USER_ADDRESS_LABEL: "住所",
     USER_MAIL_LABEL: "メールアドレス",
     USER_PASSWORD_LABEL: "パスワード",
@@ -138,11 +161,18 @@ export const FOOD_CREATE_TEXT = {
 
 export const FOOD_DETAIL_TEXT = {
     EDIT_FOOD_LABEL: "編集する",
+    DELETE_FOOD_LABEL: "削除する",
+    DELETE_MODAL_TITLE: "料理を削除しますか？",
+    DELETE_MODAL_TEXT: "",
+    COMPLETE_DELETE_MESSAGE: "料理を削除しました",
+    CANT_DELETE_MESSAGE: "削除できませんでした",
     BUY_FOOD_LABEL: "購入する",
+    REGISTRATION_ADDRESS: "購入するために、住所を登録してください",
     BUY_FOOD_MODAL_TITLE: "この商品を購入しますか？",
     BUY_FOOD_MESSAGE: "購入しました",
     BUY_POINT_MODAL_TITLE: "ポイントが不足しています。ポイントを購入しましょう！",
     BUY_POINT_LABEL: "ポイント画面へ",
+    LOCATION_TEXT: "提供地域：",
 }
 
 export const FOOD_EDIT_TEXT = {
@@ -153,21 +183,27 @@ export const FOOD_EDIT_TEXT = {
     FOOD_DESCRIPTION_LABEL: "説明",
     LOCATION_PLACEHOLDER_TEXT: "地域",
     SAVE_BTN_LABEL: "変更",
+    CANCEL_BTN_LABEL: "キャンセル",
     NO_IMAGE_MESSAGE: "画像が設定されていません",
     CANT_CHANGE_UPLOAD: "変更できませんでした",
 }
 
 export const NOTFOUND_FOOD_TEXT = {
-    NOT_UPLOAD_MYFOODS_TEXT: "まだ料理を投稿したことがありません",
-    LETS_UPLOAD_FOOD_TEXT: "最初の1品目を投稿してみましょう！",
+    NOT_UPLOAD_MYFOODS_TEXT: "料理がありませんでした",
+    LETS_UPLOAD_FOOD_TEXT: "あなたの料理を投稿してみよう！",
+    GOTO_FOOD_CREATE_BUTTON_LABEL: "料理を投稿する！",
+}
+
+export const TASK_INDEX_TEXT = {
+    MYTASK_INDEX_TITLE: "Task一覧",
+    NOT_EXIST_TASK_TEXT: "まだ注文されたことがありません",
+    LETS_CREATE_FOOD_TEXT: "料理を投稿してあなたの料理を届けましょう！",
     GOTO_FOOD_CREATE_BUTTON_LABEL: "料理を投稿する！",
 }
 
 export const TASK_TEXT = {
     TASK_CREATE_TEXT: "注文受付日時：",
     TASK_UPDATE_TEXT: "配達完了日時：",
-    NOT_EXIST_TASK_TEXT: "まだ注文されたことがありません",
-    LETS_CREATE_FOOD_TEXT: "料理を投稿してあなたの料理を届けましょう！",
     TASK_FINISH_BUTTOM_LABEL: "配達完了！!",
     TASK_CANCEL_BUTTOM_LABEL: "キャンセルする",
     TASK_FINISH_MODALTITLE: "配達完了しましたか？",
@@ -180,9 +216,18 @@ export const TASK_TEXT = {
 export const ORDER_TASK_STATUS_NUMBERS = {
     TASK_UNFINISHED: "0",//未配達
     ORDER_WATINGE_VALUATION: "1",//評価待ち
-    TASKFINISH: "2",//配達済み
+    COMPLETE_ORDER: "2",//取引完了
     ORDER_CANCEL: "3",//オーダーをキャンセル
     TASK_CANCEL: "4",//タスクをキャンセル
+}
+
+export const ORDER_STATUS_TEXT = {
+    ORDER_STATUS_UNFINISHED_TEXT: "注文中",//0 注文者専用文字
+    TASK_STATUS_UNFINISHED_TEXT: "未配達",//0 配達者専用の文字
+    ORDER_STATUS_PENDINGEVALUATION_TEXT: "評価待ち",//1
+    ORDER_STATUS_FINISHED_TEXT: "取引完了",//2
+    ORDER_STATUS_ORDER_CANCEL_TEXT: "注文キャンセル",//3
+    ORDER_STATUS_TASK_CANCEL_TEXT: "取引キャンセル",//4
 }
 
 export const ORDER_TEXT = {
@@ -252,6 +297,11 @@ export const UPDATE_PASSWORD_TEXT = {
     COMPLETE_UPDATE_PASSWORD_MESSAGE: "パスワード変更完了",
 }
 
+export const NOTIFICATIONS_TEXT = {
+    NOTIFICATIONS_TITLE: "お知らせ",
+    NOT_NOTIFICATION_TEXT: "お知らせはありません",
+}
+
 export const NOTFOUND_ORDER_TEXT = {
     NOT_EXIST_ORDER_TEXT: "注文した料理はありません",
     LETS_ORDER_TEXT: "料理を見てみましょう！！",
@@ -265,13 +315,25 @@ export const MODAL_BUTTON_LABEL = {
 
 export const VALUATION_ERROR = {
     NAME_VALUATION_ERROR: "名前を入力してください",
+    NAME_MAX_ERROR: "名前は30文字以内で入力してください",
+    USER_ADDRESS_BLANK_ERROR: "住所を入力してください",
+    USER_ADDRESS_MAX_ERROR: "住所は1から44文字で入力してください",
+    USER_CITY_BLANK_ERROR: "配達地域を選択してください",
     EMAIL_REGEXP_ERROR: "メールアドレスを入力してください",
     ERROR_BLANK_PASSWORD_MESSAGE: "パスワードを入力してください",
     ERROR_UNMATCHPASSWORD_MESSAGE: "確認用に同じパスワードを入力してください",
-    ERROR_VALUATION_MESSAGE: "半角英数字で8から15文字で入力してください",
+    ERROR_VALUATION_MESSAGE: "パスワードは半角英数字で8から15文字で入力してください",
     NO_IMAGE_ERROR: "画像が設定されていません",
     NO_FOOD_NAME: "料理名を入力してください",
     PRICE_ERROR: "1から99999の間で価格を設定してください",
     NO_DESCRIPTION_ERROR: "商品説明を入力してください",
     OVER_DESCRIPTION_ERROR: "商品情報は200文字以内で入力してください",
+    NO_CITY: "提供地域を入力してください",
+    ERROR_BLANK_FOOD_NAME_MESSAGE: "Foodの名前を入力してください",
+    ERROR_REGEXP_FOOD_NAME_MESSAGE: "Foodの名前は30文字以内で入力してください",
+    ERROR_BLANK_FOOD_PRICE_MESSAGE: "価格を入力してください",
+    ERROR_REGEXP_PRICE_MESSAGE: "価格は半角数字で入力してください",
+    ERROR_LIMIT_PRICE_MESSAGE: "価格は300～999999の間で設定してください",
+    ERROR_BLANK_FOOD_DESCRIPTION_MESSAGE: "説明文を入力してください",
+    ERROR_LENGTH_LIMIT_DESCRIPTION_MESSAGE: "説明文は200文字以内で入力してください",
 }

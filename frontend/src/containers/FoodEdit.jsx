@@ -1,27 +1,30 @@
 import React, { Fragment, useEffect, useReducer, useContext, useState } from 'react';
 import styled from "styled-components";
+import media from "styled-media-query";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { SaveButton } from "../component/MaterialUISaveButton";
+import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import foodSelectImage from "../images/food-select.jpg";
 import { ButtonTheme } from "../style_constants";
 import { FOOD_EDIT_TEXT, REQUEST_STATE } from "../constants";
-import { fetchFoodApi, updateFoodApi } from '../apis/foodApis';
+import { fetchFoodApi, updateFoodApi, updateNoImageFoodApi } from '../apis/foodApis';
 import { initializeState, foodEditActionTypes, foodEditReducer } from "../reducer/foodEditReducer";
 import { FoodEditCard } from "../component/foodComponent/FoodEditCard";
 import { FoodDispatch, FoodState, MessageDispatch, MessageState } from '../context/Context';
 import { useHistory } from "react-router-dom";
-import { foodShowURL } from "../urls/index";
 import { SessionState, SessionDispatch } from "../context/Context";
 import { TextFieldInReducer } from "../component/TextFieldInReducer";
 import { MultiLineTextFieldInReducer } from "../component/MultiLineTextFieldInReducer";
 import MUIAnimatedMultiSelect from "../component/MUIAnimatedMultiSelect";
-import { foodsIndexURL } from "../urls/index";
+import { foodsIndexURL, foodShowURL } from "../urls/index";
 import { messageActionTypes } from "../reducer/messageReducer";
+import { validateFoodName, validatePrice, validateDescription } from "../AppFunction";
 import { handleCreatePost } from "../AppImageFunction";
 import { changeImageURL } from "../AppImageFunction";
 
-const DetailWrapper = styled.div`
+
+const Wrapper = styled.div`
   margin-left:20%;
   margin-right:20%;
   margin-bottom:5%;
@@ -76,7 +79,22 @@ const SelectWrapper = styled.div`
 `;
 
 const BtnWrapper = styled.div`
-  text-align:right;
+  // margin-left: 100%;
+  display: flex;
+  justify-content: flex-end;
+  `;
+
+const SaveWrapper = styled.div`
+  margin:1% 1% 1% -1%;
+//   ${media.lessThan("huge")`
+//   margin:-1% 1% 1% -1%;
+// `}
+//   ${media.lessThan("medium")`
+//   margin:2.5% 1% 1% -1%;
+// `}
+`;
+
+const CancelWrapper = styled.div`
 `;
 
 const SkeltonImage = styled.div`
@@ -98,14 +116,20 @@ export const FoodEdit = ({ match }) => {
   const [state, dispatch] = useReducer(foodEditReducer, initializeState);
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-  const [city, setCity] = useState(SessionAuthState.currentUser.city);
+  const [city, setCity] = useState();
   const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: foodEditActionTypes.FETCHING });
     fetchFoodApi(match.params.foodId)
       .then((data) => {
+        console.log(data)
+        console.log(data.food.count)
+        if (data.food.count === 0) {
+          history.push(foodShowURL(data.food.id));
+        }
         if (data.food.user_id === SessionAuthState.currentUser.id) {
+          setCity(data.food.city);
           dispatch({
             type: foodEditActionTypes.FETCH_SUCCESS,
             payload: {
@@ -145,7 +169,7 @@ export const FoodEdit = ({ match }) => {
       formData.append('food[name]', state.food.name);
       formData.append('food[price]', state.food.price);
       formData.append('food[description]', state.food.description);
-      formData.append('food[city]', state.food.city);
+      formData.append('food[city]', city);
       return formData
     } catch (e) {
       messageDispatch({
@@ -161,31 +185,63 @@ export const FoodEdit = ({ match }) => {
     submitHandle()
   }
 
-  const submitHandle = async () => {
-    const formData = await createFormData();
-
-    updateFoodApi(state.food, formData, city)
-
-      .then((data) => {
-        history.push(foodShowURL(data.food.id))
-      })
-      .catch(e => {
-        messageDispatch({
-          type: messageActionTypes.SET_ERROR_MESSAGE,
-          payload: {
-            errorMessage: FOOD_EDIT_TEXT.CANT_CHANGE_UPLOAD
-          }
-        })
-      });
+  function handleCancel() {
+    history.push(foodShowURL(state.food.id))
   }
+
+  const submitHandle = async () => {
+    try {
+      validateFoodName(state.food.name);
+      validatePrice(state.food.price);
+      validateDescription(state.food.description);
+      if (preview) {
+        const formData = await createFormData();
+
+        updateFoodApi(state.food, formData, city)
+          .then((data) => {
+            history.push(foodShowURL(data.food.id))
+          })
+          .catch(e => {
+            messageDispatch({
+              type: messageActionTypes.SET_ERROR_MESSAGE,
+              payload: {
+                errorMessage: FOOD_EDIT_TEXT.CANT_CHANGE_UPLOAD
+              }
+            })
+          });
+      } else {
+        updateNoImageFoodApi(state.food, city)
+          .then((data) => {
+            history.push(foodShowURL(data.food.id))
+          })
+          .catch(e => {
+            messageDispatch({
+              type: messageActionTypes.SET_ERROR_MESSAGE,
+              payload: {
+                errorMessage: FOOD_EDIT_TEXT.CANT_CHANGE_UPLOAD
+              }
+            })
+          });
+      }
+    } catch (e) {
+      messageDispatch({
+        type: messageActionTypes.SET_ERROR_MESSAGE,
+        payload: {
+          errorMessage: e
+        }
+      })
+    };
+  }
+
 
   console.log(state)
   // console.log(state.food.image.url)
   console.log(preview)
   console.log(foodSelectImage)
+  console.log(city)
   return (
     <Fragment>
-      <DetailWrapper>
+      <Wrapper>
         <FoodEditHeader>
           {FOOD_EDIT_TEXT.HEADER_TITLE}
         </FoodEditHeader>
@@ -195,11 +251,7 @@ export const FoodEdit = ({ match }) => {
               <FoodImageWrapper htmlFor={"upload-button"} >
                 {
                   preview ?
-                    <FoodImage src={
-                      preview
-                    }
-                      alt="dummy" >
-                    </FoodImage>
+                    <FoodImage src={preview} alt="dummy" />
                     :
                     <FoodImage
                       src={state.food.image.url === null ? foodSelectImage : changeImageURL(state.food.image.url)} alt="foodImage">
@@ -244,13 +296,22 @@ export const FoodEdit = ({ match }) => {
                   placeholederText={FOOD_EDIT_TEXT.LOCATION_PLACEHOLDER_TEXT}
                   setCity={setCity}
                   city={city}
+                  onKeyDown={onKeyDownEnter}
                 />
               </SelectWrapper>
               <BtnWrapper>
-                <SaveButton
-                  onClick={submitHandle}
-                  btnLabel={FOOD_EDIT_TEXT.SAVE_BTN_LABEL}
-                />
+                <SaveWrapper>
+                  <SaveButton
+                    onClick={submitHandle}
+                    btnLabel={FOOD_EDIT_TEXT.SAVE_BTN_LABEL}
+                  />
+                </SaveWrapper>
+                <CancelWrapper>
+                  <MaterialUICommonButton
+                    onClick={handleCancel}
+                    btnLabel={FOOD_EDIT_TEXT.CANCEL_BTN_LABEL}
+                  />
+                </CancelWrapper>
               </BtnWrapper>
             </Fragment>
             :
@@ -266,7 +327,7 @@ export const FoodEdit = ({ match }) => {
               </SkeltonDescription>
             </Fragment>
         }
-      </DetailWrapper >
+      </Wrapper >
     </Fragment >
   )
 }

@@ -18,6 +18,7 @@ export function MaterialUILocationButton({ onClick, btnLabel }) {
       <Button
         size="medium"
         variant="contained"
+        //ここのカラーをprimary→secondaryに変更してみる
         color="primary"
         startIcon={<LocationOnIcon />}
         className={classes.button}

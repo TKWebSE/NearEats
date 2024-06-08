@@ -4,6 +4,10 @@ import { createContext } from "react";
 export const SessionState = createContext("");
 export const SessionDispatch = createContext("");
 
+//guestSession用のcontext
+export const GuestState = createContext("");
+export const GuestDispatch = createContext("");
+
 //food用context
 export const FoodState = createContext("");
 export const FoodDispatch = createContext("");

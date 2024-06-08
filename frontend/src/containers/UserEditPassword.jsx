@@ -19,7 +19,9 @@ const HeaderWrapper = styled.h1`
     margin-top:5%;
 `;
 
-const EmailWrapper = styled.div``;
+const EmailWrapper = styled.div`
+margin-bottom:1%;
+`;
 
 const ButtonWrapper = styled.div`
   text-align:right;

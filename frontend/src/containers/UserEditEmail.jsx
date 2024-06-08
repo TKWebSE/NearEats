@@ -48,7 +48,7 @@ export const UserEditEmail = () => {
     dispatch({
       type: userActionTypes.SETTINGUSEREMAIL,
       payload: {
-        email: sessionAuthState.currentUser.email
+        value: sessionAuthState.currentUser.email
       }
     })
   }, [])
@@ -62,6 +62,7 @@ export const UserEditEmail = () => {
       validateEmail(state.user.email);
       sendEmailToChangeEmailAddressApi(sessionAuthState.currentUser.id, state.user.email)
         .then((data) => {
+          console.log(data)
           messageDispatch({
             type: messageActionTypes.SET_MESSAGE,
             payload: {
@@ -70,15 +71,18 @@ export const UserEditEmail = () => {
           })
           history.push(authChangeEmailURL)
         })
-        .catch(e =>
+        .catch((e) => {
+          // ここ通ってる
+          console.log(e)
           messageDispatch({
             type: messageActionTypes.SET_ERROR_MESSAGE,
             payload: {
-              errorMessage: EDIT_EMAIL_TEXT.ERROR_CHANGE_EMAIL_MESSAGE
+              errorMessage: e
             },
           })
-        );
+        });
     } catch (e) {
+      console.log(e)
       messageDispatch({
         type: messageActionTypes.SET_ERROR_MESSAGE,
         payload: {

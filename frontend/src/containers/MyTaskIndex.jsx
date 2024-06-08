@@ -4,11 +4,13 @@ import media from "styled-media-query";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { NotFoundCatComponent } from "../component/notFoundComponent/NotFoundCatComponent";
 import { useHistory } from "react-router-dom";
 import { fetchTaskIndexApi } from "../apis/taskApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
 import { initializeState, tasksActionTypes, taskListReducer } from "../reducer/taskListReducer";
-import { REQUEST_STATE, ORDER_HEADER_TITLE, NOTFOUND_FOOD_TEXT } from "../constants";
+import { initializeFoodListState, foodsListActionTypes, foodsListReducer } from "../reducer/foodsListReducer";
+import { REQUEST_STATE, TASK_INDEX_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../constants";
 import { MyTaskIndexCard } from "../component/orderComponent/MyTaskIndexCard";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
@@ -19,6 +21,7 @@ const MyTaskWrapper = styled.div`
     margin-top:5%;
     margin-right:10%;
     margin-left:10%;
+    margin-bottom:5%;
 `;
 
 const MyTaskIndexTitle = styled.h1`
@@ -35,14 +38,6 @@ const MyTaskIndexTitle = styled.h1`
 `;
 
 const NotExistTaskWrapper = styled.div`
-`;
-
-const ExistTaskWrapper = styled.div`
-    padding-bottom:1%;
-`;
-
-
-const NoFoodsListWrapper = styled.div`
     padding-top:5%;
     padding-left:26%;
     position:relative;
@@ -54,58 +49,18 @@ const NoFoodsListWrapper = styled.div`
     `}
 `;
 
-const NotFoundCatWrapper = styled.div`
+const FinishTaskWrapper = styled.div`
+    margin-bottom:1%;
+    background-color:lightcyan;
 `;
 
-const NotFoundCatImage = styled.img`
-    ${media.lessThan("small")`
-        width:120%;
-    `}
+const CancelExistTaskWrapper = styled.div`
+    margin-bottom:1%;
+    background-color:darkgray;
 `;
 
-const NotExistTaskTextWrapper = styled.h3`
-    position:absolute;
-    top: 50%;
-    left: 30%;
-    ${media.lessThan("large")`
-        left:32%;
-    `}
-    ${media.lessThan("medium")`
-        left:20%;
-    `}
-    ${media.lessThan("small")`
-        left:5%;
-    `}
-`;
-
-const LetsUploadFoodsWrapper = styled.h3`
-    position:absolute;
-    top: 60%;
-    left: 30%;
-    ${media.lessThan("large")`
-        left:32%;
-    `}
-    ${media.lessThan("medium")`
-        left:20%;
-    `}
-    ${media.lessThan("small")`
-        left:5%;
-    `}
-`;
-
-const GotoFoodCreateWrapper = styled.div`
-    position:absolute;
-    top: 80%;
-    left: 37%;
-    ${media.lessThan("large")`
-        left:40%;
-    `}
-    ${media.lessThan("medium")`
-        left:34%;
-    `}
-    ${media.lessThan("small")`
-        left:25%;
-    `}
+const ExistTaskWrapper = styled.div`
+    padding-bottom:1%;
 `;
 
 const SkeltonsWrapper = styled.div`
@@ -131,6 +86,7 @@ export const MyTaskIndex = () => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
     const [state, dispatch] = useReducer(taskListReducer, initializeState);
+    const [foodsState, foodsDispatch] = useReducer(foodsListReducer, initializeFoodListState);
     const history = useHistory();
 
     useEffect(() => {
@@ -145,6 +101,12 @@ export const MyTaskIndex = () => {
                         tasks: data.tasks,
                     },
                 });
+                foodsDispatch({
+                    type: foodsListActionTypes.FETCH_SUCCESS,
+                    payload: {
+                        foodsList: data.foods,
+                    },
+                });
             })
             .catch((e) => console.log(e))
     }, [])
@@ -152,44 +114,51 @@ export const MyTaskIndex = () => {
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
     }
-    console.log(state)
+
     return (
         <Fragment>
             <MyTaskWrapper>
                 <MyTaskIndexTitle>
-                    {ORDER_HEADER_TITLE.MYTASK_INDEX_TITLE}
+                    {TASK_INDEX_TEXT.MYTASK_INDEX_TITLE}
                 </MyTaskIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
-                        state.tasks === [] ?
+                        state.tasks === [] || state.tasks[0] === undefined ?
                             <NotExistTaskWrapper>
-                                <NotFoundCatWrapper>
-                                    <NotFoundCatImage src={NotFoundCat} />
-                                </NotFoundCatWrapper>
-                                <NotExistTaskTextWrapper>
-                                    {ORDER_HEADER_TITLE.NOT_EXIST_TASK_TEXT}
-                                </NotExistTaskTextWrapper>
-                                <LetsUploadFoodsWrapper>
-                                    {ORDER_HEADER_TITLE.LETS_CREATE_FOOD_TEXT}
-                                </LetsUploadFoodsWrapper>
-                                <ThemeProvider theme={ButtonTheme}>
-                                    <GotoFoodCreateWrapper>
-                                        <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
-                                    </GotoFoodCreateWrapper>
-                                </ThemeProvider>
+                                <NotFoundCatComponent
+                                    firstText={TASK_INDEX_TEXT.NOT_EXIST_TASK_TEXT}
+                                    secondText={TASK_INDEX_TEXT.LETS_CREATE_FOOD_TEXT}
+                                    btnLabel={TASK_INDEX_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}
+                                    onClick={() => gotoFoodCreateHandle()}
+                                />
                             </NotExistTaskWrapper>
                             :
-                            state.tasks.map((task, i) =>
-                                <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
-                                    <TaskDispatch.Provider value={dispatch}>
-                                        <TaskState.Provider value={state}>
-                                            <ExistTaskWrapper key={i}>
-                                                <MyTaskIndexCard task={task} />
-                                            </ExistTaskWrapper>
-                                        </TaskState.Provider>
-                                    </TaskDispatch.Provider>
-                                </Link>
-                            )
+                            foodsState.foodsList.map((food, f) =>
+                                state.tasks.map((task, t) =>
+                                    <div>
+                                        <Fragment>
+                                            {food.id === task.food_id ?
+                                                task.order_status === ORDER_TASK_STATUS_NUMBERS.COMPLETE_ORDER ?
+                                                    <FinishTaskWrapper>
+                                                        <MyTaskIndexCard task={task} food={food} />
+                                                    </FinishTaskWrapper>
+                                                    :
+                                                    task.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL || task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL ?
+                                                        <CancelExistTaskWrapper key={t}>
+                                                            <MyTaskIndexCard task={task} food={food} />
+                                                        </CancelExistTaskWrapper>
+                                                        :
+                                                        <Link to={myTaskShowURL(task.id)} style={{ textDecoration: 'none' }}>
+                                                            <ExistTaskWrapper key={t}>
+                                                                <MyTaskIndexCard task={task} food={food} />
+                                                            </ExistTaskWrapper>
+                                                        </Link>
+                                                :
+                                                <div></div>
+                                            }
+                                        </Fragment>
+                                    </div>
+                                ))
                         :
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>

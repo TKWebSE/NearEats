@@ -44,6 +44,8 @@ module Api
                 cancel_url: params[:buyPointfrontendURL] + '?canceled=true',
             })
             logger.debug("paymentここ")
+            logger.debug(session)
+            logger.debug(session.success_url)
             # redirect_to session.url
             render json: { url:session.url}
         end

@@ -14,17 +14,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { SwipeableTemporaryDrawer } from "./MaterialUIDrawer";
 import { headerInitializeState, headerActionTypes, headerReducer } from "../../../reducer/headerReducer";
 import { sessionActionTypes } from "../../../reducer/sessionReducer";
 import { SessionDispatch, SessionState } from "../../../context/Context";
 import { Link } from "react-router-dom";
-import { foodsIndexURL } from "../../../urls/index";
+import { foodsIndexURL, notificationIndexURL } from "../../../urls/index";
 import { HOME_TEXT, HEADER_TEXT } from "../../../constants";
 import { signOutApi } from "../../../apis/sessionApis";
 import { useHistory } from "react-router-dom";
-import { homeURL, buyPointURL, myTaskIndexURL } from "../../../urls/index";
+import { homeURL, buyPointURL, ordersIndexURL, myTaskIndexURL, userShowURL } from "../../../urls/index";
 import MaterialUILocationIconModal from "./desktopOnly/MaterialUILocationIconModal";
 import MaterialUILocationModbileModal from "./mobileOnly/MaterialUILocationModbileModal";
 import { COLORS } from "../../../style_constants";
@@ -168,13 +169,29 @@ export default function MaterialUIPrivateHeader() {
     }
   }
 
-  // function handleNotice() {
-  //   console.log("handleNotice")
-  // }
-
   function handleTaskNotification() {
-    console.log(myTaskIndexURL)
-    history.push(myTaskIndexURL)
+    console.log(SessionUserState)
+    // falseになる。配列ではないということ？
+    // console.log(SessionUserState.orders === [])
+    console.log(SessionUserState.orders)
+    // console.log(SessionState.orders[0])読めない
+    console.log(SessionUserState.orders === undefined)
+    // console.log(SessionState.tasks.length)読めない
+    if (SessionUserState.orders > 0) {
+      console.log("orderに遷移する")
+      history.push(ordersIndexURL)
+    } else {
+      console.log("taskに遷移する")
+      history.push(myTaskIndexURL)
+    }
+  }
+
+  function handleMailNotification() {
+    history.push(notificationIndexURL)
+  }
+
+  function handleProfile() {
+    history.push(userShowURL(SessionUserState.currentUser.id))
   }
 
   const handleSignOut = () => {
@@ -210,7 +227,7 @@ export default function MaterialUIPrivateHeader() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>{HEADER_TEXT.PROFILE_TEXT}</MenuItem>
+      <MenuItem onClick={handleProfile}>{HEADER_TEXT.PROFILE_TEXT}</MenuItem>
       <MenuItem onClick={handleSignOut}>{HEADER_TEXT.SIGNOUT_TEXT}</MenuItem>
     </Menu>
   );
@@ -258,34 +275,53 @@ export default function MaterialUIPrivateHeader() {
     >
       {/* <MenuItem color="red">
         <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
-          <Badge badgeContent={4} color="secondary">
+          <Badge overlap="rectangular" badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem> */}
-      <MenuItem>
+      <MenuItem onClick={() => handleMailNotification()}>
         <IconButton
           aria-label="show 11 new notifications" color="inherit"
-          onClick={() => handleTaskNotification()}
         >
-          <Badge badgeContent={SessionUserState.notification} color="secondary">
+          {/* <Badge overlap="rectangular" badgeContent={SessionUserState.notification} color="secondary"> */}
+          <MailIcon />
+          {/* </Badge> */}
+        </IconButton>
+        <p>{HEADER_TEXT.NOTIFICATION_HEADER_TEXT}</p>
+      </MenuItem>
+      <MenuItem onClick={() => handleTaskNotification()}>
+        <IconButton
+          aria-label="show 11 new notifications" color="inherit"
+        >
+          <Badge overlap="rectangular" badgeContent={SessionUserState.notification} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>{HEADER_TEXT.NOTIFICATION_TASK_HEADER_TEXT}</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={handleProfile}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-          onClick={handleProfileMenuOpen}
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{HEADER_TEXT.PROFILE_TEXT}</p>
+      </MenuItem>
+      <MenuItem onClick={handleSignOut}>
+        <IconButton
+          aria-label="sign out"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <ExitToAppIcon />
+        </IconButton>
+        <p>{HEADER_TEXT.SIGNOUT_TEXT}</p>
       </MenuItem>
     </Menu>
   );
@@ -348,14 +384,18 @@ export default function MaterialUIPrivateHeader() {
           </PointWrapper>
           <div className={classes.sectionDesktop}>
             {/* <IconButton aria-label="show 4 new mails" color="inherit" onClick={() => handleNotice}>
-              <Badge badgeContent={4} color="secondary">
+              <Badge overlap="rectangular" badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton> */}
-            <IconButton aria-label="show 17 new notifications" color="inherit" onClick={() =>
-              handleTaskNotification()}>
-              <Badge badgeContent={SessionUserState.notification} color="secondary">
+            <IconButton aria-label="task notifications" color="inherit" onClick={() => handleTaskNotification()}>
+              <Badge overlap="rectangular" badgeContent={SessionUserState.notification} color="secondary">
                 <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton aria-label="mail notifications" color="inherit" onClick={() => handleMailNotification()}>
+              <Badge overlap="rectangular" badgeContent={SessionUserState.notification} color="secondary">
+                <MailIcon />
               </Badge>
             </IconButton>
             <IconButton

@@ -1,7 +1,29 @@
 import axios from "axios";
 import React from "react";
-import { signInBackendURL, signOutBackendURL, sessionIsLoginBackendURL } from '../urls/index'
+import { signUpBackendURL, signInBackendURL, signOutBackendURL, sessionIsLoginBackendURL } from '../urls/index'
 import Cookies from "js-cookie";
+
+//ユーザーを登録する(device_token_auth)
+export const signUpApi = (name, email, password, passwordConfirmation) => {
+    console.log(signUpBackendURL)
+    return axios.post(signUpBackendURL, {
+        name: name,
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation,
+    })
+        .then((res) => {
+            console.log(res);
+            console.log("成功");
+            return res.data
+        })
+        .catch((e) => {
+            console.log(e);
+            console.log("失敗");
+            throw e
+        })
+}
+
 
 //ログインする
 export const signInApi = (email, password) => {
@@ -50,6 +72,7 @@ export const isLoginApi = () => {
     const uid = Cookies.get("uid");
     const accessToken = Cookies.get("access_token");
     const client = Cookies.get("client");
+    console.log("isLogin!!!")
     return axios.get(sessionIsLoginBackendURL, {
         headers: {
             'access-token': accessToken,

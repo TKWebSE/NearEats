@@ -10,26 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_024851) do
+ActiveRecord::Schema.define(version: 2023_03_17_024851) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "foods", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.text "description", null: false
     t.string "image"
     t.integer "count", null: false
     t.string "city", null: false
+    t.datetime "buy_time"
     t.boolean "deleted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
 
+  create_table "guests", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "auth_code", null: false
+    t.datetime "confirmation_email_sent_at"
+    t.boolean "deleted", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
-    t.integer "order_user_id", null: false
-    t.integer "make_user_id", null: false
-    t.integer "food_id", null: false
+    t.bigint "order_user_id", null: false
+    t.bigint "make_user_id", null: false
+    t.bigint "food_id", null: false
     t.integer "count", default: 1, null: false
     t.string "order_status", default: "0", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -61,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_024851) do
     t.integer "point"
     t.integer "valuation"
     t.string "stripe_customer_id"
+    t.boolean "activate", default: false
     t.string "deleted", default: "f"
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false

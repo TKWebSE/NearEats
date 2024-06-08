@@ -12,6 +12,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.user_id}"
   end
   
   # def default_url
@@ -66,8 +67,42 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    time = Time.now
-    name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
-    name.downcase
+    # ここをユーザーIDが時間で条件分岐を入れたい。ユーザーIDならいけそう。時間はCreatedTimeの時間を考える必要あり。
+    # おそらく、ここに来たん時点ではFoodモデルが作成されていない説がある
+    # インスタンスは作ったけど、データベースには保存してないから、idが採番されてない説
+    if model.user_id < 8
+      # if model.name == "クロワッサン"
+      # name = 'sample' && model.name  && '.jpg'
+      # name = 'sample.jpg'
+      # end
+      # if model.user_id == 1
+        name = '20221029181542.jpg'
+      # # end
+      # if model.user_id == 2
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 3
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 4
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 5
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 6
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 7
+      #   name = '20221029181542.jpg'
+      # end
+      # if model.user_id == 8
+      #   name = '20221029181542.jpg'
+      # end
+    else
+      time = Time.now
+      name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+      name.downcase
+    end
   end
 end

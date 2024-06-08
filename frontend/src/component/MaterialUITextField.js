@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 //汎用TextFieldコンポーネント
 export function MaterialUITextField({ label, value, setValue, onKeyDown, helperText }) {
   const classes = useStyles();
-
   const handleChange = (event) => {
     setValue(event.target.value)
   };
@@ -22,25 +21,28 @@ export function MaterialUITextField({ label, value, setValue, onKeyDown, helperT
   return (
     <Fragment>
       {
-        <form className={classes.root} noValidate autoComplete="off">
-          <TextField
-            id="outlined-basic"
-            label={label}
-            variant="outlined"
-            fullWidth
-            value={value}
-            helperText={helperText}
-            onChange={(event) => handleChange(event)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                event.preventDefault();
-                onKeyDown(event)
+        value === undefined ?
+          <div></div>
+          :
+          < form className={classes.root} noValidate autoComplete="off">
+            <TextField
+              id="outlined-basic"
+              label={label}
+              variant="outlined"
+              fullWidth
+              value={value}
+              helperText={helperText}
+              onChange={(event) => handleChange(event)}
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                  onKeyDown(event)
+                }
               }
-            }
-            }
-          />
-        </form>
+              }
+            />
+          </form>
       }
-    </Fragment>
+    </Fragment >
   );
 }

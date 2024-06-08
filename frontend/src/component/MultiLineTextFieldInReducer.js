@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { REQUEST_STATE } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
 //汎用TextFieldコンポーネント
 export function MultiLineTextFieldInReducer({ label, value, dispatch, actionType, onKeyDown, helperText }) {
   const classes = useStyles();
+  console.log(value)
+  console.log(actionType)
 
   const handleChange = (event) => {
     dispatch({
@@ -25,9 +28,11 @@ export function MultiLineTextFieldInReducer({ label, value, dispatch, actionType
   };
 
   return (
-    <Fragment>
-      {
-        <form className={classes.root} noValidate autoComplete="off">
+    <Fragment>{
+      value === null || value === undefined ?
+        <div></div>
+        :
+        < form className={classes.root} noValidate autoComplete="off">
           <TextField
             id="outlined-basic"
             label={label}
@@ -47,7 +52,7 @@ export function MultiLineTextFieldInReducer({ label, value, dispatch, actionType
             }
           />
         </form>
-      }
-    </Fragment>
+    }
+    </Fragment >
   );
 }

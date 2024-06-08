@@ -27,7 +27,6 @@ export const foodEditReducer = (state, action) => {
                 food: action.payload.food,
             }
         case foodEditActionTypes.SETTINGFOODIMAGE:
-            console.log(state)
             return {
                 fetchstate: REQUEST_STATE.OK,
                 food: {
@@ -43,7 +42,7 @@ export const foodEditReducer = (state, action) => {
                 fetchstate: REQUEST_STATE.OK,
                 food: {
                     id: state.food.id,
-                    image: state.image,
+                    image: state.food.image,
                     name: action.payload.value,
                     price: state.food.price,
                     description: state.food.description,
@@ -54,7 +53,7 @@ export const foodEditReducer = (state, action) => {
                 fetchstate: REQUEST_STATE.OK,
                 food: {
                     id: state.food.id,
-                    image: state.image,
+                    image: state.food.image,
                     name: state.food.name,
                     price: action.payload.value,
                     description: state.food.description,
@@ -65,7 +64,7 @@ export const foodEditReducer = (state, action) => {
                 fetchstate: REQUEST_STATE.OK,
                 food: {
                     id: state.food.id,
-                    image: state.image,
+                    image: state.food.image,
                     name: state.food.name,
                     price: state.food.price,
                     description: action.payload.value,

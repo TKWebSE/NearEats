@@ -9,7 +9,6 @@ import { changeJSTDate } from "../../AppFunction";
 import { ORDER_TEXT, ORDER_TASK_STATUS_NUMBERS } from "../../constants";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
 import { MaterialUICommonButton } from "../MaterialUICommonButton";
-import { updateValuationOrderApi, updateCancelOrderApi } from "../../apis/orderApis";
 import { useHistory } from "react-router-dom";
 import { ordersIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
@@ -17,6 +16,7 @@ import { getOrderStatusText } from "./getOrderStatusText";
 import MaterialUIUpdateRatingStar from "../MaterialUIUpdateRatingStar";
 import { orderActionTypes } from "../../reducer/orderReducer";
 import MaterialUISimpleModal from "../../component/MaterialUISimpleModal";
+import { changeImageURL } from "../../AppImageFunction";
 
 const OrderDetailCardWrapper = styled.div`
     text-align:left;
@@ -122,7 +122,8 @@ const RatingStarWrapper = styled.div`
 `;
 
 const ValuationButtomWrapper = styled.div`
-    margin:0 0 0 auto;
+    // margin:0 0 0 auto;
+    text-align:right;
 `;
 
 const OrderDetailCancelButtomWrapper = styled.div`
@@ -130,59 +131,47 @@ const OrderDetailCancelButtomWrapper = styled.div`
 
 
 
-export const OrderDetailCard = () => {
-    const state = useContext(OrderState);
-    const dispatch = useContext(OrderDispatch)
+export const OrderDetailCard = ({ order, food, valuation, cancelHandle, valuationHandle, dispatch }) => {
     const history = useHistory();
 
-    function submitOrderCancelHandle() {
-        updateCancelOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
-            .then((data) => {
-                history.push(ordersIndexURL);
-            })
-    }
 
-    function submitValuationHandle() {
-        updateValuationOrderApi(state.order, state.valuation, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
-            .then((data) => {
-                history.push(ordersIndexURL);
-            })
-    }
-
+    console.log(order)
+    console.log(food)
+    console.log(valuation)
     return (
         <Fragment>
             <OrderDetailCardWrapper>
                 <ImageStatusWrapper>
-                    <FoodImage src={foodImage} alt="foodImage"></FoodImage>
+                    <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
                     <OrderStatus>
-                        {getOrderStatusText(state.order.order_status).STATUS_TEXT}
+                        {getOrderStatusText(order.order_status).STATUS_TEXT}
                     </OrderStatus>
                 </ImageStatusWrapper>
                 <FoodName>
-                    {state.order.name}
+                    {food.name}
                 </FoodName>
                 <FoodPrice>
-                    ￥{state.order.price}
+                    ￥{food.price}
                 </FoodPrice>
                 <FoodDescription>
-                    {state.order.description}
+                    {food.description}
                 </FoodDescription>
                 <OrderStatusWrapper>
                     <OrderStatusTextWrapper>
-                        {getOrderStatusTimeText(state.order.order_status).STATUS_TEXT}
+                        {getOrderStatusTimeText(order.order_status).STATUS_TEXT}
                     </OrderStatusTextWrapper>
                     <OrderStatusTImeWrapper>
                         {
-                            state.order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
+                            order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                                 <UnFinishedWrapper>
                                     <OrderCreateTimeWrapper>
-                                        {changeJSTDate(state.order.created_at)}
+                                        {changeJSTDate(order.created_at)}
                                     </OrderCreateTimeWrapper>
                                 </UnFinishedWrapper>
                                 :
                                 <FinishedWrapper>
                                     <OrderUpdateTimeWrapper>
-                                        {changeJSTDate(state.order.updated_at)}
+                                        {changeJSTDate(order.updated_at)}
                                     </OrderUpdateTimeWrapper>
                                 </FinishedWrapper>
                         }
@@ -190,7 +179,7 @@ export const OrderDetailCard = () => {
                     </OrderStatusTImeWrapper>
                 </OrderStatusWrapper>
                 {
-                    state.order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
+                    order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                         <OrderCancelWrapper>
                             <OrderValuationText>
                                 {ORDER_TEXT.ORDER_CANCEL_TEXT}
@@ -199,7 +188,7 @@ export const OrderDetailCard = () => {
                                 <ValuationButtomWrapper>
                                     <MaterialUISimpleModal
                                         btnLabel={ORDER_TEXT.ORDER_CANCEL_BUTTON_LABEL}
-                                        onClick={() => submitOrderCancelHandle()}
+                                        onClick={cancelHandle}
                                         modalTilte={ORDER_TEXT.ORDER_CANCEL_MODAL_TITLE}
                                         modalText={ORDER_TEXT.ORDER_CANCEL_MODAL_TEXT}
                                     />
@@ -210,18 +199,18 @@ export const OrderDetailCard = () => {
                         null
                 }
                 {
-                    state.order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
+                    order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION ?
                         <OrderValuationWrapper>
                             <OrderValuationText>
                                 {ORDER_TEXT.ORDER_VALUATION_TEXT}
                             </OrderValuationText>
                             <RatingStarWrapper>
-                                <MaterialUIUpdateRatingStar />
+                                <MaterialUIUpdateRatingStar valuation={valuation} dispatch={dispatch} />
                             </RatingStarWrapper>
                             <ThemeProvider theme={ButtonTheme}>
                                 <ValuationButtomWrapper>
                                     <MaterialUICommonButton
-                                        onClick={() => submitValuationHandle()}
+                                        onClick={valuationHandle}
                                         btnLabel={ORDER_TEXT.FINISHTASK_BUTTON_LABEL}
                                     />
                                 </ValuationButtomWrapper>

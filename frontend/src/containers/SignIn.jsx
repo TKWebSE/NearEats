@@ -10,7 +10,7 @@ import { foodsIndexURL, signInURL, passwordResetSendEmailURL } from "../urls/ind
 import { CommonReloadButton } from "../component/CommonReloadButton";
 import { HTTP_STATUS_CODE, SIGNIN_TEXT } from "../constants";
 import { messageActionTypes } from "../reducer/messageReducer";
-import { validateEmail } from "../AppFunction";
+import { validateEmail, blankCheckPassword } from "../AppFunction";
 import { MaterialUITextField } from "../component/MaterialUITextField";
 import { PasswordTextField } from "../component/PasswordTextField";
 
@@ -70,6 +70,7 @@ export const SignIn = () => {
   function handleSubmit() {
     try {
       validateEmail(email);
+      blankCheckPassword(password);
       signInApi(email, password)
         .then((data) => {
           SessionAuthDispatch({
@@ -87,17 +88,13 @@ export const SignIn = () => {
           history.push(foodsIndexURL);
         })
         .catch((e) => {
-          if (e.response.status === HTTP_STATUS_CODE.UN_AUTHORIZED) {
-            messageDispatch({
-              type: messageActionTypes.SET_ERROR_MESSAGE,
-              payload: {
-                errorMessage: SIGNIN_TEXT.SIGN_IN_ERROR
-              },
-            })
-            history.push(signInURL)
-          } else {
-            throw e;
-          }
+          messageDispatch({
+            type: messageActionTypes.SET_ERROR_MESSAGE,
+            payload: {
+              errorMessage: SIGNIN_TEXT.SIGN_IN_ERROR
+            },
+          })
+          history.push(signInURL)
         })
     } catch (e) {
       messageDispatch({

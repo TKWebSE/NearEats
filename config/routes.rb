@@ -5,11 +5,17 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
-      
+
+      resources :guests do
+        post 'activate', to: 'guests#activate'        
+      end
+
       resources :users do
+        get 'fetchCurrentUser', to: 'users#fetchCurrentUser'
         get 'sendAuthCodeChangeEmail', to: 'users#send_change_email'
         get 'sendAuthCodeChangePassword', to: 'users#send_change_password'
 
+        post 'activate', to: 'users#activate'
         put 'updateEmail', to: 'users#update_email'
         put 'updatePassword', to: 'users#update_password'
       end
@@ -17,6 +23,8 @@ Rails.application.routes.draw do
       resources :foods do
         get 'myfoods', to: 'foods#myfoods'
         put 'buyfood', to: 'foods#buyfood'
+        put 'updateNoImageFood', to: 'foods#updateNoImageFood'
+        delete 'destroyAllFoodForOneUser', to: 'foods#destroyAllFoodForOneUser'
       end
 
       resources :orders do
@@ -32,12 +40,13 @@ Rails.application.routes.draw do
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
           # passwords:     'api/v1/auth/passwords',
+          sessions: 'api/v1/auth/sessions',
           registrations: 'api/v1/auth/registrations',
       }
 
-      namespace :auth do
-        resources :sessions, only: %i[index]
-      end
+      # devise_scope  :auth do
+      #   resources :sessions, only: [:index,:create]
+      # end
       
     end
   end

@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import { myTaskIndexURL } from "../../urls/index";
 import { COLORS } from "../../style_constants";
 import { getTaskStatusText } from "./getTaskStatusText";
+import { changeImageURL } from "../../AppImageFunction";
 
 const TaskDetailCardWrapper = styled.div`
     text-align:left;
@@ -83,12 +84,13 @@ const OrderUserName = styled.h3`
 
 `;
 
-const OrderUserAddress = styled.div`
+const OrderUserAddress = styled.h3`
     margin-top:1%;
 `;
 
 const TaskStatusTextWrapper = styled.div`
     float:left;
+    padding:0% 0% 0% 1%;
 `;
 
 const TaskStatusTImeWrapper = styled.div`
@@ -127,60 +129,48 @@ const TaskDetailCancelButtomWrapper = styled.div`
 
 
 
-export const TaskDetailCard = () => {
+export const TaskDetailCard = ({ task, food, orderUser, cancelHandle, finishHandle }) => {
     const state = useContext(TaskState);
     const dispatch = useContext(TaskDispatch)
     const history = useHistory();
 
-    function taskCancelHandle() {
-        console.log(state)
-        updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.TASKCANCEL)
-            .then((data) => {
-                history.push(myTaskIndexURL);
-            })
-    }
-
-    function taskFinisiheHandle() {
-        updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.TASKFINISH)
-            .then((data) => {
-                history.push(myTaskIndexURL);
-            })
-    }
-
+    console.log(task)
+    console.log(food)
+    console.log(orderUser)
     return (
         <Fragment>
             <TaskDetailCardWrapper>
                 <ImageStatusWrapper>
-                    <FoodImage src={foodImage} alt="foodImage"></FoodImage>
+                    <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
                     <TaskStatus>
-                        {getTaskStatusText(state.task.order_status).STATUS_TEXT}
+                        {getTaskStatusText(task.order_status).STATUS_TEXT}
                     </TaskStatus>
                 </ImageStatusWrapper>
                 <FoodName>
-                    {state.task.name}
+                    {food.name}
                 </FoodName>
                 <FoodPrice>
-                    ￥{state.task.price}
+                    ￥{food.price}
                 </FoodPrice>
                 <FoodDescription>
-                    {state.task.description}
+                    {food.description}
                 </FoodDescription>
                 <TaskStatusWrapper>
                     <TaskStatusTextWrapper>
-                        {getTaskStatusTimeText(state.task.order_status).STATUS_TEXT}
+                        {getTaskStatusTimeText(task.order_status).STATUS_TEXT}
                     </TaskStatusTextWrapper>
                     <TaskStatusTImeWrapper>
                         {
-                            state.task.order_status === 0 ?
+                            task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                                 <UnFinishedWrapper>
                                     <TaskCreateTimeWrapper>
-                                        {changeJSTDate(state.task.created_at)}
+                                        {changeJSTDate(task.created_at)}
                                     </TaskCreateTimeWrapper>
                                 </UnFinishedWrapper>
                                 :
                                 <FinishedWrapper>
                                     <TaskUpdateTimeWrapper>
-                                        {changeJSTDate(state.task.updated_at)}
+                                        {changeJSTDate(task.updated_at)}
                                     </TaskUpdateTimeWrapper>
                                 </FinishedWrapper>
                         }
@@ -188,24 +178,24 @@ export const TaskDetailCard = () => {
                     </TaskStatusTImeWrapper>
                 </TaskStatusWrapper>
                 {
-                    state.task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
+                    task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_UNFINISHED ?
                         <TaskNotFinishedWrapper>
                             <OrderUserInfoText>
                                 {TASK_TEXT.ORDER_INFO_TEXT}
                             </OrderUserInfoText>
                             <OrderUserInfoWrapper>
                                 <OrderUserName>
-                                    {state.order_user.name}
+                                    {orderUser.name}
                                 </OrderUserName>
                                 <OrderUserAddress>
-                                    {state.order_user.address}
+                                    {orderUser.address}
                                 </OrderUserAddress>
                             </OrderUserInfoWrapper>
                             <TaskDetailCardButtom>
                                 <ThemeProvider theme={ButtonTheme}>
                                     <TaskDetailFinisheButtomWrapper>
                                         <MaterialUISimpleModal
-                                            onClick={() => taskFinisiheHandle()}
+                                            onClick={finishHandle}
                                             btnLabel={TASK_TEXT.TASK_FINISH_BUTTOM_LABEL}
                                             modalTilte={TASK_TEXT.TASK_FINISH_MODALTITLE}
                                             modalText={TASK_TEXT.TASK_FINISH_MODAL_TEXT}
@@ -213,7 +203,7 @@ export const TaskDetailCard = () => {
                                     </TaskDetailFinisheButtomWrapper>
                                     <TaskDetailCancelButtomWrapper>
                                         <MaterialUISimpleModal
-                                            onClick={() => taskCancelHandle()}
+                                            onClick={cancelHandle}
                                             btnLabel={TASK_TEXT.TASK_CANCEL_BUTTOM_LABEL}
                                             modalTilte={TASK_TEXT.TASK_CANCEL_MODAL_TITLE}
                                             modalText={TASK_TEXT.TASK_CANCEL_MODAL_TEXT}

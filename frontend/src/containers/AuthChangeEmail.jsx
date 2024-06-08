@@ -46,6 +46,10 @@ export const AuthChangeEmail = () => {
     history.push(editEmailURL)
   }
 
+  function onKeyDownEnterhandleSubmit(event) {
+    handleSubmit()
+  }
+
   function handleSubmit() {
     updateEmailApi(sessionAuthState.currentUser.id, confirmationCode)
       .then((data) => {
@@ -77,6 +81,7 @@ export const AuthChangeEmail = () => {
           label={AUTH_CHANGE_EMAIL.TEXT_FIELD_LABEL}
           value={confirmationCode}
           setValue={setConfirmationCode}
+          onKeyDown={onKeyDownEnterhandleSubmit}
         />
         <LinkWrapper onClick={() => handleLinkClick()}>
           {AUTH_CHANGE_EMAIL.EDIT_EMAIL_LINK_TEXT}

@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import {
     userShowBackendURL,
-    signUpBackendURL,
+    userCreateBackendURL,
     userUpdateBackendURL,
     userDeleteBackendURL,
     updateEmailBackendURL,
@@ -26,19 +27,21 @@ export const fetchUserApi = (userId) => {
 }
 
 //ユーザーを作成する
-export const userCreateApi = (name, email, password, passwordConfirmation) => {
-    return axios.post(signUpBackendURL, {
-        name: name,
+export const userCreateApi = (email) => {
+    return axios.post(userCreateBackendURL, {
+        // name: name,
         email: email,
-        password: password,
-        password_confirmation: passwordConfirmation,
-        stripe_customer_id: "",
+        // password: password,
+        // password_confirmation: passwordConfirmation,
     })
         .then((res) => {
+            console.log(res);
+            console.log("成功");
             return res.data
         })
         .catch((e) => {
-            console.log(e)
+            console.log(e);
+            console.log("失敗");
             throw e
         })
 }
@@ -49,6 +52,7 @@ export const userUpdateApi = (user) => {
         user: {
             name: user.name,
             address: user.address,
+            city: user.city,
             email: user.email,
             password: user.password,
         }
@@ -63,12 +67,25 @@ export const userUpdateApi = (user) => {
 
 //ユーザーを削除する
 export const userDelete = (user) => {
+    console.log(userDeleteBackendURL(user.id))
+    const uid = Cookies.get("uid");
+    const accessToken = Cookies.get("access_token");
+    const client = Cookies.get("client");
     return axios.delete(userDeleteBackendURL(user.id), {
+        headers: {
+            'access-token': accessToken,
+            client: client,
+            uid: uid,
+        },
         params: {
             user: user
-        }
+        },
     })
         .then((res) => {
+            Cookies.set("user_id", null)
+            Cookies.set("access_token", null)
+            Cookies.set("client", null)
+            Cookies.set("uid", null)
             return res.data
         })
         .catch(e => console.log(e))

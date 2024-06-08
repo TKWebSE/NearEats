@@ -7,6 +7,7 @@ import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
 import { getOrderStatusText } from "./getOrderStatusText";
 import { getOrderStatusTimeText } from "./getOrderStatusTimeText";
+import { changeImageURL } from "../../AppImageFunction";
 
 const OrderIndexCardWrapper = styled.div`
   border: solid;
@@ -21,6 +22,11 @@ const OrderIndexCardWrapper = styled.div`
 
 const FoodImageWrapper = styled.div`
   width:25%;
+`;
+
+const CancelFoodImageWrapper = styled.div`
+  width:25%;
+  opacity:0.3;
 `;
 
 const FoodImage = styled.img`
@@ -61,7 +67,8 @@ const OrderStatusWrapper = styled.div`
   border-radius:100%;
   text-align:center;
   color:white;
-  padding:2%;
+  padding:2% 1% 2% 1%;
+  margin:0% 1% 1% 1%;
   ${media.lessThan("large")`
     font-size:15px;
   `}
@@ -114,29 +121,33 @@ const TimeWrapper = styled.div`
 `;
 
 const FinishedWrapper = styled.div`
-text-align:right;
+  text-align:right;
 `;
 
 const UnFinishedWrapper = styled.div`
-text-align:right;
-
+  text-align:right;
 `;
 
 
-export const OrderIndexCard = ({ order }) => {
-
-  console.log(getOrderStatusTimeText(order.order_status).STATUS_TEXT)
+export const OrderIndexCard = ({ order, food }) => {
 
   return (
     <Fragment>
       <OrderIndexCardWrapper>
-        <FoodImageWrapper>
-          <FoodImage src={foodImage} alt="foodImage"></FoodImage>
-        </FoodImageWrapper>
+        {
+          order.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL || order.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL || order.order_status === ORDER_TASK_STATUS_NUMBERS.COMPLETE_ORDER ?
+            <CancelFoodImageWrapper>
+              <FoodImage src={changeImageURL(food.image.url)} alt="orderImage"></FoodImage>
+            </CancelFoodImageWrapper>
+            :
+            <FoodImageWrapper>
+              <FoodImage src={changeImageURL(food.image.url)} alt="orderImage"></FoodImage>
+            </FoodImageWrapper>
+        }
         <OrderIndexCardTextWrapper>
           <OrderIndexCardUpsideWrapper>
             <FoodNameWrapper>
-              {order.name}
+              {food.name}
             </FoodNameWrapper>
             <OrderStatusWrapper>
               {getOrderStatusText(order.order_status).STATUS_TEXT}
@@ -144,7 +155,7 @@ export const OrderIndexCard = ({ order }) => {
           </OrderIndexCardUpsideWrapper>
           <OrderIndexCardDownsideWrapper>
             <FoodPriceWrapper>
-              ￥{order.price}
+              ￥{food.price}
             </FoodPriceWrapper>
             <TimeWrapper>
               {

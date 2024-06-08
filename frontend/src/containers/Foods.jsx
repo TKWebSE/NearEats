@@ -7,13 +7,14 @@ import { fetchFoodsIndexApi, searchFoodsIndex } from '../apis/foodApis';
 import { REQUEST_STATE, FOOD_HEADER_TITLE } from '../constants';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {
-    initializeState,
+    initializeFoodListState,
     foodsListActionTypes,
     foodsListReducer,
 } from '../reducer/foodsListReducer';
 import { FoodCard } from '../component/foodComponent/FoodCard';
 import { SessionDispatch, SessionState } from "../context/Context";
 import { NOTFOUND_FOOD_TEXT } from "../constants";
+import { NotFoundCatComponent } from "../component/notFoundComponent/NotFoundCatComponent";
 import NotFoundCat from "../images/NotFoundCat.jpeg";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
 import { foodCreateURL } from "../urls/index";
@@ -153,7 +154,7 @@ const SkeltonTitleWrapper = styled.div`
 export const Foods = () => {
     const SessionUserState = useContext(SessionState);
     const SessionUserDispatch = useContext(SessionDispatch);
-    const [state, dispatch] = useReducer(foodsListReducer, initializeState);
+    const [state, dispatch] = useReducer(foodsListReducer, initializeFoodListState);
     const history = useHistory();
 
     useEffect(() => {
@@ -173,6 +174,7 @@ export const Foods = () => {
                         foodsList: data.foods
                     },
                 });
+                console.log(data)
             })
             .catch((e) => console.log(e))
     }, [])
@@ -180,6 +182,7 @@ export const Foods = () => {
     function gotoFoodCreateHandle() {
         history.push(foodCreateURL);
     }
+
 
     return (
         <Fragment>
@@ -189,9 +192,15 @@ export const Foods = () => {
                 </FoodsIndexTitle>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
-                        state.foodsList === undefined || state.foodsList === [] ?
+                        state.foodsList === undefined || state.foodsList[0] === undefined ?
                             <NoFoodsListWrapper>
-                                <NotFoundCatWrapper>
+                                <NotFoundCatComponent
+                                    firstText={NOTFOUND_FOOD_TEXT.NOT_UPLOAD_MYFOODS_TEXT}
+                                    secondText={NOTFOUND_FOOD_TEXT.LETS_UPLOAD_FOOD_TEXT}
+                                    btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}
+                                    onClick={() => gotoFoodCreateHandle()}
+                                />
+                                {/* <NotFoundCatWrapper>
                                     <NotFoundCatImage src={NotFoundCat} />
                                 </NotFoundCatWrapper>
                                 <NoUploadFoodsWrapper>
@@ -204,7 +213,7 @@ export const Foods = () => {
                                     <GotoFoodCreateWrapper>
                                         <MaterialUICommonButton onClick={() => gotoFoodCreateHandle()} btnLabel={NOTFOUND_FOOD_TEXT.GOTO_FOOD_CREATE_BUTTON_LABEL}></MaterialUICommonButton>
                                     </GotoFoodCreateWrapper>
-                                </ThemeProvider>
+                                </ThemeProvider> */}
                             </NoFoodsListWrapper>
                             :
                             <FoodListWrapper>

@@ -6,24 +6,35 @@ const FRONTEND_DEFAULT_URL = `http://localhost:3001`;
 const BACKEND_DEFAULT_URL = `http://localhost:3000${API_V1}`;
 const AUTH_URL = `${BASE_URL}${API_V1}${AUTH}`;
 
+export const MIDDLE_IMAGE_URL = (FOOD_ID) => `${FRONTEND_DEFAULT_URL}/uploads/food/image/${FOOD_ID}/`;
+
 export const publicImageURL = "/"
 
 //HomeのURL
 export const homeURL = "/home";
 
+//guestのURL
+export const guestCreateURL = `/signup`;
+export const guestActivateURL = `/activate`;
+
+//userのBackendURL
+export const guestCreateURLBackendURL = `${BACKEND_DEFAULT_URL}/guests`;
+export const guestActivateBackendURL = (guestId) => `${BACKEND_DEFAULT_URL}/guests/${guestId}/activate`;
+export const guestShowBackendURL = (guestId) => `${BACKEND_DEFAULT_URL}/guests/${guestId}`;
+
+
 //userのURL
 export const userShowURL = (userId) => `/users/${userId}`;
-export const userCreateURL = `/users/create`;
 export const userEditURL = (userId) => `/users/${userId}/edit`;
 export const userEmailEditURL = `/editEmail`;
 export const userPasswordEditURL = `/editPassword`;
 
 //userのBackendURL
 export const userShowBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userShowURL(userId)}`;
-export const userCreateBackendURL = () => `${AUTH_URL}${userCreateURL}`;
+export const userCreateBackendURL = `${BACKEND_DEFAULT_URL}/users`;
 export const userEditBackendURL = (userId) => `${BACKEND_DEFAULT_URL}${userEditURL(userId)}`;
 export const userUpdateBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}`;
-export const userDeleteBackendURL = (userId) => `${BACKEND_DEFAULT_URL}/users/${userId}/delete`;
+export const userDeleteBackendURL = (userId) => `${AUTH_URL}/`;
 
 //foodのURL
 export const foodsIndexURL = `/foods`;
@@ -42,7 +53,9 @@ export const MyfoodsIndexBackendURL = (user_id) => `${BACKEND_DEFAULT_URL}/foods
 export const foodCreateBackendURL = `${BACKEND_DEFAULT_URL}/foods`;
 export const foodShowBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodShowURL(foodId)}`;
 export const foodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpdateURL(foodId)}`
-export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/${foodId}/foods`;
+export const noImagefoodUpdateBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}${foodUpdateURL(foodId)}/updateNoImageFood`;
+export const foodDeleteBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/foods/${foodId}`;
+export const allFoodDeleteForOneUserBackendURL = (user_id) => `${BACKEND_DEFAULT_URL}/foods/${user_id}/destroyAllFoodForOneUser`;
 export const foodBuyBackendURL = (foodId) => `${BACKEND_DEFAULT_URL}/foods/${foodId}/buyfood`;
 
 //orderのURL
@@ -76,14 +89,25 @@ export const checkoutCancelURL = `${BACKEND_DEFAULT_URL}/checkoutCancel`;
 //setting関連のURL
 export const settingURL = `/setting`;
 
+//notification関連のURL
+export const notificationIndexURL = `/notificationIndex`
+export const notificationURL = (notificationId) => `/notification/${notificationId}`;
+
+export const notificationsBackendURL = `${BACKEND_DEFAULT_URL}/notifications`;
+export const notificationBackendURL = `${BACKEND_DEFAULT_URL}/notification`
+
+
 //session関連のURL
 export const signInURL = `/signin`;
+// export const userActivateURL = `/users/activate`;
+export const passwordRegistrationURL = `/passwordRegistration`;
 
 //session関連のBackendURL
 export const signUpBackendURL = `${AUTH_URL}`;
 export const signInBackendURL = `${AUTH_URL}/sign_in`;
 export const signOutBackendURL = `${AUTH_URL}/sign_out`;
-export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
+// export const sessionIsLoginBackendURL = `${AUTH_URL}/sessions`;
+export const sessionIsLoginBackendURL = `${BACKEND_DEFAULT_URL}/users/current/fetchCurrentUser`;
 
 //email送信関連のURL
 export const editEmailURL = `/editEmail`;

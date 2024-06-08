@@ -32,16 +32,21 @@ export function PrivateOnlyRoute(props) {
         console.log("Private側の認証確認中")
         isLoginApi()
             .then((data) => {
-                // // fetchOrdersApi(dat)
-                //     .then((dataO) => {
-                //         console.log(data0)
-                console.log(data)
-                SessionAuthDispatch({
-                    type: sessionActionTypes.ISLOGIN,
-                    payload: {
-                        data: data
-                    },
-                });
+                // fetchOrdersApi(dat)
+                // .then((dataO) => {
+                //     console.log(data0)
+                if (data !== null && data !== undefined) {
+                    SessionAuthDispatch({
+                        type: sessionActionTypes.ISLOGIN,
+                        payload: {
+                            data: data
+                        },
+                    })
+                } else {
+                    // SessionAuthDispatch({
+                    //     type: sessionActionTypes.TRUE_LOGIN,
+                    // })
+                }
             })
             .catch((e) => console.log(e))
     }, [location.pathname])

@@ -4,12 +4,13 @@ import media from "styled-media-query";
 import { ThemeProvider } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useHistory } from "react-router-dom";
-import { fetchOrderApi, updateOrderApi } from "../apis/orderApis";
+import { fetchOrderApi, updateCancelOrderApi, updateValuationOrderApi } from "../apis/orderApis";
 import { SessionState, SessionDispatch, OrderState, OrderDispatch } from "../context/Context";
 import { initializeState, orderActionTypes, orderReducer } from "../reducer/orderReducer";
-import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
+import { foodInitializeState, foodActionTypes, foodReducer } from "../reducer/foodReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE, ORDER_TASK_STATUS_NUMBERS } from "../constants";
 import { OrderDetailCard } from "../component/orderComponent/OrderDetailCard";
-import { myTaskShowBackendURL, foodsIndexURL } from "../urls/index";
+import { myTaskShowBackendURL, foodsIndexURL, ordersIndexURL } from "../urls/index";
 import { COLORS } from "../style_constants";
 
 const OrderDetailWrapper = styled.div`
@@ -49,23 +50,31 @@ export const OrderDetail = ({ match }) => {
   const SessionAuthState = useContext(SessionState);
   const SessionAuthDispatch = useContext(SessionDispatch)
   const [state, dispatch] = useReducer(orderReducer, initializeState);
+  const [foodState, foodDispatch] = useReducer(foodReducer, foodInitializeState);
   const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: orderActionTypes.FETCHING })
     fetchOrderApi(match.params.orderId)
       .then((data) => {
-        if (data.order[0].order_user_id === SessionAuthState.currentUser.id) {
+        if (data.order.order_user_id === SessionAuthState.currentUser.id) {
+          console.log(data)
+          foodDispatch({
+            type: foodActionTypes.FETCH_SUCCESS,
+            payload: {
+              food: data.food
+            },
+          });
           dispatch({
             type: orderActionTypes.FETCH_ORDER,
             payload: {
-              order: data.order[0]
+              order: data.order
             },
           });
           dispatch({
             type: orderActionTypes.FETCH_MAKE_USER,
             payload: {
-              make_user: data.make_user[0]
+              make_user: data.make_user
             },
           });
           dispatch({
@@ -78,7 +87,23 @@ export const OrderDetail = ({ match }) => {
       .catch((e) => console.log(e))
   }, [])
 
+  function submitOrderCancelHandle() {
+    updateCancelOrderApi(state.order, ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL)
+      .then((data) => {
+        history.push(ordersIndexURL);
+      })
+  }
+
+  function submitValuationHandle() {
+    updateValuationOrderApi(state.order, state.valuation)
+      .then((data) => {
+        history.push(ordersIndexURL);
+      })
+  }
+
   console.log(state)
+  console.log(foodState)
+  console.log(foodState.food)
   return (
     <Fragment>
       <OrderDetailWrapper>
@@ -87,13 +112,9 @@ export const OrderDetail = ({ match }) => {
         </OrderDetailHeader>
         {
           state.fetchState === REQUEST_STATE.OK ?
-            <OrderDispatch.Provider value={dispatch}>
-              <OrderState.Provider value={state}>
-                <OrderDetailCardWrapper>
-                  <OrderDetailCard />
-                </OrderDetailCardWrapper>
-              </OrderState.Provider>
-            </OrderDispatch.Provider>
+            <OrderDetailCardWrapper>
+              <OrderDetailCard order={state.order} food={foodState.food} user={state.make_user} valuation={state.valuation} cancelHandle={submitOrderCancelHandle} valuationHandle={submitValuationHandle} dispatch={dispatch} />
+            </OrderDetailCardWrapper>
             :
             <SkeltonsWrapper>
               <SkeltonCardWrapper>

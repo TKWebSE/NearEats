@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city }) {
+export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city, onkeyPress }) {
   const classes = useStyles();
 
   function handleChange(value) {
@@ -54,7 +54,6 @@ export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city
     if (e.which === 13)
       console.log(e)
   }
-  console.log(city)
 
   return (
     <Fragment>
@@ -69,7 +68,14 @@ export default function MUIAnimatedMultiSelect({ placeholederText, setCity, city
           defaultValue={{ label: city, value: city }}
           onChange={(event) => { handleChange(event.value) }}
           variant="outlined"
-          onKeyPress={(e) => onkeyPressHandle(e)}
+          onKeyDown={(event) => {
+            event.preventDefault();
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              onkeyPress(event)
+            }
+          }
+          }
         >
         </Select>
       </form>

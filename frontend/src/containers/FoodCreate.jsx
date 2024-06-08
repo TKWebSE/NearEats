@@ -15,18 +15,16 @@ import { foodShowURL } from "../urls/index";
 import MUIAnimatedMultiSelect from "../component/MUIAnimatedMultiSelect";
 import { TextFieldInReducer } from "../component/TextFieldInReducer";
 import { MultiLineTextFieldInReducer } from "../component/MultiLineTextFieldInReducer";
-import foodSelectImage from "../images/food-select.jpg";
 import { ImageComponent } from "../component/commonComponent/ImageComponent/ImageComponent";
-import { useEffect } from "react";
 import { createFormData } from "../AppImageFunction";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
 import { messageActionTypes } from "../reducer/messageReducer";
-import MaterialUISimpleModal from "../component/MaterialUISimpleModal";
-import { CollectionsBookmarkRounded } from "@mui/icons-material";
+import { validateFoodName, validatePrice, validateDescription } from "../AppFunction";
 
 const FoodCreateWrappwer = styled.div`
     margin-left:20%;
     margin-right:20%;
+    margin-bottom:5%;
 `;
 
 const FoodCreateHeader = styled.h1`
@@ -96,6 +94,9 @@ export const FoodCreate = () => {
 
     function submitHandle() {
         try {
+            validateFoodName(state.food.name)
+            validatePrice(state.food.price)
+            validateDescription(state.food.description)
             const formData = createFormData(state, city, SessionAuthState.currentUser.id);
             createFoodApi(formData)
                 .then((data) => {
@@ -103,7 +104,6 @@ export const FoodCreate = () => {
                     history.push(foodShowURL(data.food.id))
                 })
                 .catch(e => {
-                    console.log("きょうはあれ")
                     messageDispatch({
                         type: messageActionTypes.SET_ERROR_MESSAGE,
                         payload: {
@@ -164,6 +164,7 @@ export const FoodCreate = () => {
                             placeholederText={FOOD_CREATE_TEXT.LOCATION_PLACEHOLDER_TEXT}
                             setCity={setCity}
                             city={city}
+                            onkeyPress={onKeyDownEnter}
                         />
                     </SelectWrapper>
                 </FoodCity>

@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HEADER_TEXT } from "../../../constants";
 import { Link } from 'react-router-dom';
-import { homeURL, userCreateURL, signInURL } from "../../../urls/index";
+import { homeURL, guestCreateURL, signInURL } from "../../../urls/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +32,7 @@ export default function MaterialUIGuestHeader() {
   const classes = useStyles();
 
   function signUpHandle() {
-    history.push(userCreateURL)
+    history.push(guestCreateURL)
   }
 
   function signInHandle() {

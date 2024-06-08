@@ -9,8 +9,8 @@ import { ButtonTheme } from "../style_constants";
 import { UPDATE_PASSWORD_TEXT } from "../constants";
 import { MaterialUITextField } from "../component/MaterialUITextField";
 import { MaterialUICommonButton } from "../component/MaterialUICommonButton";
-import { MaterialUIPasswordLine } from "../component/userComponent/MaterialUIPasswordLine";
-import { editPasswordURL, authChangePasswordURL, settingURL } from "../urls/index";
+import { PasswordTextField } from "../component/PasswordTextField";
+import { editPasswordURL, settingURL } from "../urls/index";
 import { SessionState, SessionDispatch, MessageState, MessageDispatch } from '../context/Context';
 import { checkPasswordConfirmationCodeApi, updatePasswordApi } from "../apis/sendEmailapis";
 import { messageActionTypes } from "../reducer/messageReducer";
@@ -71,7 +71,7 @@ export const AuthChangePassword = () => {
               message: UPDATE_PASSWORD_TEXT.COMPLETE_UPDATE_PASSWORD_MESSAGE
             },
           })
-          history.push(authChangePasswordURL)
+          history.push(settingURL)
         })
         .catch((e) =>
           messageDispatch({
@@ -97,7 +97,7 @@ export const AuthChangePassword = () => {
           {UPDATE_PASSWORD_TEXT.UPDATE_PASSWORD_TITLE}
         </TitleWrapper>
         <ChangePasswordWrapper>
-          <MaterialUIPasswordLine
+          <PasswordTextField
             label={UPDATE_PASSWORD_TEXT.NEW_PASSWORD_LABEL}
             value={newPasswordValue}
             setValue={setNewPassword}
@@ -105,7 +105,7 @@ export const AuthChangePassword = () => {
           />
         </ChangePasswordWrapper>
         <ConfirmPasswordWrapper>
-          <MaterialUIPasswordLine
+          <PasswordTextField
             label={UPDATE_PASSWORD_TEXT.CONFIRMATION_LABEL}
             value={confirmationPasswordValue}
             setValue={setConfirmationPassword}

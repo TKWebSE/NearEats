@@ -7,7 +7,9 @@ import {
     foodShowBackendURL,
     foodCreateBackendURL,
     foodUpdateBackendURL,
+    noImagefoodUpdateBackendURL,
     foodDeleteBackendURL,
+    allFoodDeleteForOneUserBackendURL,
     foodBuyBackendURL
 } from "../urls/index";
 
@@ -97,10 +99,38 @@ export const updateFoodApi = (food, formData, city) => {
         .catch(e => console.log(e));
 }
 
+//Imageが更新されない場合、foodを更新する
+export const updateNoImageFoodApi = (food, city) => {
+    return axios.put(noImagefoodUpdateBackendURL(food.id), {
+        food: {
+            id: food.id,
+            name: food.name,
+            price: food.price,
+            description: food.description,
+            city: city,
+        }
+    })
+        .then((res) => {
+            return res.data
+        })
+        .catch(e => console.log(e));
+}
+
 //foodを削除する
 export const deleteFoodApi = (food) => {
     return axios.delete(foodDeleteBackendURL(food.id), {
         food: food
+    })
+        .then((res) => {
+            return res.data
+        })
+        .catch(e => console.log(e));
+}
+
+//ユーザー1人のfoodを全削除する
+export const deleteAllFoodForOneUserApi = (user) => {
+    return axios.delete(allFoodDeleteForOneUserBackendURL(user.id), {
+        user_id: user.id
     })
         .then((res) => {
             return res.data

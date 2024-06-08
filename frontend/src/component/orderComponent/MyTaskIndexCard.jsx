@@ -8,6 +8,7 @@ import foodImage from "../../images/food-image.jpg";
 import { COLORS } from "../../style_constants";
 import { getTaskStatusText } from "./getTaskStatusText";
 import { getTaskStatusTimeText } from "./getTaskStatusTimeText";
+import { changeImageURL } from "../../AppImageFunction";
 
 const TaskIndexCardWrapper = styled.div`
   border: solid;
@@ -22,6 +23,11 @@ const TaskIndexCardWrapper = styled.div`
 
 const FoodImageWrapper = styled.div`
   width:25%;
+`;
+
+const CancelFoodImageWrapper = styled.div`
+  width:25%;
+  opacity:0.3;
 `;
 
 const FoodImage = styled.img`
@@ -62,7 +68,8 @@ const TaskStatusWrapper = styled.div`
   border-radius:100%;
   text-align:center;
   color:white;
-  padding:2%;
+  padding:2% 1% 2% 1%;
+  margin:0% 1% 1% 1%;
   ${media.lessThan("large")`
     font-size:15px;
   `}
@@ -99,7 +106,9 @@ const FoodPriceWrapper = styled.h2`
 `;
 
 const TimeWrapper = styled.div`
-  width:55%;
+  // width:55%;
+  width:80%;
+  padding:0% 1% 0% 0%;
   text-align:right;
   font-size:20px;
   ${media.lessThan("large")`
@@ -124,22 +133,27 @@ const UnFinishedWrapper = styled.div`
   text-align:right;
 `;
 
-export const MyTaskIndexCard = ({ task }) => {
-  const state = useContext(TaskState);
-  const dispatch = useContext(TaskDispatch)
+export const MyTaskIndexCard = ({ task, food }) => {
 
   console.log(task)
 
   return (
     <Fragment>
       <TaskIndexCardWrapper>
-        <FoodImageWrapper>
-          <FoodImage src={foodImage} alt="foodImage"></FoodImage>
-        </FoodImageWrapper>
+        {
+          task.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL || task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL || task.order_status === ORDER_TASK_STATUS_NUMBERS.COMPLETE_ORDER ?
+            <CancelFoodImageWrapper>
+              <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
+            </CancelFoodImageWrapper>
+            :
+            <FoodImageWrapper>
+              <FoodImage src={changeImageURL(food.image.url)} alt="foodImage"></FoodImage>
+            </FoodImageWrapper>
+        }
         <TaskIndexCardTextWrapper>
           <TaskIndexCardUpsideWrapper>
             <FoodNameWrapper>
-              {task.name}
+              {food.name}
             </FoodNameWrapper>
             <TaskStatusWrapper>
               {getTaskStatusText(task.order_status).STATUS_TEXT}
@@ -147,7 +161,7 @@ export const MyTaskIndexCard = ({ task }) => {
           </TaskIndexCardUpsideWrapper>
           <TaskIndexCardDownsideWrapper>
             <FoodPriceWrapper>
-              ￥{task.price}
+              ￥{food.price}
             </FoodPriceWrapper>
             <TimeWrapper>
               {

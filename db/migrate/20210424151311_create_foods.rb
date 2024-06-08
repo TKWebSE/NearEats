@@ -8,6 +8,7 @@ class CreateFoods < ActiveRecord::Migration[6.0]
       t.string :image
       t.integer :count,null:false
       t.string :city,null:false
+      t.datetime :buy_time
 
       t.boolean :deleted,default:false
       t.timestamps

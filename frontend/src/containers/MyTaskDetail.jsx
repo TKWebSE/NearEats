@@ -7,9 +7,10 @@ import { useHistory } from "react-router-dom";
 import { fetchTaskApi, updateTaskApi } from "../apis/taskApis";
 import { SessionState, SessionDispatch, TaskState, TaskDispatch } from "../context/Context";
 import { initializeState, taskActionTypes, taskReducer } from "../reducer/taskReducer";
-import { REQUEST_STATE, ORDER_HEADER_TITLE } from "../constants";
+import { foodInitializeState, foodActionTypes, foodReducer } from "../reducer/foodReducer";
+import { REQUEST_STATE, ORDER_HEADER_TITLE, ORDER_TASK_STATUS_NUMBERS } from "../constants";
 import { TaskDetailCard } from "../component/orderComponent/TaskDetailCard";
-import { myTaskShowBackendURL, foodsIndexURL } from "../urls/index";
+import { myTaskIndexURL, foodsIndexURL } from "../urls/index";
 import { COLORS } from "../style_constants";
 
 const TaskDetailWrapper = styled.div`
@@ -20,7 +21,6 @@ const TaskDetailWrapper = styled.div`
 const TaskDetailHeader = styled.h1`
     margin-top:3%;
     margin-bottom:3%;
-
 `;
 
 const TaskDetailCardWrapper = styled.div`
@@ -50,17 +50,27 @@ export const MyTaskDetail = ({ match }) => {
     const SessionAuthState = useContext(SessionState);
     const SessionAuthDispatch = useContext(SessionDispatch)
     const [state, dispatch] = useReducer(taskReducer, initializeState);
+    const [foodState, foodDispatch] = useReducer(foodReducer, foodInitializeState);
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: taskActionTypes.FETCHING })
         fetchTaskApi(match.params.orderId)
             .then((data) => {
-                if (data.task[0].make_user_id === SessionAuthState.currentUser.id) {
+                if (data.task.order_status === ORDER_TASK_STATUS_NUMBERS.ORDER_CANCEL || data.task.order_status === ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL) {
+                    history.push(myTaskIndexURL)
+                }
+                if (data.task.make_user_id === SessionAuthState.currentUser.id) {
+                    foodDispatch({
+                        type: foodActionTypes.FETCH_SUCCESS,
+                        payload: {
+                            food: data.food
+                        },
+                    });
                     dispatch({
                         type: taskActionTypes.FETCH_TASK,
                         payload: {
-                            task: data.task[0]
+                            task: data.task
                         },
                     });
                     dispatch({
@@ -80,6 +90,24 @@ export const MyTaskDetail = ({ match }) => {
             .catch((e) => console.log(e))
     }, [])
 
+    function taskCancelHandle() {
+        console.log("taskCancel")
+        updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.TASK_CANCEL)
+            .then((data) => {
+                history.push(myTaskIndexURL);
+            })
+    }
+
+    function taskFinisiheHandle() {
+        console.log("COMPLETE_ORDER")
+        updateTaskApi(state.task, ORDER_TASK_STATUS_NUMBERS.ORDER_WATINGE_VALUATION)
+            .then((data) => {
+                history.push(myTaskIndexURL);
+            })
+    }
+
+    console.log(state)
+
     return (
         <Fragment>
             <TaskDetailWrapper>
@@ -88,13 +116,9 @@ export const MyTaskDetail = ({ match }) => {
                 </TaskDetailHeader>
                 {
                     state.fetchState === REQUEST_STATE.OK ?
-                        <TaskDispatch.Provider value={dispatch}>
-                            <TaskState.Provider value={state}>
-                                <TaskDetailCardWrapper>
-                                    <TaskDetailCard />
-                                </TaskDetailCardWrapper>
-                            </TaskState.Provider>
-                        </TaskDispatch.Provider>
+                        <TaskDetailCardWrapper>
+                            <TaskDetailCard task={state.task} food={foodState.food} orderUser={state.order_user} cancelHandle={taskCancelHandle} finishHandle={taskFinisiheHandle} />
+                        </TaskDetailCardWrapper>
                         :
                         <SkeltonsWrapper>
                             <SkeltonCardWrapper>

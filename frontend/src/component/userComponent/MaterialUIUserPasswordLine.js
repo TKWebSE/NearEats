@@ -23,7 +23,7 @@ export function MaterialUIUserPasswordLine() {
     dispatch({
       type: userActionTypes.SETTINGUSERPASSWORD,
       payload: {
-        password: event.target.value
+        value: event.target.value
       }
     })
   };

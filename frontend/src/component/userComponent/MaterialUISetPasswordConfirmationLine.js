@@ -24,7 +24,7 @@ export function MaterialUISetPasswordConfirmationLine() {
     dispatch({
       type: userActionTypes.SETTINGUSERPASSWORDCONFIRMATION,
       payload: {
-        passwordConfirmation: event.target.value
+        value: event.target.value
       }
     })
   };

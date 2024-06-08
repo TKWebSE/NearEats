@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //userの名前を設定するためのTextFieldコンポーネント
-export function MaterialUIUserNameLine() {
+export function MaterialUIUserNameLine({ onKeyPress }) {
   const classes = useStyles();
   const state = useContext(UserState);
   const dispatch = useContext(UserDispatch);
@@ -23,10 +23,14 @@ export function MaterialUIUserNameLine() {
     dispatch({
       type: userActionTypes.SETTINGUSERNAME,
       payload: {
-        name: event.target.value
+        value: event.target.value
       }
     })
   };
+
+  const onKeyDownHandle = (event) => {
+    onKeyPress(event)
+  }
 
   return (
     <Fragment>
@@ -48,6 +52,7 @@ export function MaterialUIUserNameLine() {
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     event.preventDefault();
+                    onKeyDownHandle(event);
                   }
                 }
                 }

@@ -23,7 +23,7 @@ export function MaterialUIUserAuthNumberLine({ label }) {
     dispatch({
       type: userActionTypes.SETTINGUSEREMAIL,
       payload: {
-        email: event.target.value
+        value: event.target.value
       }
     })
   };

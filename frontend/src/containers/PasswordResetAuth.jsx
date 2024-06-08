@@ -7,7 +7,7 @@ import {
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ButtonTheme } from "../style_constants";
 import { PASSWORD_RESET_AUTH_TEXT } from "../constants";
-import { MaterialUITextField } from "../component/MaterialUITextField";
+import { PasswordTextField } from "../component/PasswordTextField";
 import { CommonReloadButton } from "../component/CommonReloadButton";
 import { MaterialUIPasswordLine } from "../component/userComponent/MaterialUIPasswordLine";
 import { signInURL, passwordResetSendEmailURL } from "../urls/index";
@@ -97,7 +97,7 @@ export const PasswordResetAuth = () => {
           {PASSWORD_RESET_AUTH_TEXT.HEADER_TITLE}
         </TitleWrapper>
         <ChangePasswordWrapper>
-          <MaterialUIPasswordLine
+          <PasswordTextField
             label={PASSWORD_RESET_AUTH_TEXT.NEW_PASSWORD_LABEL}
             value={newPasswordValue}
             setValue={setNewPassword}
@@ -105,7 +105,7 @@ export const PasswordResetAuth = () => {
           />
         </ChangePasswordWrapper>
         <ConfirmPasswordWrapper>
-          <MaterialUIPasswordLine
+          <PasswordTextField
             label={PASSWORD_RESET_AUTH_TEXT.CONFIMATION_PASSWORD_LABEL}
             value={confirmationPasswordValue}
             setValue={setConfirmationPassword}

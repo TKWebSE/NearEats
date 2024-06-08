@@ -1,6 +1,6 @@
 import { REQUEST_STATE } from '../constants';
 
-export const initializeState = {
+export const initializeFoodListState = {
     fetchState: REQUEST_STATE.INITIAL,
     foodsList: []
 }
@@ -10,12 +10,12 @@ export const foodsListActionTypes = {
     FETCH_SUCCESS: "SUCCESS"
 }
 
-export const foodsListReducer = (state,action) => {
+export const foodsListReducer = (state, action) => {
     switch (action.type) {
         case foodsListActionTypes.FETCHING:
             return {
                 ...state,
-                fetchState:REQUEST_STATE.LOADING,
+                fetchState: REQUEST_STATE.LOADING,
             }
         case foodsListActionTypes.FETCH_SUCCESS:
             return {

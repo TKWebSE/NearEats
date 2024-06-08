@@ -19,7 +19,7 @@ export const getTaskStatusTimeText = (order_status) => {
             return {
                 STATUS_TEXT: taskStatusTimeText.TASK_STATUS_PENDINGEVALUATION_TEXT,
             }
-        case ORDER_TASK_STATUS_NUMBERS.TASKFINISH:
+        case ORDER_TASK_STATUS_NUMBERS.COMPLETE_ORDER:
             return {
                 STATUS_TEXT: taskStatusTimeText.TASK_STATUS_FINISHED_TIME_TEXT,
             }
